@@ -1,0 +1,170 @@
+header {
+  margin: 25px;
+  border-radius: 15px;
+  background-color: white;
+}
+
+.nav {
+  margin: 25px;
+  min-height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &-branding {
+    color: black;
+    font-size: 30px;
+    text-decoration: none;
+  }
+
+  &-item {
+    list-style: none;
+    position: relative;
+  }
+
+  &-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+    z-index: 2;
+  }
+
+  &-link {
+    color: black;
+    transition: 0.3s ease-out;
+    text-decoration: none;
+  }
+
+  &-link:hover {
+    color: greenyellow;
+  }
+
+  &-hamburger {
+    display: none;
+    cursor: pointer;
+  }
+
+  &-bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    background-color: black;
+  }
+
+  &-submenu {
+    display: none;
+    position: absolute;
+    top: 55px;
+    right: -25px;
+    width: 130px;
+    background-color: white;
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+    animation-name: hover-in;
+    animation-duration: 0.3s;
+    z-index: 3;
+
+    &-link {
+      list-style: none;
+      margin: 10px 0;
+
+      a {
+        color: black;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: greenyellow;
+      }
+    }
+  }
+
+  &-submenu.active {
+    display: flex;
+  }
+}
+
+@media(max-width: 1024px) {
+  header {
+    margin: 15px;
+  }
+
+  .nav {
+    margin: 25px 10px;
+
+    &-branding {
+      font-size: 25px;
+    }
+
+    &-hamburger {
+      display: block;
+    }
+
+    &-hamburger.active &-bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    &-hamburger.active &-bar:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    &-hamburger.active &-bar:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    &-menu {
+      position: absolute;
+      display: none;
+      top: 90px;
+      background-color: white;
+      width: 200px;
+      border-radius: 15px;
+      text-align: center;
+      margin: 20px;
+      animation-name: slide-in;
+      animation-duration: 0.3s;
+    }
+
+    &-item {
+      margin: 16px 0;
+    }
+
+    &-menu.active {
+      display: flex;
+      flex-direction: column;
+      right: 0;
+      gap: 0;
+    }
+
+    &-submenu {
+      top: 40px;
+      left: -25px;
+    }
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes hover-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

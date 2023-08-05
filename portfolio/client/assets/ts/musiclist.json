@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "A költő ha visszatér",
+    "artist": "Kormorán",
+    "image": "https://th.bing.com/th/id/R.4b710e06004ceec45724e1b8b6a866dc?rik=hhR2JHBLpoX7Ug&pid=ImgRaw&r=0",
+    "audio": "https://dl.sndup.net/rtpd/zene1.mp3"
+  },
+  {
+    "id": 2,
+    "title": "Zúg Március",
+    "artist": "Dinnyés József",
+    "image": "https://th.bing.com/th/id/OIP.nt8zCiOweS2CvQgQR-hQHQHaEK?pid=ImgDet&rs=1",
+    "audio": "https://dl.sndup.net/gnrd/zene2.mp3"
+  },
+  {
+    "id": 3,
+    "title": "A magyar himnusz",
+    "artist": "Kölcsey Ferenc",
+    "image": "https://th.bing.com/th/id/OIP.im_OAJvxZVsFiyrXU4wqJwHaE7?pid=ImgDet&rs=1",
+    "audio": "https://dl.sndup.net/q545/zene3.mp3"
+  }
+]
