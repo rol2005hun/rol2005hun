@@ -1,13 +1,10 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import functions from '@/assets/ts/functions';
-if(process.client) {
-  axios.defaults.headers.common['Authorization'] = functions.getCookie('token') || '';
-}
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    token: process.client ? functions.getCookie('token') || '' : '',
+    token: '',
     currentUser: {},
     error: ''
   }),
@@ -56,7 +53,7 @@ export const useUserStore = defineStore('user', {
       } catch(err: any) {
         this.$state.error = err.response.data.message;
         if(process.client && err.response.status != 429) {
-          functions.deleteCookie('token');
+          useCookie('token').value = null;
         }
       }
     }

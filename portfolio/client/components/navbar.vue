@@ -43,7 +43,7 @@ function toggleMenu(option: number) {
     hamburger?.classList.toggle('active');
     menu?.classList.toggle('active');
   } else if (option === 2) {
-    submenu.classList.toggle('active');
+    submenu ? submenu.classList.toggle('active') : null;
     isDropdownActive.value = !isDropdownActive.value;
   }
 }
@@ -62,7 +62,7 @@ function handleOutsideClick(event: MouseEvent) {
   const hamburger = document.querySelector('.nav-hamburger');
   const submenu = document.querySelector('.nav-submenu') as HTMLUListElement;
 
-  if (menu && !menu.contains(target) && hamburger && !hamburger.contains(target)) {
+  if (submenu  && menu && !menu.contains(target) && hamburger && !hamburger.contains(target)) {
     submenu.classList.remove('active');
     isDropdownActive.value = false;
   }
