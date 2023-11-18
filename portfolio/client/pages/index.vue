@@ -3,40 +3,49 @@
     <h1><i class="fa-solid fa-circle-info"></i> Információ</h1>
     <br>
     <h3>A fennt lévő navigációs sáv segítségével tudsz navigálni a többi oldal között; de addig is jó zenehallgatást ;)</h3>
-    <div class="music-player">
-      <audio :src="currentTrack.audio" ref="audioElement"></audio>
-      <div class="music-player-track">
-        <img :src="currentTrack.image" title="currenttrack">
-        <div class="music-player-track-info">
-          <div class="title">{{ currentTrack.title }}</div>
-          <div class="artist">{{ currentTrack.artist }}</div>
-          <div class="time">{{ formatTime(currentTime) }} / {{ formatTime(duration) }}</div>
-          <input type="range" class="slider-music" title="Húzogassad kedved szerint" :value="musicSlider" @input="e => setTime(parseFloat((e.target as HTMLInputElement).value))">
-        </div>
-        <div class="music-player-track-volum">
-          <input type="range" class="slider-volume" title="Húzogassad kedved szerint" :value="volumeSlider" @input="e => setVolume(parseFloat((e.target as HTMLInputElement).value))">
-          <button @click="toggleMute">
-            <i :class="[isMuted ? 'fa-solid fa-volume-xmark' : 'fa-solid fa-volume-high']"></i>
-          </button>
+    <div class="divs">
+      <div class="terminal">
+        <div class="output" v-for="output in outputs" v-html="output"></div>
+        <div class="input-container">
+          <span class="prompt">you@ranzak.me:~$</span>
+          <input v-model="command" @keyup.enter="executeCommand" placeholder="Futass le egy parancsot..." />
         </div>
       </div>
-      <div class="music-player-controls">
-        <div class="buttons">
-          <button @click="prevTrack">
-            <i class="fas fa-backward"></i>
-          </button>
-          <button @click="restartTrack">
-            <i class="fas fa-undo"></i>
-          </button>
-          <button @click="togglePlayback">
-            <i :class="[isPlaying ? 'fas fa-pause' : 'fas fa-play']"></i>
-          </button>
-          <button @click="toggleLoop">
-            <i :class="[isLooping ? 'fas fa-retweet' : 'fas fa-redo']"></i>
-          </button>
-          <button @click="nextTrack">
-            <i class="fas fa-forward"></i>
-          </button>
+      <div class="music-player">
+        <audio :src="currentTrack.audio" ref="audioElement"></audio>
+        <div class="music-player-track">
+          <img :src="currentTrack.image" title="currenttrack">
+          <div class="music-player-track-info">
+            <div class="title">{{ currentTrack.title }}</div>
+            <div class="artist">{{ currentTrack.artist }}</div>
+            <div class="time">{{ formatTime(currentTime) }} / {{ formatTime(duration) }}</div>
+            <input type="range" class="slider-music" title="Húzogassad kedved szerint" :value="musicSlider" @input="e => setTime(parseFloat((e.target as HTMLInputElement).value))">
+          </div>
+          <div class="music-player-track-volum">
+            <input type="range" class="slider-volume" title="Húzogassad kedved szerint" :value="volumeSlider" @input="e => setVolume(parseFloat((e.target as HTMLInputElement).value))">
+            <button @click="toggleMute">
+              <i :class="[isMuted ? 'fa-solid fa-volume-xmark' : 'fa-solid fa-volume-high']"></i>
+            </button>
+          </div>
+        </div>
+        <div class="music-player-controls">
+          <div class="buttons">
+            <button @click="prevTrack">
+              <i class="fas fa-backward"></i>
+            </button>
+            <button @click="restartTrack">
+              <i class="fas fa-undo"></i>
+            </button>
+            <button @click="togglePlayback(false)">
+              <i :class="[isPlaying ? 'fas fa-pause' : 'fas fa-play']"></i>
+            </button>
+            <button @click="toggleLoop">
+              <i :class="[isLooping ? 'fas fa-retweet' : 'fas fa-redo']"></i>
+            </button>
+            <button @click="nextTrack">
+              <i class="fas fa-forward"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -46,6 +55,7 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect, onMounted } from 'vue';
 import playlist from '@/assets/ts/musiclist.json';
+import commands from '@/assets/ts/commands.json';
 
 interface Track {
   title: string
@@ -65,6 +75,9 @@ const isLooping = ref(false);
 const isMuted = ref(false);
 const tracks = ref<Track[]>([]);
 const audioElement = ref<HTMLAudioElement | null>(null);
+const outputs = ref<string[]>([]);
+const command = ref('');
+const socialMedias = ['github', 'facebook', 'discord', 'email'];
 
 watchEffect(() => {
   tracks.value = playlist;
@@ -74,13 +87,19 @@ const currentTrack = computed(() => {
   return tracks.value[currentTrackIndex.value];
 });
 
-function togglePlayback() {
-  isPlaying.value = !isPlaying.value;
-
-  if (isPlaying.value) {
-    audioElement.value?.play();
+function togglePlayback(nextprev: boolean) {
+  if(!nextprev) {
+    if (!isPlaying.value) {
+      audioElement.value?.play();
+    } else {
+      audioElement.value?.pause();
+    }
+    isPlaying.value = !isPlaying.value;
   } else {
-    audioElement.value?.pause();
+    if(isPlaying.value) {
+      audioElement.value?.play();
+      isPlaying.value = true;
+    }
   }
 }
 
@@ -97,26 +116,35 @@ function toggleMute() {
   }
 }
 
+function nextTrack() {
+  currentTrackIndex.value = (currentTrackIndex.value + 1) % tracks.value.length;
+  restartOrTogglePlayback();
+}
+
 function prevTrack() {
   currentTrackIndex.value = (currentTrackIndex.value - 1 + tracks.value.length) % tracks.value.length;
-  if (audioElement.value!.currentTime <= 1) {
-    audioElement.value!.currentTime = 0;
+  restartOrTogglePlayback();
+}
+
+function restartOrTogglePlayback() {
+  const onLoadedData = () => {
+    audioElement.value?.removeEventListener('loadeddata', onLoadedData);
+    togglePlayback(true);
+    updateMusicSlider();
+  };
+
+  audioElement.value?.addEventListener('loadeddata', onLoadedData);
+
+  audioElement.value!.currentTime = 0;
+
+  if (!audioElement.value!.paused) {
+    audioElement.value!.load();
   }
-  togglePlayback();
 }
 
 function restartTrack() {
   audioElement.value!.currentTime = 0;
   if(isPlaying.value) audioElement.value?.play();
-}
-
-function nextTrack() {
-  currentTrackIndex.value = (currentTrackIndex.value + 1) % tracks.value.length;
-  if (isPlaying.value) {
-    togglePlayback();
-  } else {
-    audioElement.value!.currentTime = 0;
-  }
 }
 
 function formatTime(time: number) {
@@ -139,15 +167,57 @@ function setVolume(value: number) {
   }
 }
 
+function updateMusicSlider() {
+  currentTime.value = audioElement.value!.currentTime;
+  duration.value = audioElement.value!.duration || 0;
+  musicSlider.value = (currentTime.value / duration.value) * 100 || 0;
+}
+
 onMounted(() => {
-  audioElement.value = audioElement.value;
   audioElement.value?.addEventListener('ended', nextTrack);
-  audioElement.value?.addEventListener('timeupdate', () => {
-    currentTime.value = audioElement.value!.currentTime;
-    duration.value = audioElement.value!.duration || 0;
-    musicSlider.value = (currentTime.value / duration.value) * 100 || 0;
-  });
+  audioElement.value?.addEventListener('timeupdate', updateMusicSlider);
+
+  if (audioElement.value) {
+    updateMusicSlider();
+  }
 });
+
+const processCommands = () => {
+  const today = new Date().toLocaleDateString();
+
+  const processedCommands = commands.map(cmd => {
+    const processedOutput = cmd.output.replace(/\${(.*?)}/g, (match, placeholder) => {
+      try {
+        const dynamicValue = eval(placeholder);
+        return dynamicValue !== undefined ? dynamicValue : match;
+      } catch (e) {
+        return match;
+      }
+    });
+
+    return { ...cmd, output: processedOutput };
+  });
+
+  return processedCommands;
+}
+
+const updatedCommands = processCommands();
+
+const executeCommand = () => {
+  const matchedCommand = updatedCommands.find(cmd => cmd.command.toLowerCase() === command.value.toLowerCase());
+  if (matchedCommand) {
+    if (socialMedias.includes(matchedCommand.command.toLowerCase())) {
+      outputs.value = [...outputs.value, `you@ranzak.me:~$ ${command.value}`, `Megnyílt a ${matchedCommand.command} oldalam!`];
+      eval(matchedCommand.output);
+    } else {
+      outputs.value = [...outputs.value, `you@ranzak.me:~$ ${command.value}`, matchedCommand.output];
+    }
+  } else {
+    outputs.value = [...outputs.value, `you@ranzak.me:~$ ${command.value}`, `Nincs ilyen parancs! Próbáld meg a 'help' parancsot!`];
+  }
+
+  command.value = '';
+}
 </script>
 
 <style lang="scss" scoped>

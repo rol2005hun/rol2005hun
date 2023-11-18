@@ -8,7 +8,6 @@
 </template>
 
 <script setup lang="ts">
-import '@/assets/scss/contacts.scss';
 </script>
 
 <style lang="scss" scoped>

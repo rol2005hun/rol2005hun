@@ -1,6 +1,7 @@
 <template>
   <Navbar />
   <NuxtPage />
+  <Christmas />
   <Footer />
 </template>
 

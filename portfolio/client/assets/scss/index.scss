@@ -5,6 +5,45 @@
     color: white;
   }
 
+  .divs {
+    display: flex;
+    margin-top: 50px;
+  }
+
+  .terminal {
+    background-color: black;
+    color: limegreen;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+    overflow-y: auto;
+    height: 400px;
+  }
+  
+  .input-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .prompt {
+    color: limegreen;
+    margin-right: 5px;
+  }
+  
+  input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: limegreen;
+    width: 100%;
+    font-size: 16px;
+  }
+  
+  .output {
+    margin-bottom: 8px;
+  }
+
   .music-player {
     background-color: white;
     display: flex;
@@ -12,8 +51,10 @@
     max-width: 450px;
     align-items: center;
     padding: 20px;
-    margin: 40px auto;
+    margin: 0 auto;
+    margin-bottom: 50px;
     border-radius: 15px;
+    align-self: flex-end;
   
     &-track {
       display: flex;
@@ -123,6 +164,60 @@
             cursor: not-allowed;
           }
         }
+      }
+    }
+  }
+}
+
+@media(max-width: 1000px) {
+  .divs {
+    flex-direction: column;
+  }
+
+  .index .music-player {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+}
+
+@media(max-width: 500px) {
+  .index .terminal {
+    max-width: 300px;
+  }
+
+  .index .music-player {
+    max-width: 250px;
+
+    &-controls {
+      .buttons {
+        button {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  .index .music-player-track {
+    img {
+      width: 50px;
+      height: 50px;
+    }
+
+    &-info {
+      .title {
+        font-size: 20px;
+        min-width: 150px;
+      }
+
+      .artist {
+        font-size: 15px;
+      }
+    }
+
+    &-volum {
+      .slider-volume {
+        margin-top: 25px;
+        width: 80px;
       }
     }
   }

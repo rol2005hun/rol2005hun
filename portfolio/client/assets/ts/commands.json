@@ -1,0 +1,38 @@
+[
+  {
+    "command": "whoami",
+    "output": "Hello, Roland vagyok, 17 éves, a DE-IK-ra járok."
+  },
+  {
+    "command": "date",
+    "output": "A mai dátum: ${new Date().toLocaleDateString()}"
+  },
+  {
+    "command": "skills",
+    "output": "Vue, Nuxt, Nodejs, Python, C++, JavaScript"
+  },
+  {
+    "command": "help",
+    "output": "Futass le parancsokat :) Kezdd a 'commands'-al."
+  },
+  {
+    "command": "commands",
+    "output": "A parancsok: <ul style=\"margin-left: 20px;\"><li>whoami</li><li>date</li><li>skills</li><li>help</li><li>commands</li><li>github</li><li>facebook</li><li>discord</li><li>email</li></ul>"
+  },
+  {
+    "command": "github",
+    "output": "window.open('https://github.com/rol2005hun')"
+  },
+  {
+    "command": "facebook",
+    "output": "window.open('https://www.facebook.com/profile.php?id=100007575887372')"
+  },
+  {
+    "command": "discord",
+    "output": "window.open('https://discord.gg/FqdMuyhdTC')"
+  },
+  {
+    "command": "email",
+    "output": "window.open('mailto:contact@ranzak.me')"
+  }
+]
