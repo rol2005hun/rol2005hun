@@ -1,8 +1,8 @@
 <template>
   <main class="index">
-    <h1><i class="fa-solid fa-circle-info"></i> Információ</h1>
+    <!-- <h1><i class="fa-solid fa-circle-info"></i> Információ</h1>
     <br>
-    <h3>A fennt lévő navigációs sáv segítségével tudsz navigálni a többi oldal között; de addig is jó zenehallgatást ;)</h3>
+    <h3>A fennt lévő navigációs sáv segítségével tudsz navigálni a többi oldal között; de addig is jó zenehallgatást ;)</h3> -->
     <div class="divs">
       <div class="terminal">
         <div class="output" v-for="output in outputs" v-html="output"></div>
@@ -76,7 +76,7 @@ const isMuted = ref(false);
 const tracks = ref<Track[]>([]);
 const audioElement = ref<HTMLAudioElement | null>(null);
 const outputs = ref<string[]>([]);
-const command = ref('');
+const command = ref('info');
 const socialMedias = ['github', 'facebook', 'discord', 'email'];
 
 watchEffect(() => {
@@ -180,6 +180,8 @@ onMounted(() => {
   if (audioElement.value) {
     updateMusicSlider();
   }
+
+  executeCommand();
 });
 
 const processCommands = () => {

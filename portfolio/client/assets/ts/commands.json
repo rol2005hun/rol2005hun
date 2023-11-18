@@ -16,6 +16,10 @@
     "output": "Futass le parancsokat :) Kezdd a 'commands'-al."
   },
   {
+    "command": "info",
+    "output": "A fennt lévő navigációs sáv segítségével tudsz navigálni a többi oldal között; de addig is jó zenehallgatást ;)"
+  },
+  {
     "command": "commands",
     "output": "A parancsok: <ul style=\"margin-left: 20px;\"><li>whoami</li><li>date</li><li>skills</li><li>help</li><li>commands</li><li>github</li><li>facebook</li><li>discord</li><li>email</li></ul>"
   },
