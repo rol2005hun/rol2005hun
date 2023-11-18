@@ -5,6 +5,7 @@
     <h3>A fennt lévő navigációs sáv segítségével tudsz navigálni a többi oldal között; de addig is jó zenehallgatást ;)</h3> -->
     <div class="divs">
       <div class="terminal">
+        <span class="prompt big">ranzakOS v1.0 copyrighted</span>
         <div class="output" v-for="output in outputs" v-html="output"></div>
         <div class="input-container">
           <span class="prompt">you@ranzak.me:~$</span>
@@ -56,6 +57,7 @@
 import { ref, computed, watchEffect, onMounted } from 'vue';
 import playlist from '@/assets/ts/musiclist.json';
 import commands from '@/assets/ts/commands.json';
+import { match } from 'assert';
 
 interface Track {
   title: string
@@ -76,8 +78,7 @@ const isMuted = ref(false);
 const tracks = ref<Track[]>([]);
 const audioElement = ref<HTMLAudioElement | null>(null);
 const outputs = ref<string[]>([]);
-const command = ref('info');
-const socialMedias = ['github', 'facebook', 'discord', 'email'];
+const command = ref('christmascounter');
 
 watchEffect(() => {
   tracks.value = playlist;
@@ -184,36 +185,33 @@ onMounted(() => {
   executeCommand();
 });
 
-const processCommands = () => {
-  const today = new Date().toLocaleDateString();
-
-  const processedCommands = commands.map(cmd => {
-    const processedOutput = cmd.output.replace(/\${(.*?)}/g, (match, placeholder) => {
-      try {
-        const dynamicValue = eval(placeholder);
-        return dynamicValue !== undefined ? dynamicValue : match;
-      } catch (e) {
-        return match;
-      }
-    });
-
-    return { ...cmd, output: processedOutput };
-  });
-
-  return processedCommands;
-}
-
-const updatedCommands = processCommands();
-
 const executeCommand = () => {
-  const matchedCommand = updatedCommands.find(cmd => cmd.command.toLowerCase() === command.value.toLowerCase());
+  if(!command.value) return outputs.value = [...outputs.value, `you@ranzak.me:~$`];
+  const matchedCommand = commands.find(cmd => cmd.command.find(c => c === command.value.toLowerCase()));
   if (matchedCommand) {
-    if (socialMedias.includes(matchedCommand.command.toLowerCase())) {
-      outputs.value = [...outputs.value, `you@ranzak.me:~$ ${command.value}`, `Megnyílt a ${matchedCommand.command} oldalam!`];
-      eval(matchedCommand.output);
-    } else {
-      outputs.value = [...outputs.value, `you@ranzak.me:~$ ${command.value}`, matchedCommand.output];
+    let output = '';
+    if(matchedCommand.output.startsWith('$')) {
+      output = matchedCommand.output.replace(/\${(.*?)}/g, (match, placeholder) => {
+        try {
+          const dynamicValue = eval(placeholder);
+          console.log(dynamicValue);
+          return dynamicValue !== undefined ? dynamicValue : match;
+        } catch (e) {
+          return match;
+        }
+      });
     }
+    if(matchedCommand.output.startsWith('*')) {
+      output = matchedCommand.output.replace(/\*{(.*?)}/g, (match, placeholder) => {
+        try {
+          eval(placeholder);
+          return '';
+        } catch (e) {
+          return match;
+        }
+      });
+    }
+    outputs.value = [...outputs.value, `you@ranzak.me:~$ ${command.value}`, output ? output : matchedCommand.output];
   } else {
     outputs.value = [...outputs.value, `you@ranzak.me:~$ ${command.value}`, `Nincs ilyen parancs! Próbáld meg a 'help' parancsot!`];
   }

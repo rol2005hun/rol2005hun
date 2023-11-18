@@ -1,42 +1,42 @@
 [
   {
-    "command": "whoami",
+    "command": ["whoami", "who am i", "who are you", "whoareyou", "whoami?"],
     "output": "Hello, Roland vagyok, 17 éves, a DE-IK-ra járok."
   },
   {
-    "command": "date",
+    "command": ["date", "time"],
     "output": "A mai dátum: ${new Date().toLocaleDateString()}"
   },
   {
-    "command": "skills",
+    "command": ["skills", "skill", "skills?"],
     "output": "Vue, Nuxt, Nodejs, Python, C++, JavaScript"
   },
   {
-    "command": "help",
+    "command": ["help", "info"],
     "output": "Futass le parancsokat :) Kezdd a 'commands'-al."
   },
   {
-    "command": "info",
-    "output": "A fennt lévő navigációs sáv segítségével tudsz navigálni a többi oldal között; de addig is jó zenehallgatást ;)"
+    "command": ["christmascounter", "christmas", "christmas?", "cc"],
+    "output": "${new Date('December 25, 2023 00:00:00').getTime() - new Date().getTime() > 0 ? 'Még ' + Math.floor((new Date('December 25, 2023 00:00:00').getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24 * 30)) + ' hónap ' + Math.floor(((new Date('December 25, 2023 00:00:00').getTime() - new Date().getTime()) % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24)) + ' nap ' + Math.floor(((new Date('December 25, 2023 00:00:00').getTime() - new Date().getTime()) % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + ' óra ' + Math.floor(((new Date('December 25, 2023 00:00:00').getTime() - new Date().getTime()) % (1000 * 60 * 60)) / (1000 * 60)) + ' perc ' + Math.floor(((new Date('December 25, 2023 00:00:00').getTime() - new Date().getTime()) % (1000 * 60)) / 1000) + ' másodperc van karácsonyig!' : 'Már nincs karácsonyig! :('}"
   },
   {
-    "command": "commands",
-    "output": "A parancsok: <ul style=\"margin-left: 20px;\"><li>whoami</li><li>date</li><li>skills</li><li>help</li><li>commands</li><li>github</li><li>facebook</li><li>discord</li><li>email</li></ul>"
+    "command": ["commands", "cmds", "parancsok"],
+    "output": "A parancsok: <ul style=\"margin-left: 20px;\"><li>whoami</li><li>date</li><li>skills</li><li>help</li><li>commands</li><li>github</li><li>facebook</li><li>discord</li><li>email</li><li>christmascounter</li></ul>"
   },
   {
-    "command": "github",
-    "output": "window.open('https://github.com/rol2005hun')"
+    "command": ["github", "git", "gh"],
+    "output": "*{window.open('https://github.com/rol2005hun')} Megnyílt a GitHub profilom."
   },
   {
-    "command": "facebook",
-    "output": "window.open('https://www.facebook.com/profile.php?id=100007575887372')"
+    "command": ["facebook", "fb", "meta"],
+    "output": "*{window.open('https://www.facebook.com/profile.php?id=100007575887372')} Megnyílt a Facebook profilom."
   },
   {
-    "command": "discord",
-    "output": "window.open('https://discord.gg/FqdMuyhdTC')"
+    "command": ["discord", "dc"],
+    "output": "*{window.open('https://discord.gg/FqdMuyhdTC')} Megnyílt a Discord Szerver."
   },
   {
-    "command": "email",
-    "output": "window.open('mailto:contact@ranzak.me')"
+    "command": ["email", "mail", "e-mail"],
+    "output": "*{window.open('mailto:contact@ranzak.me')} Megnyílt az e-mail küldő."
   }
 ]
