@@ -8,7 +8,7 @@
         <span class="prompt big">ranzakOS v1.0 copyrighted</span>
         <div class="output" v-for="output in outputs" v-html="output"></div>
         <div class="input-container">
-          <span class="prompt">you@ranzak.me:~$</span>
+          <span class="prompt">{{ username }}@ranzak.me:~$</span>
           <input v-model="command" @keyup.enter="executeCommand" placeholder="Futass le egy parancsot..." />
         </div>
       </div>
@@ -38,7 +38,7 @@
               <i class="fas fa-undo"></i>
             </button>
             <button @click="togglePlayback(false)">
-              <i :class="[isPlaying ? 'fas fa-pause' : 'fas fa-play']"></i>
+              <i :class="[isPlaying ? 'fas fa-pause' : 'fas fa-play']" id="playback"></i>
             </button>
             <button @click="toggleLoop">
               <i :class="[isLooping ? 'fas fa-retweet' : 'fas fa-redo']"></i>
@@ -57,7 +57,7 @@
 import { ref, computed, watchEffect, onMounted } from 'vue';
 import playlist from '@/assets/ts/musiclist.json';
 import commands from '@/assets/ts/commands.json';
-import { match } from 'assert';
+import functions from '@/assets/ts/functions';
 
 interface Track {
   title: string
@@ -79,6 +79,7 @@ const tracks = ref<Track[]>([]);
 const audioElement = ref<HTMLAudioElement | null>(null);
 const outputs = ref<string[]>([]);
 const command = ref('christmascounter');
+const username = ref(functions.getCookie('username') || 'you');
 
 watchEffect(() => {
   tracks.value = playlist;
@@ -186,22 +187,16 @@ onMounted(() => {
 });
 
 const executeCommand = () => {
-  if(!command.value) return outputs.value = [...outputs.value, `you@ranzak.me:~$`];
-  const matchedCommand = commands.find(cmd => cmd.command.find(c => c === command.value.toLowerCase()));
+  if(!command.value) return outputs.value = [...outputs.value, `${username.value}@ranzak.me:~$`];
+  let matchedCommand = commands.find(cmd => cmd.command.find(c => c === command.value.split(' ')[0].toLowerCase()));
+  let input = '';
+  if(command.value.split(' ')[1]) {
+    input = command.value.split(' ')[1];
+    matchedCommand!.output = matchedCommand!.output.replace(/INPUT/g, input);
+  }
   if (matchedCommand) {
     let output = '';
-    if(matchedCommand.output.startsWith('$')) {
-      output = matchedCommand.output.replace(/\${(.*?)}/g, (match, placeholder) => {
-        try {
-          const dynamicValue = eval(placeholder);
-          console.log(dynamicValue);
-          return dynamicValue !== undefined ? dynamicValue : match;
-        } catch (e) {
-          return match;
-        }
-      });
-    }
-    if(matchedCommand.output.startsWith('*')) {
+    if(matchedCommand.output.includes('*{')) {
       output = matchedCommand.output.replace(/\*{(.*?)}/g, (match, placeholder) => {
         try {
           eval(placeholder);
@@ -211,11 +206,21 @@ const executeCommand = () => {
         }
       });
     }
-    outputs.value = [...outputs.value, `you@ranzak.me:~$ ${command.value}`, output ? output : matchedCommand.output];
+    if(matchedCommand.output.includes('${')) {
+      output = matchedCommand.output.replace(/\${(.*?)}/g, (match, placeholder) => {
+        try {
+          const dynamicValue = eval(placeholder);
+          return dynamicValue !== undefined ? dynamicValue : match;
+        } catch (e) {
+          return match;
+        }
+      });
+    }
+    outputs.value = [...outputs.value, `${username.value}@ranzak.me:~$ ${command.value}`, output ? output : matchedCommand.output];
   } else {
-    outputs.value = [...outputs.value, `you@ranzak.me:~$ ${command.value}`, `Nincs ilyen parancs! Próbáld meg a 'help' parancsot!`];
+    outputs.value = [...outputs.value, `${username.value}@ranzak.me:~$ ${command.value}`, `Nincs ilyen parancs! Próbáld meg a 'help' parancsot!`];
   }
-
+  username.value = functions.getCookie('username') || 'you';
   command.value = '';
 }
 </script>

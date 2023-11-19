@@ -21,7 +21,7 @@
   },
   {
     "command": ["commands", "cmds", "parancsok"],
-    "output": "A parancsok: <ul style=\"margin-left: 20px;\"><li>whoami</li><li>date</li><li>skills</li><li>help</li><li>commands</li><li>github</li><li>facebook</li><li>discord</li><li>email</li><li>christmascounter</li></ul>"
+    "output": "A parancsok: <ul style=\"margin-left: 20px;\"><li>whoami</li><li>date</li><li>skills</li><li>help</li><li>commands</li><li>github</li><li>facebook</li><li>discord</li><li>email</li><li>christmascounter</li><li>login [username]</li><li>logout</li><li>start</li><li>stop</li></ul>"
   },
   {
     "command": ["github", "git", "gh"],
@@ -38,5 +38,21 @@
   {
     "command": ["email", "mail", "e-mail"],
     "output": "*{window.open('mailto:contact@ranzak.me')} Megnyílt az e-mail küldő."
+  },
+  {
+    "command": ["login", "sudo", "su"],
+    "output": "*{document.cookie = 'username=INPUT; expires=Thu, 18 Dec 2023 12:00:00 UTC; path=/';} Bejelentkezve mint: INPUT"
+  },
+  {
+    "command": ["logout", "exit", "quit"],
+    "output": "*{document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';} Kijelentkezve."
+  },
+  {
+    "command": ["start", "resume"],
+    "output": "*{document.querySelectorAll('audio')[0].play(); document.getElementById('playback').classList.add('fa-pause'); document.getElementById('playback').classList.remove('fa-play')} Zene elindítva."
+  },
+  {
+    "command": ["stop", "pause"],
+    "output": "*{document.querySelectorAll('audio')[0].pause(); document.getElementById('playback').classList.add('fa-play'); document.getElementById('playback').classList.remove('fa-pause')} Zene megállítva."
   }
 ]
