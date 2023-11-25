@@ -56,8 +56,8 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect, onMounted } from 'vue';
 import playlist from '@/assets/ts/musiclist.json';
-import commands from '@/assets/ts/commands.json';
 import functions from '@/assets/ts/functions';
+import executeCommands from '@/assets/ts/commands';
 
 interface Track {
   title: string
@@ -186,42 +186,16 @@ onMounted(() => {
   executeCommand();
 });
 
-const executeCommand = () => {
+function executeCommand() {
   if(!command.value) return outputs.value = [...outputs.value, `${username.value}@ranzak.me:~$`];
-  let matchedCommand = commands.find(cmd => cmd.command.find(c => c === command.value.split(' ')[0].toLowerCase()));
-  let input = '';
-  if(command.value.split(' ')[1]) {
-    input = command.value.split(' ')[1];
-    matchedCommand!.output = matchedCommand!.output.replace(/INPUT/g, input);
+  let output = executeCommands(command.value);
+  if(typeof output === 'object') {
+    eval(output[0]);
+    output = output[1];
   }
-  if (matchedCommand) {
-    let output = '';
-    if(matchedCommand.output.includes('*{')) {
-      output = matchedCommand.output.replace(/\*{(.*?)}/g, (match, placeholder) => {
-        try {
-          eval(placeholder);
-          return '';
-        } catch (e) {
-          return match;
-        }
-      });
-    }
-    if(matchedCommand.output.includes('${')) {
-      output = matchedCommand.output.replace(/\${(.*?)}/g, (match, placeholder) => {
-        try {
-          const dynamicValue = eval(placeholder);
-          return dynamicValue !== undefined ? dynamicValue : match;
-        } catch (e) {
-          return match;
-        }
-      });
-    }
-    outputs.value = [...outputs.value, `${username.value}@ranzak.me:~$ ${command.value}`, output ? output : matchedCommand.output];
-  } else {
-    outputs.value = [...outputs.value, `${username.value}@ranzak.me:~$ ${command.value}`, `Nincs ilyen parancs! Próbáld meg a 'help' parancsot!`];
-  }
-  username.value = functions.getCookie('username') || 'you';
+  outputs.value = [...outputs.value, `${username.value}@ranzak.me:~$ ${command.value}`, output];
   command.value = '';
+  username.value = functions.getCookie('username') || 'you';
 }
 </script>
 

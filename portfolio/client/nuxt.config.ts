@@ -27,7 +27,6 @@ const config: NuxtConfig = {
   runtimeConfig: {
     public: {
       apiBase: 'http://localhost:1225',
-      cookieDomain: 'localhost'
     }
   }
 }
