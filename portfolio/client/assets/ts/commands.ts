@@ -50,7 +50,7 @@ function executeCommands(command: string) {
     if(cmd == 'login' || cmd == 'bejelentkezes' || cmd == 'sudo' || cmd == 'su') {
         const username = command.split(' ')[1];
         if(!username) return 'Helyes használat: login [username]';
-        document.cookie = `username=${username}; expires=Thu, 18 Dec 2023 12:00:00 UTC; path=/`;
+        document.cookie = `username=${username}; expires=Thu, 18 Dec 2029 12:00:00 UTC; path=/`;
         return `Bejelentkezve mint: ${username}`;
     }
 
