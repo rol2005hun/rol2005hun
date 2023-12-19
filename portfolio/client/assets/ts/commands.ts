@@ -19,6 +19,7 @@ function executeCommands(command: string) {
     }
 
     if(cmd == 'skills') {
+        window.open('https://credly.com/users/roland-ranyak/badges')
         return 'Vue, Nuxt, Nodejs, Python, C++, JavaScript';
     }
     

@@ -7,6 +7,8 @@
         <h3><a href="https://shortify.wolimby.hu" class="link">Wolimby Shortify</a></h3>
         <h3><a href="https://social.wolimby.hu" class="link">Wolimby Social (Kötelező bejelentkezés)</a></h3>
         <h3><a href="https://github.com/rol2005hun/cpp" class="link">C++ repository GitHubon</a></h3>
+        <h3><a href="https://github.com/rol2005hun/python" class="link">Python repository GitHubon</a></h3>
+        <h3><a href="https://github.com/rol2005hun/nginx-autoindex" class="link">Design az nginx autoindexhez</a></h3>
         <h3><a href="https://github.com/rol2005hun/DE-IK" class="link">DE-IK repository GitHubon</a></h3>
     </main>
 </template>
