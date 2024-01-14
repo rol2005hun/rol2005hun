@@ -1,12 +1,16 @@
 footer {
-    position: fixed;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 15px;
     bottom: 0;
-    right: 0;
-    padding: 30px;
-    
-    i {
-        cursor: pointer;
+
+    h2 {
         color: white;
-        font-size: 50px;
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
     }
 }

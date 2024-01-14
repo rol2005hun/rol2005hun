@@ -24,7 +24,7 @@ function executeCommands(command: string) {
     }
     
     if(cmd == 'christmascounter' || cmd == 'christmas' || cmd == 'cc') {
-        return `${new Date('December 25, 2023 00:00:00').getTime() - new Date().getTime() > 0 ? 'Még ' + Math.floor((new Date('December 25, 2023 00:00:00').getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24 * 30)) + ' hónap ' + Math.floor(((new Date('December 25, 2023 00:00:00').getTime() - new Date().getTime()) % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24)) + ' nap ' + Math.floor(((new Date('December 25, 2023 00:00:00').getTime() - new Date().getTime()) % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + ' óra ' + Math.floor(((new Date('December 25, 2023 00:00:00').getTime() - new Date().getTime()) % (1000 * 60 * 60)) / (1000 * 60)) + ' perc ' + Math.floor(((new Date('December 25, 2023 00:00:00').getTime() - new Date().getTime()) % (1000 * 60)) / 1000) + ' másodperc van karácsonyig!' : 'Már nincs karácsonyig! :('}`;
+        return `${new Date('December 25, 2024 00:00:00').getTime() - new Date().getTime() > 0 ? 'Még ' + Math.floor((new Date('December 25, 2024 00:00:00').getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24 * 30)) + ' hónap ' + Math.floor(((new Date('December 25, 2024 00:00:00').getTime() - new Date().getTime()) % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24)) + ' nap ' + Math.floor(((new Date('December 25, 2024 00:00:00').getTime() - new Date().getTime()) % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + ' óra ' + Math.floor(((new Date('December 25, 2024 00:00:00').getTime() - new Date().getTime()) % (1000 * 60 * 60)) / (1000 * 60)) + ' perc ' + Math.floor(((new Date('December 25, 2024 00:00:00').getTime() - new Date().getTime()) % (1000 * 60)) / 1000) + ' másodperc van karácsonyig!' : 'Már nincs karácsonyig! :('}`;
     }
 
     if(cmd == 'facebook' || cmd == 'fb' || cmd == 'fbprofile' || cmd == 'facebookprofile') {
@@ -62,18 +62,22 @@ function executeCommands(command: string) {
     if(cmd == 'start' || cmd == 'play' || cmd == 'resume' || cmd == 'continue' || cmd == 'playback' || cmd == 'stop' || cmd == 'pause') {
         const element = document.getElementById('playback') as HTMLElement;
         if(element.classList.contains('fa-play')) {
-            return ['togglePlayback()', 'Zene elindítva.'];
+            togglePlayback(false);
+            return `Zene elindítva.`;
         } else {
-            return ['togglePlayback()', 'Zene megállítva.'];
+            togglePlayback(false);
+            return `Zene megállítva.`;
         }
     }
 
     if(cmd == 'next' || cmd == 'skip') {
-        return ['nextTrack()', 'Átváltottál a következő számra.'];
+        nextTrack();
+        return `Átváltottál a következő számra.`;
     }
 
     if(cmd == 'previous' || cmd == 'prev') {
-        return ['prevTrack()', 'Átváltottál az előző számra.'];
+        prevTrack();
+        return `Átváltottál az előző számra.`;
     }
 
     if(cmd == 'volume' || cmd == 'vol') {
@@ -82,7 +86,8 @@ function executeCommands(command: string) {
         const volume = parseInt(value);
         if(isNaN(volume)) return 'A megadott érték nem szám.';
         if(volume < 0 || volume > 100) return 'A megadott értéknek 0 és 100 között kell lennie.';
-        return [`setVolume(${volume})`, 'Állítottál a hangerőn.'];
+        setVolume(volume);
+        return `Állítottál a hangerőn.`;
     }
 
     return `Nincs ilyen parancs! Próbáld meg a 'help' parancsot!`;

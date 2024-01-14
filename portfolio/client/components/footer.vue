@@ -1,8 +1,11 @@
 <template>
-  <footer>
-    <a href="https://github.com/rol2005hun/are-you-a.live" target="_blank"><i class="fa-brands fa-github"></i></a>
-  </footer>
+    <footer>
+        <h2>Készítette rol2005hun ❤️-el és 💖-al - <a href="https://github.com/rol2005hun/wolimby/tree/portfolio" target="_blank">Forráskód</a></h2>
+    </footer>
 </template>
+
+<script setup lang="ts">
+</script>
 
 <style lang="scss" scoped>
 @import '@/assets/scss/footer.scss';

@@ -1,33 +1,34 @@
-function userRoles(roles: number[] | undefined, id?: string): void {
-    if (roles == undefined) return;
-    if (!id) {
-        const userRolesDiv = document.getElementsByClassName('username-roles');
-        for (let i = 0; i < userRolesDiv.length; i++) {
-            const div = userRolesDiv[i] as HTMLElement;
-            for (let j = 0; j < roles.length; j++) {
-                if (roles[j] == 1) div.innerHTML += '<i class="fas fa-check-circle" data-title="V.I.P."></i>';
-                if (roles[j] == 2) div.innerHTML += '<i class="fas fa-user-shield" data-title="Moderátor"></i>';
-                if (roles[j] == 3) div.innerHTML += '<i class="fas fa-hammer" data-title="Adminisztátor"></i>';
-                if (roles[j] == 4) div.innerHTML += '<i class="fas fa-pencil-paintbrush" data-title="Dizájner"></i>';
-                if (roles[j] == 5) div.innerHTML += '<i class="fas fa-code" data-title="Fejlesztő"></i>';
-                if (roles[j] == 6) div.innerHTML += '<i class="fas fa-crown" data-title="Tulajdonos"></i>';
-            }
-        }
-    } else if (id) {
-      const userRolesDiv = document.getElementsByClassName('username-roles-custom ' + id)[0] as HTMLElement;
-      for(let i = 0; i < roles.length; i++) {
-            if (roles[i] == 1) userRolesDiv.innerHTML += '<i class="fas fa-check-circle" data-title="V.I.P."></i>';
-            if (roles[i] == 2) userRolesDiv.innerHTML += '<i class="fas fa-user-shield" data-title="Moderátor"></i>';
-            if (roles[i] == 3) userRolesDiv.innerHTML += '<i class="fas fa-hammer" data-title="Adminisztátor"></i>';
-            if (roles[i] == 4) userRolesDiv.innerHTML += '<i class="fas fa-pencil-paintbrush" data-title="Dizájner"></i>';
-            if (roles[i] == 5) userRolesDiv.innerHTML += '<i class="fas fa-code" data-title="Fejlesztő"></i>';
-            if (roles[i] == 6) userRolesDiv.innerHTML += '<i class="fas fa-crown" data-title="Tulajdonos"></i>';
+function renderUserRoles(user: any, username?: string): string {
+    let html = '';
+    for (let i = 0; i < user.profile.roles.length; i++) {
+        switch (user.profile.roles[i]) {
+            case 'vip':
+                html += '<i class="fas fa-check-circle" data-title="V.I.P."></i>';
+                break;
+            case 'mod':
+                html += '<i class="fas fa-user-shield" data-title="Moderátor"></i>';
+                break;
+            case 'admin':
+                html += '<i class="fas fa-hammer" data-title="Adminisztátor"></i>';
+                break;
+            case 'designer':
+                html += '<i class="fas fa-pencil-paintbrush" data-title="Dizájner"></i>';
+                break;
+            case 'developer':
+                html += '<i class="fas fa-code" data-title="Fejlesztő"></i>';
+                break;
+            case 'owner':
+                html += '<i class="fas fa-crown" data-title="Tulajdonos"></i>';
+                break;
         }
     }
+    const returnHtml = username ? html + username : html + user.profile.username;
+    return returnHtml;
 }
 
-function formatDate(ipDate: string): string {
-    const date = new Date(ipDate);
+
+function formatDate(rdate: string): string {
+    const date = new Date(rdate);
     function addZero(i: number): string {
         return i < 10 ? `0${i}` : i.toString();
     }
@@ -75,11 +76,11 @@ function deleteCookie(cName: string): string {
 }
 
 export default {
-    userRoles,
+    renderUserRoles,
     formatDate,
     getFileType,
     getDomain,
     setCookie,
     getCookie,
     deleteCookie
-};
+}
