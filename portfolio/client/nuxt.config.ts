@@ -1,4 +1,3 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 import { NuxtConfig } from '@nuxt/types';
 
 const config: NuxtConfig = {
@@ -8,27 +7,19 @@ const config: NuxtConfig = {
       htmlAttrs: {
         lang: 'hu'
       },
-      title: 'Wolimby - Me (rol2005hun)',
+      title: 'Are you alive?',
       link: [
         { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css', crossorigin: 'anonymous' },
-        { rel: 'icon', href: 'https://i.imgur.com/Z4uWZ64.jpg', type: 'image/x-icon' }
+        { rel: 'icon', href: 'https://i.imgur.com/uYWgYwg.png', type: 'image/x-icon' }
       ],
       meta: [
-        { name: 'title', content: 'Wolimby - Me (rol2005hun)' },
-        { name: 'description', content: 'Ranyák Roland a nevem, 17 éves vagyok, full-stack fejlesztő, jelenleg a Nuxt.js-t tanulom' }
+        { name: 'title', content: 'Are you alive?' },
+        { name: 'description', content: 'You can check here, if you\'re alive. Easily. Safely. Fast.' }
       ]
     },
     rootId: 'app'
   },
-  static: {
-    directory: 'static'
-  },
   buildModules: ['@pinia/nuxt'],
-  runtimeConfig: {
-    public: {
-      apiBase: 'http://localhost:1225',
-    }
-  }
 }
 
 export default config;
