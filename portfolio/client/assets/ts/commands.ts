@@ -1,5 +1,6 @@
 function executeCommands(command: string) {
     const cmd = command.toLowerCase().split(' ')[0];
+
     if(cmd == 'whoami' || cmd == 'who am i' || cmd == 'who') {
         return 'Hello, Roland vagyok, 18 éves, a DE-IK-ra járok.';
     }
@@ -9,13 +10,13 @@ function executeCommands(command: string) {
     }
 
     if(cmd == 'help' || cmd == 'info') {
-        return `Futass le parancsokat :) Kezdd a 'commands'-al.`;
+        return `Üdv itt! Ha zavar a hóesés vagy a zenelejátszó útban van, jobb klikk a képernyőre, és kapcsold ki, vagy használd a terminált hozzá.`;
     }
 
     if(cmd == 'commands' || cmd == 'command' || cmd == 'parancsok' || cmd == 'parancs' || cmd == 'cmds' || cmd == 'cmd') {
         return `A parancsok: <ul style="margin-left: 20px;"><li>whoami</li><li>date</li><li>skills</li><li>help</li><li>commands</li>
         <li>github</li><li>facebook</li><li>discord</li><li>email</li><li>christmascounter</li><li>login [username]</li><li>logout</li>
-        <li>start</li><li>stop</li><li>next</li><li>previous</li><li>volume [érték]</li></ul>`
+        <li>start</li><li>stop</li><li>next</li><li>previous</li><li>volume [érték]</li><li>togglesnow</li><li>togglemusic</li></ul>`
     }
 
     if(cmd == 'skills') {
@@ -88,6 +89,19 @@ function executeCommands(command: string) {
         if(volume < 0 || volume > 100) return 'A megadott értéknek 0 és 100 között kell lennie.';
         setVolume(volume);
         return `Állítottál a hangerőn.`;
+    }
+
+    const { showSnow } = useChristmasUtils();
+    if(cmd == 'togglesnow' || cmd =='tsnow' || cmd == 'snow') {
+        showSnow.value = !showSnow.value;
+        return `Hó ${showSnow.value ? 'megjelenítve.' : 'elrejtve.'}`;
+    }
+
+    const { showPlayer } = useAudioUtils();
+    if(cmd == 'togglemusicplayer' || cmd == 'toggleplayer' || cmd == 'togglemp' || cmd == 'tmp') {
+        showPlayer.value = !showPlayer.value;
+        return `A zenelejátszó ${showPlayer.value ? 'elrejtve.' : 'megjelenítve.'}`;
+    
     }
 
     return `Nincs ilyen parancs! Próbáld meg a 'help' parancsot!`;

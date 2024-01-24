@@ -109,7 +109,7 @@ export const setVolume = (value: number) => {
         defaultVolume.value = value;
         if(value == 0) isMuted.value = true;
         else isMuted.value = false;
-        functions.setCookie('volume', value.toString());
+        functions.setCookie('volume', value.toString(), 365);
     }
 }
 

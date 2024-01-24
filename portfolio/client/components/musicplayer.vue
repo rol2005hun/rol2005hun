@@ -70,7 +70,7 @@ onMounted(() => {
     if (audioElement.value) {
         updateMusicSlider();
 
-        if(volume) setVolume(parseInt(volume.value));
+        if(volume.value) setVolume(parseInt(volume.value));
     }
 });
 

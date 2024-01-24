@@ -1,7 +1,7 @@
 <template>
   <main class="index">
     <div class="divs">
-      <div class="terminal">
+      <div class="terminal" ref="terminalRef">
         <span class="prompt big">ranzakOS v1.1 copyrighted</span>
         <div class="output" v-for="output in outputs" v-html="output"></div>
         <div class="input-container">
@@ -19,12 +19,9 @@ import functions from '@/assets/ts/functions';
 import executeCommands from '@/assets/ts/commands';
 
 const outputs = ref<string[]>([]);
-const command = ref('christmascounter');
+const command = ref('info');
 const username = ref(functions.getCookie('username') || 'you');
-
-onMounted(() => {
-  executeCommand();
-});
+const terminalRef = ref<HTMLElement>();
 
 function executeCommand() {
   if(!command.value) return outputs.value = [...outputs.value, `${username.value}@ranzak.me:~$`];
@@ -36,7 +33,14 @@ function executeCommand() {
   outputs.value = [...outputs.value, `${username.value}@ranzak.me:~$ ${command.value}`, output];
   command.value = '';
   username.value = functions.getCookie('username') || 'you';
+  nextTick(() => {
+    if (terminalRef.value) {
+      terminalRef.value.scrollTop = terminalRef.value.scrollHeight;
+    }
+  });
 }
+
+executeCommand();
 </script>
 
 <style lang="scss" scoped>
