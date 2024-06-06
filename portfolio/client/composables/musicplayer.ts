@@ -1,4 +1,3 @@
-import { ref, computed, watchEffect } from 'vue';
 import playlist from '@/assets/ts/musiclist.json';
 import functions from '@/assets/ts/functions';
 

@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "title": "ranzak FM",
-    "artist": "ranzak",
-    "image": "https://raw.githubusercontent.com/rol2005hun/Wolimby/main/client/public/icons/icon-512x512.png",
-    "audio": "https://radio.wolimby.hu/listen/wolimby/radio.mp3"
+    "title": "Kis karácsony nagy karácsony",
+    "artist": "Kis gyerekek",
+    "image": "https://media.discordapp.net/attachments/673994522736328730/1175146360329220096/image.png?ex=656a2b55&is=6557b655&hm=fc1f4030380b95bab27092669b2dd79f73804b409d6fce82aa73d06c10bd769c&=&width=670&height=671",
+    "audio": "https://dl.sndup.net/mmpm/Kis%20kar%C3%A1csony%20nagy%20kar%C3%A1csony%20dalsz%C3%B6veg.mp3"
   },
   {
     "id": 2,
@@ -43,9 +43,9 @@
   },
   {
     "id": 7,
-    "title": "Kis karácsony nagy karácsony",
-    "artist": "Kis gyerekek",
-    "image": "https://media.discordapp.net/attachments/673994522736328730/1175146360329220096/image.png?ex=656a2b55&is=6557b655&hm=fc1f4030380b95bab27092669b2dd79f73804b409d6fce82aa73d06c10bd769c&=&width=670&height=671",
-    "audio": "https://dl.sndup.net/mmpm/Kis%20kar%C3%A1csony%20nagy%20kar%C3%A1csony%20dalsz%C3%B6veg.mp3"
+    "title": "ranzak FM",
+    "artist": "ranzak",
+    "image": "https://raw.githubusercontent.com/rol2005hun/Wolimby/main/client/public/icons/icon-512x512.png",
+    "audio": "https://radio.wolimby.hu/listen/wolimby/radio.mp3"
   }
 ]

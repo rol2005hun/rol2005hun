@@ -2,13 +2,13 @@
     <main class="music-box">
         <Transition name="showPlayer">
             <div v-show="showPlayer" class="music-player">
-                <audio :src="currentTrack.audio" ref="audioElement"></audio>
+                <audio :src="currentTrack.audio" ref="audioElement" preload="auto"></audio>
                 <div class="music-player-track">
                     <img :src="currentTrack.image" title="currenttrack">
                     <div class="music-player-track-info">
                         <div class="title">{{ currentTrack.title }}</div>
                         <div class="artist">{{ currentTrack.artist }}</div>
-                        <div class="time">{{ formatTime(currentTime) }} / {{ formatTime(duration) != 'Infinity:NaN' ? formatTime(duration) : 'Live' }}</div>
+                        <div class="time">{{ formatTime(currentTime) }} / {{ duration != Infinity ? formatTime(duration) : 'Live' }}</div>
                         <input type="range" class="slider-music" title="Húzogassad kedved szerint" :value="musicSlider" @input="e => setTime(parseFloat((e.target as HTMLInputElement).value))">
                     </div>
                     <div class="music-player-track-volum">

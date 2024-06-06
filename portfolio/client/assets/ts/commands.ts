@@ -16,7 +16,7 @@ function executeCommands(command: string) {
     if(cmd == 'commands' || cmd == 'command' || cmd == 'parancsok' || cmd == 'parancs' || cmd == 'cmds' || cmd == 'cmd') {
         return `A parancsok: <ul style="margin-left: 20px;"><li>whoami</li><li>date</li><li>skills</li><li>help</li><li>commands</li>
         <li>github</li><li>facebook</li><li>discord</li><li>email</li><li>christmascounter</li><li>login [username]</li><li>logout</li>
-        <li>start</li><li>stop</li><li>next</li><li>previous</li><li>volume [érték]</li><li>togglesnow</li><li>togglemusic</li></ul>`
+        <li>start</li><li>stop</li><li>next</li><li>previous</li><li>volume [érték]</li><li>togglesnow</li><li>togglemusicplayer</li><li>switch [page]</li></ul>`
     }
 
     if(cmd == 'skills') {
@@ -100,8 +100,32 @@ function executeCommands(command: string) {
     const { showPlayer } = useAudioUtils();
     if(cmd == 'togglemusicplayer' || cmd == 'toggleplayer' || cmd == 'togglemp' || cmd == 'tmp') {
         showPlayer.value = !showPlayer.value;
-        return `A zenelejátszó ${showPlayer.value ? 'elrejtve.' : 'megjelenítve.'}`;
+        return `A zenelejátszó ${showPlayer.value ? 'megjelenítve.' : 'elrejtve.'}`;
     
+    }
+
+    if(cmd == 'clear' || cmd == 'cls') {
+        const outputs = document.getElementsByClassName('output') as HTMLCollectionOf<HTMLDivElement>;
+        for (let i = outputs.length - 1; i >= 0; i--) {
+            outputs[i].remove();
+        }
+        return '';
+    }
+
+    if(cmd == 'switch') {
+        const page = command.split(' ')[1];
+        if(!page) return 'Helyes használat: switch [page] (page: home, about, projects)';
+        console.log(page)
+        switch(page) {
+            case 'home':
+                return 'Már a kezdőoldalon vagy!';
+            case 'about':
+                return navigateTo('/about');
+            case 'projects':
+                return navigateTo('/projects');
+            default:
+                return 'Nincs ilyen oldal!';
+        }
     }
 
     return `Nincs ilyen parancs! Próbáld meg a 'help' parancsot!`;
