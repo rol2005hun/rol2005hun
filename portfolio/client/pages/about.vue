@@ -21,11 +21,11 @@
                 </div>
                 <div class="socials">
                     <h2>Oldalaim</h2>
-                    <h3>・<a href="https://discord.com/" class="link"><i class="fa-brands fa-discord"></i> halokafoglalt</a></h3>
+                    <h3>・<a href="https://discord.com/" class="link"><i class="fa-brands fa-discord"></i> Discord tag: harapalb.</a></h3>
                     <h3>・<a href="https://github.com/rol2005hun" class="link"><i class="fa-brands fa-github"></i> rol2005hun</a></h3>
                     <h3>・<a href="https://www.facebook.com/profile.php?id=100007575887372" class="link"><i class="fa-brands fa-facebook"></i> Ranyák Roland</a></h3>
                     <h3>・<a href="https://www.instagram.com/roland_ranyak11/" class="link"><i class="fa-brands fa-instagram"></i> roland_ranyak11</a></h3>
-                    <h3>・<a href="mailto:contact@ranzak.me"><i class="fa-solid fa-envelope"></i> contact@ranzak.me</a></h3>
+                    <h3>・<a href="mailto:contact@ranzak.me"><i class="fa-solid fa-envelope"></i> contact@ranzak.site</a></h3>
                 </div>
             </div>
         </div>

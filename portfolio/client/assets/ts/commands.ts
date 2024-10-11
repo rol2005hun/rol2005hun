@@ -2,7 +2,9 @@ function executeCommands(command: string) {
     const cmd = command.toLowerCase().split(' ')[0];
 
     if(cmd == 'whoami' || cmd == 'who am i' || cmd == 'who') {
-        return 'Hello, Roland vagyok, 18 éves, a DE-IK-ra járok.';
+        const ageInMilliseconds = Date.now() - new Date("2005-12-25").getTime();
+        const ageInYears = Math.floor(ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25));
+        return `Hello, Roland vagyok, ${ageInYears} éves, a DE-IK-ra járok.`;
     }
 
     if(cmd == 'date' || cmd == 'time' || cmd == 'now') {

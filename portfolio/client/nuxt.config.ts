@@ -14,7 +14,7 @@ const config: NuxtConfig = {
         { rel: 'icon', href: 'https://i.imgur.com/Z4uWZ64.jpg', type: 'image/x-icon' }
       ],
       meta: [
-        { name: 'title', content: 'Wolimby - Me (rol2005hun)' },
+        { name: 'title', content: 'ranzak' },
         { name: 'description', content: 'Ranyák Roland a nevem, 17 éves vagyok, full-stack fejlesztő, jelenleg a Nuxt.js-t tanulom' }
       ]
     },
