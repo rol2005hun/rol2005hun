@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import functions from '@/assets/ts/functions';
+import functions from '@/composables/functions';
 
 const snow = ref(functions.getCookie('showSnow') as any);
 const { showSnow } = useChristmasUtils();
@@ -20,6 +20,6 @@ watch(showSnow, () => {
 </script>
     
 <style lang="scss">
-@import '@/assets/scss/christmas.scss';
+@use '@/assets/scss/christmas.scss';
 </style>
   

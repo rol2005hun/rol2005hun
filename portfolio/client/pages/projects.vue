@@ -20,9 +20,9 @@
 </template>
 
 <script setup lang="ts">
-import projects from '@/assets/ts/projects.json';
+import projects from '@/public/projects.json';
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/projects.scss';
+@use '@/assets/scss/projects.scss';
 </style>

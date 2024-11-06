@@ -1,5 +1,5 @@
-import playlist from '@/assets/ts/musiclist.json';
-import functions from '@/assets/ts/functions';
+import playlist from '@/public/musiclist.json';
+import functions from '@/composables/functions';
 
 interface Track {
   title: string

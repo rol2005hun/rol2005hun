@@ -8,5 +8,5 @@
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/footer.scss';
+@use '@/assets/scss/footer.scss';
 </style>

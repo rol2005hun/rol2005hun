@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import functions from '@/assets/ts/functions';
+import functions from '@/composables/functions';
 
 const volume = ref(functions.getCookie('volume') as string);
 const musicPlayer = ref(functions.getCookie('musicPlayer') as string);
@@ -85,5 +85,5 @@ watch(showPlayer, () => {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/scss/musicplayer.scss';
+@use '@/assets/scss/musicplayer.scss';
 </style>

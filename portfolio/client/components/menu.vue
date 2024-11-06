@@ -55,5 +55,5 @@ onBeforeUnmount(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/scss/menu.scss';
+@use '@/assets/scss/menu.scss';
 </style>

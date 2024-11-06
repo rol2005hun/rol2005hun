@@ -1,13 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900');
 
 body {
-  background: url('https://i.pinimg.com/originals/3c/35/f1/3c35f1197ba68a804ab0e7cd0dcc54f0.png')!important;
+  background: url('/assets/img/background.webp')!important;
   background-repeat: no-repeat!important;
   background-size: cover!important;
 }
 
 .snow1 {
-  background: url('https://raw.githubusercontent.com/Madhav52/CSS-Snowfall-Animation-Effects/master/snow.png');
+  background: url('/assets/img/snow.webp');
   background-repeat: repeat;
   width: 100%;
   height: 100%;
@@ -19,7 +19,7 @@ body {
 }
 
 .snow2 {
-  background: url('https://raw.githubusercontent.com/Madhav52/CSS-Snowfall-Animation-Effects/master/snow.png');
+  background: url('/assets/img/snow.webp');
   background-repeat: repeat;
   width: 100%;
   height: 100%;
@@ -33,7 +33,7 @@ body {
 }
 
 .snow3 {
-  background: url('https://raw.githubusercontent.com/Madhav52/CSS-Snowfall-Animation-Effects/master/snow.png');
+  background: url('/assets/img/snow.webp');
   background-repeat: repeat;
   width: 100%;
   z-index: -1;

@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import type { NuxtConfig } from '@nuxt/types';
-
-const config: NuxtConfig = {
+export default defineNuxtConfig({
+  compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   app: {
     head: {
@@ -15,20 +14,18 @@ const config: NuxtConfig = {
       ],
       meta: [
         { name: 'title', content: 'ranzak' },
-        { name: 'description', content: 'Ranyák Roland a nevem, 17 éves vagyok, full-stack fejlesztő, jelenleg a Nuxt.js-t tanulom' }
+        { name: 'description', content: 'less fel ide :D' }
       ]
     },
     rootId: 'app'
   },
-  static: {
-    directory: 'static'
-  },
-  buildModules: ['@pinia/nuxt'],
-  runtimeConfig: {
-    public: {
-      apiBase: 'http://localhost:1225',
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler'
+        }
+      }
     }
   }
-}
-
-export default config;
+})
