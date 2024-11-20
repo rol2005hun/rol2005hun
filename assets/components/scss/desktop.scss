@@ -1,0 +1,108 @@
+.desktop {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: url('https://wallpaperaccess.com/full/1323316.jpg') no-repeat center;
+    background-size: cover;
+}
+  
+.taskbar {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 0.5em;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: white;
+}
+  
+.start-button {
+    cursor: pointer;
+
+    .start-img {
+        border-radius: 50%;
+        width: 3em;
+        height: 3em;
+    }
+}
+  
+.task-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1.5em;
+    gap: 1.5em;
+
+    .icon {
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+
+    .icon.active {
+        border-bottom: thin solid white;
+    }
+}
+  
+.desktop-icons {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0.5em;
+
+    .icon {
+        font-size: 1.5em;
+        padding: 0.5em;
+        cursor: pointer;
+    }
+
+    .app {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.window {
+    position: relative;
+    width: 80em;
+    border: 0.125em solid #ccc;
+    border-radius: 0.3125em;
+    background: #f3f3f3;
+    box-shadow: 0em 0.25em 0.375em rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    max-height: 100vh;
+
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #0078d7;
+        color: white;
+        padding: 0.625em;
+        font-weight: bold;
+        border-bottom: 0.0625em solid #ccc;
+
+        &-title {
+            margin: 0;
+            font-size: 0.875em;
+        }
+
+        .close-btn {
+            background: #ff5f57;
+            border: none;
+            border-radius: 0.1875em;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 0 0.625em;
+            font-size: 0.75em;
+            line-height: 1.25em;
+
+            &:hover {
+                background: #e0534e;
+            }
+        }
+    }
+}
