@@ -107,9 +107,7 @@ export const setVolume = (value: number) => {
         defaultVolume.value = value;
         if(value == 0) isMuted.value = true;
         else isMuted.value = false;
-        let date = new Date();
-        date.setTime(date.getTime() + 365! * 24 * 60 * 60 * 1000);
-        useCookie('volume', { path: '/', expires: date }).value = value.toString();
+        useCookie('volume', { path: '/', expires: new Date('3000-12-12') }).value = value.toString();
     }
 }
 

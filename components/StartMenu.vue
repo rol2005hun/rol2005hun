@@ -1,8 +1,8 @@
 <template>
     <div class="start-menu">
         <div class="menu-items">
-            <div class="menu-item">ranzakOS v2 névjegye</div>
-            <div class="menu-item">Beállítások</div>
+            <div class="menu-item" @click="$emit('openSysInfo', 'sysinfo')">ranzakOS v2 névjegye</div>
+            <div class="menu-item" @click="$emit('openSysInfo', 'settings')">Beállítások</div>
             <div class="menu-item" @click="turnOff">Leállítás</div>
         </div>
     </div>

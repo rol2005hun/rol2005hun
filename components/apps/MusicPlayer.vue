@@ -40,7 +40,6 @@
 
 <script setup lang="ts">
 const volume = ref(useCookie('volume').value as string);
-const musicPlayer = ref(useCookie('musicPlayer').value as string);
 
 const {
     currentTime,

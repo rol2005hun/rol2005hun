@@ -13,7 +13,7 @@
 const { executeCommands } = useCommands();
 const outputs = ref<string[]>([]);
 const command = ref('info');
-const username = ref(useCookie('username').value || 'you');
+const username = useCookie('username', { expires: new Date('3000-12-12'), default: () => 'user' }) as Ref<string>;
 const terminalRef = ref<HTMLElement>();
 const host = ref(username.value + '@ranzak.site:~$');
 

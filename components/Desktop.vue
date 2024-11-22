@@ -1,15 +1,15 @@
 <template>
-    <div class="desktop" @mousedown="startSelection" @mousemove="updateSelection" @mouseup="endSelection">
+    <div class="desktop" id="desktop" @mousedown="startSelection" @mousemove="updateSelection" @mouseup="endSelection" :style="{ backgroundImage: `url(${backgroundUrl})` }">
         <div class="selection-box" v-if="isSelecting" :style="selectionBoxStyles"></div>
         <div class="desktop-background"></div>
         <div class="taskbar">
             <div class="start-button" @click="isMenuVisible = !isMenuVisible">
                 <img src="public/images/ranzakOSstart.webp" alt="ranzakOSstart" class="start-img">
             </div>
-            <StartMenu v-if="isMenuVisible" ref="startMenu" />
+            <StartMenu v-if="isMenuVisible" ref="startMenu" @openSysInfo="openApp($event)" />
             <div class="task-icons">
-                <span v-for="app in apps" :key="app.id" :class="{ icon: true, active: currentApps.map(appid => appid.id).includes(app.id) }" @click="openApp(app.id)">
-                    {{ app.icon }}
+                <span v-for="app in apps.filter(app => app.desktopIcon || currentApps.some(current => current.id === app.id))" :key="app.id" 
+                    :class="{ icon: true, active: currentApps.map(appid => appid.id).includes(app.id) }" @click="openApp(app.id)"> {{ app.icon }}
                 </span>
             </div>
             <div class="task-time">
@@ -23,7 +23,7 @@
             <RightClickMenu />
         </div>
         <div class="desktop-icons">
-            <div v-for="app in apps" :key="app.id" class="app" :class="app.id" @click="openApp(app.id)">
+            <div v-for="app in apps.filter(app => app.desktopIcon)" :key="app.id" class="app" :class="app.id" @click="openApp(app.id)">
                 <span class="icon">{{ app.icon }}</span>
                 <span class="name">{{ app.name }}</span>
             </div>
@@ -44,15 +44,20 @@ import AppsAbout from '@/components/apps/About.vue';
 import AppsTerminal from '@/components/apps/Terminal.vue';
 import AppsMusicPlayer from '@/components/apps/MusicPlayer.vue';
 import AppsWolimbySearch from '@/components/apps/WolimbySearch.vue';
+import SystemInfo from '@/components/apps/SystemInfo.vue';
+import Settings from '@/components/apps/Settings.vue';
 
 const apps = ref([
-    { id: 'about', name: 'Rólam', icon: '📂', component: markRaw(AppsAbout) },
-    { id: 'terminal', name: 'Terminal', icon: '💻', component: markRaw(AppsTerminal) },
-    { id: 'musicplayer', name: 'Zene', icon: '🎵', component: markRaw(AppsMusicPlayer) },
-    { id: 'browser', name: 'Wolimby Search', icon: '🌐', component: markRaw(AppsWolimbySearch) }
+    { id: 'about', name: 'Rólam', icon: '📂', desktopIcon: true, component: markRaw(AppsAbout) },
+    { id: 'terminal', name: 'Terminal', icon: '💻', desktopIcon: true, component: markRaw(AppsTerminal) },
+    { id: 'musicplayer', name: 'Zene', icon: '🎵', desktopIcon: true, component: markRaw(AppsMusicPlayer) },
+    { id: 'browser', name: 'Wolimby Search', icon: '🌐', desktopIcon: true, component: markRaw(AppsWolimbySearch) },
+    { id: 'sysinfo', name: 'ranzakOS v2 névjegye', icon: 'ℹ️', desktopIcon: false, component: markRaw(SystemInfo) },
+    { id: 'settings', name: 'Beállítások', icon: '⚙️', desktopIcon: false, component: markRaw(Settings) }
 ]);
 const currentApps = useCookie('currentApps', { default: () => [] }) as Ref<{ id: string, position: { top: number, left: number }, zIndex: number }[]>;
 const startMenu = ref<HTMLElement | null>(null);
+const backgroundUrl = useCookie('backgroundUrl', { expires: new Date('3000-12-12') }) as Ref<string>;
 const isMenuVisible = ref(false);
 const hour = ref(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
 const date = ref(new Date().toLocaleDateString());

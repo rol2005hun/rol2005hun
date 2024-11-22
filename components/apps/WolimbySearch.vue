@@ -26,11 +26,14 @@ function loadUrl() {
 
         if (url.value.match(/^(http|https):\/\//)) {
             iframeUrl.value = url.value;
+
             openedLinks.value.push(url.value);
             currentIndex++;
             canGoBack.value = true;
         } else if (url.value.trim()) {
             iframeUrl.value = `https://askvoid.com/search?q=${encodeURIComponent(url.value)}`;
+            url.value = iframeUrl.value;
+
             openedLinks.value.push(iframeUrl.value);
             currentIndex++;
             canGoBack.value = true;
