@@ -34,6 +34,7 @@ function restart() {
         }
     }, 1000);
     setTimeout(() => {
+        navigateTo('/');
         currentScreen.value = 'loading';
     }, 10000);
 }
@@ -44,5 +45,5 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/components/scss/notfound.scss';
+@use '@/assets/scss/components/notfound.scss';
 </style>

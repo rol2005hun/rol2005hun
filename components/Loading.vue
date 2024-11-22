@@ -34,5 +34,5 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/components/scss/loading.scss';
+@use '@/assets/scss/components/loading.scss';
 </style>

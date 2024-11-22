@@ -1,6 +1,6 @@
 <template>
     <div class="terminal" ref="terminalRef">
-        <span class="prompt big">ranzakOS v2 copyrighted</span>
+        <span class="prompt big">ranzakOS v2 terminal copyrighted</span>
         <div class="output" v-for="output in outputs" v-html="output"></div>
         <div class="input-container">
             <span class="prompt">{{ host }}</span>
@@ -33,5 +33,5 @@ executeCommand();
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/components/scss/terminal.scss';
+@use '@/assets//scss/components/apps/terminal.scss';
 </style>

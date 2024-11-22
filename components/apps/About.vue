@@ -38,5 +38,5 @@ const calculateAge = computed(() => {
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/components/scss/about.scss';
+@use '@/assets//scss/components/apps/about.scss';
 </style>

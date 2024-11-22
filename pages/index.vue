@@ -9,10 +9,8 @@
 </template>
   
 <script setup lang="ts">
-const currentScreen = useCookie('currentScreen') as Ref<string>;
+const currentScreen = useCookie('currentScreen', { default: () => 'login' }) as Ref<string>;
 const unlockTimer = ref<ReturnType<typeof setTimeout> | null>(null);
-
-if (currentScreen.value == undefined) currentScreen.value = 'login';
 
 function startUnlock() {
     unlockTimer.value = setTimeout(() => {

@@ -1,97 +1,231 @@
 <template>
-    <div class="desktop">
+    <div class="desktop" @mousedown="startSelection" @mousemove="updateSelection" @mouseup="endSelection">
+        <div class="selection-box" v-if="isSelecting" :style="selectionBoxStyles"></div>
         <div class="desktop-background"></div>
         <div class="taskbar">
             <div class="start-button" @click="isMenuVisible = !isMenuVisible">
                 <img src="public/images/ranzakOSstart.webp" alt="ranzakOSstart" class="start-img">
             </div>
-            <StartMenu v-if="isMenuVisible" />
+            <StartMenu v-if="isMenuVisible" ref="startMenu" />
             <div class="task-icons">
-                <span :class="{ icon: true, active: currentApp === 'about' }" @click="currentApp = 'about'">📂</span>
-                <span :class="{ icon: true, active: currentApp === 'terminal' }" @click="currentApp = 'terminal'">💻</span>
-                <span :class="{ icon: true, active: currentApp === 'musicplayer' }" @click="currentApp = 'musicplayer'">🎵</span>
+                <span v-for="app in apps" :key="app.id" :class="{ icon: true, active: currentApps.map(appid => appid.id).includes(app.id) }" @click="openApp(app.id)">
+                    {{ app.icon }}
+                </span>
             </div>
+            <div class="task-time">
+                <div class="hour">
+                    <span>{{ hour }}</span>
+                </div>
+                <div class="date">
+                    <span>{{ date }}</span>
+                </div>
+            </div>
+            <RightClickMenu />
         </div>
         <div class="desktop-icons">
-            <div class="app about" @click="currentApp = 'about'">
-                <span class="icon">📂</span>
-                <span class="name">Rólam</span>
-            </div>
-            <div class="app terminal" @click="currentApp = 'terminal'">
-                <span class="icon">💻</span>
-                <span class="name">Terminal</span>
-            </div>
-            <div class="app music" @click="currentApp = 'musicplayer'">
-                <span class="icon">🎵</span>
-                <span class="name">Zene</span>
+            <div v-for="app in apps" :key="app.id" class="app" :class="app.id" @click="openApp(app.id)">
+                <span class="icon">{{ app.icon }}</span>
+                <span class="name">{{ app.name }}</span>
             </div>
         </div>
-        <div class="window" ref="window" :style="{ top: position.top + 'px', left: position.left + 'px' }" v-show="apps.includes(currentApp)">
-            <div class="window-header" @mousedown="startDrag">
-                <span class="window-title">{{ appName(currentApp) }}</span>
-                <button class="close-btn" @click="closeApp">X</button>
+        <div v-for="app in currentApps" :key="app.id" class="window"  ref="window" :style="{ top: app.position.top + 'px', left: app.position.left + 'px', zIndex: app.zIndex }"
+            v-show="apps.some(a => a.id === app.id)" @click="putToTop(app)">
+            <div class="window-header" @mousedown="startDrag(app, $event)">
+                <span class="window-title">{{ appName(app.id) }}</span>
+                <button class="close-btn" @click="closeApp(app.id)">X</button>
             </div>
-            <AppsAbout v-show="currentApp == 'about'" />
-            <AppsTerminal v-show="currentApp == 'terminal'" />
-            <AppsMusicPlayer v-show="currentApp == 'musicplayer'" />
+            <component :is="getComponent(app.id)" />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-const currentApp = useCookie('currentApp') as Ref<string>;
-const window = ref<HTMLDivElement | null>(null);
-const position = ref({ top: 20, left: 125 }) as Ref<{ top: number, left: number }>;
-let offset = { x: 0, y: 0 } as { x: number, y: number };
-let isDragging = false as boolean;
+import AppsAbout from '@/components/apps/About.vue';
+import AppsTerminal from '@/components/apps/Terminal.vue';
+import AppsMusicPlayer from '@/components/apps/MusicPlayer.vue';
+import AppsWolimbySearch from '@/components/apps/WolimbySearch.vue';
+
+const apps = ref([
+    { id: 'about', name: 'Rólam', icon: '📂', component: markRaw(AppsAbout) },
+    { id: 'terminal', name: 'Terminal', icon: '💻', component: markRaw(AppsTerminal) },
+    { id: 'musicplayer', name: 'Zene', icon: '🎵', component: markRaw(AppsMusicPlayer) },
+    { id: 'browser', name: 'Wolimby Search', icon: '🌐', component: markRaw(AppsWolimbySearch) }
+]);
+const currentApps = useCookie('currentApps', { default: () => [] }) as Ref<{ id: string, position: { top: number, left: number }, zIndex: number }[]>;
+const startMenu = ref<HTMLElement | null>(null);
 const isMenuVisible = ref(false);
-const apps = ref(['about', 'terminal', 'musicplayer']) as Ref<string[]>;
+const hour = ref(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+const date = ref(new Date().toLocaleDateString());
+const isSelecting = ref(false);
+const selectionStart = ref<{ x: number; y: number } | null>(null);
+const selectionEnd = ref<{ x: number; y: number } | null>(null);
+let zIndexCounter = 1000;
 
-if (currentApp.value == undefined) currentApp.value = 'null';
-
-function closeApp() {
-    currentApp.value = 'null';
+if (!currentApps.value || !Array.isArray(currentApps.value)) {
+    currentApps.value = [];
 }
 
-function startDrag(event: MouseEvent) {
-    isDragging = true;
-    offset = {
-        x: event.clientX - (position.value.left || 0),
-        y: event.clientY - (position.value.top || 0),
+function handleOutsideClick(event: MouseEvent) {
+    const startMenuElement = document.querySelector('.start-menu');
+    const startButton = document.querySelector('.start-button');
+
+    if (
+        startMenuElement &&
+        !startMenuElement.contains(event.target as Node) &&
+        startButton &&
+        !startButton.contains(event.target as Node)
+    ) {
+        isMenuVisible.value = false;
+    }
+}
+
+function openApp(appId: string) {
+    const appExists = currentApps.value.find((app) => app.id === appId);
+    if (!appExists) {
+        const newApp = { id: appId, position: { top: 20, left: 125 }, zIndex: zIndexCounter++ };
+        currentApps.value.push(newApp);
+    }
+}
+
+function closeApp(appId: string) {
+    currentApps.value = currentApps.value.filter((app) => app.id !== appId);
+}
+
+function startDrag(app: { id: string, position: { top: number, left: number } }, event: MouseEvent) {
+    let offset = {
+        x: event.clientX - (app.position.left || 0),
+        y: event.clientY - (app.position.top || 0),
+    };
+
+    const onDrag = (event: MouseEvent) => {
+        app.position = { top: event.clientY - offset.y, left: event.clientX - offset.x };
+
+        const appIndex = currentApps.value.findIndex(a => a.id === app.id);
+        if (appIndex !== -1) {
+            currentApps.value[appIndex] = { ...currentApps.value[appIndex], position: app.position };
+        }
+    };
+
+    const stopDrag = () => {
+        document.removeEventListener('mousemove', onDrag);
+        document.removeEventListener('mouseup', stopDrag);
     };
 
     document.addEventListener('mousemove', onDrag);
     document.addEventListener('mouseup', stopDrag);
 }
 
-function onDrag(event: MouseEvent) {
-    if (!isDragging) return;
-    position.value = {
-        top: event.clientY - offset.y,
-        left: event.clientX - offset.x,
+function appName(appId: string): string {
+    const app = apps.value.find((app) => app.id === appId);
+    return app ? app.name : 'Ismeretlen alkalmazás';
+}
+
+function getComponent(appId: string) {
+    const app = apps.value.find((app) => app.id === appId);
+    return app ? app.component : null;
+}
+
+function putToTop(app: { id: string, zIndex: number }) {
+    app.zIndex = zIndexCounter++;
+}
+
+let selectedIcons = new Set<string>();
+function startSelection(event: MouseEvent) {
+    if (event.button !== 0) return;
+
+    isSelecting.value = true;
+    selectionStart.value = { x: event.clientX, y: event.clientY };
+    selectionEnd.value = { x: event.clientX, y: event.clientY };
+}
+
+function updateSelection(event: MouseEvent) {
+    if (!isSelecting.value || !selectionStart.value) return;
+
+    selectionEnd.value = { x: event.clientX, y: event.clientY };
+
+    const apps = document.querySelectorAll('.desktop-icons .app');
+    apps.forEach((app) => {
+        app.classList.remove('selected');
+        const icon = app.querySelector('.icon');
+        const name = app.querySelector('.name');
+        if (icon) icon.classList.remove('selected');
+        if (name) name.classList.remove('selected');
+    });
+
+    const selectionRect = {
+        left: Math.min(selectionStart.value.x, selectionEnd.value.x),
+        top: Math.min(selectionStart.value.y, selectionEnd.value.y),
+        right: Math.max(selectionStart.value.x, selectionEnd.value.x),
+        bottom: Math.max(selectionStart.value.y, selectionEnd.value.y),
     };
+
+    apps.forEach((app) => {
+        const rect = app.getBoundingClientRect();
+        if (
+            rect.left < selectionRect.right &&
+            rect.right > selectionRect.left &&
+            rect.top < selectionRect.bottom &&
+            rect.bottom > selectionRect.top
+        ) {
+            app.classList.add('selected');
+            
+            const icon = app.querySelector('.icon');
+            const name = app.querySelector('.name');
+            if (icon) icon.classList.add('selected');
+            if (name) name.classList.add('selected');
+
+            selectedIcons.add(app.classList.value);
+        }
+    });
 }
 
-function stopDrag() {
-    isDragging = false;
-    document.removeEventListener('mousemove', onDrag);
-    document.removeEventListener('mouseup', stopDrag);
-}
 
-function appName(app: string): string {
-    switch (app) {
-        case 'about':
-            return 'Rólam';
-        case 'terminal':
-            return 'Terminal';
-        case 'musicplayer':
-            return 'Zene';
-        default:
-            return 'hát ennek nem kellene így lennie, szólj nekem kérlek, vmi nem kóser';
+function endSelection(event: MouseEvent) {
+    const clickedIcon = event.target as HTMLElement;
+    const icons = document.querySelectorAll('.desktop-icons .app');
+
+    if (!clickedIcon.classList.contains('selected')) {
+        icons.forEach((icon) => {
+            icon.classList.remove('selected');
+            selectedIcons.clear();
+        });
     }
+
+    isSelecting.value = false;
+    selectionStart.value = null;
+    selectionEnd.value = null;
 }
+
+const selectionBoxStyles = computed(() => {
+    if (!selectionStart.value || !selectionEnd.value) return {};
+
+    const startX = Math.min(selectionStart.value.x, selectionEnd.value.x);
+    const startY = Math.min(selectionStart.value.y, selectionEnd.value.y);
+    const width = Math.abs(selectionEnd.value.x - selectionStart.value.x);
+    const height = Math.abs(selectionEnd.value.y - selectionStart.value.y);
+
+    return {
+        left: `${startX}px`,
+        top: `${startY}px`,
+        width: `${width}px`,
+        height: `${height}px`,
+    };
+});
+
+onMounted(() => {
+    document.addEventListener('click', handleOutsideClick);
+
+    setInterval(() => {
+        hour.value = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        date.value = new Date().toLocaleDateString();
+    }, 1000);
+});
+
+onUnmounted(() => {
+    document.removeEventListener('click', handleOutsideClick);
+});
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/components/scss/desktop.scss';
+@use '@/assets/scss/components/desktop.scss';
 </style>

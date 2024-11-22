@@ -1,8 +1,8 @@
 <template>
     <div class="start-menu">
         <div class="menu-items">
-            <div class="menu-item">Programs</div>
-            <div class="menu-item">Settings</div>
+            <div class="menu-item">ranzakOS v2 névjegye</div>
+            <div class="menu-item">Beállítások</div>
             <div class="menu-item" @click="turnOff">Leállítás</div>
         </div>
     </div>
@@ -17,5 +17,5 @@ function turnOff() {
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/components/scss/startmenu.scss';
+@use '@/assets/scss/components/startmenu.scss';
 </style>

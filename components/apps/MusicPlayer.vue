@@ -69,5 +69,5 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/components/scss/musicplayer.scss';
+@use '@/assets//scss/components/apps/musicplayer.scss';
 </style>

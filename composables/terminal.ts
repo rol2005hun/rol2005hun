@@ -1,3 +1,5 @@
+import commands from '@/public/jsons/commands.json';
+
 export const useCommands = () => {
     const executeCommands = (command: string) => {
         const cmd = command.toLowerCase().split(' ')[0];
@@ -22,10 +24,9 @@ export const useCommands = () => {
         }
     
         if (cmd == 'commands' || cmd == 'command' || cmd == 'parancsok' || cmd == 'parancs' || cmd == 'cmds' || cmd == 'cmd') {
-            return `A parancsok: <ul style="margin-left: 20px;">
-            <li>whoami</li><li>date</li><li>skills</li><li>help</li><li>commands</li>
-            <li>github</li><li>facebook</li><li>discord</li><li>email</li><li>christmascounter</li><li>login [username]</li><li>logout</li>
-            <li>start</li><li>stop</li><li>next</li><li>previous</li><li>volume [érték]</li><li>togglesnow</li><li>togglemusicplayer</li><li>switch [page]</li></ul>`;
+            const commandList = commands.commands.map((command) => `<li>${command}</li>`).join('');
+            const commandHtml = `<ul style="margin-left: 30px;">${commandList}</ul>`;
+            return `A parancsok: ` + commandHtml;
         }
     
         if (cmd == 'skills') {

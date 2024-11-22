@@ -22,5 +22,5 @@ function cancelUnlock() {
 </script>
 
 <style scoped lang="scss">
-@use '@/assets/components/scss/login.scss';
+@use '@/assets/scss/components/login.scss';
 </style>
