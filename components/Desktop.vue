@@ -89,6 +89,15 @@ function openApp(appId: string) {
     if (!appExists) {
         const newApp = { id: appId, position: { top: 20, left: 125 }, zIndex: zIndexCounter++ };
         currentApps.value.push(newApp);
+    } else {
+        putToTop(appExists);
+    }
+
+    const cleanedIcons = new Set([...selectedIcons].map(icon => icon.split(' ')[0]));
+    selectedIcons.clear();
+    
+    for (const icon of cleanedIcons) {
+        openApp(icon);
     }
 }
 
