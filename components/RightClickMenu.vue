@@ -2,7 +2,7 @@
     <div class="right-click-menu" v-if="showMenu" :style="{ top: `${menuY}px`, left: `${menuX}px` }">
         <div class="start-menu">
             <div class="menu-items">
-                <div class="menu-item" @click="currentApps = []">Appok bezárása</div>
+                <div class="menu-item" @click="currentApps = []; hideContextMenu">Appok bezárása</div>
             </div>
         </div>
     </div>
@@ -28,10 +28,8 @@ function showContextMenu(event: MouseEvent) {
 }
 
 function hideContextMenu(event: MouseEvent) {
-    const isInsideMenu = (event.target as Element).closest('.right-click-menu');
-    if (!isInsideMenu) {
-        showMenu.value = false;
-    }
+    event.preventDefault();
+    showMenu.value = false;
 }
 
 

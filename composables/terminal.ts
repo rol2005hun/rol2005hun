@@ -77,21 +77,6 @@ export const useCommands = () => {
             }
             return '';
         }
-    
-        if (cmd == 'open') {
-            const page = command.split(' ')[1];
-            if (!page) return 'Helyes használat: open [app] (app: about, music)';
-            switch (page) {
-            case 'about':
-                useCookie('currentApp').value = 'about';
-                return;
-            case 'music':
-                useCookie('currentApp').value = 'musicplayer';
-                return;
-            default:
-                return 'Nincs ilyen app!';
-            }
-        }
 
         if(cmd == 'start' || cmd == 'play' || cmd == 'resume' || cmd == 'continue' || cmd == 'playback' || cmd == 'stop' || cmd == 'pause') {
             const element = document.getElementById('playback') as HTMLElement;
@@ -122,6 +107,72 @@ export const useCommands = () => {
             if(volume < 0 || volume > 100) return 'A megadott értéknek 0 és 100 között kell lennie.';
             setVolume(volume);
             return `Állítottál a hangerőn.`;
+        }
+
+        if (cmd == 'open') {
+            const app = command.split(' ')[1];
+            if (!app) return 'Helyes használat: open [app] (app: about, terminal, musicplayer, browser, sysinfo, settings)';
+            switch (app) {
+                case 'about':
+                    useCookie('currentApp').value = 'about';
+                    return 'Megnyitottad a Rólam appot.';
+                case 'terminal':
+                    useCookie('currentApp').value = 'terminal';
+                    return 'Megnyitottad a Terminál appot.';
+                case 'musicplayer':
+                    useCookie('currentApp').value = 'musicplayer';
+                    return 'Megnyitottad a Zenelejátszó appot.';
+                case 'browser':
+                    useCookie('currentApp').value = 'browser';
+                    return 'Megnyitottad a Böngésző appot.';
+                case 'sysinfo':
+                    useCookie('currentApp').value = 'sysinfo';
+                    return 'Megnyitottad a Rendszerinformáció appot.';
+                case 'settings':
+                    useCookie('currentApp').value = 'settings';
+                    return 'Megnyitottad a Beállítások appot.';
+                default:
+                    return 'Nincs ilyen app!';
+            }
+        }
+
+        if(cmd == 'close') {
+            const app = command.split(' ')[1];
+            if (!app) return 'Helyes használat: close [app] (app: about, terminal, musicplayer, browser, sysinfo, settings)';
+
+            const currentApps = useCookie('currentApps', { default: () => [] }) as Ref<{ id: string, position: { top: number, left: number }, zIndex: number }[]>;
+            function closeApp(app: string) {
+                currentApps.value = currentApps.value.filter((currentApp) => currentApp.id !== app);
+            }
+
+            switch (app) {
+                case 'about':
+                    closeApp('about');
+                    return 'Bezártad a Rólam appot.';
+                case 'terminal':
+                    closeApp('terminal');
+                    return 'Bezártad a Terminál appot.';
+                case 'musicplayer':
+                    closeApp('musicplayer');
+                    return 'Bezártad a Zenelejátszó appot.';
+                case 'browser':
+                    closeApp('browser');
+                    return 'Bezártad a Böngésző appot.';
+                case 'sysinfo':
+                    closeApp('sysinfo');
+                    return 'Bezártad a Rendszerinformáció appot.';
+                case 'settings':
+                    closeApp('settings');
+                    return 'Bezártad a Beállítások appot.';
+                default:
+                    return 'Nincs ilyen app!';
+            }
+        }
+
+        if(cmd == 'exit') {
+            const currentApps = useCookie('currentApps', { default: () => [] }) as Ref<{ id: string, position: { top: number, left: number }, zIndex: number }[]>;
+            currentApps.value = currentApps.value.filter((app) => app.id !== 'terminal');
+            return 'Kiléptél a terminálból.';
         }
   
         return `Nincs ilyen parancs! Próbáld meg a 'help' parancsot!`;

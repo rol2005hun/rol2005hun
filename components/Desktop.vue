@@ -28,11 +28,18 @@
                 <span class="name">{{ app.name }}</span>
             </div>
         </div>
-        <div v-for="app in currentApps" :key="app.id" class="window"  ref="window" :style="{ top: app.position.top + 'px', left: app.position.left + 'px', zIndex: app.zIndex }"
+        <div v-for="app in currentApps" :key="app.id" class="window" :class="app.id" ref="window" :style="{ top: app.position.top + 'px', left: app.position.left + 'px', zIndex: app.zIndex }"
             v-show="apps.some(a => a.id === app.id)" @click="putToTop(app)">
             <div class="window-header" @mousedown="startDrag(app, $event)">
-                <span class="window-title">{{ appName(app.id) }}</span>
-                <button class="close-btn" @click="closeApp(app.id)">X</button>
+                <div class="icon-name">
+                    <span class="window-icon">{{ apps.find(a => a.id === app.id)?.icon }}</span>
+                    <span class="window-title">{{ appName(app.id) }}</span>
+                </div>
+                <div class="buttons">
+                    <button class="minimize btn" @click="minimizeApp(app.id)">—</button>
+                    <button class="maximize btn" @click="maximizeApp(app.id)">🗖</button>
+                    <button class="close btn" @click="closeApp(app.id)">X</button>
+                </div>
             </div>
             <component :is="getComponent(app.id)" />
         </div>
@@ -101,20 +108,59 @@ function openApp(appId: string) {
     }
 }
 
+function minimizeApp(appId: string) {
+    const app = document.querySelector(`.window.${appId}`) as HTMLElement;
+    if (!app) return;
+
+    app.style.width = '50%';
+    app.style.height = '50%';
+}
+
+function maximizeApp(appId: string) {
+    const appIndex = currentApps.value.findIndex((app) => app.id === appId);
+    if (appIndex !== -1) {
+        currentApps.value[appIndex] = { ...currentApps.value[appIndex], position: { top: 0, left: 0 } };
+    }
+
+    const app = document.querySelector(`.window.${appId}`) as HTMLElement;
+    if (!app) return;
+
+    app.style.width = '100%';
+    app.style.height = '93%';
+}
+
 function closeApp(appId: string) {
     currentApps.value = currentApps.value.filter((app) => app.id !== appId);
 }
 
-function startDrag(app: { id: string, position: { top: number, left: number } }, event: MouseEvent) {
-    let offset = {
+function startDrag(app: { id: string; position: { top: number; left: number } }, event: MouseEvent) {
+    const offset = {
         x: event.clientX - (app.position.left || 0),
         y: event.clientY - (app.position.top || 0),
     };
 
     const onDrag = (event: MouseEvent) => {
-        app.position = { top: event.clientY - offset.y, left: event.clientX - offset.x };
+        let newTop = event.clientY - offset.y;
+        let newLeft = event.clientX - offset.x;
 
-        const appIndex = currentApps.value.findIndex(a => a.id === app.id);
+        const windowElement = document.querySelector(`.window.${app.id}`) as HTMLElement;
+        const headerElement = windowElement?.querySelector('.window-header') as HTMLElement;
+
+        if (!windowElement || !headerElement) return;
+
+        const headerHeight = headerElement.offsetHeight;
+        const desktopWidth = window.innerWidth;
+        const desktopHeight = window.innerHeight;
+        const taskbarHeight = 70;
+        const topBoundaryMargin = 42;
+        const sideMargin = 45;
+
+        newTop = Math.max(-headerHeight + topBoundaryMargin, Math.min(desktopHeight - taskbarHeight - headerHeight, newTop));
+        newLeft = Math.max(-windowElement.offsetWidth + sideMargin, Math.min(desktopWidth - sideMargin, newLeft));
+
+        app.position = { top: newTop, left: newLeft };
+
+        const appIndex = currentApps.value.findIndex((a) => a.id === app.id);
         if (appIndex !== -1) {
             currentApps.value[appIndex] = { ...currentApps.value[appIndex], position: app.position };
         }
@@ -144,8 +190,13 @@ function putToTop(app: { id: string, zIndex: number }) {
 }
 
 let selectedIcons = new Set<string>();
-function startSelection(event: MouseEvent) {
+    function startSelection(event: MouseEvent) {
     if (event.button !== 0) return;
+
+    const target = event.target as HTMLElement;
+    if (target.closest('.window') || target.closest('.desktop-icons .app') || target.closest('.taskbar')) {
+        return;
+    }
 
     isSelecting.value = true;
     selectionStart.value = { x: event.clientX, y: event.clientY };

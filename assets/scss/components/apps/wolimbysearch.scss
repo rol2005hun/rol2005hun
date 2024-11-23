@@ -1,7 +1,6 @@
 .browser {
     border: 0.0625em solid #ccc;
     overflow: hidden;
-    box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
 }
   
 .browser-header {
@@ -55,7 +54,7 @@
 }
   
 .browser-content {
-    height: 37.5em;
+    height: 100vh;
     background-color: #fff;
 }
   
