@@ -108,6 +108,43 @@
     max-width: 100%;
     max-height: 100vh;
     resize: both;
+    transform-origin: center;
+    transition: transform 0.5s ease, opacity 0.3s ease;
+
+    &.opening {
+        opacity: 0;
+        transform: scale(0.5) translate(-50%, -50%);
+    }
+
+    &.open {
+        opacity: 1;
+        transform: scale(1) translate(0, 0);
+    }
+
+    &.minimized {
+        transform: translateY(calc(100vh - 3.5em)) scale(0.8);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &.restored {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+
+    &.maximized {
+        transform: scale(100%, 93%);
+    }
+
+    &.revert-maximized {
+        transform: scale(50%, 50%) translate(-50%, -50%);
+    }
+
+    &.closed {
+        transform: scale(0.5) translate(-50%, -50%);
+        opacity: 0;
+        pointer-events: none;
+    }
 
     &-header {
         display: flex;
@@ -133,7 +170,7 @@
         .buttons {
             display: flex;
             gap: 0.5em;
-
+        
             .btn {
                 border: none;
                 border-radius: 0.1875em;
@@ -143,27 +180,40 @@
                 padding: 0.2em 0.7em;
                 font-size: 0.75em;
                 line-height: 1.25em;
+                position: relative;
             }
-    
+        
+            .btn.maximize {
+                background: #5cb85c;
+        
+                &:hover {
+                    background: #4cae4c;
+                }
+
+                .span-foreground {
+                    position: relative;
+                    z-index: 2;
+                }
+
+                .span-background {
+                    position: absolute;
+                    top: -0.1em;
+                    right: 0.3em;
+                    z-index: 1;
+                }
+            }
+        
             .btn.minimize {
                 background: #f0ad4e;
-    
+        
                 &:hover {
                     background: #ec971f;
                 }
             }
-    
-            .btn.maximize {
-                background: #5cb85c;
-    
-                &:hover {
-                    background: #4cae4c;
-                }
-            }
-    
+        
             .close {
                 background: #ff5f57;
-    
+        
                 &:hover {
                     background: #e0534e;
                 }

@@ -34,4 +34,3 @@ onMounted(() => {
 <style scoped lang="scss">
 @use '@/assets/scss/components/apps/systeminfo.scss';
 </style>
-  

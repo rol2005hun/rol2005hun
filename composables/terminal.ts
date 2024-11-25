@@ -79,23 +79,50 @@ export const useCommands = () => {
         }
 
         if(cmd == 'start' || cmd == 'play' || cmd == 'resume' || cmd == 'continue' || cmd == 'playback' || cmd == 'stop' || cmd == 'pause') {
+            function play(element: HTMLElement) {
+                if(element.classList.contains('fa-play')) {
+                    useMusicPlayer().togglePlayback(false);
+                    return `Zene elindítva.`;
+                } else {
+                    useMusicPlayer().togglePlayback(false);
+                    return `Zene megállítva.`;
+                }
+            }
+
             const element = document.getElementById('playback') as HTMLElement;
-            if(element.classList.contains('fa-play')) {
-                togglePlayback(false);
+            if (!element) {
+                useDesktop().openApp('musicplayer');
+                setTimeout(() => {
+                    const elementAfterDelay = document.getElementById('playback') as HTMLElement;
+                    if (elementAfterDelay) {
+                        return play(elementAfterDelay);
+                    } else {
+                        return `Nem található a Zenelejátszó app!`;
+                    }
+                }, 1000);
                 return `Zene elindítva.`;
             } else {
-                togglePlayback(false);
-                return `Zene megállítva.`;
+                return play(element);
             }
         }
     
         if(cmd == 'next' || cmd == 'skip') {
-            nextTrack();
+            const element = document.getElementById('next') as HTMLElement;
+            if (!element) {
+                return `Nem található a Zenelejátszó app!`;
+            }
+
+            useMusicPlayer().nextTrack();
             return `Átváltottál a következő számra.`;
         }
     
         if(cmd == 'previous' || cmd == 'prev') {
-            prevTrack();
+            const element = document.getElementById('next') as HTMLElement;
+            if (!element) {
+                return `Nem található a Zenelejátszó app!`;
+            }
+
+            useMusicPlayer().prevTrack();
             return `Átváltottál az előző számra.`;
         }
     
@@ -105,7 +132,7 @@ export const useCommands = () => {
             const volume = parseInt(value);
             if(isNaN(volume)) return 'A megadott érték nem szám.';
             if(volume < 0 || volume > 100) return 'A megadott értéknek 0 és 100 között kell lennie.';
-            setVolume(volume);
+            useMusicPlayer().setVolume(volume);
             return `Állítottál a hangerőn.`;
         }
 
@@ -114,22 +141,22 @@ export const useCommands = () => {
             if (!app) return 'Helyes használat: open [app] (app: about, terminal, musicplayer, browser, sysinfo, settings)';
             switch (app) {
                 case 'about':
-                    useCookie('currentApp').value = 'about';
+                    useDesktop().openApp('about');
                     return 'Megnyitottad a Rólam appot.';
                 case 'terminal':
-                    useCookie('currentApp').value = 'terminal';
+                    useDesktop().openApp('terminal');
                     return 'Megnyitottad a Terminál appot.';
                 case 'musicplayer':
-                    useCookie('currentApp').value = 'musicplayer';
+                    useDesktop().openApp('musicplayer');
                     return 'Megnyitottad a Zenelejátszó appot.';
                 case 'browser':
-                    useCookie('currentApp').value = 'browser';
+                    useDesktop().openApp('browser');
                     return 'Megnyitottad a Böngésző appot.';
                 case 'sysinfo':
-                    useCookie('currentApp').value = 'sysinfo';
+                    useDesktop().openApp('sysinfo');
                     return 'Megnyitottad a Rendszerinformáció appot.';
                 case 'settings':
-                    useCookie('currentApp').value = 'settings';
+                    useDesktop().openApp('settings');
                     return 'Megnyitottad a Beállítások appot.';
                 default:
                     return 'Nincs ilyen app!';
@@ -140,29 +167,24 @@ export const useCommands = () => {
             const app = command.split(' ')[1];
             if (!app) return 'Helyes használat: close [app] (app: about, terminal, musicplayer, browser, sysinfo, settings)';
 
-            const currentApps = useCookie('currentApps', { default: () => [] }) as Ref<{ id: string, position: { top: number, left: number }, zIndex: number }[]>;
-            function closeApp(app: string) {
-                currentApps.value = currentApps.value.filter((currentApp) => currentApp.id !== app);
-            }
-
             switch (app) {
                 case 'about':
-                    closeApp('about');
+                    useDesktop().closeApp('about');
                     return 'Bezártad a Rólam appot.';
                 case 'terminal':
-                    closeApp('terminal');
+                    useDesktop().closeApp('terminal');
                     return 'Bezártad a Terminál appot.';
                 case 'musicplayer':
-                    closeApp('musicplayer');
+                    useDesktop().closeApp('musicplayer');
                     return 'Bezártad a Zenelejátszó appot.';
                 case 'browser':
-                    closeApp('browser');
+                    useDesktop().closeApp('browser');
                     return 'Bezártad a Böngésző appot.';
                 case 'sysinfo':
-                    closeApp('sysinfo');
+                    useDesktop().closeApp('sysinfo');
                     return 'Bezártad a Rendszerinformáció appot.';
                 case 'settings':
-                    closeApp('settings');
+                    useDesktop().closeApp('settings');
                     return 'Bezártad a Beállítások appot.';
                 default:
                     return 'Nincs ilyen app!';
@@ -170,8 +192,7 @@ export const useCommands = () => {
         }
 
         if(cmd == 'exit') {
-            const currentApps = useCookie('currentApps', { default: () => [] }) as Ref<{ id: string, position: { top: number, left: number }, zIndex: number }[]>;
-            currentApps.value = currentApps.value.filter((app) => app.id !== 'terminal');
+            useDesktop().closeApp('terminal');
             return 'Kiléptél a terminálból.';
         }
   

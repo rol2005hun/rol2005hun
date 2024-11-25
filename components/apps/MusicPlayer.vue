@@ -50,8 +50,18 @@ const {
     isLooping,
     isMuted,
     audioElement,
-    currentTrack
-} = useAudioUtils();
+    currentTrack,
+    formatTime,
+    setTime,
+    setVolume,
+    togglePlayback,
+    toggleLoop,
+    toggleMute,
+    prevTrack,
+    nextTrack,
+    restartTrack,
+    updateMusicSlider
+} = useMusicPlayer();
 
 if(volume.value) volumeSlider.value = parseInt(volume.value);
 
