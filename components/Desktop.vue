@@ -6,7 +6,7 @@
             <div class="start-button" @click="isMenuVisible = !isMenuVisible">
                 <img src="public/images/ranzakOSstart.webp" alt="ranzakOSstart" class="start-img">
             </div>
-            <StartMenu v-if="isMenuVisible" @openSysInfo="openApp($event)" />
+            <StartMenu v-if="isMenuVisible" @openApp="openApp($event)" />
             <div class="task-icons">
                 <span v-for="app in apps.filter(app => app.desktopIcon || currentApps.some(current => current.id === app.id))" :key="app.id" 
                     :class="{ icon: true, active: currentApps.map(appid => appid.id).includes(app.id) }" @click="openApp(app.id)"> {{ app.icon }}

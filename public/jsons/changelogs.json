@@ -5,6 +5,12 @@
             "date": "2024-11-25",
             "name": "Megérkezett a béta",
             "description": "Már pár napja kinn volt, de mostmár végleges béta verzió, van benne pár app, de még nincs kész teljesen. Előfordulhatnak hibák, ha találsz valamit, akkor terminalba írd be hogy: dc, majd írj rám, köszi."
+        },
+        {
+            "version": "1.0.1",
+            "date": "2024-11-26",
+            "name": "Hibajavítások",
+            "description": "- Nem működtek a zene app 'kontrollerjei' a terminálból, javítva lett.<br>- Ha a beállításokbol megnyitottad a changelog appot, nem volt animáció, javítva lett.<br>- Csak az első megnyitott appnak volt animációja, javítva.<br>Emelett még pár apróbb hibát is javítottam."
         }
     ]
 }

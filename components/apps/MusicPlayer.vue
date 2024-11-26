@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-const volume = ref(useCookie('volume').value as string);
+const volume = useCookie('volume').value as Ref<string>;
 
 const {
     currentTime,

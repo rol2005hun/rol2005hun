@@ -6,6 +6,8 @@ import SystemInfo from '@/components/apps/SystemInfo.vue';
 import Settings from '@/components/apps/Settings.vue';
 import Changelog from '@/components/apps/Changelog.vue';
 
+let zIndexCounter = 1000;
+
 export function useDesktop() {
     const apps = ref([
         { id: 'about', name: 'Rólam', icon: '📂', desktopIcon: true, component: markRaw(AppsAbout) },
@@ -25,6 +27,12 @@ export function useDesktop() {
     const selectionStart = ref<{ x: number; y: number } | null>(null);
     const selectionEnd = ref<{ x: number; y: number } | null>(null);
     const maximize = ref(true);
+    let selectedIcons = new Set<string>();
+
+    if (!currentApps.value || !Array.isArray(currentApps.value)) {
+        currentApps.value = [];
+    }
+
     const selectionBoxStyles = computed(() => {
         if (!selectionStart.value || !selectionEnd.value) return {};
         const startX = Math.min(selectionStart.value.x, selectionEnd.value.x);
@@ -39,12 +47,6 @@ export function useDesktop() {
             height: `${height}px`,
         };
     });
-    let zIndexCounter = 1000;
-    let selectedIcons = new Set<string>();
-
-    if (!currentApps.value || !Array.isArray(currentApps.value)) {
-        currentApps.value = [];
-    }
 
     const startSelection = (event: MouseEvent) => {
         if (event.button !== 0) return;
@@ -178,16 +180,8 @@ export function useDesktop() {
         if (!app) {
             const newApp = { id: appId, position: { top: 20, left: 125 }, size: { width: -1, height: -1 }, zIndex: zIndexCounter++, minimized: false };
             currentApps.value.push(newApp);
-
             nextTick(() => {
-                const appElement = document.querySelector(`.window.${appId}`) as HTMLElement;
-                appElement?.classList.add('opening');
-                setTimeout(() => {
-                    appElement?.classList.remove('opening');
-                    appElement?.classList.add('open');
-                    observeResize(appId);
-                    appElement.classList.remove('open');
-                }, 0);
+                observeResize(appId);
             });
         } else if (app.minimized) {
             restoreApp(appId);
@@ -209,13 +203,14 @@ export function useDesktop() {
 
     const maximizeApp = (appId: string) => {
         const appIndex = currentApps.value.findIndex((app) => app.id === appId);
+        const app = document.querySelector(`.window.${appId}`) as HTMLElement;
+
         if (appIndex !== -1) {
             currentApps.value[appIndex] = { ...currentApps.value[appIndex], position: { top: 0, left: 0 } };
         }
 
         if (maximize.value) {
             maximize.value = false;
-            const app = document.querySelector(`.window.${appId}`) as HTMLElement;
             if (!app) return;
             app.classList.add('maximized');
             setTimeout(() => {
@@ -224,7 +219,6 @@ export function useDesktop() {
             }, 500);
         } else {
             maximize.value = true;
-            const app = document.querySelector(`.window.${appId}`) as HTMLElement;
             if (!app) return;
 
             app.classList.add('revert-maximized');

@@ -4,7 +4,7 @@
         <ul>
             <li v-for="(log, index) in changelogs.changelogs" :key="index">
                 <strong>{{ log.date }} {{ log.version }}</strong>: {{ log.name }}
-                <p>{{ log.description }}</p>
+                <p v-html="log.description"></p>
             </li>
         </ul>
     </div>

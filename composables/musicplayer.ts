@@ -7,20 +7,20 @@ interface Track {
     audio: string;
 }
 
-export function useMusicPlayer() {
-    const currentTrackIndex = ref(0);
-    const currentTime = ref(0);
-    const duration = ref(0);
-    const musicSlider = ref(0);
-    const volumeSlider = ref<number>(100);
-    const defaultVolume = ref<number>(100);
-    const isPlaying = ref(false);
-    const isLooping = ref(false);
-    const isMuted = ref(false);
-    const showPlayer = ref(true);
-    const tracks = ref<Track[]>([]);
-    const audioElement = ref<HTMLAudioElement | null>(null);
+const currentTrackIndex = ref(0);
+const currentTime = ref(0);
+const duration = ref(0);
+const musicSlider = ref(0);
+const volumeSlider = ref<number>(100);
+const defaultVolume = ref<number>(100);
+const isPlaying = ref(false);
+const isLooping = ref(false);
+const isMuted = ref(false);
+const showPlayer = ref(true);
+const tracks = ref<Track[]>([]);
+const audioElement = ref<HTMLAudioElement | null>(null);
 
+export function useMusicPlayer() {
     const currentTrack = computed(() => tracks.value[currentTrackIndex.value]);
 
     const togglePlayer = () => (showPlayer.value = !showPlayer.value);
