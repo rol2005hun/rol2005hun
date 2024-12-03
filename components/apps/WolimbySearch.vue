@@ -12,11 +12,11 @@
 </template>
 
 <script setup lang="ts">
-const url = ref('https://askvoid.com/');
-const iframeUrl = ref('https://askvoid.com/');
+const url = ref('https://chrcountback.netlify.app/');
+const iframeUrl = ref('https://chrcountback.netlify.app/');
 const canGoBack = ref(false);
 const canGoForward = ref(false);
-const openedLinks = ref<string[]>(['https://askvoid.com/']);
+const openedLinks = ref<string[]>(['https://chrcountback.netlify.app/']);
 const previousUrl = ref<string>(url.value);
 let currentIndex = 0 as number;
 

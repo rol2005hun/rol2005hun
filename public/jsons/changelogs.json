@@ -11,6 +11,12 @@
             "date": "2024-11-26",
             "name": "Hibajavítások",
             "description": "- Nem működtek a zene app 'kontrollerjei' a terminálból, javítva lett.<br>- Ha a beállításokbol megnyitottad a changelog appot, nem volt animáció, javítva lett.<br>- Csak az első megnyitott appnak volt animációja, javítva.<br>Emelett még pár apróbb hibát is javítottam."
+        },
+        {
+            "version": "1.0.2",
+            "date": "2024-12-03",
+            "name": "Browser frissítés",
+            "description": "- Ha megnyitod magát az OP rendszert, akkor bedob karácsonyi visszaszámlálóra, majd maximalizeolja az appot.<br>- A changelog mostmár a legújabb verziót mutatja felül."
         }
     ]
 }
