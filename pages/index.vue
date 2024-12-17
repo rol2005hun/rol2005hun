@@ -1,6 +1,5 @@
 <template>
     <div class="app">
-        <Cookies v-if="acceptedCookies === false" />
         <Login v-else-if="currentScreen === 'login'" @mousedown="startUnlock" @mouseup="cancelUnlock" @mouseleave="cancelUnlock" />
         <Loading v-else-if="currentScreen === 'loading'" />
         <Desktop v-else-if="currentScreen === 'desktop'" />
