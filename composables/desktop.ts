@@ -133,6 +133,8 @@ export function useDesktop() {
     };
 
     const observeResize = (appId: string) => {
+        if (appId === 'cookies') return;
+
         const appElement = document.querySelector(`.window.${appId}`) as HTMLElement;
     
         if (!appElement) return;
@@ -184,6 +186,9 @@ export function useDesktop() {
         if (!app) {
             const newApp = { id: appId, position: { top: 20, left: 125 }, size: { width: -1, height: -1 }, zIndex: zIndexCounter++, minimized: false };
             currentApps.value.push(newApp);
+            nextTick(() => {
+                observeResize(appId);
+            });
         } else if (app.minimized) {
             restoreApp(appId);
         } else {
