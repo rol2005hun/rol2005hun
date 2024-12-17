@@ -1,6 +1,6 @@
 <template>
     <div class="app">
-        <Login v-else-if="currentScreen === 'login'" @mousedown="startUnlock" @mouseup="cancelUnlock" @mouseleave="cancelUnlock" />
+        <Login v-if="currentScreen === 'login'" @mousedown="startUnlock" @mouseup="cancelUnlock" @mouseleave="cancelUnlock" />
         <Loading v-else-if="currentScreen === 'loading'" />
         <Desktop v-else-if="currentScreen === 'desktop'" />
         <Logout v-else-if="currentScreen === 'logout'" />
