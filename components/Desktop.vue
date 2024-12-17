@@ -59,6 +59,12 @@ const { apps, currentApps, backgroundUrl, isMenuVisible, hour, date, isSelecting
 observeResize, openApp, minimizeApp, maximizeApp, closeApp, startDrag, appName, getComponent, putToTop } = useDesktop();
 
 // karacsonyig
+function openRicsi() {
+    openApp('browser');
+    nextTick(() => {
+        maximizeApp('browser');
+    });
+}
 // karacsonyig vege
 
 onMounted(() => {
@@ -69,6 +75,8 @@ onMounted(() => {
     currentApps.value.forEach(app => {
         nextTick(() => observeResize(app.id));
     })
+
+    openRicsi();
 });
 
 onUnmounted(() => {
