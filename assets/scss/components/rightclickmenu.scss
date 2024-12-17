@@ -1,0 +1,26 @@
+.right-click-menu {
+    position: fixed;
+    background-color: #333;
+    border-radius: 0.5em;
+    padding: 0.5em 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 1;
+
+    .menu-items {
+        display: flex;
+        flex-direction: column;
+    }
+      
+    .menu-item {
+        padding: 10px;
+        margin: 0 0.5em 0 0.5em;
+        border-radius: 0.5em;
+        cursor: pointer;
+    
+        &:hover {
+          background-color: #555;
+        }
+    }
+}

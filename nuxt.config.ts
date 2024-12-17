@@ -7,14 +7,14 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'hu'
       },
-      title: 'ranzak',
+      title: 'ranzakOS v2',
       link: [
         { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css', crossorigin: 'anonymous' },
         { rel: 'icon', href: 'https://i.imgur.com/Z4uWZ64.jpg', type: 'image/x-icon' }
       ],
       meta: [
-        { name: 'title', content: 'ranzak' },
-        { name: 'description', content: 'less fel ide :D' }
+        { name: 'title', content: 'ranzak.site' },
+        { name: 'description', content: 'Próbáld ki a ranzakOS v2-es verzióját, megújult dizájnnal.' }
       ]
     },
     rootId: 'app'
@@ -28,4 +28,4 @@ export default defineNuxtConfig({
       }
     }
   }
-})
+});

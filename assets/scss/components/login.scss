@@ -1,0 +1,59 @@
+.loading-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #1e1e1e;
+    color: white;
+}
+  
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+  
+.fingerprint-scanner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10em;
+    height: 10em;
+    border: 0.1em solid white;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    background: url('https://pngimg.com/uploads/fingerprint/fingerprint_PNG81.png') no-repeat center;
+    background-size: contain;
+}
+  
+.label {
+    margin-top: 1em;
+    font-size: 1em;
+}
+  
+.scanning-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 255, 0, 0.5) 20%, transparent 70%);
+    animation: scanning 2s linear infinite;
+    z-index: 1;
+    border-radius: 50%;
+}
+  
+@keyframes scanning {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+}

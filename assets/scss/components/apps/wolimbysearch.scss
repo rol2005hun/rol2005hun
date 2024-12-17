@@ -1,0 +1,65 @@
+.browser {
+    border: 0.0625em solid #ccc;
+    overflow: hidden;
+}
+  
+.browser-header {
+    background-color: #f9f9f9;
+    padding: 0.625em 0.9375em;
+    display: flex;
+    align-items: center;
+    border-bottom: 0.0625em solid #ddd;
+
+    .nav-button {
+        margin-right: 0.625em;
+        padding: 0.5em;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 0.25em;
+        cursor: pointer;
+        font-size: 1em;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        width: 2.5em;
+        height: 2.5em;
+    
+        &:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+    
+        &:disabled {
+            background-color: #d6d6d6;
+            cursor: not-allowed;
+        }
+    
+        i {
+            font-size: 1.125em;
+        }
+    }
+}
+  
+.address-bar {
+    width: 100%;
+    padding: 0.625em;
+    border: 0.0625em solid #ddd;
+    border-radius: 0.5em;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.3s;
+}
+  
+.address-bar:focus {
+    border-color: #0078d7;
+}
+  
+.browser-content {
+    height: 100vh;
+    background-color: #fff;
+}
+  
+.iframe-content {
+    width: 100%;
+    height: 100%;
+    border: none;
+}

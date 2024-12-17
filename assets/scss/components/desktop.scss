@@ -1,0 +1,232 @@
+.desktop {
+    user-select: none;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #1b1b1b;
+    background-size: cover;
+
+    .selection-box {
+        position: absolute;
+        border: 1px dashed #0078d4;
+        background-color: rgba(0, 120, 212, 0.2);
+        pointer-events: none;
+        z-index: 999;
+    }
+}
+  
+.taskbar {
+    z-index: 9999999999;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 0.5em;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: white;
+
+    .task-time {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        margin-left: auto;
+        padding: 0 1em;
+        color: white;
+        font-size: 1em;
+    }
+}
+  
+.start-button {
+    cursor: pointer;
+
+    .start-img {
+        border-radius: 50%;
+        width: 3em;
+        height: 3em;
+    }
+}
+  
+.task-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1.5em;
+    gap: 1.5em;
+
+    .icon {
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+
+    .icon.active {
+        border-bottom: thin solid white;
+    }
+}
+  
+.desktop-icons {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 0.5em;
+
+    .icon {
+        font-size: 1.5em;
+        padding: 0.5em;
+        cursor: pointer;
+    }
+
+    .app {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 5em;
+        margin-top: 0.5em;
+
+        &:hover {
+            background-color: rgba(245, 245, 245, 0.7);
+            color: black;
+            border-radius: 0.25em;
+        }
+    }
+
+    .app.selected {
+        background-color: rgba(245, 245, 245, 0.7);
+        color: black;
+        border-radius: 0.25em;
+    }
+}
+
+.window {
+    position: absolute;
+    border: 0.125em solid #ccc;
+    border-radius: 0.3125em;
+    background: #f3f3f3;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    max-width: 100%;
+    max-height: 100vh;
+    resize: both;
+    transform-origin: center;
+    transition: transform 0.5s ease, opacity 0.3s ease;
+
+    &-transition-enter-active {
+        opacity: 0;
+        transform: scale(0.5) translate(-50%, -50%);
+    }
+
+    &-transition-enter-to {
+        opacity: 1;
+        transform: scale(1) translate(0, 0);
+    }
+
+    &.minimized {
+        transform: translateY(calc(100vh - 3.5em)) scale(0.8);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &.restored {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+
+    &.maximized {
+        transform: scale(100%, 93%);
+    }
+
+    &.revert-maximized {
+        transform: scale(50%, 50%) translate(-50%, -50%);
+    }
+
+    &.closed {
+        transform: scale(0.5) translate(-50%, -50%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #0078d7;
+        color: white;
+        padding: 0.625em;
+        font-weight: bold;
+        border-bottom: 0.0625em solid #ccc;
+
+        .icon-name {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+
+        &-title {
+            margin: 0;
+            font-size: 0.875em;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 0.5em;
+        
+            .btn {
+                border: none;
+                border-radius: 0.1875em;
+                color: white;
+                cursor: pointer;
+                font-weight: bold;
+                padding: 0.2em 0.7em;
+                font-size: 0.75em;
+                line-height: 1.25em;
+                position: relative;
+            }
+        
+            .btn.maximize {
+                background: #5cb85c;
+        
+                &:hover {
+                    background: #4cae4c;
+                }
+
+                .span-foreground {
+                    position: relative;
+                    z-index: 2;
+                }
+
+                .span-background {
+                    position: absolute;
+                    top: -0.1em;
+                    right: 0.3em;
+                    z-index: 1;
+                }
+            }
+        
+            .btn.minimize {
+                background: #f0ad4e;
+        
+                &:hover {
+                    background: #ec971f;
+                }
+            }
+        
+            .close {
+                background: #ff5f57;
+        
+                &:hover {
+                    background: #e0534e;
+                }
+            }
+        }
+    }
+}
+
+// külön appok
+
+.window.terminal, .window.browser, .window.about {
+    width: 70em;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+}
