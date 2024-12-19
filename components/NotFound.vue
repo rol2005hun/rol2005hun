@@ -2,26 +2,25 @@
     <div class="kernel-panic">
         <h1>kernel panic</h1>
         <p>A fatal error has occurred. The system has been halted.</p>
-        <pre>
-            <code>
-                Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000009
-                CPU: 0 PID: 1 Comm: init Not tainted 5.4.0-42-generic #46-Ubuntu
-                Hardware name: Example Hardware
-                Call Trace:
-                 dump_stack+0x66/0x81
-                 panic+0x101/0x2e3
-                 do_exit+0xb24/0xb30
-                 do_group_exit+0x47/0xb0
-                 __x64_sys_exit_group+0x18/0x20
-                 do_syscall_64+0x57/0x190
-                 entry_SYSCALL_64_after_hwframe+0x44/0xa9
-            </code>
-        </pre>
+        <span class="code">
+            <p>Kernel panic - not syncing: Attempted to kill init! exitcode=0x00000009</p>
+            <p>CPU: 0 PID: 1 Comm: init Not tainted 5.4.0-42-generic #46-Ubuntu</p>
+            <p>Hardware name: ranzakOSv2 hardwares</p>
+            <p>!!! PLEASE CONTACT THE SYSTEM ADMINISTRATOR, WITH A SCREENSHOT: RANZAK !!!</p>
+            <p>Error statuscode: <span style="color: red;">{{ error?.statusCode }}</span></p>
+            <p>Error message: <span style="color: red;">{{ error?.cause }}</span></p>
+            <p>Error JSON: <span style="color: red;">{{ error?.toJSON }}</span></p>
+        </span>
         <p>retarting after {{ seconds }} seconds</p>
     </div>
 </template>
 
 <script setup lang="ts">
+import type { NuxtError } from '#app';
+
+const props = defineProps({
+  error: Object as () => NuxtError
+});
 const currentScreen = useCookie('currentScreen') as Ref<string>;
 const seconds = ref(10);
 

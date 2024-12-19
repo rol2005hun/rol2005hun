@@ -49,8 +49,12 @@ export function useDesktop() {
 
     const maximized = (appId: string): boolean => {
         const app = currentApps.value.find((app) => app.id === appId);
-        return app?.size.width === 100 && app.size.height === 93;
-    }
+        if (!app) return false;
+    
+        const isWidthMax = app.size.width === 100;
+        const isHeightMax = Math.abs(app.size.height - 93) > 0;
+        return isWidthMax && isHeightMax;
+    };
 
     const startSelection = (event: MouseEvent) => {
         if (event.button !== 0) return;
@@ -182,25 +186,27 @@ export function useDesktop() {
     };
     
     const openApp = (appId: string) => {
-        const selectedElements = document.querySelectorAll('.app.selected');
+        if (appId !== 'cookies') {
+            const selectedElements = document.querySelectorAll('.app.selected');
 
-        selectedElements.forEach((element) => {
-            const id = element.classList[0];
-            if (id && id !== appId) {
-                const existingApp = currentApps.value.find((app) => app.id === id);
-                if (!existingApp) {
-                    const newApp = { id, position: { top: 20, left: 125 }, size: { width: -1, height: -1 }, zIndex: zIndexCounter++, minimized: false };
-                    currentApps.value.push(newApp);
-                    nextTick(() => {
-                        observeResize(id);
-                    });
-                } else if (existingApp.minimized) {
-                    restoreApp(id);
-                } else {
-                    putToTop(existingApp);
+            selectedElements.forEach((element) => {
+                const id = element.classList[0];
+                if (id && id !== appId) {
+                    const existingApp = currentApps.value.find((app) => app.id === id);
+                    if (!existingApp) {
+                        const newApp = { id, position: { top: 20, left: 125 }, size: { width: -1, height: -1 }, zIndex: zIndexCounter++, minimized: false };
+                        currentApps.value.push(newApp);
+                        nextTick(() => {
+                            observeResize(id);
+                        });
+                    } else if (existingApp.minimized) {
+                        restoreApp(id);
+                    } else {
+                        putToTop(existingApp);
+                    }
                 }
-            }
-        });
+            });
+        };
 
         const app = currentApps.value.find((app) => app.id === appId);
         if (!app) {
@@ -228,23 +234,25 @@ export function useDesktop() {
     };
 
     const maximizeApp = (appId: string) => {
+        const taskbarHeight = 70;
         const appIndex = currentApps.value.findIndex((app) => app.id === appId);
         const app = document.querySelector(`.window.${appId}`) as HTMLElement;
-
+    
         if (appIndex !== -1) {
             currentApps.value[appIndex] = { ...currentApps.value[appIndex], position: { top: 0, left: 0 } };
         }
-
+    
         if (!maximized(appId)) {
             if (!app) return;
             app.classList.add('maximized');
             setTimeout(() => {
                 app.classList.remove('maximized');
-                currentApps.value[appIndex] = { ...currentApps.value[appIndex], size: { width: 100, height: 93 } };
+                const maxHeight = window.innerHeight - taskbarHeight;
+                currentApps.value[appIndex] = { ...currentApps.value[appIndex], size: { width: 100, height: (maxHeight / window.innerHeight) * 100 } };
             }, 500);
         } else {
             if (!app) return;
-
+    
             app.classList.add('revert-maximized');
             setTimeout(() => {
                 app.classList.remove('revert-maximized');
