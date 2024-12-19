@@ -5,6 +5,7 @@ import AppsWolimbySearch from '@/components/apps/WolimbySearch.vue';
 import SystemInfo from '@/components/apps/SystemInfo.vue';
 import Settings from '@/components/apps/Settings.vue';
 import Changelog from '@/components/apps/Changelog.vue';
+import Chat from '@/components/apps/Chat.vue';
 
 let zIndexCounter = 1000;
 
@@ -17,6 +18,7 @@ export function useDesktop() {
         { id: 'sysinfo', name: 'ranzakOS v2 névjegye', icon: 'ℹ️', desktopIcon: false, component: markRaw(SystemInfo) },
         { id: 'settings', name: 'Beállítások', icon: '⚙️', desktopIcon: false, component: markRaw(Settings) },
         { id: 'changelog', name: 'Újdonságok', icon: '📝', desktopIcon: false, component: markRaw(Changelog) },
+        { id: 'chat', name: 'Chat', icon: '💬', desktopIcon: true, component: markRaw(Chat) },
     ]);
     const currentApps = useCookie('currentApps', { default: () => [] }) as Ref<{ id: string, position: { top: number, left: number }, size: { width: number, height: number }, zIndex: number, minimized: boolean }[]>;
     const backgroundUrl = useCookie('backgroundUrl', { expires: new Date('3000-12-12') }) as Ref<string>;

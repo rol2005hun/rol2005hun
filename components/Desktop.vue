@@ -76,7 +76,7 @@ onMounted(() => {
         nextTick(() => observeResize(app.id));
     })
 
-    openRicsi();
+    // openRicsi();
 });
 
 onUnmounted(() => {
