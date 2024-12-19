@@ -36,7 +36,7 @@
 import { io } from 'socket.io-client';
 import { ref, computed, onMounted, nextTick } from 'vue';
 
-const socket = io('http://localhost:3001');
+const socket = io('https://v2socketr.onrender.com/');
 const currentRoom = ref<string>('general');
 const messages = ref<Record<string, { id: string; username: string; text: string; isSystem?: boolean }[]>>({});
 const currentMessages = computed(() => messages.value[currentRoom.value] || []);
