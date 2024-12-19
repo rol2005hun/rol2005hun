@@ -1,44 +1,86 @@
 [
-    {
-      "id": 1,
-      "title": "Kis karácsony nagy karácsony",
-      "artist": "Kis gyerekek",
-      "image": "https://rockdiszkont.hu/kepek/nagy_kepek/rockdiszkont_kepek/kis_karacsony_nagy_karacsony_10_klasszikus_unnepi_dal.jpg",
-      "audio": "https://dl.sndup.net/mmpm/Kis%20kar%C3%A1csony%20nagy%20kar%C3%A1csony%20dalsz%C3%B6veg.mp3"
-    },
-    {
-      "id": 2,
-      "title": "Carol of the Bells",
-      "artist": "Monique Danielle",
-      "image": "https://blimey.pro/wp-content/uploads/2022/08/Song-history-Shchedryk-and-Carol-of-the-Bells.jpg",
-      "audio": "https://dl.sndup.net/n7wp/Carol%20of%20the%20Bells.mp3"
-    },
-    {
-      "id": 3,
-      "title": "Csengettyű, csengettyű",
-      "artist": "Kulcsár Sándor",
-      "image": "https://www.hobbykreativ.hu/wp-content/uploads/2018/11/csengettyu-rosegold-kicsi-3db-hobbykreativ-2-500x500.jpg",
-      "audio": "https://dl.sndup.net/dwf8/Csengetty%C5%B1,%20csengetty%C5%B1.mp3"
-    },
-    {
-      "id": 4,
-      "title": "Last Christmas",
-      "artist": "Wham!",
-      "image": "https://is5-ssl.mzstatic.com/image/thumb/Music124/v4/96/8e/a1/968ea1bc-3024-2cba-8eee-6432d7326236/886448113539.jpg/1200x1200bf-60.jpg",
-      "audio": "https://dl.sndup.net/bm69/Wham!%20-%20Last%20Christmas%20(Official%20Video).mp3"
-    },
-    {
-      "id": 5,
-      "title": "Mennyből az angyal",
-      "artist": "Tóth Gabi",
-      "image": "https://www.magyarmenedek.com/pictures/medium/mennybol_az_angyal_cd_karacsonyi_enekek.jpg",
-      "audio": "https://dl.sndup.net/d7v7/T%C3%B3th%20Gabi%20%20Mennyb%C5%91l%20az%20angyal.mp3"
-    },
-    {
-      "id": 6,
-      "title": "All I Want for Christmas Is You",
-      "artist": "Mariah Carey",
-      "image": "https://th.bing.com/th/id/OIP.9Gt4kqhu6cMaVKAhySXVfgHaHa?rs=1&pid=ImgDetMain",
-      "audio": "https://dl.sndup.net/p82q/All%20I%20Want%20for%20Christmas%20Is%20You.mp3"
-    }
+  {
+    "id": 1,
+    "title": "Kis karácsony nagy karácsony",
+    "artist": "Kis gyerekek",
+    "image": "https://rockdiszkont.hu/kepek/nagy_kepek/rockdiszkont_kepek/kis_karacsony_nagy_karacsony_10_klasszikus_unnepi_dal.jpg",
+    "audio": "https://web.unideb.hu/rol2005hun/felho/zenek/Kis%20kar%c3%a1csony%20nagy%20kar%c3%a1csony%20dalsz%c3%b6veg.mp3"
+  },
+  {
+    "id": 2,
+    "title": "Carol of the Bells",
+    "artist": "Monique Danielle",
+    "image": "https://blimey.pro/wp-content/uploads/2022/08/Song-history-Shchedryk-and-Carol-of-the-Bells.jpg",
+    "audio": "https://web.unideb.hu/rol2005hun/felho/zenek/Libera%20-%20Carol%20of%20the%20Bells%20(New).mp3"
+  },
+  {
+    "id": 3,
+    "title": "Csengettyű, csengettyű",
+    "artist": "Kulcsár Sándor",
+    "image": "https://www.hobbykreativ.hu/wp-content/uploads/2018/11/csengettyu-rosegold-kicsi-3db-hobbykreativ-2-500x500.jpg",
+    "audio": "https://web.unideb.hu/rol2005hun/felho/zenek/Csengetty%c5%b1,%20csengetty%c5%b1%20(kar%c3%a1csonyi%20%c3%a9nek).mp3"
+  },
+  {
+    "id": 4,
+    "title": "Last Christmas",
+    "artist": "Wham!",
+    "image": "https://is5-ssl.mzstatic.com/image/thumb/Music124/v4/96/8e/a1/968ea1bc-3024-2cba-8eee-6432d7326236/886448113539.jpg/1200x1200bf-60.jpg",
+    "audio": "https://web.unideb.hu/rol2005hun/felho/zenek/Wham!%20-%20Last%20Christmas%20(Official%20Video).mp3"
+  },
+  {
+    "id": 5,
+    "title": "Mennyből az angyal",
+    "artist": "Tóth Gabi",
+    "image": "https://www.magyarmenedek.com/pictures/medium/mennybol_az_angyal_cd_karacsonyi_enekek.jpg",
+    "audio": "https://web.unideb.hu/rol2005hun/felho/zenek/T%c3%b3th%20Gabi%20%20Mennyb%c5%91l%20az%20angyal.mp3"
+  },
+  {
+    "id": 6,
+    "title": "All I Want for Christmas Is You",
+    "artist": "Mariah Carey",
+    "image": "https://th.bing.com/th/id/OIP.9Gt4kqhu6cMaVKAhySXVfgHaHa?rs=1&pid=ImgDetMain",
+    "audio": "https://web.unideb.hu/rol2005hun/felho/zenek/Mariah%20Carey%20-%20All%20I%20Want%20For%20Christmas%20Is%20You%20(Official%20Video).mp3"
+  },
+  {
+    "id": 7,
+    "title": "Let it snow!",
+    "artist": "Dean Martin",
+    "image": "https://th.bing.com/th/id/R.bc5284fa391aa9d268bfb4a16f827280?rik=bXjbLT0OLehW%2bw&pid=ImgRaw&r=0",
+    "audio": "https://web.unideb.hu/rol2005hun/felho/zenek/Dean%20Martin%20-%20Let%20It%20Snow!%20Let%20It%20Snow!%20Let%20It%20Snow!.mp3"
+  },
+  {
+    "id": 8,
+    "title": "Snowman",
+    "artist": "Sia",
+    "image": "https://i.ytimg.com/vi/gset79KMmt0/maxresdefault.jpg",
+    "audio": "https://web.unideb.hu/rol2005hun/felho/zenek/Sia%20-%20Snowman%20%5bOfficial%20Video%5d.mp3"
+  },
+  {
+    "id": 9,
+    "title": "Santa tell me",
+    "artist": "Ariana Grande",
+    "image": "https://images.genius.com/7d22404eff20f3b66da1a1c19e351428.1000x1000x1.jpg",
+    "audio": "https://web.unideb.hu/rol2005hun/felho/zenek/Ariana%20Grande%20-%20Santa%20Tell%20Me%20(Official%20Video).mp3"
+  },
+  {
+    "id": 10,
+    "title": "Falalalala",
+    "artist": "Ismeretlen",
+    "image": "https://th.bing.com/th/id/OIP.B7MM6BYatRvGEFRAOzqqRwHaEK?rs=1&pid=ImgDetMain",
+    "audio": "https://web.unideb.hu/rol2005hun/felho/zenek/Deck%20the%20Halls%20with%20Lyrics%20Christmas%20Song%20&%20Carol%20%20Fa-la-la,%20la-la-la,%20la,%20la,%20la!.mp3"
+  },
+  {
+    "id": 11,
+    "title": "Santa claus is coming to town",
+    "artist": "Gyerekek",
+    "image": "https://th.bing.com/th/id/OIP.6f7uOW-Z22aARP5T5vggXwAAAA?rs=1&pid=ImgDetMain",
+    "audio": "https://web.unideb.hu/rol2005hun/felho/zenek/Santa%20Claus%20is%20coming%20to%20town%20(Lyrics%20-%20Children%20version).mp3"
+  },
+  {
+    "id": 12,
+    "title": "Silent night",
+    "artist": "Christmas Carol",
+    "image": "https://th.bing.com/th/id/R.34f141b4fd2497ebd2e3236ede8d00f1?rik=UseZJVTfc%2bIbSQ&riu=http%3a%2f%2ffreeldssheetmusic.org%2fsystem%2f0009%2f9717%2fSilent_Night.png%3f1479943351&ehk=XN2NHI2e0GP09PQ3SVvOHOC90sjxq6HgnoggxQb%2fv9A%3d&risl=&pid=ImgRaw&r=0",
+    "audio": "https://web.unideb.hu/rol2005hun/felho/zenek/Silent%20Night%20with%20Lyrics%20%20Christmas%20Carol.mp3"
+  }
 ]

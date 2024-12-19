@@ -182,6 +182,26 @@ export function useDesktop() {
     };
     
     const openApp = (appId: string) => {
+        const selectedElements = document.querySelectorAll('.app.selected');
+
+        selectedElements.forEach((element) => {
+            const id = element.classList[0];
+            if (id && id !== appId) {
+                const existingApp = currentApps.value.find((app) => app.id === id);
+                if (!existingApp) {
+                    const newApp = { id, position: { top: 20, left: 125 }, size: { width: -1, height: -1 }, zIndex: zIndexCounter++, minimized: false };
+                    currentApps.value.push(newApp);
+                    nextTick(() => {
+                        observeResize(id);
+                    });
+                } else if (existingApp.minimized) {
+                    restoreApp(id);
+                } else {
+                    putToTop(existingApp);
+                }
+            }
+        });
+
         const app = currentApps.value.find((app) => app.id === appId);
         if (!app) {
             const newApp = { id: appId, position: { top: 20, left: 125 }, size: { width: -1, height: -1 }, zIndex: zIndexCounter++, minimized: false };
@@ -194,7 +214,7 @@ export function useDesktop() {
         } else {
             putToTop(app);
         }
-    };
+    };    
 
     const minimizeApp = (appId: string) => {
         const appIndex = currentApps.value.findIndex((app) => app.id === appId);

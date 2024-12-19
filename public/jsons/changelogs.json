@@ -23,6 +23,12 @@
             "date": "2024-12-04",
             "name": "Cookie elfogadás, hibajavítások",
             "description": "- Minden meglévő/új felhasználó el kell fogadja a sütik használatát.<br>- Kernel panicot dobott ha minimizeolva volt a browser, javítva lett.<br>- Egy változóban volt tárolva az, hogy egy megnyitott app kivan-e fullscreenezve 😎, ez is javítva lett.<br>- Changelog verzió javítva."
+        },
+        {
+            "version": "2.1.1",
+            "date": "2024-12-04",
+            "name": "Új zenék, hibajavítások",
+            "description": "- Javításra került a zene app, és mellé kerültek be új zenék is.<br>- Selection boxal hiába választottad ki az összes appot, nem nyitotta meg egyszerre, javítva lett."
         }
     ]
 }
