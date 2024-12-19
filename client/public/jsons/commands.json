@@ -1,0 +1,7 @@
+{
+    "commands": [
+        "whoami", "date", "help", "commands", "skills", "christmascounter", "facebook",
+        "github", "email", "discord", "login [username]", "logout", "clear", "open [app]",
+        "start", "next", "previous", "stop", "pause", "resume", "volume [0-100]"
+    ]
+}

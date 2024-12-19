@@ -1,0 +1,40 @@
+{
+    "changelogs": [
+        {
+            "version": "2.0.0",
+            "date": "2024-11-25",
+            "name": "Megérkezett a béta",
+            "description": "Már pár napja kinn volt, de mostmár végleges béta verzió, van benne pár app, de még nincs kész teljesen. Előfordulhatnak hibák, ha találsz valamit, akkor terminalba írd be hogy: dc, majd írj rám, köszi."
+        },
+        {
+            "version": "2.0.1",
+            "date": "2024-11-26",
+            "name": "Hibajavítások",
+            "description": "- Nem működtek a zene app 'kontrollerjei' a terminálból, javítva lett.<br>- Ha a beállításokbol megnyitottad a changelog appot, nem volt animáció, javítva lett.<br>- Csak az első megnyitott appnak volt animációja, javítva.<br>Emelett még pár apróbb hibát is javítottam."
+        },
+        {
+            "version": "2.0.2",
+            "date": "2024-12-03",
+            "name": "Browser frissítés",
+            "description": "- Ha megnyitod magát az OP rendszert, akkor bedob karácsonyi visszaszámlálóra, majd maximalizeolja az appot.<br>- A changelog mostmár a legújabb verziót mutatja felül."
+        },
+        {
+            "version": "2.1.0",
+            "date": "2024-12-16",
+            "name": "Cookie elfogadás, hibajavítások",
+            "description": "- Minden meglévő/új felhasználó el kell fogadja a sütik használatát.<br>- Kernel panicot dobott ha minimizeolva volt a browser, javítva lett.<br>- Egy változóban volt tárolva az, hogy egy megnyitott app kivan-e fullscreenezve 😎, ez is javítva lett.<br>- Changelog verzió javítva."
+        },
+        {
+            "version": "2.1.1",
+            "date": "2024-12-19",
+            "name": "Új zenék, hibajavítások",
+            "description": "- Javításra került a zene app, és mellé kerültek be új zenék is.<br>- Selection boxal hiába választottad ki az összes appot, nem nyitotta meg egyszerre, javítva lett."
+        },
+        {
+            "version": "2.1.2",
+            "date": "2024-12-19",
+            "name": "Hot fix",
+            "description": "- Dinamikusabb lett a teljes nézet, mostmár elvileg minden felbontáson jó kell legyen.<br>- Aki legelsőnek nyitotta meg a cookies fület, kernel panicot kapott, javítva lett."
+        }
+    ]
+}

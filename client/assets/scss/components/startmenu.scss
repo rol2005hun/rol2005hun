@@ -1,0 +1,39 @@
+.start-menu {
+  position: absolute;
+  bottom: 4em;
+  left: 1em;
+  width: 9em;
+  background-color: #333;
+  color: white;
+  border-radius: 0.5em;
+  padding: 0.5em 0;
+  z-index: 10;
+  animation: slideIn 0.3s ease-in-out;
+}
+  
+@keyframes slideIn {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+  
+.menu-items {
+  display: flex;
+  flex-direction: column;
+}
+  
+.menu-item {
+  padding: 10px;
+  margin: 0 0.5em 0 0.5em;
+  border-radius: 0.5em;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #555;
+  }
+}
