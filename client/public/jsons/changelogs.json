@@ -35,6 +35,12 @@
             "date": "2024-12-19",
             "name": "Hot fix",
             "description": "- Dinamikusabb lett a teljes nézet, mostmár elvileg minden felbontáson jó kell legyen.<br>- Aki legelsőnek nyitotta meg a cookies fület, kernel panicot kapott, javítva lett."
+        },
+        {
+            "version": "2.2.0",
+            "date": "2024-12-19",
+            "name": "Új appok, bugfixek",
+            "description": "- Hozzá lett adva egy beépített <strong>beta</strong> chat app.<br>- Ismert bugok javítva lettek."
         }
     ]
 }
