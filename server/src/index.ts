@@ -29,12 +29,10 @@ io.on('connection', (socket) => {
 
             console.log(`[${socket.id}] ${username} belépett a #${room} csatornába`);
 
-            socket.emit('roomMessages', roomMessages[room] || []);
-
             const joinMessage = { id: Date.now().toString(), username: 'System', text: `${username} csatlakozott a(z) #${room} szobához.`, isSystem: true };
             if (!roomMessages[room]) roomMessages[room] = [];
             roomMessages[room].push(joinMessage);
-
+            socket.emit('roomMessages', roomMessages[room] || []);
             socket.broadcast.to(room).emit('userJoined', { username, room });
             socket.to(room).emit('message', joinMessage);
 
