@@ -30,7 +30,7 @@ export const useCommands = () => {
         }
     
         if (cmd == 'skills') {
-            window.open('https://credly.com/users/roland-ranyak/badges');
+            window.open('https://credly.com/users/roland-ranyak/');
             return 'Vue, Nuxt, Nodejs, Python, C++, JavaScript, Java';
         }
     

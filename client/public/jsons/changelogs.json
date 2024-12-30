@@ -41,6 +41,12 @@
             "date": "2024-12-19",
             "name": "Új appok, bugfixek",
             "description": "- Hozzá lett adva egy beépített <strong>beta</strong> chat app.<br>- Ismert bugok javítva lettek."
+        },
+        {
+            "version": "2.2.1",
+            "date": "2024-12-19",
+            "name": "Chat app javítások",
+            "description": "- Üzeneteknek szebb dizájnja lett, el lettek választva egymástól.<br>- Jelzi, ha offline a socket szerver.<br>- Jelzi hány felhasználó van online.<br>- Kiírja neked is chatbe, ha csatlakoztál egy szobába."
         }
     ]
 }

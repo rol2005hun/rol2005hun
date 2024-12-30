@@ -2,7 +2,27 @@
     background-color: #333;
     color: white;
     height: 100%;
+}
+
+.server-status {
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ff4c4c;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    z-index: 1000;
+  
+    .offline-message {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  }
+
+.online {
     display: flex;
+    height: 100%;
 }
 
 .rooms {
@@ -82,14 +102,31 @@
     }
 
     .message {
+        background-color: #444;
+        padding: 0.75em 1em;
+        border-radius: 0.5em;
         margin-bottom: 1em;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+
+        strong {
+            font-weight: bold;
+            color: #ddd;
+        }
+
+        span {
+            color: #eee;
+        }
     }
 
     .system-message {
+        background-color: #333;
         text-align: center;
         font-style: italic;
         color: #bbb;
         font-weight: bold;
+        border: 1px solid #555;
     }
 
     input {

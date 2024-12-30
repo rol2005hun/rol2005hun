@@ -1,7 +1,6 @@
 {
     "commands": [
-        "whoami", "date", "help", "commands", "skills", "christmascounter", "facebook",
-        "github", "email", "discord", "login [username]", "logout", "clear", "open [app]",
-        "start", "next", "previous", "stop", "pause", "resume", "volume [0-100]"
+        "whoami", "date", "help", "commands", "skills", "christmascounter", "facebook", "github", "email", "discord", "login [username]", "logout", "clear",
+        "start", "next", "previous", "stop", "pause", "resume", "volume [0-100]", "open [app]", "close [app]", "exit"
     ]
 }

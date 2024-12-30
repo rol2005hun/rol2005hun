@@ -1,6 +1,10 @@
 <template>
   <div class="chat-app">
-    <div class="rooms">
+    <div v-if="!connected" class="server-status">
+      <p class="offline-message">A szerver jelenleg offline. Kérjük, várjon...</p>
+    </div>
+    <div v-else class="online">
+      <div class="rooms">
       <div class="top">
         <h2>Szobák</h2>
         <ul>
@@ -25,11 +29,12 @@
         :placeholder="'Írj egy üzenetet ide: #' + currentRoom" />
     </div>
     <div class="online-users">
-      <h3>Online Felhasználók:</h3>
+      <h3>Online felhasználók ({{ onlineUsers.length }}):</h3>
       <ul>
         <li v-if="onlineUsers.length === 0">Senki</li>
         <li v-for="user in onlineUsers" :key="user">{{ user }}</li>
       </ul>
+    </div>
     </div>
   </div>
 </template>
@@ -46,12 +51,13 @@ const newMessage = ref<string>('');
 const rooms = ref<string[]>(['general', 'ranzak???v3??coming??soon']);
 const username = useCookie('username', { expires: new Date('3000-12-12'), default: () => 'user' }) as Ref<string>;
 const onlineUsers = ref<string[]>([]);
+const connected = ref<boolean>(false);
 
 function joinRoom(room: string) {
   if (room === currentRoom.value) return;
   socket.emit('leaveRoom', currentRoom.value, username.value);
-  currentRoom.value = room;
   socket.emit('joinRoom', room, username.value);
+  currentRoom.value = room;
 }
 
 function sendMessage(room: string) {
@@ -88,6 +94,7 @@ onMounted(() => {
   });
 
   socket.on('roomOnlineUsers', (oUsers: string[]) => {
+    connected.value = true;
     onlineUsers.value = oUsers;
   });
 

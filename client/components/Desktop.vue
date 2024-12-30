@@ -58,15 +58,6 @@
 const { apps, currentApps, backgroundUrl, isMenuVisible, hour, date, isSelecting, selectionBoxStyles, maximized, startSelection, updateSelection, endSelection, handleOutsideClick,
 observeResize, openApp, minimizeApp, maximizeApp, closeApp, startDrag, appName, getComponent, putToTop } = useDesktop();
 
-// karacsonyig
-function openRicsi() {
-    openApp('browser');
-    nextTick(() => {
-        maximizeApp('browser');
-    });
-}
-// karacsonyig vege
-
 onMounted(() => {
     document.addEventListener('mousedown', handleOutsideClick);
     document.addEventListener('mousemove', updateSelection);
@@ -74,9 +65,7 @@ onMounted(() => {
 
     currentApps.value.forEach(app => {
         nextTick(() => observeResize(app.id));
-    })
-
-    // openRicsi();
+    });
 });
 
 onUnmounted(() => {
