@@ -2,7 +2,7 @@
     <div v-if="showModal" class="modal-overlay">
         <div class="modal">
             <h2>Új verzió</h2>
-            <p>Csekkold le az új verziót a <a href="https://v2.ranzak.site" target="_blank">v2-es oldalon</a>. (Telefonról nem működik)</p>
+            <p>Csekkold le az új verziót a <a href="https://v2.ranzak.site" target="_blank">v2-es oldalon</a>. Ez a verzió megszünésre fog kerülni. (Telefonról nem működik az új)</p>
             <div class="checkbox-container">
                 <input type="checkbox" id="notmore" v-model="notmore">
                 <label for="notmore">Nem akarom többet látni</label>
@@ -70,7 +70,7 @@ const closeModal = () => {
 .checkbox-container {
     display: flex;
     align-items: center;
-    margin-bottom: 15px;
+    margin: 0 auto 1.5em auto;
     font-size: 0.9rem;
     color: #666;
 }

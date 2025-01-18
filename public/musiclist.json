@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "title": "Kis karácsony nagy karácsony",
-    "artist": "Kis gyerekek",
-    "image": "https://rockdiszkont.hu/kepek/nagy_kepek/rockdiszkont_kepek/kis_karacsony_nagy_karacsony_10_klasszikus_unnepi_dal.jpg",
-    "audio": "https://web.unideb.hu/rol2005hun/felho/zenek/Kis%20kar%c3%a1csony%20nagy%20kar%c3%a1csony%20dalsz%c3%b6veg.mp3"
+    "title": "ranzakFM",
+    "artist": "ranzak",
+    "image": "https://i.imgur.com/QfUI2x4.jpeg",
+    "audio": "https://radio.wolimby.hu/listen/ranzakfm/radio.mp3"
   },
   {
     "id": 2,
@@ -82,5 +82,12 @@
     "artist": "Christmas Carol",
     "image": "https://th.bing.com/th/id/R.34f141b4fd2497ebd2e3236ede8d00f1?rik=UseZJVTfc%2bIbSQ&riu=http%3a%2f%2ffreeldssheetmusic.org%2fsystem%2f0009%2f9717%2fSilent_Night.png%3f1479943351&ehk=XN2NHI2e0GP09PQ3SVvOHOC90sjxq6HgnoggxQb%2fv9A%3d&risl=&pid=ImgRaw&r=0",
     "audio": "https://web.unideb.hu/rol2005hun/felho/zenek/Silent%20Night%20with%20Lyrics%20%20Christmas%20Carol.mp3"
+  },
+  {
+    "id": 13,
+    "title": "Kis karácsony nagy karácsony",
+    "artist": "Kis gyerekek",
+    "image": "https://rockdiszkont.hu/kepek/nagy_kepek/rockdiszkont_kepek/kis_karacsony_nagy_karacsony_10_klasszikus_unnepi_dal.jpg",
+    "audio": "https://web.unideb.hu/rol2005hun/felho/zenek/Kis%20kar%c3%a1csony%20nagy%20kar%c3%a1csony%20dalsz%c3%b6veg.mp3"
   }
 ]
