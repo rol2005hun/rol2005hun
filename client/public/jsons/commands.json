@@ -1,6 +1,32 @@
 {
     "commands": [
-        "whoami", "date", "help", "commands", "skills", "christmascounter", "facebook", "github", "email", "discord", "login [username]", "logout", "clear",
-        "start", "next", "previous", "stop", "pause", "resume", "volume [0-100]", "open [app]", "close [app]", "exit"
+        "whoami", 
+        "date", 
+        "help", 
+        "commands", 
+        "skills", 
+        "christmascounter", 
+        "facebook", 
+        "github", 
+        "email", 
+        "discord", 
+        "login [username]", 
+        "logout", 
+        "clear", 
+        "start", 
+        "next", 
+        "previous", 
+        "stop", 
+        "pause", 
+        "resume", 
+        "volume [0-100]", 
+        "open [app]", 
+        "close [app]", 
+        "exit", 
+        "random [min] [max]", 
+        "uptime", 
+        "ascii [szöveg]", 
+        "joke", 
+        "weather [város]"
     ]
 }

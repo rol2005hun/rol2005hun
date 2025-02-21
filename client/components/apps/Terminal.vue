@@ -17,10 +17,19 @@ const username = useCookie('username', { expires: new Date('3000-12-12'), defaul
 const terminalRef = ref<HTMLElement>();
 const host = ref(username.value + '@ranzak.site:~$');
 
-function executeCommand() {
-    if (!command.value) return outputs.value = [...outputs.value, `${host.value}`];
-    let output = String(executeCommands(command.value));
-    outputs.value = [...outputs.value, `${host.value} ${command.value}`, output];
+async function executeCommand() {
+    if (!command.value) {
+        outputs.value = [...outputs.value, `${host.value}`];
+        return;
+    }
+
+    try {
+        const output = await executeCommands(command.value);
+        outputs.value = [...outputs.value, `${host.value} ${command.value}`, output];
+    } catch (error) {
+        outputs.value = [...outputs.value, `${host.value} ${command.value}`, 'Hiba történt a parancs végrehajtása során.'];
+    }
+    
     command.value = '';
     nextTick(() => {
         if (terminalRef.value) {

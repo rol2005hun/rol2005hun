@@ -233,7 +233,7 @@ export const useCommands = () => {
             const text = command.substring(6).trim();
             if (!text) return 'Helyes használat: ascii [szöveg]';
             
-            return fetch(`https://asciified.thelicato.io/api/v2/ascii?text=${encodeURIComponent(text)}`)
+            return fetch(`https://api.zjm.im/ascii/?text=${encodeURIComponent(text)}`)
                 .then(response => response.json())
                 .then(data => data.ascii || 'Hiba történt az ASCII generálás során.')
                 .catch(() => 'Nem sikerült az ASCII art lekérése.');

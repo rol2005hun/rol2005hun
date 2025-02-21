@@ -53,6 +53,12 @@
             "date": "2025-01-19",
             "name": "Zene app",
             "description": "- Hozzá lett adva a Zene apphoz egy online rádió."
+        },
+        {
+            "version": "2.2.3",
+            "date": "2025-02-21",
+            "name": "Új parancsok",
+            "description": "- Bekerült pár új parancs a Terminal appba, írd be a 'commands' parancsot a listázáshoz!"
         }
     ]
 }
