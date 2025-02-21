@@ -30,12 +30,22 @@ export const useCommands = () => {
         }
     
         if (cmd == 'skills') {
-            window.open('https://credly.com/users/roland-ranyak/');
+            window.open('https://credly.com/users/roland-ranyak/badges');
             return 'Vue, Nuxt, Nodejs, Python, C++, JavaScript, Java';
         }
     
         if (cmd == 'christmascounter' || cmd == 'christmas' || cmd == 'cc') {
-            return `${new Date('December 25, 2024 00:00:00').getTime() - new Date().getTime() > 0 ? 'Még ' + Math.floor((new Date('December 25, 2024 00:00:00').getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24 * 30)) + ' hónap ' + Math.floor(((new Date('December 25, 2024 00:00:00').getTime() - new Date().getTime()) % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24)) + ' nap ' + Math.floor(((new Date('December 25, 2024 00:00:00').getTime() - new Date().getTime()) % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) + ' óra ' + Math.floor(((new Date('December 25, 2024 00:00:00').getTime() - new Date().getTime()) % (1000 * 60 * 60)) / (1000 * 60)) + ' perc ' + Math.floor(((new Date('December 25, 2024 00:00:00').getTime() - new Date().getTime()) % (1000 * 60)) / 1000) + ' másodperc van karácsonyig!' : 'Már nincs karácsonyig! :('}`;
+            const now = new Date();
+            const xmas = new Date(now.getFullYear(), 11, 25);
+            if (now > xmas) xmas.setFullYear(xmas.getFullYear() + 1);
+            
+            const diff = xmas.getTime() - now.getTime();
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            return `Még ${days} nap, ${hours} óra, ${minutes} perc, ${seconds} másodperc van karácsonyig!`;
         }
     
         if (cmd == 'facebook' || cmd == 'fb' || cmd == 'fbprofile' || cmd == 'facebookprofile') {
@@ -194,6 +204,101 @@ export const useCommands = () => {
         if(cmd == 'exit') {
             useDesktop().closeApp('terminal');
             return 'Kiléptél a terminálból.';
+        }
+
+        if (cmd == 'random' || cmd == 'rand') {
+            const args = command.split(' ');
+            if (args.length < 3) return 'Helyes használat: random [min] [max]';
+            
+            const min = parseInt(args[1]);
+            const max = parseInt(args[2]);
+            
+            if (isNaN(min) || isNaN(max)) return 'Hiba: A megadott értékeknek számnak kell lenniük!';
+            if (min > max) return 'Hiba: A minimum érték nem lehet nagyobb, mint a maximum!';
+            
+            const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+            return `Véletlenszám ${min} és ${max} között: ${randomNumber}`;
+        }
+
+        let startTime = Date.now();
+        if (cmd == 'uptime') {
+            const diff = Date.now() - startTime;
+            const seconds = Math.floor(diff / 1000) % 60;
+            const minutes = Math.floor(diff / (1000 * 60)) % 60;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            return `Terminál futási ideje: ${hours} óra, ${minutes} perc, ${seconds} másodperc.`;
+        }
+
+        if (cmd == 'ascii') {
+            const text = command.substring(6).trim();
+            if (!text) return 'Helyes használat: ascii [szöveg]';
+            
+            return fetch(`https://asciified.thelicato.io/api/v2/ascii?text=${encodeURIComponent(text)}`)
+                .then(response => response.json())
+                .then(data => data.ascii || 'Hiba történt az ASCII generálás során.')
+                .catch(() => 'Nem sikerült az ASCII art lekérése.');
+        }
+
+        if (cmd == 'joke') {
+            return fetch('https://v2.jokeapi.dev/joke/Any')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.type === 'single') {
+                        return data.joke;
+                    } else if (data.type === 'twopart') {
+                        return `${data.setup}\n${data.delivery}`;
+                    }
+                    return 'Hiba történt a vicc lekérése közben.';
+                })
+                .catch(() => 'Nem sikerült viccet lekérni.');
+        }
+        
+        if (cmd == 'weather') {
+            function getWeatherDescription(code: number): string {
+                const descriptions: { [key: number]: string } = {
+                    0: "Tiszta égbolt",
+                    1: "Főként napos",
+                    2: "Részben felhős",
+                    3: "Borult",
+                    45: "Ködös",
+                    48: "Zúzmarás köd",
+                    51: "Gyenge szitálás",
+                    53: "Mérsékelt szitálás",
+                    55: "Erős szitálás",
+                    61: "Gyenge eső",
+                    63: "Mérsékelt eső",
+                    65: "Erős eső",
+                    71: "Gyenge havazás",
+                    73: "Mérsékelt havazás",
+                    75: "Erős havazás",
+                    95: "Zivatar",
+                    96: "Zivatar jégesővel",
+                    99: "Erős zivatar jégesővel"
+                };
+                return descriptions[code] || "Ismeretlen időjárás";
+            }
+            
+            const city = command.substring(8).trim();
+            if (!city) return 'Helyes használat: weather [város]';
+        
+            return fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=hu`)
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.results || data.results.length === 0) {
+                        return 'Nem található ilyen város.';
+                    }
+                    
+                    const { latitude, longitude, name, country } = data.results[0];
+        
+                    return fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&timezone=auto`)
+                        .then(response => response.json())
+                        .then(weatherData => {
+                            const { temperature, weathercode } = weatherData.current_weather;
+                            const weatherDescription = getWeatherDescription(weathercode);
+                            return `🌍 ${name}, ${country}\n🌡️ Hőmérséklet: ${temperature}°C\n🌤️ Időjárás: ${weatherDescription}`;
+                        });
+                })
+                .catch(() => 'Nem sikerült az időjárás lekérése.');
         }
   
         return `Nincs ilyen parancs! Próbáld meg a 'help' parancsot!`;
