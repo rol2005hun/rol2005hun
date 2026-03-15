@@ -17,7 +17,7 @@
           :class="{ active: win.zIndex === topZIndex && !win.isMinimized }"
           @click="toggleWindow(win.id)"
         >
-          <Icon :name="getAppIcon(win.appId)" size="20px" />
+          <AppIcon :app-id="win.appId" size="20px" />
         </button>
       </div>
     </div>
@@ -42,6 +42,7 @@ import { useDesktopStore } from '@/stores/features/os/useDesktopStore';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
 import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
 import { useSystemInfo } from '@/composables/features/os/useSystemInfo';
+import AppIcon from '@/components/features/os/shared/AppIcon.vue';
 
 const desktopStore = useDesktopStore();
 const windowStore = useWindowStore();
@@ -93,11 +94,6 @@ onUnmounted(() => {
 const topZIndex = computed(() => {
   return Math.max(0, ...windowStore.windows.map(w => w.zIndex));
 });
-
-const getAppIcon = (appId: string) => {
-  const app = registryStore.getAppById(appId);
-  return app ? app.icon : 'ph:app-window';
-};
 
 const toggleWindow = (id: string) => {
   const win = windowStore.windows.find(w => w.id === id);

@@ -6,13 +6,19 @@
           :class="{ active: activeTab === 'appearance' }"
           @click="activeTab = 'appearance'"
         >
-          <Icon name="ph:paint-brush-broad-fill" /> {{ $t('os.apps.settings.appearance') }}
+          <Icon name="ph:paint-brush-broad-fill" class="icon" /> {{ $t('os.apps.settings.appearance') }}
+        </li>
+        <li
+          :class="{ active: activeTab === 'wallpaper' }"
+          @click="activeTab = 'wallpaper'"
+        >
+          <Icon name="ph:image-fill" class="icon" /> {{ $t('os.apps.settings.wallpaper') }}
         </li>
         <li
           :class="{ active: activeTab === 'language' }"
           @click="activeTab = 'language'"
         >
-          <Icon name="ph:globe-hemisphere-west-fill" /> {{ $t('os.apps.settings.language') }}
+          <Icon name="ph:globe-hemisphere-west-fill" class="icon" /> {{ $t('os.apps.settings.language') }}
         </li>
       </ul>
     </div>
@@ -31,6 +37,23 @@
           >
             <div class="color-preview" :style="{ backgroundColor: theme.color }"/>
             <span>{{ $t(theme.nameKey) }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div v-if="activeTab === 'wallpaper'">
+        <h2>{{ $t('os.apps.settings.wallpaperSelection') }}</h2>
+        <p class="subtitle">{{ $t('os.apps.settings.wallpaperSubtitle') }}</p>
+
+        <div class="wallpaper-grid">
+          <button
+            v-for="wp in themeStore.availableWallpapers"
+            :key="wp.id"
+            class="wallpaper-card"
+            :class="{ active: themeStore.currentWallpaper === wp.id }"
+            @click="themeStore.setWallpaper(wp.id)"
+          >
+            <div class="wallpaper-preview" :style="{ backgroundImage: 'url(' + wp.thumb + ')' }" />
           </button>
         </div>
       </div>
@@ -70,7 +93,7 @@ import { useLanguageStore } from '@/stores/features/os/useLanguageStore';
 const themeStore = useThemeStore();
 const languageStore = useLanguageStore();
 
-const activeTab = ref<'appearance' | 'language'>('appearance');
+const activeTab = ref<'appearance' | 'wallpaper' | 'language'>('appearance');
 </script>
 
 <style scoped lang="scss">
@@ -103,7 +126,7 @@ const activeTab = ref<'appearance' | 'language'>('appearance');
       align-items: center;
       gap: 10px;
       font-size: 14px;
-      transition: background 0.2s;
+      transition: background 0.2s, color 0.2s;
 
       &:hover {
         background: rgba(255, 255, 255, 0.05);
@@ -112,6 +135,10 @@ const activeTab = ref<'appearance' | 'language'>('appearance');
         background: var(--os-primary-color, rgba(255, 255, 255, 0.1));
         color: var(--os-primary-text, #000);
         font-weight: 600;
+
+        .icon {
+          color: var(--os-primary-text, #000);
+        }
       }
     }
   }
@@ -187,6 +214,38 @@ const activeTab = ref<'appearance' | 'language'>('appearance');
   span {
     font-size: 13px;
     font-weight: 500;
+  }
+}
+
+.wallpaper-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.wallpaper-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &.active {
+    border-color: var(--os-primary-color, #fff);
+  }
+
+  .wallpaper-preview {
+    width: 100%;
+    height: 100px;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
   }
 }
 </style>

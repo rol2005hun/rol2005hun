@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
-import { shallowRef, ref, markRaw } from 'vue';
+import { ref } from 'vue';
+import { useAppRegistry } from './useAppRegistry';
 
 export interface OSWindow {
   id: string;
@@ -20,6 +21,18 @@ export const useWindowStore = defineStore('os-window', () => {
   const topZIndex = ref(100);
 
   const openWindow = (windowInfo: Omit<OSWindow, 'isOpen' | 'isMinimized' | 'isMaximized' | 'zIndex' | 'x' | 'y'>) => {
+    const registryStore = useAppRegistry();
+    const appDef = registryStore.getAppById(windowInfo.appId);
+
+    if (appDef && appDef.allowMultipleInstances === false) {
+      const existingByApp = windows.value.find(w => w.appId === windowInfo.appId);
+      if (existingByApp) {
+        if (existingByApp.isMinimized) existingByApp.isMinimized = false;
+        focusWindow(existingByApp.id);
+        return;
+      }
+    }
+
     const existing = windows.value.find(w => w.id === windowInfo.id);
     if (existing) {
       if (existing.isMinimized) existing.isMinimized = false;

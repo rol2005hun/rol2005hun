@@ -75,7 +75,6 @@ const onDrag = (e: MouseEvent) => {
   const dx = e.clientX - startX;
   const dy = e.clientY - startY;
 
-  // We could update store continuously, but it might be heavy. Let's do it directly.
   windowStore.updateWindow(props.windowInfo.id, {
     x: initialWinX + dx,
     y: initialWinY + dy
@@ -138,12 +137,12 @@ const toggleMaximize = () => {
   flex-direction: column;
   background: var(--os-window-bg, rgba(30, 30, 30, 0.85));
   border: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.15));
-  border-radius: 8px;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  transition: opacity 0.2s, transform 0.2s;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
 
   &.is-minimized {
     opacity: 0;
@@ -154,11 +153,18 @@ const toggleMaximize = () => {
   &.is-maximized {
     border-radius: 0;
     border: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   &.is-focused {
-    box-shadow: 0 12px 50px rgba(0, 0, 0, 0.6);
-    border-color: var(--os-primary-light, rgba(255, 255, 255, 0.3));
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+    border-color: var(--os-primary-color, rgba(255, 255, 255, 0.3));
+  }
+
+  &.is-dragging {
+    transition: none;
+    opacity: 0.95;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
   }
 }
 

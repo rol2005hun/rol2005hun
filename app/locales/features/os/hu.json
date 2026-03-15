@@ -10,10 +10,13 @@
       "name": "Rendszerbeállítások",
       "appearance": "Megjelenés",
       "language": "Nyelv",
+      "wallpaper": "Háttérkép",
       "themeSelection": "Téma választása",
       "themeSubtitle": "Válaszd ki az operációs rendszer stílusát.",
       "languageSelection": "Rendszernyelv",
       "languageSubtitle": "Válaszd ki a preferált nyelvet.",
+      "wallpaperSelection": "Asztal háttérképe",
+      "wallpaperSubtitle": "Tedd egyedivé az operációs rendszered kinézetét.",
       "english": "Angol",
       "hungarian": "Magyar"
     }

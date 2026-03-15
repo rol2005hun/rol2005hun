@@ -14,7 +14,6 @@ export const useLanguageStore = defineStore('os-language', () => {
     locale.value = lang;
   };
 
-  // Sync back to i18n
   watch(currentLanguage, (newLang) => {
     locale.value = newLang;
   }, { immediate: true });

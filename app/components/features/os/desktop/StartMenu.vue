@@ -16,7 +16,7 @@
             @click="openApp(app.id)"
           >
             <div class="icon-box">
-              <Icon :name="app.icon" size="28px" />
+              <AppIcon :app-id="app.id" size="28px" />
             </div>
             <span>{{ $t(app.nameKey) }}</span>
           </div>
@@ -44,6 +44,7 @@ import { useI18n } from 'vue-i18n';
 import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
 import { useDesktopStore } from '@/stores/features/os/useDesktopStore';
+import AppIcon from '@/components/features/os/shared/AppIcon.vue';
 
 const registryStore = useAppRegistry();
 const windowStore = useWindowStore();
@@ -57,10 +58,8 @@ const filteredApps = computed(() => {
   if (!query) return registryStore.installedApps;
 
   return registryStore.installedApps.filter(app => {
-    // English/Hungarian/etc key paths
     const keyPath = app.nameKey.split('.');
 
-    // We check every available locale for a match
     for (const locale of Object.keys(messages.value)) {
       let currentVal: any = messages.value[locale];
 
@@ -78,7 +77,6 @@ const filteredApps = computed(() => {
       }
     }
 
-    // Also match the app id directly, e.g. "settings"
     if (app.id.toLowerCase().includes(query)) {
       return true;
     }
@@ -88,7 +86,7 @@ const filteredApps = computed(() => {
 });
 
 const openApp = (appId: string) => {
-  searchQuery.value = ''; // Reset search on open
+  searchQuery.value = '';
   const appConfig = registryStore.getAppById(appId);
   if (appConfig) {
     windowStore.openWindow({

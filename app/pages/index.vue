@@ -1,6 +1,9 @@
 <template>
   <div class="desktop-surface">
-    <div class="wallpaper"/>
+    <div
+      class="wallpaper"
+      :style="{ backgroundImage: 'url(' + themeStore.currentWallpaperUrl + ')' }"
+    />
 
     <div v-if="!isMobile" class="windows-layer"/>
 
@@ -13,7 +16,9 @@
 import Desktop from '@/components/features/os/desktop/Desktop.vue';
 import MobileOS from '@/components/features/os/mobile/MobileOS.vue';
 import { useDevice } from '@/composables/features/os/useDevice';
+import { useThemeStore } from '@/stores/features/os/useThemeStore';
 
+const themeStore = useThemeStore();
 const { isMobile } = useDevice();
 </script>
 
@@ -26,9 +31,11 @@ const { isMobile } = useDevice();
   .wallpaper {
     position: absolute;
     inset: 0;
-    background: url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=2070") no-repeat center center;
     background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     z-index: 1;
+    transition: background-image 0.5s ease-in-out;
   }
 
   .windows-layer {

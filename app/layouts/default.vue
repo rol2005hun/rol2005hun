@@ -18,10 +18,6 @@ import { useCookie } from '#imports';
 import SystemSetup from '@/components/features/setup/SystemSetup.vue';
 import LockScreen from '@/components/features/auth/LockScreen.vue';
 import { useAuthStore } from '@/composables/features/auth/useAuthStore';
-import { useThemeStore } from '@/stores/features/os/useThemeStore';
-
-// Initialize global theme early
-const themeStore = useThemeStore();
 
 const authStore = useAuthStore();
 const licenseCookie = useCookie('ranzakos_license');

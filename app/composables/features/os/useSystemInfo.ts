@@ -4,7 +4,14 @@ export interface SystemInfo {
   batteryLevel: number | null;
   batteryCharging: boolean;
   online: boolean;
-  connectionType: string | null; // e.g., 'wifi', 'cellular', etc.
+  connectionType: string | null;
+}
+
+interface ExtendedNavigator extends Navigator {
+  connection?: any;
+  mozConnection?: any;
+  webkitConnection?: any;
+  getBattery?: () => Promise<any>;
 }
 
 export function useSystemInfo() {
@@ -13,14 +20,13 @@ export function useSystemInfo() {
   const online = ref<boolean>(true);
   const connectionType = ref<string | null>(null);
 
-  // Fallback update functions
   const updateOnlineStatus = () => {
     online.value = navigator.onLine;
   };
 
   const updateConnectionStatus = () => {
-    // @ts-ignore - Network Information API is experimental and not in all browsers
-    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const nav = navigator as ExtendedNavigator;
+    const connection = nav.connection || nav.mozConnection || nav.webkitConnection;
     if (connection) {
       connectionType.value = connection.type || connection.effectiveType || 'wifi';
     }
@@ -34,11 +40,10 @@ export function useSystemInfo() {
   };
 
   const initBattery = async () => {
-    // @ts-ignore - Battery API
-    if ('getBattery' in navigator) {
+    const nav = navigator as ExtendedNavigator;
+    if ('getBattery' in nav && nav.getBattery) {
       try {
-        // @ts-ignore
-        const battery = await navigator.getBattery();
+        const battery = await nav.getBattery();
         batteryRef = battery;
         updateBatteryStatus(battery);
 
@@ -51,19 +56,17 @@ export function useSystemInfo() {
   };
 
   onMounted(() => {
-    // Network events
     window.addEventListener('online', updateOnlineStatus);
     window.addEventListener('offline', updateOnlineStatus);
     updateOnlineStatus();
 
-    // @ts-ignore
-    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const nav = navigator as ExtendedNavigator;
+    const connection = nav.connection || nav.mozConnection || nav.webkitConnection;
     if (connection) {
       connection.addEventListener('change', updateConnectionStatus);
       updateConnectionStatus();
     }
 
-    // Battery init
     initBattery();
   });
 
@@ -71,8 +74,8 @@ export function useSystemInfo() {
     window.removeEventListener('online', updateOnlineStatus);
     window.removeEventListener('offline', updateOnlineStatus);
 
-    // @ts-ignore
-    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    const nav = navigator as ExtendedNavigator;
+    const connection = nav.connection || nav.mozConnection || nav.webkitConnection;
     if (connection) {
       connection.removeEventListener('change', updateConnectionStatus);
     }

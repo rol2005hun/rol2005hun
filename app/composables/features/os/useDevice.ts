@@ -4,7 +4,6 @@ export const useDevice = () => {
   const isMobile = ref(false);
 
   const checkDevice = () => {
-    // 768px is a common breakpoint for mobile vs tablet/desktop
     isMobile.value = window.innerWidth <= 768;
   };
 

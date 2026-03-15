@@ -10,10 +10,13 @@
       "name": "System Settings",
       "appearance": "Appearance",
       "language": "Language",
+      "wallpaper": "Wallpaper",
       "themeSelection": "Theme Selection",
       "themeSubtitle": "Choose your personal operating system style.",
       "languageSelection": "System Language",
       "languageSubtitle": "Choose your preferred language.",
+      "wallpaperSelection": "Desktop Background",
+      "wallpaperSubtitle": "Customize your desktop environment.",
       "english": "English",
       "hungarian": "Hungarian"
     }
