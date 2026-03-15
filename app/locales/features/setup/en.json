@@ -1,0 +1,9 @@
+{
+  "title": "System Initialization",
+  "description": "Welcome to the RanzakOS setup. Please enter your valid beta license key to continue the installation. This system relies on local storage.",
+  "learnMore": "Learn more about our storage policy.",
+  "betaKeyHint": "Beta Key:",
+  "keyLabel": "License Key:",
+  "invalidKey": "Invalid license key. Please try again.",
+  "verifyBtn": "VERIFY AND INSTALL"
+}

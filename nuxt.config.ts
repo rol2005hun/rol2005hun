@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     '@nuxt/icon'
   ],
   css: [
-    '~/assets/scss/main.scss'
+    '@/assets/scss/main.scss'
   ],
   nitro: {
     experimental: {

@@ -1,20 +1,31 @@
 <template>
-  <div class="desktop-environment">
-    <h1>Welcome to RanzakOS</h1>
-  </div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
 
 <script setup lang="ts">
 </script>
 
 <style scoped lang="scss">
-.desktop-environment {
+.desktop-surface {
   width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  background-color: #1e293b;
+  position: relative;
+
+  .wallpaper {
+    position: absolute;
+    inset: 0;
+    background: url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=2070") no-repeat center center;
+    background-size: cover;
+    z-index: 1;
+  }
+
+  .windows-layer {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: calc(100% - 48px);
+  }
 }
 </style>

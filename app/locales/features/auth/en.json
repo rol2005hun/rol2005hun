@@ -1,0 +1,7 @@
+{
+  "welcomeTitle": "Welcome to RanzakOS",
+  "consentDescription": "Before you begin, please note that this system uses local storage to save your settings and preferences locally on your device.",
+  "acceptButton": "Accept & Continue",
+  "guestUser": "Guest User",
+  "fingerprintPrompt": "Hold to unlock"
+}

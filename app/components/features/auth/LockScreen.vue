@@ -10,7 +10,7 @@
         <div class="avatar-container">
           <Icon name="ph:user-circle-light" class="avatar-placeholder" />
         </div>
-        <h2 class="username">Guest User</h2>
+        <h2 class="username">{{ t('auth.guestUser') }}</h2>
       </div>
 
       <div class="unlock-section">
@@ -63,7 +63,7 @@
         </div>
 
         <p class="instruction-text" :class="{ 'is-hidden': isUnlocking }">
-          {{ $t('auth.fingerprintPrompt') }}
+          {{ t('auth.fingerprintPrompt') }}
         </p>
       </div>
     </div>
@@ -72,8 +72,10 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { useAuthStore } from '~/composables/features/auth/useAuthStore';
+import { useI18n } from 'vue-i18n';
+import { useAuthStore } from '@/composables/features/auth/useAuthStore';
 
+const { t } = useI18n();
 const authStore = useAuthStore();
 const isUnlocking = ref(false);
 const progressValue = ref(0);
@@ -155,6 +157,7 @@ const finishUnlock = () => {
   padding: 8vh 2rem;
   box-sizing: border-box;
   overflow: hidden;
+  position: relative;
 }
 
 .clock-widget {
@@ -293,7 +296,7 @@ const finishUnlock = () => {
 
 .progress-ring-circle {
   transition: stroke-dashoffset 0.05s linear;
-  stroke-dasharray: 314.159; /* 50 * 2 * Math.PI */
+  stroke-dasharray: 314.159;
 }
 
 .instruction-text {
