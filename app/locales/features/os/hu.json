@@ -23,6 +23,18 @@
       "or": "VAGY",
       "english": "Angol",
       "hungarian": "Magyar"
+    },
+    "browser": {
+      "name": "Böngésző"
+    },
+    "terminal": {
+      "name": "Terminál"
+    },
+    "about": {
+      "name": "Névjegy"
+    },
+    "projects": {
+      "name": "Projektek"
     }
   },
   "themes": {

@@ -23,6 +23,18 @@
       "or": "OR",
       "english": "English",
       "hungarian": "Hungarian"
+    },
+    "browser": {
+      "name": "Browser"
+    },
+    "terminal": {
+      "name": "Terminal"
+    },
+    "about": {
+      "name": "About"
+    },
+    "projects": {
+      "name": "Projects"
     }
   },
   "themes": {

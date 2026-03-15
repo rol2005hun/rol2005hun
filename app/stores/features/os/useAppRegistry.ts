@@ -1,10 +1,5 @@
 import { defineStore } from 'pinia';
-import { shallowRef } from 'vue';
-import SettingsApp from '@/components/features/os/apps/settings/SettingsApp.vue';
-
-export const appComponents: Record<string, any> = {
-  settings: SettingsApp
-};
+import { ref } from 'vue';
 
 export interface AppDefinition {
   id: string;
@@ -17,13 +12,45 @@ export interface AppDefinition {
 }
 
 export const useAppRegistry = defineStore('os-app-registry', () => {
-  const installedApps = shallowRef<AppDefinition[]>([
+  const installedApps = ref<AppDefinition[]>([
+    {
+      id: 'browser',
+      nameKey: 'os.apps.browser.name',
+      icon: 'ph:globe-hemisphere-west-fill',
+      defaultWidth: 900,
+      defaultHeight: 600,
+      allowMultipleInstances: true,
+    },
+    {
+      id: 'terminal',
+      nameKey: 'os.apps.terminal.name',
+      icon: 'ph:terminal-window-fill',
+      defaultWidth: 700,
+      defaultHeight: 450,
+      allowMultipleInstances: true,
+    },
+    {
+      id: 'projects',
+      nameKey: 'os.apps.projects.name',
+      icon: 'ph:folder-open-fill',
+      defaultWidth: 800,
+      defaultHeight: 500,
+      allowMultipleInstances: false,
+    },
     {
       id: 'settings',
       nameKey: 'os.apps.settings.name',
       icon: 'ph:gear-six-fill',
       defaultWidth: 600,
       defaultHeight: 450,
+      allowMultipleInstances: false,
+    },
+    {
+      id: 'about',
+      nameKey: 'os.apps.about.name',
+      icon: 'ph:info-fill',
+      defaultWidth: 400,
+      defaultHeight: 300,
       allowMultipleInstances: false,
     },
   ]);

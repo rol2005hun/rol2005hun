@@ -36,11 +36,24 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, defineAsyncComponent } from 'vue';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
 import type { OSWindow } from '@/stores/features/os/useWindowStore';
-import { appComponents } from '@/stores/features/os/useAppRegistry';
 import AppIcon from '@/components/features/os/shared/AppIcon.vue';
+
+import SettingsApp from '@/components/features/os/apps/settings/SettingsApp.vue';
+import BrowserApp from '@/components/features/os/apps/browser/BrowserApp.vue';
+import TerminalApp from '@/components/features/os/apps/terminal/TerminalApp.vue';
+import AboutApp from '@/components/features/os/apps/about/AboutApp.vue';
+import ProjectsApp from '@/components/features/os/apps/projects/ProjectsApp.vue';
+
+const appComponents: Record<string, any> = {
+  settings: SettingsApp,
+  browser: BrowserApp,
+  terminal: TerminalApp,
+  about: AboutApp,
+  projects: ProjectsApp
+};
 
 const props = defineProps<{
   windowInfo: OSWindow;
