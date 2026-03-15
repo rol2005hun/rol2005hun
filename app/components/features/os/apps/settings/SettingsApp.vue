@@ -110,6 +110,7 @@ const activeTab = ref<'appearance' | 'language'>('appearance');
       }
       &.active {
         background: var(--os-primary-color, rgba(255, 255, 255, 0.1));
+        color: var(--os-primary-text, #000);
         font-weight: 600;
       }
     }

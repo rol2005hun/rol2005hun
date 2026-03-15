@@ -141,7 +141,6 @@ const openApp = (appId: string) => {
     outline: none;
     color: var(--os-text, #fff);
     width: 100%;
-    font-family: inherit;
     font-size: 14px;
 
     &::placeholder {

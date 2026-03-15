@@ -2,6 +2,7 @@
 
 :root {
   --os-primary-color: #ffffff;
+  --os-primary-text: #000000;
   --os-taskbar-bg: rgba(20, 20, 20, 0.85);
   --os-window-bg: rgba(30, 30, 30, 0.95);
   --os-menu-bg: rgba(35, 35, 35, 0.90);
@@ -12,6 +13,7 @@
 
 :root[data-theme='light'] {
   --os-primary-color: #000000;
+  --os-primary-text: #ffffff;
   --os-taskbar-bg: rgba(240, 240, 240, 0.85);
   --os-window-bg: rgba(255, 255, 255, 0.95);
   --os-menu-bg: rgba(250, 250, 250, 0.90);
@@ -22,6 +24,7 @@
 
 :root[data-theme='orange'] {
   --os-primary-color: #ff7a00;
+  --os-primary-text: #ffffff;
   --os-taskbar-bg: rgba(30, 15, 0, 0.85);
   --os-window-bg: rgba(45, 20, 0, 0.95);
   --os-menu-bg: rgba(40, 15, 0, 0.90);
@@ -32,6 +35,7 @@
 
 :root[data-theme='purple'] {
   --os-primary-color: #9d00ff;
+  --os-primary-text: #ffffff;
   --os-taskbar-bg: rgba(15, 0, 25, 0.85);
   --os-window-bg: rgba(25, 0, 40, 0.95);
   --os-menu-bg: rgba(20, 0, 35, 0.90);
@@ -42,6 +46,7 @@
 
 :root[data-theme='green'] {
   --os-primary-color: #00c853;
+  --os-primary-text: #ffffff;
   --os-taskbar-bg: rgba(0, 20, 5, 0.85);
   --os-window-bg: rgba(0, 35, 10, 0.95);
   --os-menu-bg: rgba(0, 25, 5, 0.90);
