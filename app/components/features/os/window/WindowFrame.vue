@@ -142,7 +142,7 @@ const toggleMaximize = () => {
   overflow: hidden;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
   &.is-minimized {
     opacity: 0;
@@ -153,7 +153,6 @@ const toggleMaximize = () => {
   &.is-maximized {
     border-radius: 0;
     border: none;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   &.is-focused {
