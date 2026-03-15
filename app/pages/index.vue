@@ -1,10 +1,15 @@
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <div class="desktop-surface">
+    <div class="wallpaper"/>
+    <div class="windows-layer">
+      <!-- Windows will be rendered here -->
+    </div>
+    <Desktop />
+  </div>
 </template>
 
 <script setup lang="ts">
+import Desktop from '@/components/features/os/desktop/Desktop.vue';
 </script>
 
 <style scoped lang="scss">

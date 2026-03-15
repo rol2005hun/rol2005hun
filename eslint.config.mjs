@@ -17,8 +17,10 @@ export default withNuxt(
     },
     rules: {
       'vue/html-quotes': ['error', 'double'],
+      'vue/html-indent': ['error', 2],
       '@stylistic/quotes': ['error', 'single'],
       '@stylistic/semi': ['error', 'always'],
+      '@stylistic/indent': ['error', 2],
       'no-undef': 'off',
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'off'
