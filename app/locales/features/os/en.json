@@ -1,0 +1,25 @@
+{
+  "startMenu": {
+    "searchPlaceholder": "Type here to search...",
+    "pinnedApps": "Pinned Apps",
+    "user": "User"
+  },
+  "apps": {
+    "settings": {
+      "name": "System Settings",
+      "appearance": "Appearance",
+      "themeSelection": "Theme Selection",
+      "themeSubtitle": "Choose your personal operating system style."
+    }
+  },
+  "themes": {
+    "dark": "Dark Mode",
+    "light": "Light Mode",
+    "orange": "Sunset Orange",
+    "purple": "Cyber Purple",
+    "green": "Forest Green"
+  },
+  "mobile": {
+    "themeIcon": "Theme"
+  }
+}

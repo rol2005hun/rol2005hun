@@ -16,7 +16,7 @@
           <div class="icon-box">
             <Icon :name="themeStore.currentTheme === 'dark' ? 'ph:moon-fill' : 'ph:sun-fill'" size="28px" />
           </div>
-          <span class="app-label">Theme</span>
+          <span class="app-label">{{ $t('os.mobile.themeIcon') }}</span>
         </div>
       </div>
     </div>

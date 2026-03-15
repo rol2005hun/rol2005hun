@@ -6,16 +6,16 @@ export type OSTheme = 'dark' | 'light' | 'orange' | 'purple' | 'green';
 
 export interface ThemeConfig {
   id: OSTheme;
-  name: string;
+  nameKey: string;
   color: string;
 }
 
 export const availableThemes: ThemeConfig[] = [
-  { id: 'dark', name: 'Dark Mode', color: '#1a1a1a' },
-  { id: 'light', name: 'Light Mode', color: '#ffffff' },
-  { id: 'orange', name: 'Sunset Orange', color: '#ff7a00' },
-  { id: 'purple', name: 'Cyber Purple', color: '#9d00ff' },
-  { id: 'green', name: 'Forest Green', color: '#00c853' },
+  { id: 'dark', nameKey: 'os.themes.dark', color: '#1a1a1a' },
+  { id: 'light', nameKey: 'os.themes.light', color: '#ffffff' },
+  { id: 'orange', nameKey: 'os.themes.orange', color: '#ff7a00' },
+  { id: 'purple', nameKey: 'os.themes.purple', color: '#9d00ff' },
+  { id: 'green', nameKey: 'os.themes.green', color: '#00c853' },
 ];
 
 export const useThemeStore = defineStore('os-theme', () => {

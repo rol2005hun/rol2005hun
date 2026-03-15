@@ -1,11 +1,10 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { shallowRef, ref, markRaw } from 'vue';
 
 export interface OSWindow {
   id: string;
   appId: string;
-  title: string;
-  component: any;
+  titleKey: string;
   isOpen: boolean;
   isMinimized: boolean;
   isMaximized: boolean;

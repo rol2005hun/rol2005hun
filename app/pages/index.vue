@@ -1,13 +1,9 @@
 <template>
   <div class="desktop-surface">
-    <!-- Közös háttér asztali és mobil nézethez is -->
     <div class="wallpaper"/>
 
-    <div v-if="!isMobile" class="windows-layer">
-      <!-- Windows will be rendered here (desktop) -->
-    </div>
+    <div v-if="!isMobile" class="windows-layer"/>
 
-    <!-- Render Desktop or Mobile OS based on screen size -->
     <Desktop v-if="!isMobile" />
     <MobileOS v-else />
   </div>

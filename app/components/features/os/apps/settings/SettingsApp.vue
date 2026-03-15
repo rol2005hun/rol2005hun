@@ -3,13 +3,13 @@
     <div class="sidebar">
       <ul>
         <li class="active">
-          <Icon name="ph:paint-brush-broad-fill" /> Appearance
+          <Icon name="ph:paint-brush-broad-fill" /> {{ $t('os.apps.settings.appearance') }}
         </li>
       </ul>
     </div>
     <div class="content">
-      <h2>Theme Selection</h2>
-      <p class="subtitle">Choose your personal operating system style.</p>
+      <h2>{{ $t('os.apps.settings.themeSelection') }}</h2>
+      <p class="subtitle">{{ $t('os.apps.settings.themeSubtitle') }}</p>
 
       <div class="theme-grid">
         <button
@@ -20,7 +20,7 @@
           @click="themeStore.setTheme(theme.id)"
         >
           <div class="color-preview" :style="{ backgroundColor: theme.color }"/>
-          <span>{{ theme.name }}</span>
+          <span>{{ $t(theme.nameKey) }}</span>
         </button>
       </div>
     </div>

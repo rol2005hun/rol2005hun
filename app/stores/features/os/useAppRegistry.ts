@@ -2,11 +2,14 @@ import { defineStore } from 'pinia';
 import { shallowRef } from 'vue';
 import SettingsApp from '@/components/features/os/apps/settings/SettingsApp.vue';
 
+export const appComponents: Record<string, any> = {
+  settings: SettingsApp
+};
+
 export interface AppDefinition {
   id: string;
-  name: string;
+  nameKey: string;
   icon: string;
-  component: any;
   defaultWidth?: number;
   defaultHeight?: number;
 }
@@ -15,9 +18,8 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
   const installedApps = shallowRef<AppDefinition[]>([
     {
       id: 'settings',
-      name: 'System Settings',
+      nameKey: 'os.apps.settings.name',
       icon: 'ph:gear-six-fill',
-      component: SettingsApp,
       defaultWidth: 600,
       defaultHeight: 450,
     },

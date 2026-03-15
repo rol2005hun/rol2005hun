@@ -1,0 +1,25 @@
+{
+  "startMenu": {
+    "searchPlaceholder": "Keress itt...",
+    "pinnedApps": "Tűzött alkalmazások",
+    "user": "Felhasználó"
+  },
+  "apps": {
+    "settings": {
+      "name": "Rendszerbeállítások",
+      "appearance": "Megjelenés",
+      "themeSelection": "Téma választása",
+      "themeSubtitle": "Válaszd ki az operációs rendszer stílusát."
+    }
+  },
+  "themes": {
+    "dark": "Sötét Mód",
+    "light": "Világos Mód",
+    "orange": "Naplemente Narancs",
+    "purple": "Cyber Lila",
+    "green": "Erdei Zöld"
+  },
+  "mobile": {
+    "themeIcon": "Téma"
+  }
+}

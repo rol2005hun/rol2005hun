@@ -3,11 +3,11 @@
     <div class="start-menu-content">
       <div class="search-bar">
         <Icon name="ph:magnifying-glass" />
-        <input type="text" placeholder="Type here to search..." >
+        <input type="text" :placeholder="$t('os.startMenu.searchPlaceholder')" >
       </div>
 
       <div class="pinned-section">
-        <h3>Pinned Apps</h3>
+        <h3>{{ $t('os.startMenu.pinnedApps') }}</h3>
         <div class="app-grid">
           <div
             v-for="app in registryStore.installedApps"
@@ -18,7 +18,7 @@
             <div class="icon-box">
               <Icon :name="app.icon" size="28px" />
             </div>
-            <span>{{ app.name }}</span>
+            <span>{{ $t(app.nameKey) }}</span>
           </div>
         </div>
       </div>
@@ -29,7 +29,7 @@
         <div class="avatar">
           <Icon name="ph:user-fill" />
         </div>
-        <span>User</span>
+        <span>{{ $t('os.startMenu.user') }}</span>
       </div>
       <button class="power-btn">
         <Icon name="ph:power-bold" size="18px" />
@@ -51,15 +51,13 @@ const openApp = (appId: string) => {
   const appConfig = registryStore.getAppById(appId);
   if (appConfig) {
     windowStore.openWindow({
-      id: `${appId}-${Date.now()}`, // Támogatja egy app többszöri megnyitását is
+      id: `${appId}-${Date.now()}`,
       appId: appConfig.id,
-      title: appConfig.name,
-      component: appConfig.component,
+      titleKey: appConfig.nameKey,
       width: appConfig.defaultWidth || 800,
       height: appConfig.defaultHeight || 600,
     });
   }
-  // Start menü bezárása megnyitás után
   desktopStore.closeStartMenu();
 };
 </script>

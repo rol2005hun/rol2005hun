@@ -1,0 +1,3 @@
+- NEVER put comments in the generated code.
+- ALWAYS use Vue i18n for all text strings. Do not hardcode strings in templates or logic.
+- Place locale files in the `app/locales/features/<feature-name>/` directory structure.

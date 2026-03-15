@@ -11,7 +11,7 @@
   >
     <div class="window-header" @dblclick="toggleMaximize">
       <div class="window-title">
-        <span>{{ windowInfo.title }}</span>
+        <span>{{ $t(windowInfo.titleKey) }}</span>
       </div>
       <div class="window-controls">
         <button class="ctrl-btn minimize" @click.stop="toggleMinimize">
@@ -27,7 +27,7 @@
     </div>
 
     <div class="window-body">
-      <component :is="windowInfo.component" />
+      <component :is="appComponents[windowInfo.appId]" />
     </div>
 
   </div>
@@ -37,6 +37,7 @@
 import { computed } from 'vue';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
 import type { OSWindow } from '@/stores/features/os/useWindowStore';
+import { appComponents } from '@/stores/features/os/useAppRegistry';
 
 const props = defineProps<{
   windowInfo: OSWindow;
