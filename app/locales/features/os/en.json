@@ -2,6 +2,7 @@
   "startMenu": {
     "searchPlaceholder": "Type here to search...",
     "pinnedApps": "Pinned Apps",
+    "searchResults": "Search Results",
     "user": "User"
   },
   "apps": {

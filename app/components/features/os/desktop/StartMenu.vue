@@ -3,14 +3,14 @@
     <div class="start-menu-content">
       <div class="search-bar">
         <Icon name="ph:magnifying-glass" />
-        <input type="text" :placeholder="$t('os.startMenu.searchPlaceholder')" >
+        <input v-model="searchQuery" type="text" :placeholder="$t('os.startMenu.searchPlaceholder')" >
       </div>
 
       <div class="pinned-section">
-        <h3>{{ $t('os.startMenu.pinnedApps') }}</h3>
+        <h3>{{ searchQuery ? $t('os.startMenu.searchResults', 'Keresési eredmények') : $t('os.startMenu.pinnedApps') }}</h3>
         <div class="app-grid">
           <div
-            v-for="app in registryStore.installedApps"
+            v-for="app in filteredApps"
             :key="app.id"
             class="app-item"
             @click="openApp(app.id)"
@@ -39,6 +39,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
 import { useDesktopStore } from '@/stores/features/os/useDesktopStore';
@@ -46,8 +48,47 @@ import { useDesktopStore } from '@/stores/features/os/useDesktopStore';
 const registryStore = useAppRegistry();
 const windowStore = useWindowStore();
 const desktopStore = useDesktopStore();
+const { messages } = useI18n();
+
+const searchQuery = ref('');
+
+const filteredApps = computed(() => {
+  const query = searchQuery.value.trim().toLowerCase();
+  if (!query) return registryStore.installedApps;
+
+  return registryStore.installedApps.filter(app => {
+    // English/Hungarian/etc key paths
+    const keyPath = app.nameKey.split('.');
+
+    // We check every available locale for a match
+    for (const locale of Object.keys(messages.value)) {
+      let currentVal: any = messages.value[locale];
+
+      for (const key of keyPath) {
+        if (currentVal && currentVal[key]) {
+          currentVal = currentVal[key];
+        } else {
+          currentVal = null;
+          break;
+        }
+      }
+
+      if (typeof currentVal === 'string' && currentVal.toLowerCase().includes(query)) {
+        return true;
+      }
+    }
+
+    // Also match the app id directly, e.g. "settings"
+    if (app.id.toLowerCase().includes(query)) {
+      return true;
+    }
+
+    return false;
+  });
+});
 
 const openApp = (appId: string) => {
+  searchQuery.value = ''; // Reset search on open
   const appConfig = registryStore.getAppById(appId);
   if (appConfig) {
     windowStore.openWindow({
