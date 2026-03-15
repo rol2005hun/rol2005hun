@@ -6,7 +6,7 @@
         :class="{ active: desktopStore.isStartMenuOpen }"
         @click="desktopStore.toggleStartMenu()"
       >
-        <Icon name="ph:windows-logo-fill" size="24px" />
+        <Icon name="ph:circles-four-fill" size="24px" />
       </button>
 
       <div class="open-apps">

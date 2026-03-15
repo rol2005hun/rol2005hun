@@ -1,5 +1,5 @@
 <template>
-  <div class="start-menu-container">
+  <div class="start-menu-container" ref="menuRef">
     <div class="start-menu-content">
       <div class="search-bar">
         <Icon name="ph:magnifying-glass" />
@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
@@ -52,6 +52,24 @@ const desktopStore = useDesktopStore();
 const { messages } = useI18n();
 
 const searchQuery = ref('');
+const menuRef = ref<HTMLElement | null>(null);
+
+const handleClickOutside = (event: MouseEvent) => {
+  const target = event.target as HTMLElement;
+  if (target.closest('.start-btn')) return;
+
+  if (menuRef.value && !menuRef.value.contains(target)) {
+    desktopStore.closeStartMenu();
+  }
+};
+
+onMounted(() => {
+  document.addEventListener('mousedown', handleClickOutside);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('mousedown', handleClickOutside);
+});
 
 const filteredApps = computed(() => {
   const query = searchQuery.value.trim().toLowerCase();

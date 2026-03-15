@@ -5,7 +5,10 @@ import { useI18n } from 'vue-i18n';
 
 export const useLanguageStore = defineStore('os-language', () => {
   const { locale } = useI18n();
-  const langCookie = useCookie<'en' | 'hu'>('os_locale', { default: () => 'en' });
+  const langCookie = useCookie<'en' | 'hu'>('os_locale', {
+    default: () => 'en',
+    maxAge: 31536000
+  });
   const currentLanguage = ref<'en' | 'hu'>(langCookie.value || 'en');
 
   const setLanguage = (lang: 'en' | 'hu') => {

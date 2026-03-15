@@ -12,17 +12,18 @@
   >
     <div class="window-header" @dblclick="toggleMaximize" @mousedown="startDrag">
       <div class="window-title">
+        <AppIcon :app-id="windowInfo.appId" size="14px" class="title-icon" />
         <span>{{ $t(windowInfo.titleKey) }}</span>
       </div>
       <div class="window-controls">
         <button class="ctrl-btn minimize" @click.stop="toggleMinimize">
-          <Icon name="ph:minus-bold" size="14px" />
+          <Icon name="ph:minus-bold" size="10px" />
         </button>
         <button class="ctrl-btn maximize" @click.stop="toggleMaximize">
-          <Icon :name="windowInfo.isMaximized ? 'ph:copy-simple-bold' : 'ph:square-bold'" size="14px" />
+          <Icon :name="windowInfo.isMaximized ? 'ph:copy-simple-bold' : 'ph:square-bold'" size="10px" />
         </button>
         <button class="ctrl-btn close" @click.stop="closeWindow">
-          <Icon name="ph:x-bold" size="14px" />
+          <Icon name="ph:x-bold" size="10px" />
         </button>
       </div>
     </div>
@@ -39,6 +40,7 @@ import { computed, ref } from 'vue';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
 import type { OSWindow } from '@/stores/features/os/useWindowStore';
 import { appComponents } from '@/stores/features/os/useAppRegistry';
+import AppIcon from '@/components/features/os/shared/AppIcon.vue';
 
 const props = defineProps<{
   windowInfo: OSWindow;
@@ -184,33 +186,52 @@ const toggleMaximize = () => {
   color: var(--os-text, #fff);
   display: flex;
   align-items: center;
+  gap: 8px;
+
+  .title-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .window-controls {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
 
   .ctrl-btn {
-    width: 24px;
-    height: 24px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     border: none;
-    background: transparent;
-    color: var(--os-text, #fff);
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s;
+    color: transparent;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.1);
+      color: rgba(0, 0, 0, 0.6);
     }
 
-    &.close:hover {
-      background: #e81123;
-      color: white;
+    &.close {
+      background: #ff5f56;
+      border: 1px solid #e0443e;
+      &:hover { background: #ff5f56; }
+    }
+
+    &.minimize {
+      background: #ffbd2e;
+      border: 1px solid #dea123;
+      &:hover { background: #ffbd2e; }
+    }
+
+    &.maximize {
+      background: #27c93f;
+      border: 1px solid #1aab29;
+      &:hover { background: #27c93f; }
     }
   }
 }

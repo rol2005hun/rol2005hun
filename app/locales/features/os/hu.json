@@ -17,6 +17,10 @@
       "languageSubtitle": "Válaszd ki a preferált nyelvet.",
       "wallpaperSelection": "Asztal háttérképe",
       "wallpaperSubtitle": "Tedd egyedivé az operációs rendszered kinézetét.",
+      "customWallpaper": "Egyéni háttérkép",
+      "wallpaperUrl": "Kép URL",
+      "uploadWallpaper": "Kép feltöltése",
+      "or": "VAGY",
       "english": "Angol",
       "hungarian": "Magyar"
     }

@@ -27,13 +27,42 @@ export const availableWallpapers = [
 ];
 
 export const useThemeStore = defineStore('os-theme', () => {
-  const themeCookie = useCookie<OSTheme>('os_theme', { default: () => 'dark' });
+  const themeCookie = useCookie<OSTheme>('os-theme', {
+    default: () => 'dark',
+    watch: true,
+    maxAge: 31536000
+  });
   const currentTheme = ref<OSTheme>(themeCookie.value || 'dark');
 
   const defaultWallpaper = availableWallpapers[0] || { id: 'default', url: '', thumb: '' };
 
-  const wallpaperCookie = useCookie<string>('os_wallpaper', { default: () => defaultWallpaper.id });
+  const wallpaperCookie = useCookie<string>('os-wallpaper', {
+    default: () => defaultWallpaper.id,
+    watch: true,
+    maxAge: 31536000
+  });
   const currentWallpaper = ref<string>(wallpaperCookie.value || defaultWallpaper.id);
+
+  const customWallpaperCookie = useCookie<string>('os-custom-wallpaper', {
+    default: () => '',
+    watch: true,
+    maxAge: 31536000
+  });
+  const customWallpaperLocal = ref<string>('');
+
+  if (import.meta.client) {
+    if (customWallpaperCookie.value === 'localstorage') {
+      setTimeout(() => {
+        customWallpaperLocal.value = localStorage.getItem('os-custom-wallpaper') || '';
+      }, 0);
+    }
+  }
+
+  const customWallpaperData = computed(() => {
+    return customWallpaperCookie.value === 'localstorage'
+      ? customWallpaperLocal.value
+      : customWallpaperCookie.value;
+  });
 
   const setTheme = (theme: OSTheme) => {
     currentTheme.value = theme;
@@ -45,17 +74,42 @@ export const useThemeStore = defineStore('os-theme', () => {
     wallpaperCookie.value = wallpaperId;
   };
 
+  const setCustomWallpaper = (dataUrl: string) => {
+    // Cookie max size is ~4KB. Base64 uploads will exceed this heavily, so we only save short URLs in cookies (SSR friendly),
+    // and route big file uploads securely into localStorage (client only) to prevent HTTP 431 errors.
+    if (dataUrl.startsWith('data:image/') || dataUrl.length > 3000) {
+      customWallpaperCookie.value = 'localstorage';
+      customWallpaperLocal.value = dataUrl;
+      if (import.meta.client) {
+        try {
+          localStorage.setItem('os-custom-wallpaper', dataUrl);
+        } catch (e) {
+          console.error('Failed to save image to localStorage', e);
+        }
+      }
+    } else {
+      customWallpaperCookie.value = dataUrl;
+      if (import.meta.client) {
+        localStorage.removeItem('os-custom-wallpaper');
+      }
+    }
+    setWallpaper('custom');
+  };
+
   const toggleTheme = () => {
     setTheme(currentTheme.value === 'dark' ? 'light' : 'dark');
   };
 
   const currentWallpaperUrl = computed(() => {
+    if (currentWallpaper.value === 'custom') {
+      return customWallpaperData.value || defaultWallpaper.url;
+    }
     const wp = availableWallpapers.find(w => w.id === currentWallpaper.value);
     return wp ? wp.url : defaultWallpaper.url;
   });
 
   watch(currentTheme, (newTheme) => {
-    if (import.meta.client) {
+    if (import.meta.client && newTheme) {
       document.documentElement.setAttribute('data-theme', newTheme);
     }
   }, { immediate: true });
@@ -65,9 +119,11 @@ export const useThemeStore = defineStore('os-theme', () => {
     availableThemes,
     currentWallpaper,
     currentWallpaperUrl,
+    customWallpaperData,
     availableWallpapers,
     setTheme,
     setWallpaper,
+    setCustomWallpaper,
     toggleTheme
   };
 });

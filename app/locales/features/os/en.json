@@ -17,6 +17,10 @@
       "languageSubtitle": "Choose your preferred language.",
       "wallpaperSelection": "Desktop Background",
       "wallpaperSubtitle": "Customize your desktop environment.",
+      "customWallpaper": "Custom Wallpaper",
+      "wallpaperUrl": "Image URL",
+      "uploadWallpaper": "Upload Image",
+      "or": "OR",
       "english": "English",
       "hungarian": "Hungarian"
     }
