@@ -1,36 +1,59 @@
 <template>
-  <div class="taskbar-container">
+  <div class="taskbar-container" @click.self="desktopStore.closeStartMenu()">
     <div class="taskbar-left">
-      <button class="start-btn">
+      <button
+        class="start-btn"
+        :class="{ active: desktopStore.isStartMenuOpen }"
+        @click="desktopStore.toggleStartMenu()"
+      >
         <Icon name="ph:windows-logo-fill" size="24px" />
       </button>
+
       <div class="open-apps">
-        <!-- Átmeneti app ikonok -->
+        <button
+          v-for="win in windowStore.windows"
+          :key="win.id"
+          class="app-btn-taskbar"
+          :class="{ active: win.zIndex === topZIndex && !win.isMinimized }"
+          @click="toggleWindow(win.id)"
+        >
+          <Icon :name="getAppIcon(win.appId)" size="20px" />
+        </button>
       </div>
     </div>
 
     <div class="taskbar-right">
-      <button class="sys-btn" @click="themeStore.toggleTheme">
-        <Icon :name="themeStore.currentTheme === 'dark' ? 'ph:moon-fill' : 'ph:sun-fill'" size="20px" />
-      </button>
+      <div class="sys-tray">
+        <Icon name="ph:wifi-high-bold" size="16px" />
+        <Icon name="ph:speaker-high-fill" size="16px" />
+        <Icon name="ph:battery-full-fill" size="16px" />
+      </div>
       <div class="time-widget">
-        {{ currentTime }}
+        <div class="time-text">{{ currentTime }}</div>
+        <div class="date-text">{{ currentDate }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
-import { useThemeStore } from '@/stores/features/os/useThemeStore';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { useDesktopStore } from '@/stores/features/os/useDesktopStore';
+import { useWindowStore } from '@/stores/features/os/useWindowStore';
+import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
 
-const themeStore = useThemeStore();
+const desktopStore = useDesktopStore();
+const windowStore = useWindowStore();
+const registryStore = useAppRegistry();
+
 const currentTime = ref('');
+const currentDate = ref('');
 let timer: ReturnType<typeof setInterval>;
 
 const updateTime = () => {
   const now = new Date();
   currentTime.value = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  currentDate.value = now.toLocaleDateString([], { month: 'short', day: 'numeric' });
 };
 
 onMounted(() => {
@@ -41,6 +64,28 @@ onMounted(() => {
 onUnmounted(() => {
   clearInterval(timer);
 });
+
+const topZIndex = computed(() => {
+  return Math.max(0, ...windowStore.windows.map(w => w.zIndex));
+});
+
+const getAppIcon = (appId: string) => {
+  const app = registryStore.getAppById(appId);
+  return app ? app.icon : 'ph:app-window';
+};
+
+const toggleWindow = (id: string) => {
+  const win = windowStore.windows.find(w => w.id === id);
+  if (win) {
+    if (win.isMinimized) {
+      windowStore.toggleMinimize(id);
+    } else if (win.zIndex === topZIndex.value) {
+      windowStore.toggleMinimize(id);
+    } else {
+      windowStore.focusWindow(id);
+    }
+  }
+};
 </script>
 
 <style scoped lang="scss">
@@ -56,7 +101,7 @@ onUnmounted(() => {
   padding: 0 10px;
   border-top: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
-  z-index: 9999;
+  z-index: 10000;
 }
 
 .taskbar-left, .taskbar-right {
@@ -66,7 +111,7 @@ onUnmounted(() => {
   height: 100%;
 }
 
-.start-btn, .sys-btn {
+.start-btn, .app-btn-taskbar {
   background: transparent;
   border: none;
   color: var(--os-text, #ffffff);
@@ -77,35 +122,55 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
 
   &:hover {
     background: var(--os-hover, rgba(255, 255, 255, 0.1));
   }
+
+  &.active {
+    background: var(--os-active, rgba(255, 255, 255, 0.2));
+    box-shadow: inset 0 -2px 0 var(--os-primary-color, #fff);
+  }
+}
+
+.open-apps {
+  display: flex;
+  gap: 4px;
+}
+
+.sys-tray {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 10px;
+  color: var(--os-text, #fff);
 }
 
 .time-widget {
   color: var(--os-text, #ffffff);
-  font-size: 13px;
-  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
   padding: 0 10px;
   height: 38px;
-  display: flex;
-  align-items: center;
   border-radius: 6px;
-  transition: background 0.2s ease;
+  cursor: default;
   user-select: none;
+  line-height: 1.2;
 
   &:hover {
     background: var(--os-hover, rgba(255, 255, 255, 0.1));
   }
-}
 
-/* Light Theme Variables overriding defaults */
-:root[data-theme='light'] {
-  --os-taskbar-bg: rgba(240, 240, 240, 0.85);
-  --os-border-color: rgba(0, 0, 0, 0.1);
-  --os-text: #1a1a1a;
-  --os-hover: rgba(0, 0, 0, 0.05);
+  .time-text {
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .date-text {
+    font-size: 11px;
+    opacity: 0.8;
+  }
 }
 </style>

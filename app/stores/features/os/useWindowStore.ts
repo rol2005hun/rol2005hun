@@ -3,19 +3,24 @@ import { ref } from 'vue';
 
 export interface OSWindow {
   id: string;
+  appId: string;
   title: string;
   component: any;
   isOpen: boolean;
   isMinimized: boolean;
   isMaximized: boolean;
   zIndex: number;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 }
 
 export const useWindowStore = defineStore('os-window', () => {
   const windows = ref<OSWindow[]>([]);
   const topZIndex = ref(100);
 
-  const openWindow = (windowInfo: Omit<OSWindow, 'isOpen' | 'isMinimized' | 'isMaximized' | 'zIndex'>) => {
+  const openWindow = (windowInfo: Omit<OSWindow, 'isOpen' | 'isMinimized' | 'isMaximized' | 'zIndex' | 'x' | 'y'>) => {
     const existing = windows.value.find(w => w.id === windowInfo.id);
     if (existing) {
       if (existing.isMinimized) existing.isMinimized = false;
@@ -24,12 +29,16 @@ export const useWindowStore = defineStore('os-window', () => {
     }
 
     topZIndex.value++;
+    const offset = (windows.value.length % 5) * 30;
+
     windows.value.push({
       ...windowInfo,
       isOpen: true,
       isMinimized: false,
       isMaximized: false,
       zIndex: topZIndex.value,
+      x: 100 + offset,
+      y: 100 + offset,
     });
   };
 

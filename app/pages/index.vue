@@ -1,15 +1,24 @@
 <template>
   <div class="desktop-surface">
+    <!-- Közös háttér asztali és mobil nézethez is -->
     <div class="wallpaper"/>
-    <div class="windows-layer">
-      <!-- Windows will be rendered here -->
+
+    <div v-if="!isMobile" class="windows-layer">
+      <!-- Windows will be rendered here (desktop) -->
     </div>
-    <Desktop />
+
+    <!-- Render Desktop or Mobile OS based on screen size -->
+    <Desktop v-if="!isMobile" />
+    <MobileOS v-else />
   </div>
 </template>
 
 <script setup lang="ts">
 import Desktop from '@/components/features/os/desktop/Desktop.vue';
+import MobileOS from '@/components/features/os/mobile/MobileOS.vue';
+import { useDevice } from '@/composables/features/os/useDevice';
+
+const { isMobile } = useDevice();
 </script>
 
 <style scoped lang="scss">
