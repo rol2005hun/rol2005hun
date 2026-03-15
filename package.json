@@ -1,0 +1,31 @@
+{
+  "name": "ranzak-os",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxt/icon": "^2.2.1",
+    "@pinia/nuxt": "^0.11.3",
+    "nuxt": "^4.4.2",
+    "pinia": "^3.0.4",
+    "sass": "^1.98.0",
+    "vue": "^3.5.30",
+    "vue-router": "^5.0.3"
+  },
+  "devDependencies": {
+    "@iconify-json/fluent": "^1.2.40",
+    "@iconify-json/ph": "^1.2.2",
+    "@nuxt/eslint": "^1.15.2",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "eslint": "^10.0.3",
+    "eslint-plugin-oxlint": "^1.55.0",
+    "oxlint": "^1.55.0",
+    "vue-i18n": "^11.3.0"
+  }
+}
