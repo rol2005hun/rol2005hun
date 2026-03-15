@@ -4,12 +4,13 @@
     :class="{
       'is-minimized': windowInfo.isMinimized,
       'is-maximized': windowInfo.isMaximized,
-      'is-focused': isFocused
+      'is-focused': isFocused,
+      'is-dragging': isDragging
     }"
     :style="windowStyle"
     @mousedown="focusWindow"
   >
-    <div class="window-header" @dblclick="toggleMaximize">
+    <div class="window-header" @dblclick="toggleMaximize" @mousedown="startDrag">
       <div class="window-title">
         <span>{{ $t(windowInfo.titleKey) }}</span>
       </div>
@@ -34,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
 import type { OSWindow } from '@/stores/features/os/useWindowStore';
 import { appComponents } from '@/stores/features/os/useAppRegistry';
@@ -44,6 +45,48 @@ const props = defineProps<{
 }>();
 
 const windowStore = useWindowStore();
+
+const isDragging = ref(false);
+let startX = 0;
+let startY = 0;
+let initialWinX = 0;
+let initialWinY = 0;
+
+const startDrag = (e: MouseEvent) => {
+  if (e.target instanceof Element && e.target.closest('.window-controls')) return;
+
+  if (props.windowInfo.isMaximized) {
+    return;
+  }
+
+  isDragging.value = true;
+  startX = e.clientX;
+  startY = e.clientY;
+  initialWinX = props.windowInfo.x;
+  initialWinY = props.windowInfo.y;
+
+  window.addEventListener('mousemove', onDrag);
+  window.addEventListener('mouseup', stopDrag);
+};
+
+const onDrag = (e: MouseEvent) => {
+  if (!isDragging.value) return;
+
+  const dx = e.clientX - startX;
+  const dy = e.clientY - startY;
+
+  // We could update store continuously, but it might be heavy. Let's do it directly.
+  windowStore.updateWindow(props.windowInfo.id, {
+    x: initialWinX + dx,
+    y: initialWinY + dy
+  });
+};
+
+const stopDrag = () => {
+  isDragging.value = false;
+  window.removeEventListener('mousemove', onDrag);
+  window.removeEventListener('mouseup', stopDrag);
+};
 
 const isFocused = computed(() => {
   const allZIndexes = windowStore.windows.map(w => w.zIndex);

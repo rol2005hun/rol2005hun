@@ -24,9 +24,9 @@
 
     <div class="taskbar-right">
       <div class="sys-tray">
-        <Icon name="ph:wifi-high-bold" size="16px" />
+        <Icon :name="wifiIcon" size="16px" :title="wifiTitle" />
         <Icon name="ph:speaker-high-fill" size="16px" />
-        <Icon name="ph:battery-full-fill" size="16px" />
+        <Icon v-if="batteryLevel !== null" :name="batteryIcon" size="16px" :title="`${Math.round(batteryLevel * 100)}%`" />
       </div>
       <div class="time-widget">
         <div class="time-text">{{ currentTime }}</div>
@@ -41,10 +41,35 @@ import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useDesktopStore } from '@/stores/features/os/useDesktopStore';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
 import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
+import { useSystemInfo } from '@/composables/features/os/useSystemInfo';
 
 const desktopStore = useDesktopStore();
 const windowStore = useWindowStore();
 const registryStore = useAppRegistry();
+
+const { batteryLevel, batteryCharging, online, connectionType } = useSystemInfo();
+
+const wifiIcon = computed(() => {
+  if (!online.value) return 'ph:wifi-slash-bold';
+  if (connectionType.value === 'cellular') return 'ph:cell-signal-full-bold';
+  return 'ph:wifi-high-bold';
+});
+
+const wifiTitle = computed(() => {
+  if (!online.value) return 'Offline';
+  return connectionType.value === 'cellular' ? 'Cellular' : 'Wi-Fi';
+});
+
+const batteryIcon = computed(() => {
+  if (batteryLevel.value === null) return 'ph:battery-full-fill';
+  if (batteryCharging.value) return 'ph:battery-charging-fill';
+
+  const level = batteryLevel.value * 100;
+  if (level > 80) return 'ph:battery-full-fill';
+  if (level > 40) return 'ph:battery-high-fill';
+  if (level > 10) return 'ph:battery-medium-fill';
+  return 'ph:battery-low-fill';
+});
 
 const currentTime = ref('');
 const currentDate = ref('');

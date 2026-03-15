@@ -69,6 +69,13 @@ export const useWindowStore = defineStore('os-window', () => {
     }
   };
 
+  const updateWindow = (id: string, updates: Partial<Pick<OSWindow, 'x' | 'y' | 'width' | 'height'>>) => {
+    const win = windows.value.find(w => w.id === id);
+    if (win) {
+      Object.assign(win, updates);
+    }
+  };
+
   return {
     windows,
     openWindow,
@@ -76,5 +83,6 @@ export const useWindowStore = defineStore('os-window', () => {
     toggleMinimize,
     toggleMaximize,
     focusWindow,
+    updateWindow,
   };
 });
