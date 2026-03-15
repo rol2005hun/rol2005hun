@@ -1,4 +1,5 @@
 import { createI18n } from 'vue-i18n';
+import { useCookie } from '#imports';
 
 type MessageSchema = {
   [key: string]: string | MessageSchema;
@@ -25,9 +26,11 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
   }
 
+  const localeCookie = useCookie('os_locale');
+
   const i18n = createI18n({
     legacy: false,
-    locale: 'en',
+    locale: localeCookie.value || 'en',
     messages,
     globalInjection: true
   });

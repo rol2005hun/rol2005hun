@@ -2,35 +2,75 @@
   <div class="settings-app">
     <div class="sidebar">
       <ul>
-        <li class="active">
+        <li
+          :class="{ active: activeTab === 'appearance' }"
+          @click="activeTab = 'appearance'"
+        >
           <Icon name="ph:paint-brush-broad-fill" /> {{ $t('os.apps.settings.appearance') }}
+        </li>
+        <li
+          :class="{ active: activeTab === 'language' }"
+          @click="activeTab = 'language'"
+        >
+          <Icon name="ph:globe-hemisphere-west-fill" /> {{ $t('os.apps.settings.language') }}
         </li>
       </ul>
     </div>
     <div class="content">
-      <h2>{{ $t('os.apps.settings.themeSelection') }}</h2>
-      <p class="subtitle">{{ $t('os.apps.settings.themeSubtitle') }}</p>
+      <div v-if="activeTab === 'appearance'">
+        <h2>{{ $t('os.apps.settings.themeSelection') }}</h2>
+        <p class="subtitle">{{ $t('os.apps.settings.themeSubtitle') }}</p>
 
-      <div class="theme-grid">
-        <button
-          v-for="theme in themeStore.availableThemes"
-          :key="theme.id"
-          class="theme-card"
-          :class="{ active: themeStore.currentTheme === theme.id }"
-          @click="themeStore.setTheme(theme.id)"
-        >
-          <div class="color-preview" :style="{ backgroundColor: theme.color }"/>
-          <span>{{ $t(theme.nameKey) }}</span>
-        </button>
+        <div class="theme-grid">
+          <button
+            v-for="theme in themeStore.availableThemes"
+            :key="theme.id"
+            class="theme-card"
+            :class="{ active: themeStore.currentTheme === theme.id }"
+            @click="themeStore.setTheme(theme.id)"
+          >
+            <div class="color-preview" :style="{ backgroundColor: theme.color }"/>
+            <span>{{ $t(theme.nameKey) }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div v-if="activeTab === 'language'">
+        <h2>{{ $t('os.apps.settings.languageSelection') }}</h2>
+        <p class="subtitle">{{ $t('os.apps.settings.languageSubtitle') }}</p>
+
+        <div class="theme-grid">
+          <button
+            class="theme-card"
+            :class="{ active: languageStore.currentLanguage === 'en' }"
+            @click="languageStore.setLanguage('en')"
+          >
+            <div class="language-icon"><Icon name="flag:gb-4x3" /></div>
+            <span>{{ $t('os.apps.settings.english') }}</span>
+          </button>
+          <button
+            class="theme-card"
+            :class="{ active: languageStore.currentLanguage === 'hu' }"
+            @click="languageStore.setLanguage('hu')"
+          >
+            <div class="language-icon"><Icon name="flag:hu-4x3" /></div>
+            <span>{{ $t('os.apps.settings.hungarian') }}</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useThemeStore } from '@/stores/features/os/useThemeStore';
+import { useLanguageStore } from '@/stores/features/os/useLanguageStore';
 
 const themeStore = useThemeStore();
+const languageStore = useLanguageStore();
+
+const activeTab = ref<'appearance' | 'language'>('appearance');
 </script>
 
 <style scoped lang="scss">
@@ -130,6 +170,17 @@ const themeStore = useThemeStore();
     border-radius: 50%;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     border: 2px solid rgba(255,255,255,0.2);
+  }
+
+  .language-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   }
 
   span {

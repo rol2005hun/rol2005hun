@@ -8,8 +8,13 @@
     "settings": {
       "name": "System Settings",
       "appearance": "Appearance",
+      "language": "Language",
       "themeSelection": "Theme Selection",
-      "themeSubtitle": "Choose your personal operating system style."
+      "themeSubtitle": "Choose your personal operating system style.",
+      "languageSelection": "System Language",
+      "languageSubtitle": "Choose your preferred language.",
+      "english": "English",
+      "hungarian": "Hungarian"
     }
   },
   "themes": {

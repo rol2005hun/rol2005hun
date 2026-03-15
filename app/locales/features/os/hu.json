@@ -8,8 +8,13 @@
     "settings": {
       "name": "Rendszerbeállítások",
       "appearance": "Megjelenés",
+      "language": "Nyelv",
       "themeSelection": "Téma választása",
-      "themeSubtitle": "Válaszd ki az operációs rendszer stílusát."
+      "themeSubtitle": "Válaszd ki az operációs rendszer stílusát.",
+      "languageSelection": "Rendszernyelv",
+      "languageSubtitle": "Válaszd ki a preferált nyelvet.",
+      "english": "Angol",
+      "hungarian": "Magyar"
     }
   },
   "themes": {
