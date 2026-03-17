@@ -31,7 +31,19 @@
       "name": "Terminal"
     },
     "about": {
-      "name": "About"
+      "name": "About",
+      "osInfo": "System Information",
+      "osName": "Operating System",
+      "osVersion": "Version",
+      "osKernel": "Kernel",
+      "osEnv": "Environment",
+      "deviceInfo": "Device Information",
+      "cpu": "CPU Logical Cores",
+      "ram": "Memory (RAM)",
+      "screenWidth": "Screen Resolution",
+      "browser": "Browser / Device",
+      "language": "System Language",
+      "copyright": "© 2026 ranzakOS. All rights reserved."
     },
     "projects": {
       "name": "Projects"
