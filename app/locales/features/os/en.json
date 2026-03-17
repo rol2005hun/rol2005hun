@@ -7,7 +7,7 @@
   },
   "apps": {
     "settings": {
-      "name": "System Settings",
+      "name": "Settings",
       "appearance": "Appearance",
       "language": "Language",
       "wallpaper": "Wallpaper",

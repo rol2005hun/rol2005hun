@@ -69,10 +69,14 @@ const closeContextMenu = () => {
   contextMenu.isOpen = false;
 };
 
+let isDragging = false;
+
 const handleDesktopClick = () => {
   desktopStore.closeStartMenu();
   closeContextMenu();
-  desktopStore.clearSelection();
+  if (!isDragging) {
+    desktopStore.clearSelection();
+  }
 };
 
 const refreshDesktop = () => {
@@ -103,6 +107,7 @@ const currentY = ref(0);
 const startSelection = (e: MouseEvent) => {
   if (e.button !== 0) return;
 
+  isDragging = false;
   closeContextMenu();
   desktopStore.closeStartMenu();
   desktopStore.clearSelection();
@@ -119,6 +124,7 @@ const startSelection = (e: MouseEvent) => {
 
 const onMouseMove = (e: MouseEvent) => {
   if (!isSelecting.value) return;
+  isDragging = true;
   currentX.value = e.clientX;
   currentY.value = e.clientY;
 
