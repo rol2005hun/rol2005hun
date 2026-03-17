@@ -53,7 +53,8 @@
         "logsCleared": "System logs cleared. (Requires Root)",
         "availableCommands": "Available commands:",
         "aliases": "(aliases: {aliases})",
-        "alreadyRoot": "Already root."
+        "alreadyRoot": "Already root.",
+        "notLoggedIn": "You are not logged in :)"
       }
     },
     "about": {

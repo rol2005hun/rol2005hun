@@ -9,7 +9,6 @@ export interface TerminalContext {
   setPromptMode: (mode: 'password' | 'text', callback: (pwd: string) => void) => void;
   t: (key: string, params?: Record<string, any>) => string;
   isRoot: () => boolean;
-  setRoot: (state: boolean) => void;
 }
 
 export interface TerminalCommand {

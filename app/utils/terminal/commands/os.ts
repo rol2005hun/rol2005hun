@@ -31,14 +31,13 @@ export const logoutCommand: TerminalCommand = {
   aliases: ['exit'],
   execute: (args, context) => {
     if (context.isRoot()) {
-      context.setRoot(false);
       const authStore = useAuthStore();
       if (authStore.user?.username === 'root') {
         authStore.logoutRoot();
       }
       context.print(context.t('os.apps.terminal.commands.logoutSuccess'));
     } else {
-      context.print('Not logged in.');
+      context.print(context.t('os.apps.terminal.commands.notLoggedIn'));
     }
   }
 };

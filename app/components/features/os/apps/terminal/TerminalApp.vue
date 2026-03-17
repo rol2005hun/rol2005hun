@@ -93,8 +93,7 @@ const context: TerminalContext = {
     }
   },
   t: (key: string, params?: any) => t(key, params),
-  isRoot: () => isRoot.value,
-  setRoot: () => { /* deprecated, state managed by pinia now */ }
+  isRoot: () => isRoot.value
 };
 
 const handleEnter = async () => {

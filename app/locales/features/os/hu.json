@@ -53,7 +53,8 @@
         "logsCleared": "Rendszernaplók törölve. (Root jog szükséges)",
         "availableCommands": "Elérhető parancsok:",
         "aliases": "(álnevek: {aliases})",
-        "alreadyRoot": "Már be vagy jelentkezve root-ként."
+        "alreadyRoot": "Már be vagy jelentkezve root-ként.",
+        "notLoggedIn": "Nem vagy bejelentkezve :)"
       }
     },
     "about": {

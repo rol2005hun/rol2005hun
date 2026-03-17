@@ -27,7 +27,6 @@ export const suCommand: TerminalCommand = {
           const authStore = useAuthStore();
           if(res.success && res.token) {
             authStore.loginRoot(res.token);
-            context.setRoot(true);
             context.print(context.t('os.apps.terminal.commands.suSuccessRoot'));
           } else {
             context.print(context.t('os.apps.terminal.commands.suAuthenticationFailure'));

@@ -1,4 +1,3 @@
-// app/utils/terminal/registry.ts
 import type { TerminalCommand } from './types';
 import * as basicCommands from './commands/basic';
 import * as systemCommands from './commands/system';
@@ -24,5 +23,5 @@ export const getCommand = (name: string): TerminalCommand | undefined => {
 };
 
 export const getAllCommands = (): TerminalCommand[] => {
-  return Array.from(new Set(commands.values())); // Deduplicate aliases
+  return Array.from(new Set(commands.values()));
 };
