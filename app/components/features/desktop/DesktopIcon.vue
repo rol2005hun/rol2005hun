@@ -71,20 +71,17 @@ const onMouseMove = (e: MouseEvent) => {
 
 const onMouseUp = () => {
   if (!isDragging.value) return;
-  // 100x100 rács (grid), 20px margóval
   const col = Math.round((dragX.value - 20) / 100);
   const row = Math.round((dragY.value - 20) / 100);
 
   let finalX = Math.max(0, col) * 100 + 20;
   let finalY = Math.max(0, row) * 100 + 20;
 
-  // Foglaltság ellenőrzése (ha a célpontban már van egy másik ikon)
   const isOccupied = desktopStore.icons.some(
     (i) => i.id !== props.icon.id && i.x === finalX && i.y === finalY
   );
 
   if (isOccupied) {
-    // Visszaugrik az eredeti pozíciójába
     finalX = baseIconX;
     finalY = baseIconY;
   }

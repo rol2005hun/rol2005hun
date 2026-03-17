@@ -7,6 +7,10 @@
         <LockScreen v-if="!authStore.isUnlocked" class="lock-screen-overlay" />
       </Transition>
 
+      <Transition name="fade">
+        <ShutdownModal v-if="systemStore.showShutdownModal" />
+      </Transition>
+
       <div class="desktop-container" :class="{ 'is-locked': !authStore.isUnlocked }">
         <slot />
       </div>
@@ -15,19 +19,45 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { useCookie } from '#imports';
 import SystemSetup from '@/components/features/setup/SystemSetup.vue';
 import LockScreen from '@/components/features/auth/LockScreen.vue';
+import ShutdownModal from '@/components/features/os/desktop/ShutdownModal.vue';
 import { useAuthStore } from '@/composables/features/auth/useAuthStore';
+import { useSystemStore } from '@/stores/features/os/useSystemStore';
 
 const authStore = useAuthStore();
+const systemStore = useSystemStore();
 const licenseCookie = useCookie('ranzakos_license');
 const isInstalled = ref(licenseCookie.value === 'valid');
 
 const handleSetupComplete = () => {
   isInstalled.value = true;
 };
+
+const preventRefresh = (e: KeyboardEvent) => {
+  if (e.key === 'F5' || (e.ctrlKey && e.key === 'r') || (e.ctrlKey && e.key === 'R')) {
+    e.preventDefault();
+    systemStore.requestShutdown();
+  }
+};
+
+const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+  e.preventDefault();
+  e.returnValue = '';
+  return '';
+};
+
+onMounted(() => {
+  window.addEventListener('keydown', preventRefresh);
+  window.addEventListener('beforeunload', handleBeforeUnload);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('keydown', preventRefresh);
+  window.removeEventListener('beforeunload', handleBeforeUnload);
+});
 </script>
 
 <style scoped lang="scss">

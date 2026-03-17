@@ -1,5 +1,5 @@
 <template>
-  <div class="start-menu-container" ref="menuRef">
+  <div ref="menuRef" class="start-menu-container">
     <div class="start-menu-content">
       <div class="search-bar">
         <Icon name="ph:magnifying-glass" />
@@ -31,7 +31,7 @@
         </div>
         <span>{{ $t('os.startMenu.user') }}</span>
       </div>
-      <button class="power-btn">
+      <button class="power-btn" @click="systemStore.requestShutdown()">
         <Icon name="ph:power-bold" size="18px" />
       </button>
     </div>
@@ -44,11 +44,13 @@ import { useI18n } from 'vue-i18n';
 import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
 import { useDesktopStore } from '@/stores/features/os/useDesktopStore';
+import { useSystemStore } from '@/stores/features/os/useSystemStore';
 import AppIcon from '@/components/features/os/shared/AppIcon.vue';
 
 const registryStore = useAppRegistry();
 const windowStore = useWindowStore();
 const desktopStore = useDesktopStore();
+const systemStore = useSystemStore();
 const { messages } = useI18n();
 
 const searchQuery = ref('');

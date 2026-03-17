@@ -1,6 +1,6 @@
 <template>
   <div class="os-app-icon" :style="{ width: size, height: size }">
-    <img v-if="app?.logo" :src="app.logo" :alt="app.id" class="app-image-logo" />
+    <img v-if="app?.logo" :src="app.logo" :alt="app.id" class="app-image-logo" >
     <Icon v-else :name="app?.icon || defaultIcon" :size="size" />
   </div>
 </template>

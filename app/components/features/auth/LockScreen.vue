@@ -160,7 +160,6 @@ const finishUnlock = () => {
   isSuccess.value = true;
   progressValue.value = 100;
 
-  // Let the parent layout handle the fade out directly
   authStore.unlockOS();
 };
 </script>
