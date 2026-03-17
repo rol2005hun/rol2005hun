@@ -2,17 +2,19 @@
   <div class="desktop-environment" @click.self="desktopStore.closeStartMenu()">
 
     <div class="desktop-surface" @click.self="desktopStore.closeStartMenu()">
-      <DesktopIcon
-        v-for="icon in desktopStore.icons"
-        :key="icon.id"
-        :icon="icon"
-      />
+      <ClientOnly>
+        <DesktopIcon
+          v-for="icon in desktopStore.icons"
+          :key="icon.id"
+          :icon="icon"
+        />
 
-      <WindowFrame
-        v-for="win in windowStore.windows"
-        :key="win.id"
-        :window-info="win"
-      />
+        <WindowFrame
+          v-for="win in windowStore.windows"
+          :key="win.id"
+          :window-info="win"
+        />
+      </ClientOnly>
     </div>
 
     <Transition name="slide-up">
@@ -43,6 +45,7 @@ const windowStore = useWindowStore();
   inset: 0;
   display: flex;
   flex-direction: column;
+  z-index: 10;
 }
 
 .desktop-surface {

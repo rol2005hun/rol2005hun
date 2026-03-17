@@ -1,11 +1,9 @@
 <template>
-  <div class="desktop-surface">
+  <div class="os-root">
     <div
       class="wallpaper"
       :style="{ backgroundImage: 'url(' + themeStore.currentWallpaperUrl + ')' }"
     />
-
-    <div v-if="!isMobile" class="windows-layer"/>
 
     <Desktop v-if="!isMobile" />
     <MobileOS v-else />
@@ -23,10 +21,11 @@ const { isMobile } = useDevice();
 </script>
 
 <style scoped lang="scss">
-.desktop-surface {
+.os-root {
   width: 100%;
   height: 100%;
   position: relative;
+  overflow: hidden;
 
   .wallpaper {
     position: absolute;
@@ -36,13 +35,6 @@ const { isMobile } = useDevice();
     background-repeat: no-repeat;
     z-index: 1;
     transition: background-image 0.5s ease-in-out;
-  }
-
-  .windows-layer {
-    position: relative;
-    z-index: 2;
-    width: 100%;
-    height: calc(100% - 48px);
   }
 }
 </style>

@@ -75,8 +75,6 @@ export const useThemeStore = defineStore('os-theme', () => {
   };
 
   const setCustomWallpaper = (dataUrl: string) => {
-    // Cookie max size is ~4KB. Base64 uploads will exceed this heavily, so we only save short URLs in cookies (SSR friendly),
-    // and route big file uploads securely into localStorage (client only) to prevent HTTP 431 errors.
     if (dataUrl.startsWith('data:image/') || dataUrl.length > 3000) {
       customWallpaperCookie.value = 'localstorage';
       customWallpaperLocal.value = dataUrl;

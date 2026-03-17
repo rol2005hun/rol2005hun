@@ -1,30 +1,50 @@
 import { defineStore } from 'pinia';
-import { ref, watch } from 'vue';
+import { ref, computed } from 'vue';
 import { useCookie } from '#imports';
+import { useAppRegistry } from './useAppRegistry';
 
 export interface DesktopIconItem {
-  id: string; // unique instance id
-  appId: string; // the app it launches
+  id: string;
+  appId: string;
   x: number;
   y: number;
 }
 
 export const useDesktopStore = defineStore('os-desktop', () => {
   const isStartMenuOpen = ref(false);
+  const appRegistry = useAppRegistry();
+
+  const defaultIcons = computed<DesktopIconItem[]>(() => {
+    return appRegistry.installedApps
+      .filter(app => app.showOnDesktop !== false)
+      .map((app, index) => ({
+        id: `icon-${app.id}`,
+        appId: app.id,
+        x: 20,
+        y: 20 + (index * 100),
+      }));
+  });
 
   const desktopIconsCookie = useCookie<DesktopIconItem[]>('os-desktop-icons', {
-    default: () => [
-      { id: 'icon-browser', appId: 'browser', x: 20, y: 20 },
-      { id: 'icon-terminal', appId: 'terminal', x: 20, y: 120 },
-      { id: 'icon-projects', appId: 'projects', x: 20, y: 220 },
-      { id: 'icon-settings', appId: 'settings', x: 20, y: 320 },
-      { id: 'icon-about', appId: 'about', x: 20, y: 420 },
-    ],
+    default: () => defaultIcons.value,
     watch: true,
     maxAge: 31536000
   });
 
-  const icons = ref<DesktopIconItem[]>(desktopIconsCookie.value || []);
+  const icons = computed(() => {
+    if (!desktopIconsCookie.value || !Array.isArray(desktopIconsCookie.value) || desktopIconsCookie.value.length === 0) {
+      return defaultIcons.value;
+    }
+
+    const currentAppIds = desktopIconsCookie.value.map(i => i.appId);
+    const missingApps = defaultIcons.value.filter(di => !currentAppIds.includes(di.appId));
+
+    if (missingApps.length > 0) {
+      return [...desktopIconsCookie.value, ...missingApps];
+    }
+
+    return desktopIconsCookie.value;
+  });
 
   const toggleStartMenu = () => {
     isStartMenuOpen.value = !isStartMenuOpen.value;
@@ -35,11 +55,11 @@ export const useDesktopStore = defineStore('os-desktop', () => {
   };
 
   const updateIconPosition = (id: string, x: number, y: number) => {
-    const icon = icons.value.find(i => i.id === id);
-    if (icon) {
-      icon.x = x;
-      icon.y = y;
-      desktopIconsCookie.value = [...icons.value];
+    const currentIcons = [...icons.value];
+    const index = currentIcons.findIndex(i => i.id === id);
+    if (index !== -1) {
+      currentIcons[index] = { ...currentIcons[index], x, y } as DesktopIconItem;
+      desktopIconsCookie.value = currentIcons;
     }
   };
 

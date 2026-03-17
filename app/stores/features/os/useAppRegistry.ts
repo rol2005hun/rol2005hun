@@ -9,6 +9,7 @@ export interface AppDefinition {
   defaultWidth?: number;
   defaultHeight?: number;
   allowMultipleInstances?: boolean;
+  showOnDesktop?: boolean;
 }
 
 export const useAppRegistry = defineStore('os-app-registry', () => {
@@ -44,6 +45,7 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       defaultWidth: 600,
       defaultHeight: 450,
       allowMultipleInstances: false,
+      showOnDesktop: false,
     },
     {
       id: 'about',
@@ -52,6 +54,7 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       defaultWidth: 400,
       defaultHeight: 300,
       allowMultipleInstances: false,
+      showOnDesktop: false,
     },
   ]);
 
