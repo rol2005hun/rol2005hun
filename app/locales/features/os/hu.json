@@ -30,9 +30,8 @@
     "terminal": {
       "name": "Terminál",
       "welcome": "ranzakOS Terminál v1.0.0",
-      "hint": "Írd be, hogy 'help' az elérhető parancsok listájához.",
+      "hint": "Írd be, hogy 'commands' az elérhető parancsok listájához.",
       "commands": {
-        "help": "Elérhető parancsok",
         "notFound": "A '{cmd}' parancs nem található.",
         "uname": "ranzakOS (Web-alapú asztali környezet)",
         "version": "ranzakOS Verzió 1.0.0 (Build 2026.03)",

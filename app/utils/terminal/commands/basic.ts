@@ -2,12 +2,12 @@ import type { TerminalCommand } from '../types';
 import { getAllCommands } from '../registry';
 
 export const helpCommand: TerminalCommand = {
-  name: 'help',
+  name: 'commands',
   execute: (args, context) => {
     const allCmds = getAllCommands();
     const available = allCmds.filter(c => !c.requiresRoot || context.isRoot());
 
-    let out = context.t('os.apps.terminal.commands.help') + '\n\n' + context.t('os.apps.terminal.commands.availableCommands') + '\n';
+    let out = context.t('os.apps.terminal.commands.availableCommands') + '\n';
     available.forEach(c => {
       out += `  ${c.name.padEnd(12)} ${c.requiresRoot ? '[root] ' : ''}${c.aliases ? context.t('os.apps.terminal.commands.aliases', { aliases: c.aliases.join(', ') }) : ''}\n`;
     });

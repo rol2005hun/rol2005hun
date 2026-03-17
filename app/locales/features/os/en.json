@@ -30,9 +30,8 @@
     "terminal": {
       "name": "Terminal",
       "welcome": "ranzakOS Terminal v1.0.0",
-      "hint": "Type 'help' for a list of available commands.",
+      "hint": "Type 'commands' for a list of available commands.",
       "commands": {
-        "help": "Available commands",
         "notFound": "Command not found: {cmd}",
         "uname": "ranzakOS (Web-based desktop environment)",
         "version": "ranzakOS Version 1.0.0 (Build 2026.03)",
