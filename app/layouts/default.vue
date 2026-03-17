@@ -3,9 +3,11 @@
     <SystemSetup v-if="!isInstalled" @setup-complete="handleSetupComplete" />
 
     <template v-else>
-      <LockScreen v-if="!authStore.isUnlocked" class="lock-screen-overlay" />
+      <Transition name="fade">
+        <LockScreen v-if="!authStore.isUnlocked" class="lock-screen-overlay" />
+      </Transition>
 
-      <div v-show="authStore.isUnlocked" class="desktop-container">
+      <div class="desktop-container" :class="{ 'is-locked': !authStore.isUnlocked }">
         <slot />
       </div>
     </template>
@@ -49,5 +51,19 @@ const handleSetupComplete = () => {
 .desktop-container {
   width: 100%;
   height: 100%;
+
+  &.is-locked {
+    pointer-events: none;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

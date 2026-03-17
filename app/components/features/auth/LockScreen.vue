@@ -16,7 +16,7 @@
       <div class="unlock-section">
         <div
           class="fingerprint-sensor"
-          :class="{ 'is-scanning': isUnlocking }"
+          :class="{ 'is-scanning': isUnlocking, 'is-success': isSuccess }"
           @mousedown="startUnlock"
           @mouseup="cancelUnlock"
           @mouseleave="cancelUnlock"
@@ -25,7 +25,7 @@
         >
           <div class="sensor-icon-wrapper">
             <Icon
-              :name="isUnlocking ? 'fluent:fingerprint-24-filled' : 'fluent:fingerprint-24-regular'"
+              :name="isSuccess ? 'fluent:fingerprint-24-filled' : (isUnlocking ? 'fluent:fingerprint-24-filled' : 'fluent:fingerprint-24-regular')"
               class="sensor-icon"
             />
           </div>
@@ -62,7 +62,7 @@
           <div class="glow-effect" />
         </div>
 
-        <p class="instruction-text" :class="{ 'is-hidden': isUnlocking }">
+        <p class="instruction-text" :class="{ 'is-hidden': isUnlocking || isSuccess }">
           {{ t('auth.fingerprintPrompt') }}
         </p>
       </div>
@@ -78,8 +78,11 @@ import { useAuthStore } from '@/composables/features/auth/useAuthStore';
 const { t } = useI18n();
 const authStore = useAuthStore();
 const isUnlocking = ref(false);
+const isSuccess = ref(false);
 const progressValue = ref(0);
-const unlockInterval = ref<number | null>(null);
+
+let animationFrameId: number | null = null;
+let unlockStartTime: number | null = null;
 
 const currentTime = ref('');
 const currentDate = ref('');
@@ -106,7 +109,6 @@ onUnmounted(() => {
 
 const maxProgress = 100;
 const unlockDurationMs = 1500;
-const tickRateMs = 16;
 const circumference = 50 * 2 * Math.PI;
 
 const unlockProgress = computed(() => {
@@ -114,32 +116,51 @@ const unlockProgress = computed(() => {
 });
 
 const startUnlock = () => {
+  if (isSuccess.value) return;
+
   isUnlocking.value = true;
   progressValue.value = 0;
+  unlockStartTime = null;
 
-  const step = (maxProgress / unlockDurationMs) * tickRateMs;
+  const animate = (timestamp: number) => {
+    if (!unlockStartTime) unlockStartTime = timestamp;
+    const elapsed = timestamp - unlockStartTime;
 
-  unlockInterval.value = window.setInterval(() => {
-    progressValue.value += step;
+    progressValue.value = Math.min((elapsed / unlockDurationMs) * 100, 100);
 
-    if (progressValue.value >= maxProgress) {
+    if (progressValue.value >= 100) {
       finishUnlock();
+    } else {
+      animationFrameId = requestAnimationFrame(animate);
     }
-  }, tickRateMs);
+  };
+
+  animationFrameId = requestAnimationFrame(animate);
 };
 
 const cancelUnlock = () => {
+  if (isSuccess.value) return;
+
   isUnlocking.value = false;
   progressValue.value = 0;
 
-  if (unlockInterval.value !== null) {
-    window.clearInterval(unlockInterval.value);
-    unlockInterval.value = null;
+  if (animationFrameId !== null) {
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = null;
   }
 };
 
 const finishUnlock = () => {
-  cancelUnlock();
+  if (animationFrameId !== null) {
+    cancelAnimationFrame(animationFrameId);
+    animationFrameId = null;
+  }
+
+  isUnlocking.value = false;
+  isSuccess.value = true;
+  progressValue.value = 100;
+
+  // Let the parent layout handle the fade out directly
   authStore.unlockOS();
 };
 </script>
@@ -282,6 +303,23 @@ const finishUnlock = () => {
 
     .glow-effect {
       opacity: 0.3;
+    }
+  }
+
+  &.is-success {
+    transform: scale(0.95);
+
+    .sensor-icon-wrapper {
+      background: rgba(34, 197, 94, 0.15);
+      .sensor-icon {
+        color: #22c55e;
+        transform: scale(1.15);
+      }
+    }
+
+    .glow-effect {
+      background: #22c55e;
+      opacity: 0.5;
     }
   }
 }
