@@ -46,7 +46,7 @@ let baseIconX = 0;
 let baseIconY = 0;
 
 const onMouseDown = (e: MouseEvent) => {
-  if (e.button !== 0) return; // Only trigger dragging with left click
+  if (e.button !== 0) return;
   e.preventDefault();
 
   if (!desktopStore.selectedIcons.includes(props.icon.id) || e.ctrlKey) {

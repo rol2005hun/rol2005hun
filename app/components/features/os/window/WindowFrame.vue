@@ -5,7 +5,8 @@
       'is-minimized': windowInfo.isMinimized,
       'is-maximized': windowInfo.isMaximized,
       'is-focused': isFocused,
-      'is-dragging': isDragging
+      'is-dragging': isDragging,
+      'is-resizing': isResizing
     }"
     :style="windowStyle"
     @mousedown="focusWindow"
@@ -31,6 +32,12 @@
     <div class="window-body">
       <component :is="appComponents[windowInfo.appId]" />
     </div>
+
+    <div
+      v-if="!windowInfo.isMaximized"
+      class="resize-handle"
+      @mousedown.stop.prevent="startResize"
+    />
 
   </div>
 </template>
@@ -100,6 +107,45 @@ const stopDrag = () => {
   isDragging.value = false;
   window.removeEventListener('mousemove', onDrag);
   window.removeEventListener('mouseup', stopDrag);
+};
+
+const isResizing = ref(false);
+let startResizeX = 0;
+let startResizeY = 0;
+let initialWidth = 0;
+let initialHeight = 0;
+
+const startResize = (e: MouseEvent) => {
+  if (props.windowInfo.isMaximized) return;
+  isResizing.value = true;
+  startResizeX = e.clientX;
+  startResizeY = e.clientY;
+  initialWidth = props.windowInfo.width;
+  initialHeight = props.windowInfo.height;
+
+  window.addEventListener('mousemove', onResize);
+  window.addEventListener('mouseup', stopResize);
+};
+
+const onResize = (e: MouseEvent) => {
+  if (!isResizing.value) return;
+
+  let newWidth = initialWidth + (e.clientX - startResizeX);
+  let newHeight = initialHeight + (e.clientY - startResizeY);
+
+  if (newWidth < 300) newWidth = 300;
+  if (newHeight < 200) newHeight = 200;
+
+  windowStore.updateWindow(props.windowInfo.id, {
+    width: newWidth,
+    height: newHeight
+  });
+};
+
+const stopResize = () => {
+  isResizing.value = false;
+  window.removeEventListener('mousemove', onResize);
+  window.removeEventListener('mouseup', stopResize);
 };
 
 const isFocused = computed(() => {
@@ -175,7 +221,7 @@ const toggleMaximize = () => {
     border-color: var(--os-primary-color, rgba(255, 255, 255, 0.3));
   }
 
-  &.is-dragging {
+  &.is-dragging, &.is-resizing {
     transition: none;
     opacity: 0.95;
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
@@ -253,5 +299,30 @@ const toggleMaximize = () => {
   flex: 1;
   position: relative;
   overflow: hidden;
+}
+
+.resize-handle {
+  position: absolute;
+  bottom: -5px;
+  right: -5px;
+  width: 16px;
+  height: 16px;
+  cursor: se-resize;
+  z-index: 100;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+  &:hover::after {
+    border-color: rgba(255, 255, 255, 0.6);
+  }
 }
 </style>
