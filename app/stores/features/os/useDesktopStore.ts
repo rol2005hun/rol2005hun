@@ -12,6 +12,7 @@ export interface DesktopIconItem {
 
 export const useDesktopStore = defineStore('os-desktop', () => {
   const isStartMenuOpen = ref(false);
+  const selectedIcons = ref<string[]>([]);
   const appRegistry = useAppRegistry();
 
   const defaultIcons = computed<DesktopIconItem[]>(() => {
@@ -63,11 +64,40 @@ export const useDesktopStore = defineStore('os-desktop', () => {
     }
   };
 
+  const selectIcon = (id: string, ctrl: boolean = false) => {
+    if (ctrl) {
+      if (selectedIcons.value.includes(id)) {
+        selectedIcons.value = selectedIcons.value.filter(i => i !== id);
+      } else {
+        selectedIcons.value.push(id);
+      }
+    } else {
+      selectedIcons.value = [id];
+    }
+  };
+
+  const clearSelection = () => {
+    selectedIcons.value = [];
+  };
+
+  const setSelection = (ids: string[]) => {
+    selectedIcons.value = ids;
+  };
+
+  const resetIcons = () => {
+    desktopIconsCookie.value = defaultIcons.value;
+  };
+
   return {
     isStartMenuOpen,
     icons,
+    selectedIcons,
     toggleStartMenu,
     closeStartMenu,
     updateIconPosition,
+    selectIcon,
+    clearSelection,
+    setSelection,
+    resetIcons
   };
 });

@@ -1,7 +1,7 @@
 <template>
   <div
     class="desktop-icon"
-    :class="{ 'is-dragging': isDragging }"
+    :class="{ 'is-dragging': isDragging, 'is-selected': isSelected }"
     :style="{
       transform: `translate(${isDragging ? dragX : icon.x}px, ${isDragging ? dragY : icon.y}px)`,
       zIndex: isDragging ? 100 : 1
@@ -26,6 +26,7 @@ import { useDesktopStore, type DesktopIconItem } from '~/stores/features/os/useD
 
 const props = defineProps<{
   icon: DesktopIconItem;
+  isSelected?: boolean;
 }>();
 
 const { t } = useI18n();
@@ -45,7 +46,13 @@ let baseIconX = 0;
 let baseIconY = 0;
 
 const onMouseDown = (e: MouseEvent) => {
+  if (e.button !== 0) return; // Only trigger dragging with left click
   e.preventDefault();
+
+  if (!desktopStore.selectedIcons.includes(props.icon.id) || e.ctrlKey) {
+    desktopStore.selectIcon(props.icon.id, e.ctrlKey);
+  }
+
   startX = e.clientX;
   startY = e.clientY;
   baseIconX = props.icon.x;
@@ -94,7 +101,27 @@ const onMouseUp = () => {
 };
 
 const openApp = () => {
-  if (appMeta.value) {
+  const selectedIds = desktopStore.selectedIcons;
+
+  if (selectedIds.includes(props.icon.id) && selectedIds.length > 0) {
+    selectedIds.forEach((id, index) => {
+      const iconItem = desktopStore.icons.find(i => i.id === id);
+      if (iconItem) {
+        const meta = appRegistry.installedApps.find((app: any) => app.id === iconItem.appId);
+        if (meta) {
+          setTimeout(() => {
+            windowStore.openWindow({
+              id: `${meta.id}-${Date.now()}-${index}`,
+              appId: meta.id,
+              titleKey: meta.nameKey,
+              width: meta.defaultWidth || 800,
+              height: meta.defaultHeight || 600
+            });
+          }, index * 50);
+        }
+      }
+    });
+  } else if (appMeta.value) {
     windowStore.openWindow({
       id: `${appMeta.value.id}-${Date.now()}`,
       appId: appMeta.value.id,
@@ -124,6 +151,11 @@ const openApp = () => {
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  &.is-selected {
+    background-color: rgba(0, 120, 215, 0.4);
+    border: 1px solid rgba(0, 120, 215, 0.6);
   }
 
   .icon-image {
