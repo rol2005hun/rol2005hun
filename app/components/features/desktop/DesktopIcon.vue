@@ -19,10 +19,10 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import AppIcon from '~/components/features/os/shared/AppIcon.vue';
-import { useAppRegistry } from '~/stores/features/os/useAppRegistry';
-import { useWindowStore } from '~/stores/features/os/useWindowStore';
-import { useDesktopStore, type DesktopIconItem } from '~/stores/features/os/useDesktopStore';
+import AppIcon from '@/components/features/os/shared/AppIcon.vue';
+import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
+import { useWindowStore } from '@/stores/features/os/useWindowStore';
+import { useDesktopStore, type DesktopIconItem } from '@/stores/features/os/useDesktopStore';
 
 const props = defineProps<{
   icon: DesktopIconItem;

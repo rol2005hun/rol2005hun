@@ -1,4 +1,4 @@
-{
+﻿{
   "startMenu": {
     "searchPlaceholder": "Keress itt...",
     "pinnedApps": "Tűzött alkalmazások",
@@ -28,7 +28,33 @@
       "name": "Böngésző"
     },
     "terminal": {
-      "name": "Terminál"
+      "name": "Terminál",
+      "welcome": "ranzakOS Terminál v1.0.0",
+      "hint": "Írd be, hogy 'help' az elérhető parancsok listájához.",
+      "commands": {
+        "help": "Elérhető parancsok",
+        "notFound": "A '{cmd}' parancs nem található.",
+        "uname": "ranzakOS (Web-alapú asztali környezet)",
+        "version": "ranzakOS Verzió 1.0.0 (Build 2026.03)",
+        "systeminfo": "OS: ranzakOS\\nVerzió: 1.0.0\\nKörnyezet: Böngésző",
+        "secret": "Megtaláltad a titkos parancsot! 🚀",
+        "logoutSuccess": "Kijelentkezve.",
+        "sudoRoot": "Itt te vagy a főnök!",
+        "sudoGuest": "Szép próbálkozás, de itt nincsenek root jogaid.",
+        "passwordPrompt": "Jelszó:",
+        "permissionDeniedRoot": "Engedély megtagadva. Te vagy a root?",
+        "permissionDeniedSession": "Engedély megtagadva. Érvénytelen vagy módosított munkamenet.",
+        "verifyingSession": "Root munkamenet ellenőrzése...",
+        "executionError": "Hiba a '{cmd}' parancs végrehajtásakor: {error}",
+        "suAuthenticationFailure": "su: Hitelesítési hiba",
+        "suUserNotFound": "su: {user} felhasználó nem létezik",
+        "suSuccessRoot": "Sikeres bejelentkezés root-ként.",
+        "rebooting": "Rendszer újraindítása...",
+        "logsCleared": "Rendszernaplók törölve. (Root jog szükséges)",
+        "availableCommands": "Elérhető parancsok:",
+        "aliases": "(álnevek: {aliases})",
+        "alreadyRoot": "Már be vagy jelentkezve root-ként."
+      }
     },
     "about": {
       "name": "Névjegy",

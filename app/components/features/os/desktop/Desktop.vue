@@ -41,12 +41,12 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue';
-import Taskbar from '~/components/features/os/taskbar/Taskbar.vue';
-import StartMenu from '~/components/features/os/desktop/StartMenu.vue';
-import WindowFrame from '~/components/features/os/window/WindowFrame.vue';
-import DesktopIcon from '~/components/features/desktop/DesktopIcon.vue';
-import { useDesktopStore } from '~/stores/features/os/useDesktopStore';
-import { useWindowStore } from '~/stores/features/os/useWindowStore';
+import Taskbar from '@/components/features/os/taskbar/Taskbar.vue';
+import StartMenu from '@/components/features/os/desktop/StartMenu.vue';
+import WindowFrame from '@/components/features/os/window/WindowFrame.vue';
+import DesktopIcon from '@/components/features/desktop/DesktopIcon.vue';
+import { useDesktopStore } from '@/stores/features/os/useDesktopStore';
+import { useWindowStore } from '@/stores/features/os/useWindowStore';
 
 const desktopStore = useDesktopStore();
 const windowStore = useWindowStore();

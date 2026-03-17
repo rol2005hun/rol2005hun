@@ -1,4 +1,8 @@
 export default defineNuxtConfig({
+  runtimeConfig: {
+    adminPassword: process.env.VITE_ADMIN_PASSWORD,
+    public: {}
+  },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   srcDir: 'app/',

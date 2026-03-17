@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { useSystemStore } from '~/stores/features/os/useSystemStore';
+import { useSystemStore } from '@/stores/features/os/useSystemStore';
 
 const systemStore = useSystemStore();
 </script>
