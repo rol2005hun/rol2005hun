@@ -63,8 +63,13 @@ const onMouseMove = (e: MouseEvent) => {
 };
 
 const onMouseUp = () => {
-  const finalX = Math.round(props.icon.x / 80) * 80;
-  const finalY = Math.round(props.icon.y / 100) * 100;
+  // 100x100 rács (grid), 20px margóval
+  const col = Math.round((props.icon.x - 20) / 100);
+  const row = Math.round((props.icon.y - 20) / 100);
+
+  const finalX = Math.max(0, col) * 100 + 20;
+  const finalY = Math.max(0, row) * 100 + 20;
+
   desktopStore.updateIconPosition(props.icon.id, finalX, finalY);
 
   document.removeEventListener('mousemove', onMouseMove);
@@ -95,7 +100,7 @@ const openApp = () => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: default;
+  cursor: pointer;
   user-select: none;
   border-radius: 8px;
   transition: background-color 0.2s;
