@@ -7,7 +7,7 @@
   },
   "apps": {
     "settings": {
-      "name": "Rendszerbeállítások",
+      "name": "Beállítások",
       "appearance": "Megjelenés",
       "language": "Nyelv",
       "wallpaper": "Háttérkép",
@@ -46,5 +46,12 @@
   },
   "mobile": {
     "themeIcon": "Téma"
+  },
+  "shutdownModal": {
+    "title": "Biztos le akarja kapcsolni a gépet?",
+    "description": "Minden nem mentett adat elvész, és az ablak bezárul.",
+    "cancel": "Mégse",
+    "confirm": "Leállítás",
+    "successMessage": "OS leállítva. Bezárhatod ezt az ablakot."
   }
 }

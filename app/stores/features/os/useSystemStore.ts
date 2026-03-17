@@ -3,6 +3,7 @@ import { ref } from 'vue';
 
 export const useSystemStore = defineStore('os-system', () => {
   const showShutdownModal = ref(false);
+  const isShuttingDown = ref(false);
 
   const requestShutdown = () => {
     showShutdownModal.value = true;
@@ -13,6 +14,8 @@ export const useSystemStore = defineStore('os-system', () => {
   };
 
   const confirmShutdown = () => {
+    isShuttingDown.value = true;
+    showShutdownModal.value = false;
     window.close();
 
     setTimeout(() => {
@@ -22,6 +25,7 @@ export const useSystemStore = defineStore('os-system', () => {
 
   return {
     showShutdownModal,
+    isShuttingDown,
     requestShutdown,
     cancelShutdown,
     confirmShutdown

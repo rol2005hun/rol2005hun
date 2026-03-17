@@ -44,6 +44,9 @@ const preventRefresh = (e: KeyboardEvent) => {
 };
 
 const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+  if (systemStore.isShuttingDown) {
+    return; // Bypass the native prompt if we are shutting down intentionally
+  }
   e.preventDefault();
   e.returnValue = '';
   return '';
