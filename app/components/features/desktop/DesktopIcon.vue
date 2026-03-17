@@ -1,8 +1,10 @@
 <template>
   <div
     class="desktop-icon"
+    :class="{ 'is-dragging': isDragging }"
     :style="{
-      transform: `translate(${icon.x}px, ${icon.y}px)`
+      transform: `translate(${isDragging ? dragX : icon.x}px, ${isDragging ? dragY : icon.y}px)`,
+      zIndex: isDragging ? 100 : 1
     }"
     @mousedown="onMouseDown"
     @dblclick="openApp"
@@ -15,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import AppIcon from '~/components/features/os/shared/AppIcon.vue';
 import { useAppRegistry } from '~/stores/features/os/useAppRegistry';
@@ -33,6 +35,10 @@ const desktopStore = useDesktopStore();
 
 const appMeta = computed(() => appRegistry.installedApps.find((app: any) => app.id === props.icon.appId));
 
+const isDragging = ref(false);
+const dragX = ref(0);
+const dragY = ref(0);
+
 let startX = 0;
 let startY = 0;
 let baseIconX = 0;
@@ -45,33 +51,47 @@ const onMouseDown = (e: MouseEvent) => {
   baseIconX = props.icon.x;
   baseIconY = props.icon.y;
 
+  isDragging.value = true;
+  dragX.value = baseIconX;
+  dragY.value = baseIconY;
+
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
 };
 
 const onMouseMove = (e: MouseEvent) => {
+  if (!isDragging.value) return;
+
   const dx = e.clientX - startX;
   const dy = e.clientY - startY;
 
-  let newX = baseIconX + dx;
-  let newY = baseIconY + dy;
-
-  newX = Math.max(0, newX);
-  newY = Math.max(0, newY);
-
-  desktopStore.updateIconPosition(props.icon.id, newX, newY);
+  dragX.value = Math.max(0, baseIconX + dx);
+  dragY.value = Math.max(0, baseIconY + dy);
 };
 
 const onMouseUp = () => {
+  if (!isDragging.value) return;
   // 100x100 rács (grid), 20px margóval
-  const col = Math.round((props.icon.x - 20) / 100);
-  const row = Math.round((props.icon.y - 20) / 100);
+  const col = Math.round((dragX.value - 20) / 100);
+  const row = Math.round((dragY.value - 20) / 100);
 
-  const finalX = Math.max(0, col) * 100 + 20;
-  const finalY = Math.max(0, row) * 100 + 20;
+  let finalX = Math.max(0, col) * 100 + 20;
+  let finalY = Math.max(0, row) * 100 + 20;
+
+  // Foglaltság ellenőrzése (ha a célpontban már van egy másik ikon)
+  const isOccupied = desktopStore.icons.some(
+    (i) => i.id !== props.icon.id && i.x === finalX && i.y === finalY
+  );
+
+  if (isOccupied) {
+    // Visszaugrik az eredeti pozíciójába
+    finalX = baseIconX;
+    finalY = baseIconY;
+  }
 
   desktopStore.updateIconPosition(props.icon.id, finalX, finalY);
 
+  isDragging.value = false;
   document.removeEventListener('mousemove', onMouseMove);
   document.removeEventListener('mouseup', onMouseUp);
 };
