@@ -132,11 +132,6 @@ onUnmounted(() => {
 .app-scale-enter-active,
 .app-scale-leave-active {
   transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
-  position: absolute;
-  top: 44px;
-  left: 0;
-  right: 0;
-  bottom: 0;
   transform-origin: center center;
 }
 .app-scale-enter-from {
@@ -149,16 +144,23 @@ onUnmounted(() => {
 }
 
 .active-app-container {
-  flex: 1;
+  position: absolute;
+  top: 44px; /* Fix pozíció, elkerüli a layout ugrást befejezéskor */
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   background: var(--os-bg, #000);
   overflow: hidden;
-  position: relative;
   z-index: 15;
 }
 
 .home-screen {
-  flex: 1;
+  position: absolute;
+  top: 44px; /* Ugyanúgy fix pozíció */
+  left: 0;
+  right: 0;
+  bottom: 0;
   padding: 40px 20px;
   overflow-y: auto;
 
