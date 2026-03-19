@@ -68,10 +68,20 @@
       "screenWidth": "Screen Resolution",
       "browser": "Browser / Device",
       "language": "System Language",
-      "copyright": "Â© 2026 ranzakOS. All rights reserved."
+      "copyright": "© 2026 ranzakOS. All rights reserved."
     },
     "projects": {
-      "name": "Projects"
+      "name": "Projects",
+      "backToProjects": "Back to Projects",
+      "viewProject": "View Project",
+      "project1": {
+        "title": "First Project",
+        "description": "This is the first sample project component."
+      },
+      "project2": {
+        "title": "Second Project",
+        "description": "Another component loaded dynamically."
+      }
     }
   },
   "themes": {
