@@ -36,7 +36,6 @@
         "uname": "ranzakOS (Web-alapú asztali környezet)",
         "version": "ranzakOS Verzió 1.0.0 (Build 2026.03)",
         "systeminfo": "OS: ranzakOS\\nVerzió: 1.0.0\\nKörnyezet: Böngésző",
-        "secret": "Megtaláltad a titkos parancsot! 🚀",
         "logoutSuccess": "Kijelentkezve.",
         "sudoRoot": "Itt te vagy a főnök!",
         "sudoGuest": "Szép próbálkozás, de itt nincsenek root jogaid.",

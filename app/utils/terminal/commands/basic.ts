@@ -43,10 +43,3 @@ export const versionCommand: TerminalCommand = {
     context.print(context.t('os.apps.terminal.commands.version'));
   }
 };
-
-export const ranzakCommand: TerminalCommand = {
-  name: 'ranzak',
-  execute: (args, context) => {
-    context.print(context.t('os.apps.terminal.commands.secret'));
-  }
-};
