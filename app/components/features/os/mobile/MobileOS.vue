@@ -189,13 +189,16 @@ onUnmounted(() => {
 }
 
 .navigation-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   height: 34px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   padding-bottom: 8px;
-  z-index: 20;
+  z-index: 50;
   cursor: pointer;
   background: linear-gradient(0deg, rgba(0,0,0,0.3) 0%, transparent 100%);
 }
