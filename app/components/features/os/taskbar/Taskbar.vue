@@ -4,8 +4,7 @@
       <button
         class="start-btn"
         :class="{ active: desktopStore.isStartMenuOpen }"
-        @click="desktopStore.toggleStartMenu()"
-      >
+        @click="desktopStore.toggleStartMenu()">
         <Icon name="ph:circles-four-fill" size="24px" />
       </button>
 
@@ -15,8 +14,7 @@
           :key="win.id"
           class="app-btn-taskbar"
           :class="{ active: win.zIndex === topZIndex && !win.isMinimized }"
-          @click="toggleWindow(win.id)"
-        >
+          @click="toggleWindow(win.id)">
           <AppIcon :app-id="win.appId" size="20px" />
         </button>
       </div>
@@ -26,7 +24,11 @@
       <div class="sys-tray">
         <Icon :name="wifiIcon" size="16px" :title="wifiTitle" />
         <Icon name="ph:speaker-high-fill" size="16px" />
-        <Icon v-if="batteryLevel !== null" :name="batteryIcon" size="16px" :title="`${Math.round(batteryLevel * 100)}%`" />
+        <Icon
+          v-if="batteryLevel !== null"
+          :name="batteryIcon"
+          size="16px"
+          :title="`${Math.round(batteryLevel * 100)}%`" />
       </div>
       <div class="time-widget">
         <div class="time-text">{{ currentTime }}</div>
@@ -92,11 +94,11 @@ onUnmounted(() => {
 });
 
 const topZIndex = computed(() => {
-  return Math.max(0, ...windowStore.windows.map(w => w.zIndex));
+  return Math.max(0, ...windowStore.windows.map((w) => w.zIndex));
 });
 
 const toggleWindow = (id: string) => {
-  const win = windowStore.windows.find(w => w.id === id);
+  const win = windowStore.windows.find((w) => w.id === id);
   if (win) {
     if (win.isMinimized) {
       windowStore.toggleMinimize(id);
@@ -125,14 +127,16 @@ const toggleWindow = (id: string) => {
   z-index: 10000;
 }
 
-.taskbar-left, .taskbar-right {
+.taskbar-left,
+.taskbar-right {
   display: flex;
   align-items: center;
   gap: 8px;
   height: 100%;
 }
 
-.start-btn, .app-btn-taskbar {
+.start-btn,
+.app-btn-taskbar {
   background: transparent;
   border: none;
   color: var(--os-text, #ffffff);

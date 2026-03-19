@@ -25,7 +25,7 @@ export const suCommand: TerminalCommand = {
             body: { password }
           });
           const authStore = useAuthStore();
-          if(res.success && res.token) {
+          if (res.success && res.token) {
             authStore.loginRoot(res.token);
             context.print(context.t('os.apps.terminal.commands.suSuccessRoot'));
           } else {
@@ -36,7 +36,9 @@ export const suCommand: TerminalCommand = {
         }
       });
     } else {
-      context.print(context.t('os.apps.terminal.commands.suUserNotFound', { user: args[0] || 'root' }));
+      context.print(
+        context.t('os.apps.terminal.commands.suUserNotFound', { user: args[0] || 'root' })
+      );
     }
   }
 };

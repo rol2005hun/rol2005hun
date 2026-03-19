@@ -5,7 +5,8 @@
         <span v-if="line.prompt" class="prompt">{{ line.prompt }}</span>
         <span class="content">
           <template v-for="(part, j) in line.content.split('\n')" :key="j">
-            {{ part }}<br v-if="j < line.content.split('\n').length - 1">
+            {{ part }}
+            <br v-if="j < line.content.split('\n').length - 1" />
           </template>
         </span>
       </div>
@@ -18,8 +19,7 @@
         :type="isMaskedMode ? 'password' : 'text'"
         spellcheck="false"
         autocomplete="off"
-        @keyup.enter="handleEnter"
-      >
+        @keyup.enter="handleEnter" />
     </div>
   </div>
 </template>

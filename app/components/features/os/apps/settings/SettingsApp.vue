@@ -2,23 +2,17 @@
   <div class="settings-app">
     <div class="sidebar">
       <ul>
-        <li
-          :class="{ active: activeTab === 'appearance' }"
-          @click="activeTab = 'appearance'"
-        >
-          <Icon name="ph:paint-brush-broad-fill" class="icon" /> {{ $t('os.apps.settings.appearance') }}
+        <li :class="{ active: activeTab === 'appearance' }" @click="activeTab = 'appearance'">
+          <Icon name="ph:paint-brush-broad-fill" class="icon" />
+          {{ $t('os.apps.settings.appearance') }}
         </li>
-        <li
-          :class="{ active: activeTab === 'wallpaper' }"
-          @click="activeTab = 'wallpaper'"
-        >
-          <Icon name="ph:image-fill" class="icon" /> {{ $t('os.apps.settings.wallpaper') }}
+        <li :class="{ active: activeTab === 'wallpaper' }" @click="activeTab = 'wallpaper'">
+          <Icon name="ph:image-fill" class="icon" />
+          {{ $t('os.apps.settings.wallpaper') }}
         </li>
-        <li
-          :class="{ active: activeTab === 'language' }"
-          @click="activeTab = 'language'"
-        >
-          <Icon name="ph:globe-hemisphere-west-fill" class="icon" /> {{ $t('os.apps.settings.language') }}
+        <li :class="{ active: activeTab === 'language' }" @click="activeTab = 'language'">
+          <Icon name="ph:globe-hemisphere-west-fill" class="icon" />
+          {{ $t('os.apps.settings.language') }}
         </li>
       </ul>
     </div>
@@ -33,9 +27,8 @@
             :key="theme.id"
             class="theme-card"
             :class="{ active: themeStore.currentTheme === theme.id }"
-            @click="themeStore.setTheme(theme.id)"
-          >
-            <div class="color-preview" :style="{ backgroundColor: theme.color }"/>
+            @click="themeStore.setTheme(theme.id)">
+            <div class="color-preview" :style="{ backgroundColor: theme.color }"></div>
             <span>{{ $t(theme.nameKey) }}</span>
           </button>
         </div>
@@ -51,9 +44,10 @@
             :key="wp.id"
             class="wallpaper-card"
             :class="{ active: themeStore.currentWallpaper === wp.id }"
-            @click="themeStore.setWallpaper(wp.id)"
-          >
-            <div class="wallpaper-preview" :style="{ backgroundImage: 'url(' + wp.thumb + ')' }" />
+            @click="themeStore.setWallpaper(wp.id)">
+            <div
+              class="wallpaper-preview"
+              :style="{ backgroundImage: 'url(' + wp.thumb + ')' }"></div>
           </button>
         </div>
 
@@ -63,8 +57,10 @@
           <div class="input-group">
             <label>{{ $t('os.apps.settings.wallpaperUrl') }}</label>
             <div class="input-row">
-              <input v-model="customUrlInput" type="text" placeholder="https://..." >
-              <button class="apply-btn" @click="applyCustomUrl"><Icon name="ph:check-bold" /></button>
+              <input v-model="customUrlInput" type="text" placeholder="https://..." />
+              <button class="apply-btn" @click="applyCustomUrl">
+                <Icon name="ph:check-bold" />
+              </button>
             </div>
           </div>
 
@@ -74,11 +70,15 @@
 
           <div class="input-group">
             <label>{{ $t('os.apps.settings.uploadWallpaper') }}</label>
-            <input type="file" accept="image/*" class="file-input" @change="handleFileUpload" >
+            <input type="file" accept="image/*" class="file-input" @change="handleFileUpload" />
           </div>
 
-          <div v-if="themeStore.currentWallpaper === 'custom' && themeStore.customWallpaperData" class="custom-preview-box">
-            <div class="wallpaper-preview" :style="{ backgroundImage: 'url(' + themeStore.customWallpaperData + ')' }" />
+          <div
+            v-if="themeStore.currentWallpaper === 'custom' && themeStore.customWallpaperData"
+            class="custom-preview-box">
+            <div
+              class="wallpaper-preview"
+              :style="{ backgroundImage: 'url(' + themeStore.customWallpaperData + ')' }"></div>
           </div>
         </div>
       </div>
@@ -91,16 +91,14 @@
           <button
             class="theme-card"
             :class="{ active: languageStore.currentLanguage === 'en' }"
-            @click="languageStore.setLanguage('en')"
-          >
+            @click="languageStore.setLanguage('en')">
             <div class="language-icon"><Icon name="flag:gb-4x3" /></div>
             <span>{{ $t('os.apps.settings.english') }}</span>
           </button>
           <button
             class="theme-card"
             :class="{ active: languageStore.currentLanguage === 'hu' }"
-            @click="languageStore.setLanguage('hu')"
-          >
+            @click="languageStore.setLanguage('hu')">
             <div class="language-icon"><Icon name="flag:hu-4x3" /></div>
             <span>{{ $t('os.apps.settings.hungarian') }}</span>
           </button>
@@ -111,7 +109,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue';
+import { ref, watch } from 'vue';
 import { useThemeStore } from '@/stores/features/os/useThemeStore';
 import { useLanguageStore } from '@/stores/features/os/useLanguageStore';
 
@@ -122,11 +120,15 @@ const activeTab = ref<'appearance' | 'wallpaper' | 'language'>('appearance');
 
 const customUrlInput = ref('');
 
-watch(() => themeStore.customWallpaperData, (newVal) => {
-  if (themeStore.currentWallpaper === 'custom' && newVal && newVal.startsWith('http')) {
-    customUrlInput.value = newVal;
-  }
-}, { immediate: true });
+watch(
+  () => themeStore.customWallpaperData,
+  (newVal) => {
+    if (themeStore.currentWallpaper === 'custom' && newVal && newVal.startsWith('http')) {
+      customUrlInput.value = newVal;
+    }
+  },
+  { immediate: true }
+);
 
 const applyCustomUrl = () => {
   if (customUrlInput.value.trim()) {
@@ -190,7 +192,7 @@ const handleFileUpload = (event: Event) => {
 .sidebar {
   width: 200px;
   background: rgba(0, 0, 0, 0.2);
-  border-right: 1px solid var(--os-border-color, rgba(255,255,255,0.1));
+  border-right: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
   padding: 20px 10px;
 
   ul {
@@ -206,7 +208,9 @@ const handleFileUpload = (event: Event) => {
       align-items: center;
       gap: 10px;
       font-size: 14px;
-      transition: background 0.2s, color 0.2s;
+      transition:
+        background 0.2s,
+        color 0.2s;
 
       &:hover {
         background: rgba(255, 255, 255, 0.05);
@@ -250,7 +254,7 @@ const handleFileUpload = (event: Event) => {
 
 .theme-card {
   background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--os-border-color, rgba(255,255,255,0.1));
+  border: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
   border-radius: 12px;
   padding: 15px;
   display: flex;
@@ -276,8 +280,8 @@ const handleFileUpload = (event: Event) => {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    border: 2px solid rgba(255,255,255,0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.2);
   }
 
   .language-icon {
@@ -288,7 +292,7 @@ const handleFileUpload = (event: Event) => {
     justify-content: center;
     font-size: 40px;
     border-radius: 4px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   }
 
   span {
@@ -334,7 +338,7 @@ const handleFileUpload = (event: Event) => {
   margin-bottom: 20px;
   font-size: 18px;
   font-weight: 600;
-  border-bottom: 1px solid var(--os-border-color, rgba(255,255,255,0.1));
+  border-bottom: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
   padding-bottom: 8px;
 }
 
@@ -359,10 +363,10 @@ const handleFileUpload = (event: Event) => {
       display: flex;
       gap: 10px;
 
-      input[type="text"] {
+      input[type='text'] {
         flex: 1;
         background: rgba(0, 0, 0, 0.2);
-        border: 1px solid var(--os-border-color, rgba(255,255,255,0.15));
+        border: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.15));
         color: var(--os-text, #fff);
         padding: 10px 14px;
         border-radius: 8px;
@@ -371,12 +375,12 @@ const handleFileUpload = (event: Event) => {
         transition: border-color 0.2s;
 
         &:focus {
-          border-color: var(--os-primary-color, rgba(255,255,255,0.4));
+          border-color: var(--os-primary-color, rgba(255, 255, 255, 0.4));
         }
       }
 
       .apply-btn {
-        background: var(--os-primary-color, rgba(255,255,255,0.2));
+        background: var(--os-primary-color, rgba(255, 255, 255, 0.2));
         color: var(--os-primary-text, #000);
         border: none;
         border-radius: 8px;
@@ -399,7 +403,7 @@ const handleFileUpload = (event: Event) => {
 
       &::file-selector-button {
         background: rgba(255, 255, 255, 0.1);
-        border: 1px solid var(--os-border-color, rgba(255,255,255,0.15));
+        border: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.15));
         color: var(--os-text, #fff);
         padding: 8px 16px;
         border-radius: 8px;
@@ -427,15 +431,15 @@ const handleFileUpload = (event: Event) => {
     &::after {
       content: '';
       flex: 1;
-      border-bottom: 1px solid var(--os-border-color, rgba(255,255,255,0.2));
+      border-bottom: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.2));
     }
 
     &:not(:empty)::before {
-      margin-right: .5em;
+      margin-right: 0.5em;
     }
 
     &:not(:empty)::after {
-      margin-left: .5em;
+      margin-left: 0.5em;
     }
   }
 

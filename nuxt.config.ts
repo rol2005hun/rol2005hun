@@ -7,14 +7,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   srcDir: 'app/',
   serverDir: 'server/',
-  modules: [
-    '@pinia/nuxt',
-    '@nuxt/eslint',
-    '@nuxt/icon'
-  ],
-  css: [
-    '@/assets/scss/main.scss'
-  ],
+  modules: ['@pinia/nuxt', '@nuxt/eslint', '@nuxt/icon'],
+  css: ['@/assets/scss/main.scss'],
   nitro: {
     experimental: {
       websocket: true
@@ -24,5 +18,5 @@ export default defineNuxtConfig({
     optimizeDeps: {
       include: ['vue-i18n']
     }
-  },
+  }
 });

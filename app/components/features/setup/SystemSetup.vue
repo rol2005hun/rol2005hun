@@ -17,7 +17,10 @@
         <div class="beta-key-hint" @click="copyKey">
           <span class="hint-label">{{ t('setup.betaKeyHint') }}</span>
           <code class="hint-key">{{ VALID_KEY }}</code>
-          <Icon :name="isCopied ? 'ph:check-circle-light' : 'ph:copy-light'" class="copy-icon" :class="{ 'text-green': isCopied }" />
+          <Icon
+            :name="isCopied ? 'ph:check-circle-light' : 'ph:copy-light'"
+            class="copy-icon"
+            :class="{ 'text-green': isCopied }" />
         </div>
 
         <div class="license-form">
@@ -29,9 +32,8 @@
               type="text"
               placeholder="XXXX-XXXX-XXXX"
               :class="{ 'is-invalid': hasError }"
-              @keyup.enter="verifyLicense"
-            >
-            <div class="focus-ring" />
+              @keyup.enter="verifyLicense" />
+            <div class="focus-ring"></div>
           </div>
           <transition name="fade">
             <p v-if="hasError" class="error-msg">
@@ -138,7 +140,9 @@ const copyKey = async () => {
   align-items: center;
   justify-content: center;
   margin-bottom: 2.5rem;
-  box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.1), 0 0 40px rgba(56, 189, 248, 0.1);
+  box-shadow:
+    inset 0 0 20px rgba(56, 189, 248, 0.1),
+    0 0 40px rgba(56, 189, 248, 0.1);
 
   .setup-icon {
     font-size: 44px;
@@ -325,7 +329,7 @@ const copyKey = async () => {
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
       transform: translateX(-100%);
       transition: transform 0.6s;
     }
@@ -370,7 +374,9 @@ const copyKey = async () => {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .fade-enter-from,

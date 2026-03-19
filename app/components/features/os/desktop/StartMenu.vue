@@ -3,18 +3,22 @@
     <div class="start-menu-content">
       <div class="search-bar">
         <Icon name="ph:magnifying-glass" />
-        <input v-model="searchQuery" type="text" :placeholder="$t('os.startMenu.searchPlaceholder')" >
+        <input
+          v-model="searchQuery"
+          type="text"
+          :placeholder="$t('os.startMenu.searchPlaceholder')" />
       </div>
 
       <div class="pinned-section">
-        <h3>{{ searchQuery ? $t('os.startMenu.searchResults', 'Keresési eredmények') : $t('os.startMenu.pinnedApps') }}</h3>
+        <h3>
+          {{
+            searchQuery
+              ? $t('os.startMenu.searchResults', 'Keresési eredmények')
+              : $t('os.startMenu.pinnedApps')
+          }}
+        </h3>
         <div class="app-grid">
-          <div
-            v-for="app in filteredApps"
-            :key="app.id"
-            class="app-item"
-            @click="openApp(app.id)"
-          >
+          <div v-for="app in filteredApps" :key="app.id" class="app-item" @click="openApp(app.id)">
             <div class="icon-box">
               <AppIcon :app-id="app.id" size="28px" />
             </div>
@@ -77,7 +81,7 @@ const filteredApps = computed(() => {
   const query = searchQuery.value.trim().toLowerCase();
   if (!query) return registryStore.installedApps;
 
-  return registryStore.installedApps.filter(app => {
+  return registryStore.installedApps.filter((app) => {
     const keyPath = app.nameKey.split('.');
 
     for (const locale of Object.keys(messages.value)) {
@@ -114,7 +118,7 @@ const openApp = (appId: string) => {
       appId: appConfig.id,
       titleKey: appConfig.nameKey,
       width: appConfig.defaultWidth || 800,
-      height: appConfig.defaultHeight || 600,
+      height: appConfig.defaultHeight || 600
     });
   }
   desktopStore.closeStartMenu();

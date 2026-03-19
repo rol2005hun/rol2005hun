@@ -36,7 +36,7 @@ const closeProject = () => {
       <div v-if="!activeProject" key="grid" class="grid-view">
         <div class="header">
           <h2 class="title">{{ $t('os.apps.projects.name') }}</h2>
-          <div class="header-divider"/>
+          <div class="header-divider"></div>
         </div>
 
         <div class="projects-grid">
@@ -44,9 +44,8 @@ const closeProject = () => {
             v-for="project in projects"
             :key="project.id"
             class="project-card"
-            @click="openProject(project.component)"
-          >
-            <div class="card-bg"/>
+            @click="openProject(project.component)">
+            <div class="card-bg"></div>
             <div class="card-content">
               <h3>{{ $t(project.titleKey) }}</h3>
               <p>{{ $t(project.descKey) }}</p>
@@ -85,13 +84,18 @@ const closeProject = () => {
   color: var(--os-text, #fff);
   box-sizing: border-box;
   overflow-y: auto;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: var(--os-bg, radial-gradient(circle at top right, rgba(255,255,255,0.05), transparent 50%));
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background: var(
+    --os-bg,
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.05), transparent 50%)
+  );
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .fade-enter-from {
   opacity: 0;
@@ -118,7 +122,7 @@ const closeProject = () => {
     font-size: 28px;
     font-weight: 700;
     letter-spacing: -0.5px;
-    background: linear-gradient(90deg, #fff, rgba(255,255,255,0.6));
+    background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.6));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -161,7 +165,7 @@ const closeProject = () => {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(circle at 100% 0%, rgba(255,255,255,0.08) 0%, transparent 60%);
+    background: radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
     opacity: 0;
     transition: opacity 0.4s ease;
     z-index: 0;
@@ -170,8 +174,9 @@ const closeProject = () => {
   &:hover {
     transform: translateY(-4px) scale(1.02);
     border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    box-shadow:
+      0 12px 30px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.1) inset;
 
     .card-bg {
       opacity: 1;
@@ -288,7 +293,7 @@ const closeProject = () => {
   border-radius: 16px;
   padding: 30px;
   overflow-y: auto;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 :root[data-theme='light'] {
@@ -302,13 +307,13 @@ const closeProject = () => {
     }
 
     .card-bg {
-      background: radial-gradient(circle at 100% 0%, rgba(0,0,0,0.03) 0%, transparent 60%);
+      background: radial-gradient(circle at 100% 0%, rgba(0, 0, 0, 0.03) 0%, transparent 60%);
     }
 
     .view-btn {
       background: rgba(0, 0, 0, 0.05);
       color: #1a1a1a;
-      border-color: rgba(0,0,0,0.1);
+      border-color: rgba(0, 0, 0, 0.1);
     }
 
     &:hover {
@@ -346,7 +351,7 @@ const closeProject = () => {
   .project-wrapper {
     background: rgba(255, 255, 255, 0.5);
     border-color: rgba(0, 0, 0, 0.1);
-    box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
   }
 }
 </style>

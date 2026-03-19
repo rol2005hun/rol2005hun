@@ -21,6 +21,6 @@ export const useDevice = () => {
   });
 
   return {
-    isMobile,
+    isMobile
   };
 };

@@ -20,12 +20,14 @@ export const useWindowStore = defineStore('os-window', () => {
   const windows = ref<OSWindow[]>([]);
   const topZIndex = ref(100);
 
-  const openWindow = (windowInfo: Omit<OSWindow, 'isOpen' | 'isMinimized' | 'isMaximized' | 'zIndex' | 'x' | 'y'>) => {
+  const openWindow = (
+    windowInfo: Omit<OSWindow, 'isOpen' | 'isMinimized' | 'isMaximized' | 'zIndex' | 'x' | 'y'>
+  ) => {
     const registryStore = useAppRegistry();
     const appDef = registryStore.getAppById(windowInfo.appId);
 
     if (appDef && appDef.allowMultipleInstances === false) {
-      const existingByApp = windows.value.find(w => w.appId === windowInfo.appId);
+      const existingByApp = windows.value.find((w) => w.appId === windowInfo.appId);
       if (existingByApp) {
         if (existingByApp.isMinimized) existingByApp.isMinimized = false;
         focusWindow(existingByApp.id);
@@ -33,7 +35,7 @@ export const useWindowStore = defineStore('os-window', () => {
       }
     }
 
-    const existing = windows.value.find(w => w.id === windowInfo.id);
+    const existing = windows.value.find((w) => w.id === windowInfo.id);
     if (existing) {
       if (existing.isMinimized) existing.isMinimized = false;
       focusWindow(existing.id);
@@ -50,16 +52,16 @@ export const useWindowStore = defineStore('os-window', () => {
       isMaximized: false,
       zIndex: topZIndex.value,
       x: 100 + offset,
-      y: 100 + offset,
+      y: 100 + offset
     });
   };
 
   const closeWindow = (id: string) => {
-    windows.value = windows.value.filter(w => w.id !== id);
+    windows.value = windows.value.filter((w) => w.id !== id);
   };
 
   const toggleMinimize = (id: string) => {
-    const win = windows.value.find(w => w.id === id);
+    const win = windows.value.find((w) => w.id === id);
     if (win) {
       win.isMinimized = !win.isMinimized;
       if (!win.isMinimized) focusWindow(id);
@@ -67,7 +69,7 @@ export const useWindowStore = defineStore('os-window', () => {
   };
 
   const toggleMaximize = (id: string) => {
-    const win = windows.value.find(w => w.id === id);
+    const win = windows.value.find((w) => w.id === id);
     if (win) {
       win.isMaximized = !win.isMaximized;
       if (win.isMaximized) focusWindow(id);
@@ -75,15 +77,18 @@ export const useWindowStore = defineStore('os-window', () => {
   };
 
   const focusWindow = (id: string) => {
-    const win = windows.value.find(w => w.id === id);
+    const win = windows.value.find((w) => w.id === id);
     if (win && win.zIndex < topZIndex.value) {
       topZIndex.value++;
       win.zIndex = topZIndex.value;
     }
   };
 
-  const updateWindow = (id: string, updates: Partial<Pick<OSWindow, 'x' | 'y' | 'width' | 'height'>>) => {
-    const win = windows.value.find(w => w.id === id);
+  const updateWindow = (
+    id: string,
+    updates: Partial<Pick<OSWindow, 'x' | 'y' | 'width' | 'height'>>
+  ) => {
+    const win = windows.value.find((w) => w.id === id);
     if (win) {
       Object.assign(win, updates);
     }
@@ -96,6 +101,6 @@ export const useWindowStore = defineStore('os-window', () => {
     toggleMinimize,
     toggleMaximize,
     focusWindow,
-    updateWindow,
+    updateWindow
   };
 });

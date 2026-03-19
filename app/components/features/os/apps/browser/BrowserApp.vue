@@ -2,13 +2,47 @@
   <div class="browser-app">
     <div class="browser-toolbar">
       <button class="nav-btn" :disabled="!canGoBack" title="Vissza" @click="goBack">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        <svg
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+          <line x1="19" y1="12" x2="5" y2="12" />
+          <polyline points="12 19 5 12 12 5" />
+        </svg>
       </button>
       <button class="nav-btn" :disabled="!canGoForward" title="Előre" @click="goForward">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <svg
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <polyline points="12 5 19 12 12 19" />
+        </svg>
       </button>
       <button class="nav-btn" title="Frissítés" @click="refresh">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        <svg
+          viewBox="0 0 24 24"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+          <polyline points="23 4 23 10 17 10" />
+          <polyline points="1 20 1 14 7 14" />
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+        </svg>
       </button>
 
       <div class="address-bar-container">
@@ -17,8 +51,7 @@
           type="text"
           class="address-bar"
           placeholder="https://..."
-          @keyup.enter="navigate"
-        >
+          @keyup.enter="navigate" />
       </div>
 
       <button class="nav-btn" title="Ugrás" @click="navigate">
@@ -32,11 +65,8 @@
         :key="iframeKey"
         :src="currentUrl"
         class="browser-iframe"
-        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-      />
-      <div v-else class="empty-state">
-        Üres oldal
-      </div>
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+      <div v-else class="empty-state">Üres oldal</div>
     </div>
   </div>
 </template>
@@ -49,7 +79,10 @@ const inputUrl = ref('https://chrcountback.netlify.app/');
 const currentUrl = ref('');
 const iframeKey = ref(0);
 
-const historyCookie = useCookie<string[]>('browser_history', { default: () => [], maxAge: 31536000 });
+const historyCookie = useCookie<string[]>('browser_history', {
+  default: () => [],
+  maxAge: 31536000
+});
 const history = ref<string[]>([]);
 const currentIndex = ref(-1);
 

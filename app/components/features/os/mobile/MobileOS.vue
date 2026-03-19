@@ -2,7 +2,7 @@
   <div class="mobile-environment">
     <div class="status-bar">
       <div class="time">{{ currentTime }}</div>
-      <div class="notch"/>
+      <div class="notch"></div>
       <div class="status-icons">
         <Icon name="ph:cell-signal-full-fill" size="14px" />
         <Icon name="ph:wifi-high-bold" size="14px" />
@@ -21,8 +21,7 @@
             v-for="app in appRegistry.installedApps"
             :key="app.id"
             class="app-icon"
-            @click="openApp(app.id)"
-          >
+            @click="openApp(app.id)">
             <div class="icon-box">
               <Icon :name="app.icon" size="28px" />
             </div>
@@ -32,8 +31,8 @@
       </div>
     </transition>
 
-    <div class="navigation-bar" :class="{'active': activeAppId}" @click="closeApp">
-      <div class="nav-pill"/>
+    <div class="navigation-bar" :class="{ active: activeAppId }" @click="closeApp">
+      <div class="nav-pill"></div>
     </div>
   </div>
 </template>
@@ -95,7 +94,7 @@ onUnmounted(() => {
   flex-direction: column;
   color: #fff;
   z-index: 10;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 .status-bar {
@@ -108,7 +107,7 @@ onUnmounted(() => {
   font-size: 14px;
   font-weight: 600;
   z-index: 20;
-  background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, transparent 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%);
 }
 
 .notch {
@@ -224,17 +223,17 @@ onUnmounted(() => {
   z-index: 9999;
   cursor: pointer;
   pointer-events: auto;
-  background: linear-gradient(0deg, rgba(0,0,0,0.3) 0%, transparent 100%);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%);
   transition: all 0.3s ease;
 
   &:hover .nav-pill {
     background: rgba(255, 255, 255, 1);
     transform: scaleY(1.2);
-    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   }
 
   &.active {
-    background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, transparent 100%);
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
   }
 }
 
@@ -252,7 +251,9 @@ onUnmounted(() => {
     background: rgba(255, 255, 255, 0.5);
     color: #1a1a1a;
     border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+    box-shadow:
+      0 8px 16px rgba(0, 0, 0, 0.05),
+      inset 0 2px 4px rgba(255, 255, 255, 0.8);
   }
 
   .app-label {

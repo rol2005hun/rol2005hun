@@ -21,13 +21,17 @@
           @mouseup="cancelUnlock"
           @mouseleave="cancelUnlock"
           @touchstart.prevent="startUnlock"
-          @touchend.prevent="cancelUnlock"
-        >
+          @touchend.prevent="cancelUnlock">
           <div class="sensor-icon-wrapper">
             <Icon
-              :name="isSuccess ? 'fluent:fingerprint-24-filled' : (isUnlocking ? 'fluent:fingerprint-24-filled' : 'fluent:fingerprint-24-regular')"
-              class="sensor-icon"
-            />
+              :name="
+                isSuccess
+                  ? 'fluent:fingerprint-24-filled'
+                  : isUnlocking
+                    ? 'fluent:fingerprint-24-filled'
+                    : 'fluent:fingerprint-24-regular'
+              "
+              class="sensor-icon" />
           </div>
 
           <svg class="progress-ring" width="110" height="110">
@@ -38,8 +42,7 @@
               fill="transparent"
               r="50"
               cx="55"
-              cy="55"
-            />
+              cy="55" />
             <circle
               class="progress-ring-circle"
               :style="{ strokeDashoffset: unlockProgress }"
@@ -49,17 +52,16 @@
               fill="transparent"
               r="50"
               cx="55"
-              cy="55"
-            />
+              cy="55" />
             <defs>
               <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color:#38bdf8;stop-opacity:1" />
-                <stop offset="100%" style="stop-color:#818cf8;stop-opacity:1" />
+                <stop offset="0%" style="stop-color: #38bdf8; stop-opacity: 1" />
+                <stop offset="100%" style="stop-color: #818cf8; stop-opacity: 1" />
               </linearGradient>
             </defs>
           </svg>
 
-          <div class="glow-effect" />
+          <div class="glow-effect"></div>
         </div>
 
         <p class="instruction-text" :class="{ 'is-hidden': isUnlocking || isSuccess }">
@@ -91,7 +93,11 @@ let clockInterval: number | null = null;
 const updateClock = () => {
   const now = new Date();
   currentTime.value = now.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
-  currentDate.value = now.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
+  currentDate.value = now.toLocaleDateString(undefined, {
+    weekday: 'long',
+    month: 'long',
+    day: 'numeric'
+  });
 };
 
 updateClock();
@@ -350,12 +356,24 @@ const finishUnlock = () => {
 }
 
 @keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>

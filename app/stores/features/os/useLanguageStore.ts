@@ -17,9 +17,13 @@ export const useLanguageStore = defineStore('os-language', () => {
     locale.value = lang;
   };
 
-  watch(currentLanguage, (newLang) => {
-    locale.value = newLang;
-  }, { immediate: true });
+  watch(
+    currentLanguage,
+    (newLang) => {
+      locale.value = newLang;
+    },
+    { immediate: true }
+  );
 
   return {
     currentLanguage,

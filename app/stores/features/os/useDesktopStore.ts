@@ -17,12 +17,12 @@ export const useDesktopStore = defineStore('os-desktop', () => {
 
   const defaultIcons = computed<DesktopIconItem[]>(() => {
     return appRegistry.installedApps
-      .filter(app => app.showOnDesktop !== false)
+      .filter((app) => app.showOnDesktop !== false)
       .map((app, index) => ({
         id: `icon-${app.id}`,
         appId: app.id,
         x: 20,
-        y: 20 + (index * 100),
+        y: 20 + index * 100
       }));
   });
 
@@ -33,12 +33,16 @@ export const useDesktopStore = defineStore('os-desktop', () => {
   });
 
   const icons = computed(() => {
-    if (!desktopIconsCookie.value || !Array.isArray(desktopIconsCookie.value) || desktopIconsCookie.value.length === 0) {
+    if (
+      !desktopIconsCookie.value ||
+      !Array.isArray(desktopIconsCookie.value) ||
+      desktopIconsCookie.value.length === 0
+    ) {
       return defaultIcons.value;
     }
 
-    const currentAppIds = desktopIconsCookie.value.map(i => i.appId);
-    const missingApps = defaultIcons.value.filter(di => !currentAppIds.includes(di.appId));
+    const currentAppIds = desktopIconsCookie.value.map((i) => i.appId);
+    const missingApps = defaultIcons.value.filter((di) => !currentAppIds.includes(di.appId));
 
     if (missingApps.length > 0) {
       return [...desktopIconsCookie.value, ...missingApps];
@@ -57,7 +61,7 @@ export const useDesktopStore = defineStore('os-desktop', () => {
 
   const updateIconPosition = (id: string, x: number, y: number) => {
     const currentIcons = [...icons.value];
-    const index = currentIcons.findIndex(i => i.id === id);
+    const index = currentIcons.findIndex((i) => i.id === id);
     if (index !== -1) {
       currentIcons[index] = { ...currentIcons[index], x, y } as DesktopIconItem;
       desktopIconsCookie.value = currentIcons;
@@ -67,7 +71,7 @@ export const useDesktopStore = defineStore('os-desktop', () => {
   const selectIcon = (id: string, ctrl: boolean = false) => {
     if (ctrl) {
       if (selectedIcons.value.includes(id)) {
-        selectedIcons.value = selectedIcons.value.filter(i => i !== id);
+        selectedIcons.value = selectedIcons.value.filter((i) => i !== id);
       } else {
         selectedIcons.value.push(id);
       }

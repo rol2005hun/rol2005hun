@@ -9,7 +9,9 @@ export default defineEventHandler(async (event) => {
   const correctPassword = config.adminPassword;
 
   if (body.password === correctPassword) {
-    const payload = Buffer.from(JSON.stringify({ role: 'root', exp: Date.now() + 86400000 })).toString('base64');
+    const payload = Buffer.from(
+      JSON.stringify({ role: 'root', exp: Date.now() + 86400000 })
+    ).toString('base64');
     const signature = crypto.createHmac('sha256', correctPassword).update(payload).digest('hex');
     const token = `${payload}.${signature}`;
 

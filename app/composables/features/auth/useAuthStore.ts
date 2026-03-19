@@ -5,7 +5,9 @@ import { useCookie } from '#imports';
 export const useAuthStore = defineStore('auth', () => {
   const isUnlocked = ref(false);
   const rootToken = useCookie('root_token', { maxAge: 86400, secure: true, sameSite: 'strict' });
-  const user = ref<{ username: string, role: string } | null>(rootToken.value ? { username: 'root', role: 'admin' } : null);
+  const user = ref<{ username: string; role: string } | null>(
+    rootToken.value ? { username: 'root', role: 'admin' } : null
+  );
 
   const unlockOS = () => {
     isUnlocked.value = true;

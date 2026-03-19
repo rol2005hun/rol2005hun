@@ -2,8 +2,7 @@
   <div class="os-root">
     <div
       class="wallpaper"
-      :style="{ backgroundImage: 'url(' + themeStore.currentWallpaperUrl + ')' }"
-    />
+      :style="{ backgroundImage: 'url(' + themeStore.currentWallpaperUrl + ')' }"></div>
 
     <Desktop v-if="!isMobile" />
     <MobileOS v-else />

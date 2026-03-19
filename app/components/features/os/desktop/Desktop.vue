@@ -1,6 +1,9 @@
 <template>
-  <div class="desktop-environment" @click.self="handleDesktopClick" @mousedown.self="startSelection" @contextmenu.prevent="openContextMenu">
-
+  <div
+    class="desktop-environment"
+    @click.self="handleDesktopClick"
+    @mousedown.self="startSelection"
+    @contextmenu.prevent="openContextMenu">
     <div
       v-if="contextMenu.isOpen"
       class="context-menu"
@@ -11,23 +14,22 @@
       <div class="context-item" @click="openSysSettings">Rendszerbeállítások</div>
     </div>
 
-    <div ref="surfaceRef" class="desktop-surface" @click.self="handleDesktopClick" @mousedown.self="startSelection" @contextmenu.prevent="openContextMenu">
-
-      <div v-if="isSelecting" class="selection-box" :style="selectionBoxStyle"/>
+    <div
+      ref="surfaceRef"
+      class="desktop-surface"
+      @click.self="handleDesktopClick"
+      @mousedown.self="startSelection"
+      @contextmenu.prevent="openContextMenu">
+      <div v-if="isSelecting" class="selection-box" :style="selectionBoxStyle"></div>
 
       <ClientOnly>
         <DesktopIcon
           v-for="icon in desktopStore.icons"
           :key="icon.id"
           :icon="icon"
-          :is-selected="desktopStore.selectedIcons.includes(icon.id)"
-        />
+          :is-selected="desktopStore.selectedIcons.includes(icon.id)" />
 
-        <WindowFrame
-          v-for="win in windowStore.windows"
-          :key="win.id"
-          :window-info="win"
-        />
+        <WindowFrame v-for="win in windowStore.windows" :key="win.id" :window-info="win" />
       </ClientOnly>
     </div>
 
@@ -161,16 +163,18 @@ const updateSelection = () => {
 
   const newSelection: string[] = [];
 
-  desktopStore.icons.forEach(icon => {
+  desktopStore.icons.forEach((icon) => {
     const iconLeft = icon.x;
     const iconTop = icon.y;
     const iconRight = iconLeft + 80;
     const iconBottom = iconTop + 90;
 
-    const intersect = !(iconRight < left ||
-                        iconLeft > right ||
-                        iconBottom < top ||
-                        iconTop > bottom);
+    const intersect = !(
+      iconRight < left ||
+      iconLeft > right ||
+      iconBottom < top ||
+      iconTop > bottom
+    );
     if (intersect) {
       newSelection.push(icon.id);
     }
@@ -215,7 +219,7 @@ const updateSelection = () => {
   border-radius: 8px;
   padding: 8px;
   min-width: 200px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .context-item {

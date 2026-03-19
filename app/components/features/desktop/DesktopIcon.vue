@@ -7,8 +7,7 @@
       zIndex: isDragging ? 100 : 1
     }"
     @mousedown="onMouseDown"
-    @dblclick="openApp"
-  >
+    @dblclick="openApp">
     <div class="icon-image">
       <AppIcon :app-id="appMeta?.id || icon.appId" size="32px" />
     </div>
@@ -34,7 +33,9 @@ const appRegistry = useAppRegistry();
 const windowStore = useWindowStore();
 const desktopStore = useDesktopStore();
 
-const appMeta = computed(() => appRegistry.installedApps.find((app: any) => app.id === props.icon.appId));
+const appMeta = computed(() =>
+  appRegistry.installedApps.find((app: any) => app.id === props.icon.appId)
+);
 
 const isDragging = ref(false);
 const dragX = ref(0);
@@ -105,7 +106,7 @@ const openApp = () => {
 
   if (selectedIds.includes(props.icon.id) && selectedIds.length > 0) {
     selectedIds.forEach((id, index) => {
-      const iconItem = desktopStore.icons.find(i => i.id === id);
+      const iconItem = desktopStore.icons.find((i) => i.id === id);
       if (iconItem) {
         const meta = appRegistry.installedApps.find((app: any) => app.id === iconItem.appId);
         if (meta) {
@@ -161,23 +162,23 @@ const openApp = () => {
   .icon-image {
     width: 48px;
     height: 48px;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     margin-bottom: 4px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
   .icon-label {
     text-align: center;
     color: white;
     font-size: 12px;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
     word-break: break-word;
     max-width: 100%;
     line-height: 1.2;

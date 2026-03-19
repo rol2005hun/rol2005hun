@@ -9,7 +9,7 @@ const commands = new Map<string, TerminalCommand>();
 const registerCommand = (cmd: TerminalCommand) => {
   commands.set(cmd.name, cmd);
   if (cmd.aliases) {
-    cmd.aliases.forEach(alias => commands.set(alias, cmd));
+    cmd.aliases.forEach((alias) => commands.set(alias, cmd));
   }
 };
 

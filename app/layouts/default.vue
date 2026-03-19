@@ -12,7 +12,7 @@
       </Transition>
 
       <div class="desktop-container" :class="{ 'is-locked': !authStore.isUnlocked }">
-        <slot />
+        <slot></slot>
       </div>
     </template>
   </div>

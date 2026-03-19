@@ -20,7 +20,7 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       icon: 'ph:globe-hemisphere-west-fill',
       defaultWidth: 900,
       defaultHeight: 600,
-      allowMultipleInstances: true,
+      allowMultipleInstances: true
     },
     {
       id: 'terminal',
@@ -28,7 +28,7 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       icon: 'ph:terminal-window-fill',
       defaultWidth: 700,
       defaultHeight: 450,
-      allowMultipleInstances: true,
+      allowMultipleInstances: true
     },
     {
       id: 'projects',
@@ -36,7 +36,7 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       icon: 'ph:folder-open-fill',
       defaultWidth: 800,
       defaultHeight: 500,
-      allowMultipleInstances: false,
+      allowMultipleInstances: false
     },
     {
       id: 'settings',
@@ -45,7 +45,7 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       defaultWidth: 600,
       defaultHeight: 450,
       allowMultipleInstances: false,
-      showOnDesktop: false,
+      showOnDesktop: false
     },
     {
       id: 'about',
@@ -54,14 +54,14 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       defaultWidth: 400,
       defaultHeight: 300,
       allowMultipleInstances: false,
-      showOnDesktop: false,
-    },
+      showOnDesktop: false
+    }
   ]);
 
-  const getAppById = (id: string) => installedApps.value.find(app => app.id === id);
+  const getAppById = (id: string) => installedApps.value.find((app) => app.id === id);
 
   const updateAppLogo = (id: string, logoUrl: string) => {
-    const app = installedApps.value.find(a => a.id === id);
+    const app = installedApps.value.find((a) => a.id === id);
     if (app) {
       app.logo = logoUrl;
       installedApps.value = [...installedApps.value];

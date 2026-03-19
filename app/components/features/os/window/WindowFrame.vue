@@ -9,8 +9,7 @@
       'is-resizing': isResizing
     }"
     :style="windowStyle"
-    @mousedown="focusWindow"
-  >
+    @mousedown="focusWindow">
     <div class="window-header" @dblclick="toggleMaximize" @mousedown="startDrag">
       <div class="window-title">
         <AppIcon :app-id="windowInfo.appId" size="14px" class="title-icon" />
@@ -21,7 +20,9 @@
           <Icon name="ph:minus-bold" size="10px" />
         </button>
         <button class="ctrl-btn maximize" @click.stop="toggleMaximize">
-          <Icon :name="windowInfo.isMaximized ? 'ph:copy-simple-bold' : 'ph:square-bold'" size="10px" />
+          <Icon
+            :name="windowInfo.isMaximized ? 'ph:copy-simple-bold' : 'ph:square-bold'"
+            size="10px" />
         </button>
         <button class="ctrl-btn close" @click.stop="closeWindow">
           <Icon name="ph:x-bold" size="10px" />
@@ -36,9 +37,7 @@
     <div
       v-if="!windowInfo.isMaximized"
       class="resize-handle"
-      @mousedown.stop.prevent="startResize"
-    />
-
+      @mousedown.stop.prevent="startResize"></div>
   </div>
 </template>
 
@@ -149,7 +148,7 @@ const stopResize = () => {
 };
 
 const isFocused = computed(() => {
-  const allZIndexes = windowStore.windows.map(w => w.zIndex);
+  const allZIndexes = windowStore.windows.map((w) => w.zIndex);
   const maxZ = Math.max(...allZIndexes, 0);
   return props.windowInfo.zIndex === maxZ && maxZ > 0;
 });
@@ -161,7 +160,7 @@ const windowStyle = computed(() => {
       top: '0px',
       left: '0px',
       width: '100%',
-      height: '100%',
+      height: '100%'
     };
   }
 
@@ -170,7 +169,7 @@ const windowStyle = computed(() => {
     top: `${props.windowInfo.y}px`,
     left: `${props.windowInfo.x}px`,
     width: `${props.windowInfo.width}px`,
-    height: `${props.windowInfo.height}px`,
+    height: `${props.windowInfo.height}px`
   };
 });
 
@@ -221,7 +220,8 @@ const toggleMaximize = () => {
     border-color: var(--os-primary-color, rgba(255, 255, 255, 0.3));
   }
 
-  &.is-dragging, &.is-resizing {
+  &.is-dragging,
+  &.is-resizing {
     transition: none;
     opacity: 0.95;
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
@@ -278,19 +278,25 @@ const toggleMaximize = () => {
     &.close {
       background: #ff5f56;
       border: 1px solid #e0443e;
-      &:hover { background: #ff5f56; }
+      &:hover {
+        background: #ff5f56;
+      }
     }
 
     &.minimize {
       background: #ffbd2e;
       border: 1px solid #dea123;
-      &:hover { background: #ffbd2e; }
+      &:hover {
+        background: #ffbd2e;
+      }
     }
 
     &.maximize {
       background: #27c93f;
       border: 1px solid #1aab29;
-      &:hover { background: #27c93f; }
+      &:hover {
+        background: #27c93f;
+      }
     }
   }
 }

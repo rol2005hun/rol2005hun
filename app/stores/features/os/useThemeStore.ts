@@ -15,15 +15,40 @@ export const availableThemes: ThemeConfig[] = [
   { id: 'light', nameKey: 'os.themes.light', color: '#ffffff' },
   { id: 'orange', nameKey: 'os.themes.orange', color: '#ff7a00' },
   { id: 'purple', nameKey: 'os.themes.purple', color: '#9d00ff' },
-  { id: 'green', nameKey: 'os.themes.green', color: '#00c853' },
+  { id: 'green', nameKey: 'os.themes.green', color: '#00c853' }
 ];
 
 export const availableWallpapers = [
-  { id: 'default', url: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=2070', thumb: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=400' },
-  { id: 'mountains', url: 'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&q=80&w=2070', thumb: 'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&q=80&w=400' },
-  { id: 'ocean', url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=2073', thumb: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=400' },
-  { id: 'abstract', url: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=2070', thumb: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=400' },
-  { id: 'city', url: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&q=80&w=2144', thumb: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&q=80&w=400' }
+  {
+    id: 'default',
+    url: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=2070',
+    thumb:
+      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=400'
+  },
+  {
+    id: 'mountains',
+    url: 'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&q=80&w=2070',
+    thumb:
+      'https://images.unsplash.com/photo-1549880338-65ddcdfd017b?auto=format&fit=crop&q=80&w=400'
+  },
+  {
+    id: 'ocean',
+    url: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=2073',
+    thumb:
+      'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=400'
+  },
+  {
+    id: 'abstract',
+    url: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=2070',
+    thumb:
+      'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=400'
+  },
+  {
+    id: 'city',
+    url: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&q=80&w=2144',
+    thumb:
+      'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&q=80&w=400'
+  }
 ];
 
 export const useThemeStore = defineStore('os-theme', () => {
@@ -102,15 +127,19 @@ export const useThemeStore = defineStore('os-theme', () => {
     if (currentWallpaper.value === 'custom') {
       return customWallpaperData.value || defaultWallpaper.url;
     }
-    const wp = availableWallpapers.find(w => w.id === currentWallpaper.value);
+    const wp = availableWallpapers.find((w) => w.id === currentWallpaper.value);
     return wp ? wp.url : defaultWallpaper.url;
   });
 
-  watch(currentTheme, (newTheme) => {
-    if (import.meta.client && newTheme) {
-      document.documentElement.setAttribute('data-theme', newTheme);
-    }
-  }, { immediate: true });
+  watch(
+    currentTheme,
+    (newTheme) => {
+      if (import.meta.client && newTheme) {
+        document.documentElement.setAttribute('data-theme', newTheme);
+      }
+    },
+    { immediate: true }
+  );
 
   return {
     currentTheme,

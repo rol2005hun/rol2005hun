@@ -5,10 +5,10 @@ export const helpCommand: TerminalCommand = {
   name: 'commands',
   execute: (args, context) => {
     const allCmds = getAllCommands();
-    const available = allCmds.filter(c => !c.requiresRoot || context.isRoot());
+    const available = allCmds.filter((c) => !c.requiresRoot || context.isRoot());
 
     let out = context.t('os.apps.terminal.commands.availableCommands') + '\n';
-    available.forEach(c => {
+    available.forEach((c) => {
       out += `  ${c.name.padEnd(12)} ${c.requiresRoot ? '[root] ' : ''}${c.aliases ? context.t('os.apps.terminal.commands.aliases', { aliases: c.aliases.join(', ') }) : ''}\n`;
     });
     context.print(out);

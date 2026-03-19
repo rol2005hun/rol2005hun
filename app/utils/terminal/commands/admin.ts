@@ -6,7 +6,7 @@ export const rebootCommand: TerminalCommand = {
   execute: (args, context) => {
     context.print(context.t('os.apps.terminal.commands.rebooting'));
     setTimeout(() => {
-        window.location.reload();
+      window.location.reload();
     }, 1500);
   }
 };

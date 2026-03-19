@@ -2,14 +2,29 @@
   <div class="shutdown-modal-overlay">
     <div class="shutdown-modal">
       <div class="modal-icon">
-        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+        <svg
+          viewBox="0 0 24 24"
+          width="48"
+          height="48"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M18.36 6.64a9 9 0 1 1-12.73 0" />
+          <line x1="12" y1="2" x2="12" y2="12" />
+        </svg>
       </div>
       <h2>{{ $t('os.shutdownModal.title') }}</h2>
       <p>{{ $t('os.shutdownModal.description') }}</p>
 
       <div class="modal-actions">
-        <button class="btn-cancel" @click="systemStore.cancelShutdown">{{ $t('os.shutdownModal.cancel') }}</button>
-        <button class="btn-confirm" @click="systemStore.confirmShutdown">{{ $t('os.shutdownModal.confirm') }}</button>
+        <button class="btn-cancel" @click="systemStore.cancelShutdown">
+          {{ $t('os.shutdownModal.cancel') }}
+        </button>
+        <button class="btn-confirm" @click="systemStore.confirmShutdown">
+          {{ $t('os.shutdownModal.confirm') }}
+        </button>
       </div>
     </div>
   </div>
@@ -102,7 +117,13 @@ button {
 }
 
 @keyframes modal-pop {
-  0% { opacity: 0; transform: scale(0.9); }
-  100% { opacity: 1; transform: scale(1); }
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 </style>

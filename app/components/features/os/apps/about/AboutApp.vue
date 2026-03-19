@@ -11,21 +11,48 @@
     <div class="info-section">
       <h3>{{ $t('os.apps.about.osInfo') }}</h3>
       <ul class="info-list">
-        <li><span>{{ $t('os.apps.about.osName') }}:</span> ranzakOS</li>
-        <li><span>{{ $t('os.apps.about.osVersion') }}:</span> 1.0.0 (Build 2026.03)</li>
-        <li><span>{{ $t('os.apps.about.osKernel') }}:</span> ranzak-core v2.4</li>
-        <li><span>{{ $t('os.apps.about.osEnv') }}:</span> Web-based Desktop</li>
+        <li>
+          <span>{{ $t('os.apps.about.osName') }}:</span>
+          ranzakOS
+        </li>
+        <li>
+          <span>{{ $t('os.apps.about.osVersion') }}:</span>
+          1.0.0 (Build 2026.03)
+        </li>
+        <li>
+          <span>{{ $t('os.apps.about.osKernel') }}:</span>
+          ranzak-core v2.4
+        </li>
+        <li>
+          <span>{{ $t('os.apps.about.osEnv') }}:</span>
+          Web-based Desktop
+        </li>
       </ul>
     </div>
 
     <div class="info-section">
       <h3>{{ $t('os.apps.about.deviceInfo') }}</h3>
       <ul class="info-list">
-        <li><span>{{ $t('os.apps.about.cpu') }}:</span> {{ hardwareConcurrency }}</li>
-        <li><span>{{ $t('os.apps.about.ram') }}:</span> {{ deviceMemory }}</li>
-        <li><span>{{ $t('os.apps.about.screenWidth') }}:</span> {{ screenWidth }} x {{ screenHeight }}</li>
-        <li><span>{{ $t('os.apps.about.language') }}:</span> {{ language }}</li>
-        <li class="browser-info"><span>{{ $t('os.apps.about.browser') }}:</span> {{ browserInfo }}</li>
+        <li>
+          <span>{{ $t('os.apps.about.cpu') }}:</span>
+          {{ hardwareConcurrency }}
+        </li>
+        <li>
+          <span>{{ $t('os.apps.about.ram') }}:</span>
+          {{ deviceMemory }}
+        </li>
+        <li>
+          <span>{{ $t('os.apps.about.screenWidth') }}:</span>
+          {{ screenWidth }} x {{ screenHeight }}
+        </li>
+        <li>
+          <span>{{ $t('os.apps.about.language') }}:</span>
+          {{ language }}
+        </li>
+        <li class="browser-info">
+          <span>{{ $t('os.apps.about.browser') }}:</span>
+          {{ browserInfo }}
+        </li>
       </ul>
     </div>
   </div>
@@ -45,7 +72,9 @@ onMounted(() => {
   if (typeof window !== 'undefined' && window.navigator) {
     const nav = window.navigator as any;
 
-    hardwareConcurrency.value = nav.hardwareConcurrency ? nav.hardwareConcurrency.toString() : 'N/A';
+    hardwareConcurrency.value = nav.hardwareConcurrency
+      ? nav.hardwareConcurrency.toString()
+      : 'N/A';
     deviceMemory.value = nav.deviceMemory ? `~${nav.deviceMemory} GB` : 'N/A';
 
     screenWidth.value = window.screen.width;
