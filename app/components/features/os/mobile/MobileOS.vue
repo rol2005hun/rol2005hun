@@ -10,27 +10,29 @@
       </div>
     </div>
 
-    <div v-if="activeAppId" class="active-app-container">
-      <component :is="appComponents[activeAppId]" />
-    </div>
+    <transition name="app-scale">
+      <div v-if="activeAppId" :key="'app-' + activeAppId" class="active-app-container">
+        <component :is="appComponents[activeAppId]" />
+      </div>
 
-    <div v-else class="home-screen">
-      <div class="app-grid">
-        <div
-          v-for="app in appRegistry.installedApps"
-          :key="app.id"
-          class="app-icon"
-          @click="openApp(app.id)"
-        >
-          <div class="icon-box">
-            <Icon :name="app.icon" size="28px" />
+      <div v-else key="home" class="home-screen">
+        <div class="app-grid">
+          <div
+            v-for="app in appRegistry.installedApps"
+            :key="app.id"
+            class="app-icon"
+            @click="openApp(app.id)"
+          >
+            <div class="icon-box">
+              <Icon :name="app.icon" size="28px" />
+            </div>
+            <span class="app-label">{{ $t(app.nameKey) }}</span>
           </div>
-          <span class="app-label">{{ $t(app.nameKey) }}</span>
         </div>
       </div>
-    </div>
+    </transition>
 
-    <div class="navigation-bar" @click="closeApp">
+    <div class="navigation-bar" :class="{'active': activeAppId}" @click="closeApp">
       <div class="nav-pill"/>
     </div>
   </div>
@@ -127,6 +129,25 @@ onUnmounted(() => {
   gap: 6px;
 }
 
+.app-scale-enter-active,
+.app-scale-leave-active {
+  transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: absolute;
+  top: 44px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform-origin: center center;
+}
+.app-scale-enter-from {
+  opacity: 0;
+  transform: scale(0.6);
+}
+.app-scale-leave-to {
+  opacity: 0;
+  transform: scale(0.6);
+}
+
 .active-app-container {
   flex: 1;
   width: 100%;
@@ -198,23 +219,44 @@ onUnmounted(() => {
   justify-content: center;
   align-items: center;
   padding-bottom: 8px;
-  z-index: 50;
+  z-index: 9999;
   cursor: pointer;
+  pointer-events: auto;
   background: linear-gradient(0deg, rgba(0,0,0,0.3) 0%, transparent 100%);
+  transition: all 0.3s ease;
+
+  &:hover .nav-pill {
+    background: rgba(255, 255, 255, 1);
+    transform: scaleY(1.2);
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+  }
+
+  &.active {
+    background: linear-gradient(0deg, rgba(0,0,0,0.5) 0%, transparent 100%);
+  }
 }
 
 .nav-pill {
   width: 130px;
   height: 5px;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 100px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :root[data-theme='light'] {
   .icon-box {
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.5);
     color: #1a1a1a;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05), inset 0 2px 4px rgba(255, 255, 255, 0.8);
+  }
+
+  .app-label {
+    text-shadow: none;
+    color: #1a1a1a;
+    font-weight: 600;
   }
 }
 </style>
