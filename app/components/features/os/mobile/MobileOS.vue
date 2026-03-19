@@ -10,18 +10,27 @@
       </div>
     </div>
 
-    <div class="home-screen">
+    <div v-if="activeAppId" class="active-app-container">
+      <component :is="appComponents[activeAppId]" />
+    </div>
+
+    <div v-else class="home-screen">
       <div class="app-grid">
-        <div class="app-icon" @click="themeStore.toggleTheme">
+        <div
+          v-for="app in appRegistry.installedApps"
+          :key="app.id"
+          class="app-icon"
+          @click="openApp(app.id)"
+        >
           <div class="icon-box">
-            <Icon :name="themeStore.currentTheme === 'dark' ? 'ph:moon-fill' : 'ph:sun-fill'" size="28px" />
+            <Icon :name="app.icon" size="28px" />
           </div>
-          <span class="app-label">{{ $t('os.mobile.themeIcon') }}</span>
+          <span class="app-label">{{ $t(app.nameKey) }}</span>
         </div>
       </div>
     </div>
 
-    <div class="navigation-bar">
+    <div class="navigation-bar" @click="closeApp">
       <div class="nav-pill"/>
     </div>
   </div>
@@ -29,15 +38,39 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
-import { useThemeStore } from '@/stores/features/os/useThemeStore';
+import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
 
-const themeStore = useThemeStore();
+import BrowserApp from '@/components/features/os/apps/browser/BrowserApp.vue';
+import TerminalApp from '@/components/features/os/apps/terminal/TerminalApp.vue';
+import AboutApp from '@/components/features/os/apps/about/AboutApp.vue';
+import ProjectsApp from '@/components/features/os/apps/projects/ProjectsApp.vue';
+import SettingsApp from '@/components/features/os/apps/settings/SettingsApp.vue';
+
+const appComponents: Record<string, any> = {
+  settings: SettingsApp,
+  browser: BrowserApp,
+  terminal: TerminalApp,
+  about: AboutApp,
+  projects: ProjectsApp
+};
+
+const appRegistry = useAppRegistry();
+
 const currentTime = ref('');
+const activeAppId = ref<string | null>(null);
 let timer: ReturnType<typeof setInterval>;
 
 const updateTime = () => {
   const now = new Date();
   currentTime.value = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+};
+
+const openApp = (appId: string) => {
+  activeAppId.value = appId;
+};
+
+const closeApp = () => {
+  activeAppId.value = null;
 };
 
 onMounted(() => {
@@ -92,6 +125,15 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: 6px;
+}
+
+.active-app-container {
+  flex: 1;
+  width: 100%;
+  background: var(--os-bg, #000);
+  overflow: hidden;
+  position: relative;
+  z-index: 15;
 }
 
 .home-screen {
@@ -154,6 +196,8 @@ onUnmounted(() => {
   align-items: center;
   padding-bottom: 8px;
   z-index: 20;
+  cursor: pointer;
+  background: linear-gradient(0deg, rgba(0,0,0,0.3) 0%, transparent 100%);
 }
 
 .nav-pill {

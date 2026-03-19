@@ -91,9 +91,6 @@
     "purple": "Cyber Purple",
     "green": "Forest Green"
   },
-  "mobile": {
-    "themeIcon": "Theme"
-  },
   "shutdownModal": {
     "title": "Are you sure you want to shut down?",
     "description": "Any unsaved data will be lost, and the window will close.",

@@ -91,9 +91,6 @@
     "purple": "Cyber Lila",
     "green": "Erdei Zöld"
   },
-  "mobile": {
-    "themeIcon": "Téma"
-  },
   "shutdownModal": {
     "title": "Biztos le akarja kapcsolni a gépet?",
     "description": "Minden nem mentett adat elvész, és az ablak bezárul.",
