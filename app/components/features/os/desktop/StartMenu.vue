@@ -6,7 +6,7 @@
         <input
           v-model="searchQuery"
           type="text"
-          :placeholder="$t('os.startMenu.searchPlaceholder')" />
+          :placeholder="$t('os.startMenu.searchPlaceholder')" >
       </div>
 
       <div class="pinned-section">

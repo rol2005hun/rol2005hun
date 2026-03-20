@@ -36,7 +36,7 @@ const closeProject = () => {
       <div v-if="!activeProject" key="grid" class="grid-view">
         <div class="header">
           <h2 class="title">{{ $t('os.apps.projects.name') }}</h2>
-          <div class="header-divider"></div>
+          <div class="header-divider" />
         </div>
 
         <div class="projects-grid">
@@ -45,7 +45,7 @@ const closeProject = () => {
             :key="project.id"
             class="project-card"
             @click="openProject(project.component)">
-            <div class="card-bg"></div>
+            <div class="card-bg" />
             <div class="card-content">
               <h3>{{ $t(project.titleKey) }}</h3>
               <p>{{ $t(project.descKey) }}</p>

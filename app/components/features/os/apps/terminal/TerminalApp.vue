@@ -6,7 +6,7 @@
         <span class="content">
           <template v-for="(part, j) in line.content.split('\n')" :key="j">
             {{ part }}
-            <br v-if="j < line.content.split('\n').length - 1" />
+            <br v-if="j < line.content.split('\n').length - 1" >
           </template>
         </span>
       </div>
@@ -19,7 +19,7 @@
         :type="isMaskedMode ? 'password' : 'text'"
         spellcheck="false"
         autocomplete="off"
-        @keyup.enter="handleEnter" />
+        @keyup.enter="handleEnter" >
     </div>
   </div>
 </template>
@@ -40,6 +40,7 @@ const cmdInput = ref<HTMLInputElement | null>(null);
 const terminalContainer = ref<HTMLElement | null>(null);
 
 const isMaskedMode = ref(false);
+// eslint-disable-next-line no-unused-vars
 const passwordCallback = ref<((pwd: string) => void) | null>(null);
 
 const isRoot = computed(() => authStore.user?.role === 'admin');

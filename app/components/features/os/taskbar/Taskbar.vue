@@ -42,13 +42,11 @@
 import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useDesktopStore } from '@/stores/features/os/useDesktopStore';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
-import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
 import { useSystemInfo } from '@/composables/features/os/useSystemInfo';
 import AppIcon from '@/components/features/os/shared/AppIcon.vue';
 
 const desktopStore = useDesktopStore();
 const windowStore = useWindowStore();
-const registryStore = useAppRegistry();
 
 const { batteryLevel, batteryCharging, online, connectionType } = useSystemInfo();
 

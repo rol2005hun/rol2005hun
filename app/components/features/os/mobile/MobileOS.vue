@@ -2,7 +2,7 @@
   <div class="mobile-environment">
     <div class="status-bar">
       <div class="time">{{ currentTime }}</div>
-      <div class="notch"></div>
+      <div class="notch" />
       <div class="status-icons">
         <Icon name="ph:cell-signal-full-fill" size="14px" />
         <Icon name="ph:wifi-high-bold" size="14px" />
@@ -32,7 +32,7 @@
     </transition>
 
     <div class="navigation-bar" :class="{ active: activeAppId }" @click="closeApp">
-      <div class="nav-pill"></div>
+      <div class="nav-pill" />
     </div>
   </div>
 </template>

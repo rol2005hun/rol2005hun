@@ -32,8 +32,8 @@
               type="text"
               placeholder="XXXX-XXXX-XXXX"
               :class="{ 'is-invalid': hasError }"
-              @keyup.enter="verifyLicense" />
-            <div class="focus-ring"></div>
+              @keyup.enter="verifyLicense" >
+            <div class="focus-ring" />
           </div>
           <transition name="fade">
             <p v-if="hasError" class="error-msg">

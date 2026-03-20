@@ -10,7 +10,8 @@
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write \"**/*.{vue,scss,css,js,ts,json}\""
+    "format": "prettier --write \"**/*.{vue,scss,css,js,ts,json}\"",
+    "format:check": "prettier --check \"**/*.{vue,scss,css,js,ts,json}\""
   },
   "dependencies": {
     "@nuxt/icon": "^2.2.1",

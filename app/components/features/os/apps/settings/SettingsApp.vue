@@ -28,7 +28,7 @@
             class="theme-card"
             :class="{ active: themeStore.currentTheme === theme.id }"
             @click="themeStore.setTheme(theme.id)">
-            <div class="color-preview" :style="{ backgroundColor: theme.color }"></div>
+            <div class="color-preview" :style="{ backgroundColor: theme.color }" />
             <span>{{ $t(theme.nameKey) }}</span>
           </button>
         </div>
@@ -45,9 +45,7 @@
             class="wallpaper-card"
             :class="{ active: themeStore.currentWallpaper === wp.id }"
             @click="themeStore.setWallpaper(wp.id)">
-            <div
-              class="wallpaper-preview"
-              :style="{ backgroundImage: 'url(' + wp.thumb + ')' }"></div>
+            <div class="wallpaper-preview" :style="{ backgroundImage: 'url(' + wp.thumb + ')' }" />
           </button>
         </div>
 
@@ -57,7 +55,7 @@
           <div class="input-group">
             <label>{{ $t('os.apps.settings.wallpaperUrl') }}</label>
             <div class="input-row">
-              <input v-model="customUrlInput" type="text" placeholder="https://..." />
+              <input v-model="customUrlInput" type="text" placeholder="https://..." >
               <button class="apply-btn" @click="applyCustomUrl">
                 <Icon name="ph:check-bold" />
               </button>
@@ -70,7 +68,7 @@
 
           <div class="input-group">
             <label>{{ $t('os.apps.settings.uploadWallpaper') }}</label>
-            <input type="file" accept="image/*" class="file-input" @change="handleFileUpload" />
+            <input type="file" accept="image/*" class="file-input" @change="handleFileUpload" >
           </div>
 
           <div
@@ -78,7 +76,7 @@
             class="custom-preview-box">
             <div
               class="wallpaper-preview"
-              :style="{ backgroundImage: 'url(' + themeStore.customWallpaperData + ')' }"></div>
+              :style="{ backgroundImage: 'url(' + themeStore.customWallpaperData + ')' }" />
           </div>
         </div>
       </div>

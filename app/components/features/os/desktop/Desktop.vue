@@ -20,7 +20,7 @@
       @click.self="handleDesktopClick"
       @mousedown.self="startSelection"
       @contextmenu.prevent="openContextMenu">
-      <div v-if="isSelecting" class="selection-box" :style="selectionBoxStyle"></div>
+      <div v-if="isSelecting" class="selection-box" :style="selectionBoxStyle" />
 
       <ClientOnly>
         <DesktopIcon

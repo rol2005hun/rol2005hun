@@ -61,7 +61,7 @@
             </defs>
           </svg>
 
-          <div class="glow-effect"></div>
+          <div class="glow-effect" />
         </div>
 
         <p class="instruction-text" :class="{ 'is-hidden': isUnlocking || isSuccess }">
@@ -113,7 +113,6 @@ onUnmounted(() => {
   }
 });
 
-const maxProgress = 100;
 const unlockDurationMs = 1500;
 const circumference = 50 * 2 * Math.PI;
 

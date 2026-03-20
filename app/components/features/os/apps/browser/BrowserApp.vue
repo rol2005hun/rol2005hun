@@ -51,7 +51,7 @@
           type="text"
           class="address-bar"
           placeholder="https://..."
-          @keyup.enter="navigate" />
+          @keyup.enter="navigate" >
       </div>
 
       <button class="nav-btn" title="Ugrás" @click="navigate">
@@ -65,7 +65,7 @@
         :key="iframeKey"
         :src="currentUrl"
         class="browser-iframe"
-        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups" />
       <div v-else class="empty-state">Üres oldal</div>
     </div>
   </div>

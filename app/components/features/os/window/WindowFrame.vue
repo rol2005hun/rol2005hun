@@ -37,12 +37,12 @@
     <div
       v-if="!windowInfo.isMaximized"
       class="resize-handle"
-      @mousedown.stop.prevent="startResize"></div>
+      @mousedown.stop.prevent="startResize" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref, defineAsyncComponent } from 'vue';
+import { computed, ref } from 'vue';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
 import type { OSWindow } from '@/stores/features/os/useWindowStore';
 import AppIcon from '@/components/features/os/shared/AppIcon.vue';
