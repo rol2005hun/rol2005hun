@@ -1,6 +1,7 @@
 <template>
   <div v-if="isVisible" class="modal-overlay">
     <div class="modal-content">
+      <button class="close-btn" @click="closeModal">&times;</button>
       <h2>Ez a verzió már nem támogatott</h2>
       <p>Az oldal ezen verziója elavult és a továbbiakban nem frissül. Kérjük, látogass el az új weboldalra a legfrissebb funkciók eléréséhez.</p>
       <a href="https://ranzak.dev" class="btn-primary">Tovább az új verzióra</a>
@@ -9,9 +10,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from "vue";
 
 const isVisible = ref(false);
+
+const closeModal = () => {
+  isVisible.value = false;
+};
 
 onMounted(() => {
   isVisible.value = true;
@@ -33,12 +38,30 @@ onMounted(() => {
 }
 
 .modal-content {
+  position: relative;
   background: #ffffff;
   padding: 40px;
   border-radius: 8px;
   text-align: center;
   max-width: 450px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  line-height: 1;
+  color: #888888;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.close-btn:hover {
+  color: #222222;
 }
 
 h2 {
