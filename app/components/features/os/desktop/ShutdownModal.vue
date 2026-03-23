@@ -1,11 +1,11 @@
-<template>
-  <div class="shutdown-modal-overlay">
-    <div class="shutdown-modal">
+﻿<template>
+  <div class="shutdown-modal-overlay" @click.stop.prevent @contextmenu.stop.prevent>
+    <div class="shutdown-modal" @click.stop>
       <div class="modal-icon">
         <svg
           viewBox="0 0 24 24"
-          width="48"
-          height="48"
+          width="36"
+          height="36"
           fill="none"
           stroke="currentColor"
           stroke-width="2"
@@ -38,14 +38,15 @@ const systemStore = useSystemStore();
 
 <style scoped lang="scss">
 .shutdown-modal-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
-  z-index: 10000;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 99999;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,76 +55,104 @@ const systemStore = useSystemStore();
 .shutdown-modal {
   background-color: var(--os-window-bg);
   border: 1px solid var(--os-border-color);
-  border-radius: 8px;
-  padding: 32px;
-  width: 400px;
+  border-radius: 16px;
+  padding: 36px 40px;
+  width: 420px;
   max-width: 90%;
   text-align: center;
   color: var(--os-text);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  animation: modal-pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  animation: modal-pop 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-icon {
-  color: #ff3b30;
-  margin-bottom: 16px;
+  color: #ff453a;
+  background: rgba(255, 69, 58, 0.12);
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 24px rgba(255, 69, 58, 0.2);
 }
 
 h2 {
-  font-size: 20px;
-  margin-bottom: 8px;
-  font-weight: 500;
+  font-size: 22px;
+  margin-bottom: 12px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
 }
 
 p {
-  font-size: 14px;
-  color: #aaa;
-  margin-bottom: 24px;
+  font-size: 15px;
+  color: var(--os-text);
+  opacity: 0.7;
+  margin-bottom: 32px;
+  line-height: 1.5;
 }
 
 .modal-actions {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   justify-content: center;
 }
 
 button {
-  padding: 8px 24px;
-  border-radius: 4px;
+  flex: 1;
+  padding: 12px 24px;
+  border-radius: 8px;
   border: none;
   font-size: 14px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
   font-weight: 500;
 }
 
 .btn-cancel {
-  background-color: transparent;
+  background-color: rgba(128, 128, 128, 0.05);
   color: var(--os-text);
   border: 1px solid var(--os-border-color);
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(128, 128, 128, 0.15);
+  }
+
+  &:active {
+    background-color: rgba(128, 128, 128, 0.2);
   }
 }
 
 .btn-confirm {
-  background-color: #ff3b30;
+  background-color: #ff453a;
   color: white;
+  border: 1px solid #ff453a;
+  box-shadow: 0 4px 12px rgba(255, 69, 58, 0.3);
 
   &:hover {
-    background-color: #ff1a10;
+    background-color: #ff5147;
+    border-color: #ff5147;
+    box-shadow: 0 6px 16px rgba(255, 69, 58, 0.4);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(255, 69, 58, 0.3);
   }
 }
 
 @keyframes modal-pop {
   0% {
     opacity: 0;
-    transform: scale(0.9);
+    transform: scale(0.95) translateY(10px);
   }
   100% {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
   }
 }
 </style>
