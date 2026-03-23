@@ -6,7 +6,10 @@
 </template>
 
 <script setup lang="ts">
-const currentScreen = useCookie('currentScreen') as Ref<string>;
+const currentScreen = useCookie('currentScreen', { 
+    sameSite: 'none', 
+    secure: true 
+}) as Ref<string>;
 const texts = ['Betöltés...', 'Felkészülés az indulásra...', 'Rendszer frissitése...', 'Üdvözöljük!'];
 const currentText = ref(texts[0]);
 const audioSrc = 'https://v1.cdnpk.net/videvo_files/audio/premium/audio0025/watermarked/AppleIiDiscDriveB PE1020501_preview.mp3';
