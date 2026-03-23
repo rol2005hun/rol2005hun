@@ -16,10 +16,8 @@ export default defineNuxtConfig({
   serverDir: 'server/',
   modules: ['@pinia/nuxt', '@nuxt/eslint', '@nuxt/icon'],
   css: ['@/assets/scss/main.scss'],
-  nitro: {
-    experimental: {
-      websocket: true
-    }
+  routeRules: {
+    '/': { prerender: true }
   },
   vite: {
     optimizeDeps: {
