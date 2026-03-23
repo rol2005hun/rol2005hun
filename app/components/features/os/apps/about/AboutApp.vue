@@ -88,7 +88,7 @@ const deviceInfo = useDevice();
 const systemStore = useSystemStore();
 
 const browserName = computed(() => {
-  const ua = deviceInfo.userAgent;
+  const ua = deviceInfo.userAgent.value;
   if (!ua) return 'Unknown';
 
   if (ua.includes('Firefox')) return 'Firefox';
