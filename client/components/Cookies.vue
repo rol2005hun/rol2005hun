@@ -30,8 +30,17 @@
 const { currentApps, openApp, startDrag } = useDesktop();
 openApp('cookies');
 const app = currentApps.value.find(app => app.id === 'cookies') as { id: string, position: { top: number, left: number }, zIndex: number, size: { width: number, height: number }, minimized: boolean };
-const acceptedCookies = useCookie('acceptedCookies', { expires: new Date('3000-12-12'), default: () => false }) as Ref<boolean>;
-const currentScreen = useCookie('currentScreen', { default: () => 'cookies' }) as Ref<string>;
+const acceptedCookies = useCookie('acceptedCookies', { 
+    expires: new Date('3000-12-12'), 
+    default: () => false,
+    sameSite: 'none', 
+    secure: true 
+}) as Ref<boolean>;
+const currentScreen = useCookie('currentScreen', { 
+    default: () => 'cookies',
+    sameSite: 'none', 
+    secure: true 
+}) as Ref<string>;
 const licenseKey = ref('');
 
 function validateLicenseKey() {
