@@ -1,4 +1,5 @@
 export default defineNuxtConfig({
+  ssr: false,
   app: {
     head: {
       title: 'ranzakOS v3',
