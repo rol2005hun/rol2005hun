@@ -22,8 +22,9 @@ if (useCookie('version2').value === 'dismissed') {
 
 const closeModal = () => {
     if (notmore.value) {
-        useCookie('version2', { expires: new Date('2025-12-31') }).value = 'dismissed';
+        useCookie('version2', { expires: new Date('2099-12-31'), sameSite: 'none', secure: true  }).value = 'dismissed';
     }
+    
     showModal.value = false;
 }
 </script>
