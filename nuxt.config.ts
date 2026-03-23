@@ -1,5 +1,4 @@
 export default defineNuxtConfig({
-  ssr: false,
   app: {
     head: {
       title: 'ranzakOS v3',
@@ -16,6 +15,11 @@ export default defineNuxtConfig({
   serverDir: 'server/',
   modules: ['@pinia/nuxt', '@nuxt/eslint', '@nuxt/icon'],
   css: ['@/assets/scss/main.scss'],
+  nitro: {
+    experimental: {
+      websocket: true
+    }
+  },
   vite: {
     optimizeDeps: {
       include: ['vue-i18n']
