@@ -1,0 +1,7 @@
+{
+  "title": "Are you sure you want to shut down?",
+  "description": "Any unsaved data will be lost, and the window will close.",
+  "cancel": "Cancel",
+  "confirm": "Shut down",
+  "successMessage": "OS has been shut down. You can close this window."
+}

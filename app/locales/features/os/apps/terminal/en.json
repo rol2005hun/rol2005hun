@@ -1,0 +1,28 @@
+{
+  "name": "Terminal",
+  "welcome": "ranzakOS Terminal v1.0.0",
+  "hint": "Type 'commands' for a list of available commands.",
+  "commands": {
+    "notFound": "Command not found: {cmd}",
+    "uname": "ranzakOS (Web-based desktop environment)",
+    "version": "ranzakOS Version 1.0.0 (Build 2026.03)",
+    "systeminfo": "OS: ranzakOS\\nVersion: 1.0.0\\nEnvironment: Browser",
+    "logoutSuccess": "Logged out.",
+    "sudoRoot": "You are the boss here!",
+    "sudoGuest": "Nice try! But you do not have root privileges here.",
+    "passwordPrompt": "Password:",
+    "permissionDeniedRoot": "Permission denied. Are you root?",
+    "permissionDeniedSession": "Permission denied. Invalid or tampered session.",
+    "verifyingSession": "Verifying root session...",
+    "executionError": "Error executing '{cmd}': {error}",
+    "suAuthenticationFailure": "su: Authentication failure",
+    "suUserNotFound": "su: user {user} does not exist",
+    "suSuccessRoot": "Successfully logged in as root.",
+    "rebooting": "System is rebooting...",
+    "logsCleared": "System logs cleared. (Requires Root)",
+    "availableCommands": "Available commands:",
+    "aliases": "(aliases: {aliases})",
+    "alreadyRoot": "Already root.",
+    "notLoggedIn": "You are not logged in :)"
+  }
+}

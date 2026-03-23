@@ -1,0 +1,16 @@
+{
+  "name": "Névjegy",
+  "osInfo": "Rendszerinformációk",
+  "osName": "Operációs Rendszer",
+  "osVersion": "Verzió",
+  "osKernel": "Rendszermag",
+  "osEnv": "Környezet",
+  "deviceInfo": "Eszközinformációk",
+  "cpu": "Processzor magok",
+  "ram": "Memória (RAM)",
+  "screenWidth": "Képernyő felbontása",
+  "browser": "Böngésző / Eszköz",
+  "language": "Rendszernyelv",
+  "copyright": "© 2026 ranzakOS. Minden jog fenntartva.",
+  "viewChangelog": "Változások megtekintése"
+}

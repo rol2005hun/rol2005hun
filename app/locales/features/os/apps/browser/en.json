@@ -1,0 +1,7 @@
+{
+  "name": "Browser",
+  "back": "Back",
+  "forward": "Forward",
+  "refresh": "Refresh",
+  "emptyState": "Empty page"
+}

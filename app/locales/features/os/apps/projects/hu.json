@@ -1,0 +1,13 @@
+{
+  "name": "Projektek",
+  "backToProjects": "Vissza a projektekhez",
+  "viewProject": "Projekt megtekintése",
+  "project1": {
+    "title": "Első Projekt",
+    "description": "Ez az első minta projekt komponens."
+  },
+  "project2": {
+    "title": "Második Projekt",
+    "description": "Egy másik dinamikusan betöltött komponens."
+  }
+}

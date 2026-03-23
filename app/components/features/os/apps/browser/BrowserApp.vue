@@ -1,7 +1,11 @@
 <template>
   <div class="browser-app">
     <div class="browser-toolbar">
-      <button class="nav-btn" :disabled="!canGoBack" title="Vissza" @click="goBack">
+      <button
+        class="nav-btn"
+        :disabled="!canGoBack"
+        :title="$t('os.apps.browser.back')"
+        @click="goBack">
         <svg
           viewBox="0 0 24 24"
           width="16"
@@ -15,7 +19,11 @@
           <polyline points="12 19 5 12 12 5" />
         </svg>
       </button>
-      <button class="nav-btn" :disabled="!canGoForward" title="Előre" @click="goForward">
+      <button
+        class="nav-btn"
+        :disabled="!canGoForward"
+        :title="$t('os.apps.browser.forward')"
+        @click="goForward">
         <svg
           viewBox="0 0 24 24"
           width="16"
@@ -29,7 +37,7 @@
           <polyline points="12 5 19 12 12 19" />
         </svg>
       </button>
-      <button class="nav-btn" title="Frissítés" @click="refresh">
+      <button class="nav-btn" :title="$t('os.apps.browser.refresh')" @click="refresh">
         <svg
           viewBox="0 0 24 24"
           width="16"
@@ -53,10 +61,6 @@
           placeholder="https://..."
           @keyup.enter="navigate" />
       </div>
-
-      <button class="nav-btn" title="Ugrás" @click="navigate">
-        <span>Go</span>
-      </button>
     </div>
 
     <div class="browser-content">
@@ -66,7 +70,7 @@
         :src="currentUrl"
         class="browser-iframe"
         sandbox="allow-scripts allow-same-origin allow-forms allow-popups" />
-      <div v-else class="empty-state">Üres oldal</div>
+      <div v-else class="empty-state">{{ $t('os.apps.browser.emptyState') }}</div>
     </div>
   </div>
 </template>

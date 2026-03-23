@@ -14,6 +14,8 @@ export default withNuxt(
         sourceType: 'module'
       }
     },
-    rules: {}
+    rules: {
+      'vue/html-self-closing': 'off'
+    }
   }
 );

@@ -1,0 +1,7 @@
+{
+  "title": "Biztos le akarja kapcsolni a gépet?",
+  "description": "Minden nem mentett adat elvész, és az ablak bezárul.",
+  "cancel": "Mégse",
+  "confirm": "Leállítás",
+  "successMessage": "OS leállítva. Bezárhatod ezt az ablakot."
+}
