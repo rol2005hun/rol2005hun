@@ -1,8 +1,18 @@
-{
+﻿{
   "title": "Changelog",
   "subtitle": "Latest OS updates and features",
   "empty": "No versions available.",
   "history": {
+    "2026-03-23-2": {
+      "version": "1.0.1",
+      "title": "Legacy Mode & UI Improvements",
+      "changes": [
+        "Added <strong>Legacy OS Viewer</strong> (Time Machine) to explore v1 and v2 natively in a fullscreen iframe.",
+        "Increased default and minimum window sizes for OS applications to improve user experience.",
+        "Fixed terminal text formatting issues (proper newline parsing for app lists).",
+        "Added close button and Escape key listener to exit legacy mode safely."
+      ]
+    },
     "2026-03-23": {
       "version": "1.0.0",
       "title": "Overhauled Design & Performance",

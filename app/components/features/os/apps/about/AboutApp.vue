@@ -58,7 +58,7 @@
           <Icon name="mdi:laptop-mac" size="20" />
           <span>
             {{ $t('os.apps.about.developedBy') }}:
-            <strong>Roland Ranyak</strong>
+            <strong>❤️ ranzak 💖</strong>
           </span>
         </div>
         <div class="links">
