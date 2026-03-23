@@ -21,7 +21,10 @@ import type { NuxtError } from '#app';
 const props = defineProps({
   error: Object as () => NuxtError
 });
-const currentScreen = useCookie('currentScreen') as Ref<string>;
+const currentScreen = useCookie('currentScreen', { 
+    sameSite: 'none', 
+    secure: true 
+}) as Ref<string>;
 const seconds = ref(10);
 
 function restart() {
