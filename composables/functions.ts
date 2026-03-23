@@ -61,9 +61,9 @@ function setCookie(cName: string, cValue: string, expDays?: number): string {
     let date = new Date();
     date.setTime(date.getTime() + expDays! * 24 * 60 * 60 * 1000);
     if(expDays) {
-        return useCookie(cName, { path: '/', domain: getDomain(), expires: date }).value = cValue;
+        return useCookie(cName, { path: '/', domain: getDomain(), expires: date, sameSite: 'none', secure: true  }).value = cValue;
     } else {
-        return useCookie(cName, { path: '/', domain: getDomain() }).value = cValue;
+        return useCookie(cName, { path: '/', domain: getDomain(), sameSite: 'none', secure: true  }).value = cValue;
     }
 }
 
