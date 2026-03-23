@@ -1,0 +1,27 @@
+{
+  "title": "Changelog",
+  "subtitle": "Latest OS updates and features",
+  "empty": "No versions available.",
+  "history": {
+    "2026-03-23-2": {
+      "version": "3.0.1-beta",
+      "title": "Legacy Mode \u0026 UI Improvements",
+      "changes": [
+        "Added \u003cstrong\u003eLegacy OS Viewer\u003c/strong\u003e (Time Machine) to explore v1 and v2 natively in a fullscreen iframe.",
+        "Increased default and minimum window sizes for OS applications to improve user experience.",
+        "Fixed terminal text formatting issues (proper newline parsing for app lists).",
+        "Added close button and Escape key listener to exit legacy mode safely."
+      ]
+    },
+    "2026-03-23": {
+      "version": "3.0.0-beta",
+      "title": "Overhauled Design \u0026 Performance",
+      "changes": [
+        "Complete \u003cstrong\u003eGlassmorphism\u003c/strong\u003e redesign across all OS interfaces.",
+        "New \u003cem\u003eChangelog Viewer\u003c/em\u003e integration via the About app.",
+        "Comprehensive \u003cstrong\u003eESLint \u0026 Prettier\u003c/strong\u003e rule enforcement and codebase formatting.",
+        "Minor bug fixes and performance optimizations in window management."
+      ]
+    }
+  }
+}

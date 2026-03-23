@@ -144,7 +144,7 @@ onUnmounted(() => {
 
 .active-app-container {
   position: absolute;
-  top: 44px; /* Fix pozíció, elkerüli a layout ugrást befejezéskor */
+  top: 44px;
   left: 0;
   right: 0;
   bottom: 0;
@@ -156,7 +156,7 @@ onUnmounted(() => {
 
 .home-screen {
   position: absolute;
-  top: 44px; /* Ugyanúgy fix pozíció */
+  top: 44px;
   left: 0;
   right: 0;
   bottom: 0;

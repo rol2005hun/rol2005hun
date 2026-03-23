@@ -1,6 +1,7 @@
 ﻿{
   "name": "About",
   "version": "Version",
+  "viewChangelog": "What's New",
   "copyright": "© 2026 ranzak. All rights reserved.",
   "systemInfo": "System Information",
   "osType": "OS Type",

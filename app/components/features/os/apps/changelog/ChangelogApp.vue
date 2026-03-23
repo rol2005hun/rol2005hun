@@ -4,14 +4,14 @@
       <div class="header-icon">
         <Icon name="ph:list-dashes-bold" />
       </div>
-      <h2>{{ $t('changelog.title') }}</h2>
-      <p class="subtitle">{{ $t('changelog.subtitle') }}</p>
+      <h2>{{ $t('os.apps.changelog.title') }}</h2>
+      <p class="subtitle">{{ $t('os.apps.changelog.subtitle') }}</p>
     </div>
 
     <div class="changelog-content">
       <div v-if="!versions || versions.length === 0" class="empty-state">
         <Icon name="ph:empty" class="empty-icon" />
-        <p>{{ $t('changelog.empty') }}</p>
+        <p>{{ $t('os.apps.changelog.empty') }}</p>
       </div>
 
       <div v-for="v in versions" :key="v.version" class="version-entry">
@@ -44,7 +44,7 @@ import { useI18n } from 'vue-i18n';
 const { tm } = useI18n();
 
 const versions = computed(() => {
-  const data = tm('changelog.history') as Record<string, any>;
+  const data = tm('os.apps.changelog.history') as Record<string, any>;
   if (!data || typeof data !== 'object') {
     return [];
   }

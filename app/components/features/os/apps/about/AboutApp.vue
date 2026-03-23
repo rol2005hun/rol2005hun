@@ -6,7 +6,13 @@
       </div>
       <div class="os-info">
         <h1>ranzakOS</h1>
-        <p class="version">{{ $t('os.apps.about.version') }}: 1.0.0 (Build 2026.03)</p>
+        <div class="version-row">
+          <p class="version">{{ $t('os.apps.about.version') }}: 1.0.1 (Build 2026.03)</p>
+          <button class="changelog-btn" @click="openChangelog">
+            <Icon name="ph:list-dashes-bold" size="14" />
+            {{ $t('os.apps.about.viewChangelog') }}
+          </button>
+        </div>
         <p class="copyright">{{ $t('os.apps.about.copyright') }}</p>
       </div>
     </div>
@@ -25,7 +31,7 @@
           </div>
           <div class="info-item">
             <span class="label">{{ $t('os.apps.about.processor') }}:</span>
-            <span class="value">Nuxt 3 Engine</span>
+            <span class="value">Nuxt 4/5 Engine</span>
           </div>
           <div v-if="deviceInfo.userAgent" class="info-item">
             <span class="label">{{ $t('os.apps.about.browser') }}:</span>
@@ -83,9 +89,13 @@
 import { computed } from 'vue';
 import { useDevice } from '@/composables/features/os/useDevice';
 import { useSystemStore } from '@/stores/features/os/useSystemStore';
+import { useWindowStore } from '@/stores/features/os/useWindowStore';
+import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
 
 const deviceInfo = useDevice();
 const systemStore = useSystemStore();
+const windowStore = useWindowStore();
+const registryStore = useAppRegistry();
 
 const browserName = computed(() => {
   const ua = deviceInfo.userAgent.value;
@@ -104,6 +114,19 @@ const browserName = computed(() => {
 
 const bootLegacy = (url: string) => {
   systemStore.bootLegacyOS(url);
+};
+
+const openChangelog = () => {
+  const appConfig = registryStore.getAppById('changelog');
+  if (appConfig) {
+    windowStore.openWindow({
+      id: `changelog-${Date.now()}`,
+      appId: appConfig.id,
+      titleKey: appConfig.nameKey,
+      width: appConfig.defaultWidth || 650,
+      height: appConfig.defaultHeight || 550
+    });
+  }
 };
 </script>
 
@@ -145,14 +168,45 @@ const bootLegacy = (url: string) => {
       letter-spacing: -0.5px;
     }
 
+    .version-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 2px;
+
+      .version {
+        font-weight: 500;
+        margin: 0;
+      }
+
+      .changelog-btn {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 3px 8px;
+        font-size: 12px;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        color: white;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.2);
+          border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        &:active {
+          transform: scale(0.96);
+        }
+      }
+    }
+
     p {
       margin: 0;
       color: rgba(255, 255, 255, 0.7);
-
-      &.version {
-        font-weight: 500;
-        margin-bottom: 2px;
-      }
 
       &.copyright {
         font-size: 12px;

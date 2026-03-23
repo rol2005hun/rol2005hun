@@ -1,6 +1,7 @@
 {
   "name": "Névjegy",
   "version": "Verzió",
+  "viewChangelog": "Újdonságok",
   "copyright": "© 2026 ranzak. Minden jog fenntartva.",
   "systemInfo": "Rendszerinformációk",
   "osType": "OS Típus",
