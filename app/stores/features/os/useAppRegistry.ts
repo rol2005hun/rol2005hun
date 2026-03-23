@@ -59,7 +59,7 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
     },
     {
       id: 'changelog',
-      nameKey: 'changelog.title',
+      nameKey: 'os.apps.changelog.title',
       icon: 'ph:list-dashes-bold',
       defaultWidth: 650,
       defaultHeight: 550,

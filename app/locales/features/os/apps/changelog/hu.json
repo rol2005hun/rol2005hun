@@ -1,26 +1,26 @@
-{
-  "title": "V�ltoz�sok jegyz�ke",
-  "subtitle": "Leg�jabb OS friss�t�sek �s funkci�k",
-  "empty": "Nincs el�rhet� v�ltozat.",
+﻿{
+  "title": "Változások jegyzéke",
+  "subtitle": "Legújabb OS frissítések és funkciók",
+  "empty": "Nincs elérhető változat.",
   "history": {
     "2026.03.23-2": {
       "version": "1.0.1",
-      "title": "Legacy m�d \u0026 UI Finomhangol�sok",
+      "title": "Legacy mód \u0026 UI Finomhangolások",
       "changes": [
-        "Hozz�adva a \u003cstrong\u003eLegacy OS Viewer\u003c/strong\u003e (Id�g�p) a N�vjegy apphoz, amivel a v1 �s v2 portf�li�k nat�van, iframe-ben futtathat�k.",
-        "Megn�velt alap�rtelmezett �s minimum ablakm�retek a jobb olvashat�s�g�rt.",
-        "Termin�l sort�r�s hib�j�nak jav�t�sa (az el�rhet� appok list�ja mostant�l sz�pen, form�zva jelenik meg).",
-        "Biztons�gos kil�p�s t�mogat�sa a Legacy m�db�l egy dedik�lt bez�r�s gombbal."
+        "Hozzáadva a \u003cstrong\u003eLegacy OS Viewer\u003c/strong\u003e (Időgép) a Névjegy apphoz, amivel a v1 és v2 portfóliók natívan, iframe-ben futtathatók.",
+        "Megnövelt alapértelmezett és minimum ablakméretek a jobb olvashatóságért.",
+        "Terminál sortörés hibájának javítása (az elérhető appok listája mostantól szépen, formázva jelenik meg).",
+        "Biztonságos kilépés támogatása a Legacy módból egy dedikált bezárás gombbal."
       ]
     },
     "2026.03.23": {
       "version": "1.0.0",
-      "title": "Meg�jult Diz�jn \u0026 Teljes�tm�ny",
+      "title": "Megújult Dizájn \u0026 Teljesítmény",
       "changes": [
-        "Teljes \u003cstrong\u003eGlassmorphism\u003c/strong\u003e �t�ll�s az OS fel�letein.",
-        "�j \u003cem\u003eV�ltoz�sok jegyz�ke\u003c/em\u003e integr�ci� a N�vjegy alkalmaz�sba.",
-        "Teljes k�r� \u003cstrong\u003eESLint \u0026 Prettier\u003c/strong\u003e szab�lyoz�s �s k�dform�z�s.",
-        "Kisebb bugfixek �s ablakkezel� optimaliz�l�sok."
+        "Teljes \u003cstrong\u003eGlassmorphism\u003c/strong\u003e átállás az OS felületein.",
+        "Új \u003cem\u003eVáltozások jegyzéke\u003c/em\u003e integráció a Névjegy alkalmazásba.",
+        "Teljes körű \u003cstrong\u003eESLint \u0026 Prettier\u003c/strong\u003e szabályozás és kódformázás.",
+        "Kisebb bugfixek és ablakkezelő optimalizálások."
       ]
     }
   }
