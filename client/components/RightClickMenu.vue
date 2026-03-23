@@ -9,7 +9,8 @@
 </template>
 
 <script setup lang="ts">
-const currentApps = useCookie('currentApps', { expires: new Date('3000-12-12') }) as Ref<{ id: string, position: { top: number, left: number }, zIndex: number }[]>;
+const currentApps = useCookie('currentApps', { expires: new Date('3000-12-12'), sameSite: 'none', 
+    secure: true  }) as Ref<{ id: string, position: { top: number, left: number }, zIndex: number }[]>;
 const showMenu = ref(false);
 const menuX = ref(0);
 const menuY = ref(0);
