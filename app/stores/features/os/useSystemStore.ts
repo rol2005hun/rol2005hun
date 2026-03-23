@@ -1,11 +1,12 @@
-import { defineStore } from 'pinia';
+﻿import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
-export const useSystemStore = defineStore('os-system', () => {
-  const showShutdownModal = ref(false);
+export const useSystemStore = defineStore('system', () => {
   const isShuttingDown = ref(false);
+  const showShutdownModal = ref(false);
+  const activeLegacyOS = ref<string | null>(null);
 
-  const requestShutdown = () => {
+  const initiateShutdown = () => {
     showShutdownModal.value = true;
   };
 
@@ -14,21 +15,26 @@ export const useSystemStore = defineStore('os-system', () => {
   };
 
   const confirmShutdown = () => {
-    isShuttingDown.value = true;
     showShutdownModal.value = false;
-    window.close();
+    isShuttingDown.value = true;
+  };
 
-    setTimeout(() => {
-      document.body.innerHTML =
-        '<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#000;color:#fff;font-family:sans-serif;">OS leállítva. Bezárhatod ezt az ablakot.</div>';
-    }, 500);
+  const bootLegacyOS = (url: string) => {
+    activeLegacyOS.value = url;
+  };
+
+  const exitLegacyOS = () => {
+    activeLegacyOS.value = null;
   };
 
   return {
-    showShutdownModal,
     isShuttingDown,
-    requestShutdown,
+    showShutdownModal,
+    activeLegacyOS,
+    initiateShutdown,
     cancelShutdown,
-    confirmShutdown
+    confirmShutdown,
+    bootLegacyOS,
+    exitLegacyOS
   };
 });

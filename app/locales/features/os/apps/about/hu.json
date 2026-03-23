@@ -1,16 +1,18 @@
 {
   "name": "Névjegy",
-  "osInfo": "Rendszerinformációk",
-  "osName": "Operációs Rendszer",
-  "osVersion": "Verzió",
-  "osKernel": "Rendszermag",
-  "osEnv": "Környezet",
-  "deviceInfo": "Eszközinformációk",
-  "cpu": "Processzor magok",
-  "ram": "Memória (RAM)",
-  "screenWidth": "Képernyő felbontása",
-  "browser": "Böngésző / Eszköz",
-  "language": "Rendszernyelv",
-  "copyright": "© 2026 ranzakOS. Minden jog fenntartva.",
-  "viewChangelog": "Változások megtekintése"
+  "version": "Verzió",
+  "copyright": "© 2026 ranzak. Minden jog fenntartva.",
+  "systemInfo": "Rendszerinformációk",
+  "osType": "OS Típus",
+  "kernel": "Rendszermag",
+  "processor": "Processzor",
+  "browser": "Böngésző motor",
+  "credits": "Készítők",
+  "creditsText": "A ranzakOS egy web-alapú operációs rendszer, amelynek célja a webfejlesztési készségek bemutatása és egy egyedi portfólió élmény nyújtása.",
+  "developedBy": "Készítette",
+  "legacy": {
+    "title": "Korábbi verziók",
+    "desc": "Utazz a múltba, és fedezd fel a ranzak portfólió korábbi verzióit közvetlenül a ranzakOS futtatókörnyezetében.",
+    "exitHint": "Nyomd meg az 'Esc' billentyűt a kilépéshez"
+  }
 }

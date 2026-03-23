@@ -2,9 +2,13 @@ import { ref, onMounted, onUnmounted } from 'vue';
 
 export const useDevice = () => {
   const isMobile = ref(false);
+  const userAgent = ref('');
 
   const checkDevice = () => {
     isMobile.value = window.innerWidth <= 768;
+    if (typeof navigator !== 'undefined') {
+      userAgent.value = navigator.userAgent;
+    }
   };
 
   onMounted(() => {
@@ -21,6 +25,7 @@ export const useDevice = () => {
   });
 
   return {
-    isMobile
+    isMobile,
+    userAgent
   };
 };

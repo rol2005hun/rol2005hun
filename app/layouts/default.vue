@@ -11,6 +11,8 @@
         <ShutdownModal v-if="systemStore.showShutdownModal" />
       </Transition>
 
+      <LegacyOSViewer />
+
       <div class="desktop-container" :class="{ 'is-locked': !authStore.isUnlocked }">
         <slot />
       </div>
@@ -23,6 +25,7 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 import { useCookie } from '#imports';
 import SystemSetup from '@/components/features/setup/SystemSetup.vue';
 import LockScreen from '@/components/features/auth/LockScreen.vue';
+import LegacyOSViewer from '@/components/features/os/desktop/LegacyOSViewer.vue';
 import ShutdownModal from '@/components/features/os/desktop/ShutdownModal.vue';
 import { useAuthStore } from '@/composables/features/auth/useAuthStore';
 import { useSystemStore } from '@/stores/features/os/useSystemStore';
@@ -39,7 +42,7 @@ const handleSetupComplete = () => {
 const preventRefresh = (e: KeyboardEvent) => {
   if (e.key === 'F5' || (e.ctrlKey && e.key === 'r') || (e.ctrlKey && e.key === 'R')) {
     e.preventDefault();
-    systemStore.requestShutdown();
+    systemStore.initiateShutdown();
   }
 };
 
@@ -47,9 +50,8 @@ const handleBeforeUnload = (e: BeforeUnloadEvent) => {
   if (systemStore.isShuttingDown) {
     return;
   }
+
   e.preventDefault();
-  e.returnValue = '';
-  return '';
 };
 
 onMounted(() => {

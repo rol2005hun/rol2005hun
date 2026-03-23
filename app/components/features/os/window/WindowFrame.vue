@@ -134,8 +134,8 @@ const onResize = (e: MouseEvent) => {
   let newWidth = initialWidth + (e.clientX - startResizeX);
   let newHeight = initialHeight + (e.clientY - startResizeY);
 
-  const MIN_WIDTH = 350;
-  const MIN_HEIGHT = 200;
+  const MIN_WIDTH = 550;
+  const MIN_HEIGHT = 450;
 
   if (newWidth < MIN_WIDTH) newWidth = MIN_WIDTH;
   if (newHeight < MIN_HEIGHT) newHeight = MIN_HEIGHT;
@@ -200,8 +200,8 @@ const toggleMaximize = () => {
   position: absolute;
   display: flex;
   flex-direction: column;
-  min-width: 350px;
-  min-height: 200px;
+  min-width: 550px;
+  min-height: 450px;
   background: var(--os-window-bg, rgba(30, 30, 30, 0.85));
   border: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.15));
   border-radius: 12px;

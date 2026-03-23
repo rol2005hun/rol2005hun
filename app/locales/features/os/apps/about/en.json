@@ -1,16 +1,18 @@
-{
+﻿{
   "name": "About",
-  "osInfo": "System Information",
-  "osName": "Operating System",
-  "osVersion": "Version",
-  "osKernel": "Kernel",
-  "osEnv": "Environment",
-  "deviceInfo": "Device Information",
-  "cpu": "CPU Logical Cores",
-  "ram": "Memory (RAM)",
-  "screenWidth": "Screen Resolution",
-  "browser": "Browser / Device",
-  "language": "System Language",
-  "copyright": "© 2026 ranzakOS. All rights reserved.",
-  "viewChangelog": "View Changelog"
+  "version": "Version",
+  "copyright": "© 2026 ranzak. All rights reserved.",
+  "systemInfo": "System Information",
+  "osType": "OS Type",
+  "kernel": "Kernel",
+  "processor": "Processor",
+  "browser": "Browser Engine",
+  "credits": "Credits",
+  "creditsText": "ranzakOS is a web-based operating system designed to showcase web development skills and provide a unique portfolio experience.",
+  "developedBy": "Developed by",
+  "legacy": {
+    "title": "Legacy Versions",
+    "desc": "Take a trip down memory lane and explore previous versions of the ranzak portfolio running natively inside ranzakOS.",
+    "exitHint": "Press 'Esc' to exit"
+  }
 }

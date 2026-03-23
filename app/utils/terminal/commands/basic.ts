@@ -77,6 +77,15 @@ export const githubCommand: TerminalCommand = {
   }
 };
 
+export const linkedInCommand: TerminalCommand = {
+  name: 'linkedin',
+  aliases: ['linkedInprofile', 'li'],
+  execute: (args, context) => {
+    window.open('https://www.linkedin.com/in/roland-adalbert-rany%C3%A1k-9a2726373/', '_blank');
+    context.print(context.t('os.apps.terminal.commands.linkedInOpened'));
+  }
+};
+
 export const emailCommand: TerminalCommand = {
   name: 'email',
   aliases: ['mail', 'e-mail', 'e-mailcim'],

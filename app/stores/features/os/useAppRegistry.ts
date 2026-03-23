@@ -43,8 +43,8 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       id: 'settings',
       nameKey: 'os.apps.settings.name',
       icon: 'ph:gear-six-fill',
-      defaultWidth: 600,
-      defaultHeight: 450,
+      defaultWidth: 700,
+      defaultHeight: 550,
       allowMultipleInstances: false,
       showOnDesktop: false
     },
@@ -52,8 +52,8 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       id: 'about',
       nameKey: 'os.apps.about.name',
       icon: 'ph:info-fill',
-      defaultWidth: 400,
-      defaultHeight: 300,
+      defaultWidth: 700,
+      defaultHeight: 550,
       allowMultipleInstances: false,
       showOnDesktop: false
     },
