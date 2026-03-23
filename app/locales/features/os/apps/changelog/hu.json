@@ -10,7 +10,8 @@
         "Hozzáadva a \u003cstrong\u003eLegacy OS Viewer\u003c/strong\u003e (Időgép) a Névjegy apphoz, amivel a v1 és v2 portfóliók natívan, iframe-ben futtathatók.",
         "Megnövelt alapértelmezett és minimum ablakméretek a jobb olvashatóságért.",
         "Terminál sortörés hibájának javítása (az elérhető appok listája mostantól szépen, formázva jelenik meg).",
-        "Biztonságos kilépés támogatása a Legacy módból egy dedikált bezárás gombbal."
+        "Biztonságos kilépés támogatása a Legacy módból egy dedikált bezárás gombbal.",
+        "Javítva: App név, random karakterek."
       ]
     },
     "2026.03.23": {

@@ -10,7 +10,8 @@
         "Added \u003cstrong\u003eLegacy OS Viewer\u003c/strong\u003e (Time Machine) to explore v1 and v2 natively in a fullscreen iframe.",
         "Increased default and minimum window sizes for OS applications to improve user experience.",
         "Fixed terminal text formatting issues (proper newline parsing for app lists).",
-        "Added close button and Escape key listener to exit legacy mode safely."
+        "Added close button and Escape key listener to exit legacy mode safely.",
+        "Fixed: App name, random characters."
       ]
     },
     "2026-03-23": {
