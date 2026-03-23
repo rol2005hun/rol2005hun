@@ -35,6 +35,7 @@
     "christmasCounterInfo": "Még {days} nap, {hours} óra, {minutes} perc, {seconds} másodperc van karácsonyig!",
     "facebookOpened": "Megnyílt a Facebook profilom.",
     "githubOpened": "Megnyílt a GitHub profilom.",
+    "linkedinOpened": "Megnyílt a LinkedIn profilom.",
     "emailOpened": "Megnyílt az e-mail címem.",
     "discordOpened": "Megnyílt a Discord szerverem.",
     "randomUsage": "Helyes használat: random [min] [max]",

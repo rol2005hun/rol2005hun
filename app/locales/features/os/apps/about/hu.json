@@ -13,6 +13,6 @@
   "legacy": {
     "title": "Korábbi verziók",
     "desc": "Utazz a múltba, és fedezd fel a ranzak portfólió korábbi verzióit közvetlenül a ranzakOS futtatókörnyezetében.",
-    "exitHint": "Nyomd meg az 'Esc' billentyűt a kilépéshez"
+    "exitHint": "Nyomd meg az 'X' gombot a kilépéshez a jobb felső sarokban."
   }
 }

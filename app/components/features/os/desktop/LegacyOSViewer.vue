@@ -3,6 +3,12 @@
     <div class="legacy-overlay-hint" :class="{ 'fade-out': hintFaded }">
       {{ $t('os.apps.about.legacy.exitHint') }}
     </div>
+    <button
+      class="legacy-close-btn"
+      @click="systemStore.exitLegacyOS()"
+      :title="$t('os.apps.about.legacy.exitHint')">
+      <Icon name="ph:x-bold" size="24" />
+    </button>
     <iframe
       :src="systemStore.activeLegacyOS"
       frameborder="0"
@@ -90,6 +96,36 @@ onUnmounted(() => {
 
 .fade-out {
   opacity: 0;
+}
+
+.legacy-close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(220, 38, 38, 0.8);
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
 }
 
 @keyframes boot-up {

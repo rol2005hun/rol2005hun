@@ -35,6 +35,7 @@
     "christmasCounterInfo": "There are {days} days, {hours} hours, {minutes} minutes, {seconds} seconds left until Christmas!",
     "facebookOpened": "Opened my Facebook profile.",
     "githubOpened": "Opened my GitHub profile.",
+    "linkedinOpened": "Opened my LinkedIn profile.",
     "emailOpened": "Opened my email.",
     "discordOpened": "Opened my Discord server.",
     "randomUsage": "Usage: random [min] [max]",
