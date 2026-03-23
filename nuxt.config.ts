@@ -1,6 +1,7 @@
 export default defineNuxtConfig({
   app: {
     head: {
+      title: 'ranzakOS',
       link: [{ rel: 'icon', type: 'image/jpeg', href: '/logo.JPG' }]
     }
   },

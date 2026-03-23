@@ -1,3 +1,11 @@
 - NEVER put comments in the generated code.
 - ALWAYS use Vue i18n for all text strings. Do not hardcode strings in templates or logic.
 - Place locale files in the `app/locales/features/<feature-name>/` directory structure.
+- Please don't harcode any text in the code. Use i18n keys instead and add the corresponding translations to the locale files.
+- For terminal commands, ensure that the command name and any output text are also localized using i18n.
+- When adding new features, make sure to follow the existing code style and structure for consistency.
+- If you need to add new dependencies, please make sure they are necessary and do not bloat the project. Always consider if the functionality can be achieved with existing tools and libraries before adding new ones.
+- For any UI components, ensure they are responsive and accessible. Use semantic HTML and ARIA attributes where appropriate to enhance accessibility.
+- When modifying existing features, make sure to test thoroughly to ensure that you do not introduce any bugs or regressions. Always consider edge cases and how your changes might affect different parts of the application.
+- If you are adding new terminal commands, make sure to include help text and usage instructions that are clear and concise. This will help users understand how to use the commands effectively.
+- Always keep performance in mind. Avoid unnecessary re-renders and optimize any expensive operations to ensure that the application remains fast and responsive.

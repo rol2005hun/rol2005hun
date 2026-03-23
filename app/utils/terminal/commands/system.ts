@@ -11,6 +11,7 @@ export const whoamiCommand: TerminalCommand = {
 
 export const suCommand: TerminalCommand = {
   name: 'su',
+  aliases: ['login'],
   execute: async (args, context) => {
     if (args.length === 0) {
       context.print(context.t('os.apps.terminal.commands.suUsage'));
