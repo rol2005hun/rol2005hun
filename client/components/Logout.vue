@@ -6,7 +6,10 @@
 </template>
 
 <script setup lang="ts">
-const currentScreen = useCookie('currentScreen') as Ref<string>;
+const currentScreen = useCookie('currentScreen', { 
+    sameSite: 'none', 
+    secure: true 
+}) as Ref<string>;
 const texts = ['Kijelentkezés...', 'Programok bezárása...', 'Ideiglenes fájlok törlése...', 'Viszlát!'];
 const currentText = ref(texts[0]);
 
