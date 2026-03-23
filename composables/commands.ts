@@ -53,12 +53,12 @@ function executeCommands(command: string) {
     if(cmd == 'login' || cmd == 'bejelentkezes' || cmd == 'sudo' || cmd == 'su') {
         const username = command.split(' ')[1];
         if(!username) return 'Helyes használat: login [username]';
-        document.cookie = `username=${username}; expires=Thu, 18 Dec 2029 12:00:00 UTC; path=/`;
+        document.cookie = `username=${username}; expires=Thu, 18 Dec 2029 12:00:00 UTC; path=/; SameSite=None; Secure`;
         return `Bejelentkezve mint: ${username}`;
     }
 
     if(cmd == 'logout') {
-        document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; SameSite=None; Secure';
         return 'Sikeresen kijelentkeztél!';
     }
 
