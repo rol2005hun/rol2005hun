@@ -94,7 +94,8 @@ export function useMusicPlayer() {
             volumeSlider.value = value;
             defaultVolume.value = value;
             isMuted.value = value === 0;
-            useCookie('volume', { expires: new Date('3000-12-12') }).value = value.toString();
+            useCookie('volume', { expires: new Date('3000-12-12'), sameSite: 'none', 
+    secure: true }).value = value.toString();
         }
     };
 

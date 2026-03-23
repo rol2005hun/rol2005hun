@@ -20,8 +20,10 @@
 
 <script setup lang="ts">
 const { openApp } = useDesktop();
-const backgroundUrl = useCookie('backgroundUrl', { expires: new Date('3000-12-12') }) as Ref<string>;
-const terminalUsername = useCookie('username', { expires: new Date('3000-12-12') }) as Ref<string>;
+const backgroundUrl = useCookie('backgroundUrl', { expires: new Date('3000-12-12'), sameSite: 'none', 
+    secure: true }) as Ref<string>;
+const terminalUsername = useCookie('username', { expires: new Date('3000-12-12'), sameSite: 'none', 
+    secure: true }) as Ref<string>;
 </script>
 
 <style scoped lang="scss">

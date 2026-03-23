@@ -10,8 +10,10 @@
 </template>
 
 <script setup lang="ts">
-const acceptedCookies = useCookie('acceptedCookies', { expires: new Date('3000-12-12'), default: () => false }) as Ref<boolean>;
-const currentScreen = useCookie('currentScreen', { default: () => 'login' }) as Ref<string>;
+const acceptedCookies = useCookie('acceptedCookies', { expires: new Date('3000-12-12'), default: () => false, sameSite: 'none', 
+    secure: true }) as Ref<boolean>;
+const currentScreen = useCookie('currentScreen', { default: () => 'login', sameSite: 'none', 
+    secure: true }) as Ref<string>;
 const unlockTimer = ref<ReturnType<typeof setTimeout> | null>(null);
 
 function startUnlock() {

@@ -20,8 +20,10 @@ export function useDesktop() {
         { id: 'changelog', name: 'Újdonságok', icon: '📝', desktopIcon: false, component: markRaw(Changelog) },
         { id: 'chat', name: 'Chat', icon: '💬', desktopIcon: true, component: markRaw(Chat) },
     ]);
-    const currentApps = useCookie('currentApps', { default: () => [] }) as Ref<{ id: string, position: { top: number, left: number }, size: { width: number, height: number }, zIndex: number, minimized: boolean }[]>;
-    const backgroundUrl = useCookie('backgroundUrl', { expires: new Date('3000-12-12') }) as Ref<string>;
+    const currentApps = useCookie('currentApps', { sameSite: 'none', 
+    secure: true, default: () => [] }) as Ref<{ id: string, position: { top: number, left: number }, size: { width: number, height: number }, zIndex: number, minimized: boolean }[]>;
+    const backgroundUrl = useCookie('backgroundUrl', { expires: new Date('3000-12-12'), sameSite: 'none', 
+    secure: true }) as Ref<string>;
     const isMenuVisible = ref(false);
     const hour = ref(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
     const date = ref(new Date().toLocaleDateString());

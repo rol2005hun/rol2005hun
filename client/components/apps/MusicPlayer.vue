@@ -39,7 +39,8 @@
 </template>
 
 <script setup lang="ts">
-const volume = useCookie('volume', { expires: new Date('3000-12-12') }) as Ref<string>;
+const volume = useCookie('volume', { expires: new Date('3000-12-12'),sameSite: 'none', 
+    secure: true }) as Ref<string>;
 
 const {
     currentTime,
