@@ -12,6 +12,11 @@ export const whoamiCommand: TerminalCommand = {
 export const suCommand: TerminalCommand = {
   name: 'su',
   execute: async (args, context) => {
+    if (args.length === 0) {
+      context.print(context.t('os.apps.terminal.commands.suUsage'));
+      return;
+    }
+
     if (context.isRoot()) {
       context.print(context.t('os.apps.terminal.commands.alreadyRoot'));
       return;

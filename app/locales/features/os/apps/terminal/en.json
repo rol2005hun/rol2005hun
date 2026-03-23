@@ -16,6 +16,7 @@
     "verifyingSession": "Verifying root session...",
     "executionError": "Error executing '{cmd}': {error}",
     "suAuthenticationFailure": "su: Authentication failure",
+    "suUsage": "Usage: su [username]",
     "suUserNotFound": "su: user {user} does not exist",
     "suSuccessRoot": "Successfully logged in as root.",
     "rebooting": "System is rebooting...",

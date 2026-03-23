@@ -1,4 +1,9 @@
 export default defineNuxtConfig({
+  app: {
+    head: {
+      link: [{ rel: 'icon', type: 'image/jpeg', href: '/logo.JPG' }]
+    }
+  },
   runtimeConfig: {
     adminPassword: process.env.VITE_ADMIN_PASSWORD,
     public: {}

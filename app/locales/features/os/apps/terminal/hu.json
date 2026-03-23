@@ -16,6 +16,7 @@
     "verifyingSession": "Root munkamenet ellenőrzése...",
     "executionError": "Hiba a '{cmd}' parancs végrehajtásakor: {error}",
     "suAuthenticationFailure": "su: Hitelesítési hiba",
+    "suUsage": "Használat: su [felhasználónév]",
     "suUserNotFound": "su: {user} felhasználó nem létezik",
     "suSuccessRoot": "Sikeres bejelentkezés root-ként.",
     "rebooting": "Rendszer újraindítása...",
