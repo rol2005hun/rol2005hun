@@ -1,4 +1,4 @@
-﻿{
+{
   "startMenu": {
     "searchPlaceholder": "Keress itt...",
     "pinnedApps": "Tűzött alkalmazások",
@@ -68,7 +68,8 @@
       "screenWidth": "Képernyő felbontása",
       "browser": "Böngésző / Eszköz",
       "language": "Rendszernyelv",
-      "copyright": "© 2026 ranzakOS. Minden jog fenntartva."
+      "copyright": "© 2026 ranzakOS. Minden jog fenntartva.",
+      "viewChangelog": "Változások megtekintése"
     },
     "projects": {
       "name": "Projektek",

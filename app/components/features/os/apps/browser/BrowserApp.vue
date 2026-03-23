@@ -51,7 +51,7 @@
           type="text"
           class="address-bar"
           placeholder="https://..."
-          @keyup.enter="navigate" >
+          @keyup.enter="navigate" />
       </div>
 
       <button class="nav-btn" title="Ugrás" @click="navigate">

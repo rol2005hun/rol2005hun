@@ -52,13 +52,15 @@ import BrowserApp from '@/components/features/os/apps/browser/BrowserApp.vue';
 import TerminalApp from '@/components/features/os/apps/terminal/TerminalApp.vue';
 import AboutApp from '@/components/features/os/apps/about/AboutApp.vue';
 import ProjectsApp from '@/components/features/os/apps/projects/ProjectsApp.vue';
+import ChangelogApp from '@/components/features/os/apps/changelog/ChangelogApp.vue';
 
 const appComponents: Record<string, any> = {
   settings: SettingsApp,
   browser: BrowserApp,
   terminal: TerminalApp,
   about: AboutApp,
-  projects: ProjectsApp
+  projects: ProjectsApp,
+  changelog: ChangelogApp
 };
 
 const props = defineProps<{

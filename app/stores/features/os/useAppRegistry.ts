@@ -10,6 +10,7 @@ export interface AppDefinition {
   defaultHeight?: number;
   allowMultipleInstances?: boolean;
   showOnDesktop?: boolean;
+  showInStartMenu?: boolean;
 }
 
 export const useAppRegistry = defineStore('os-app-registry', () => {
@@ -55,6 +56,16 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       defaultHeight: 300,
       allowMultipleInstances: false,
       showOnDesktop: false
+    },
+    {
+      id: 'changelog',
+      nameKey: 'changelog.title',
+      icon: 'ph:list-dashes-bold',
+      defaultWidth: 650,
+      defaultHeight: 550,
+      allowMultipleInstances: false,
+      showOnDesktop: false,
+      showInStartMenu: false
     }
   ]);
 

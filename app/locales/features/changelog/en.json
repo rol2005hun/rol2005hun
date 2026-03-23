@@ -1,0 +1,17 @@
+{
+  "title": "Changelog",
+  "subtitle": "Latest OS updates and features",
+  "empty": "No versions available.",
+  "history": {
+    "2026-03-23": {
+      "version": "1.0.0",
+      "title": "Overhauled Design & Performance",
+      "changes": [
+        "Complete <strong>Glassmorphism</strong> redesign across all OS interfaces.",
+        "New <em>Changelog Viewer</em> integration via the About app.",
+        "Comprehensive <strong>ESLint & Prettier</strong> rule enforcement and codebase formatting.",
+        "Minor bug fixes and performance optimizations in window management."
+      ]
+    }
+  }
+}

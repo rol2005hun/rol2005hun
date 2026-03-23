@@ -1,0 +1,17 @@
+{
+  "title": "Változások jegyzéke",
+  "subtitle": "Legújabb OS frissítések és funkciók",
+  "empty": "Nincs elérhető változat.",
+  "history": {
+    "2026.03.23": {
+      "version": "1.0.0",
+      "title": "Megújult Dizájn & Teljesítmény",
+      "changes": [
+        "Teljes <strong>Glassmorphism</strong> átállás az OS felületein.",
+        "Új <em>Változások jegyzéke</em> integráció a Névjegy alkalmazásba.",
+        "Teljes körű <strong>ESLint & Prettier</strong> szabályozás és kódformázás.",
+        "Kisebb bugfixek és ablakkezelő optimalizálások."
+      ]
+    }
+  }
+}

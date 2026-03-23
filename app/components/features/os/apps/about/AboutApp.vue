@@ -6,6 +6,11 @@
       </div>
       <h2>ranzakOS</h2>
       <p class="subtitle">{{ $t('os.apps.about.copyright') }}</p>
+
+      <button class="changelog-btn" @click="openChangelog">
+        <Icon name="ph:list-dashes-bold" />
+        {{ $t('os.apps.about.viewChangelog') }}
+      </button>
     </div>
 
     <div class="info-section">
@@ -60,6 +65,8 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { useWindowStore } from '@/stores/features/os/useWindowStore';
+import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
 
 const hardwareConcurrency = ref<string>('N/A');
 const deviceMemory = ref<string>('N/A');
@@ -67,6 +74,22 @@ const screenWidth = ref<number>(0);
 const screenHeight = ref<number>(0);
 const language = ref<string>('N/A');
 const browserInfo = ref<string>('N/A');
+
+const windowStore = useWindowStore();
+const registryStore = useAppRegistry();
+
+const openChangelog = () => {
+  const appConfig = registryStore.getAppById('changelog');
+  if (appConfig) {
+    windowStore.openWindow({
+      id: `${appConfig.id}-1`,
+      appId: appConfig.id,
+      titleKey: appConfig.nameKey,
+      width: appConfig.defaultWidth || 650,
+      height: appConfig.defaultHeight || 550
+    });
+  }
+};
 
 onMounted(() => {
   if (typeof window !== 'undefined' && window.navigator) {
@@ -128,6 +151,30 @@ onMounted(() => {
     font-size: 12px;
     color: #aaa;
     margin: 0;
+  }
+
+  .changelog-btn {
+    margin-top: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--os-text, #fff);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
   }
 }
 

@@ -55,7 +55,7 @@
           <div class="input-group">
             <label>{{ $t('os.apps.settings.wallpaperUrl') }}</label>
             <div class="input-row">
-              <input v-model="customUrlInput" type="text" placeholder="https://..." >
+              <input v-model="customUrlInput" type="text" placeholder="https://..." />
               <button class="apply-btn" @click="applyCustomUrl">
                 <Icon name="ph:check-bold" />
               </button>
@@ -68,7 +68,7 @@
 
           <div class="input-group">
             <label>{{ $t('os.apps.settings.uploadWallpaper') }}</label>
-            <input type="file" accept="image/*" class="file-input" @change="handleFileUpload" >
+            <input type="file" accept="image/*" class="file-input" @change="handleFileUpload" />
           </div>
 
           <div

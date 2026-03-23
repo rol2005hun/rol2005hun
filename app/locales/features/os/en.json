@@ -1,4 +1,4 @@
-﻿{
+{
   "startMenu": {
     "searchPlaceholder": "Type here to search...",
     "pinnedApps": "Pinned Apps",
@@ -68,7 +68,8 @@
       "screenWidth": "Screen Resolution",
       "browser": "Browser / Device",
       "language": "System Language",
-      "copyright": "© 2026 ranzakOS. All rights reserved."
+      "copyright": "© 2026 ranzakOS. All rights reserved.",
+      "viewChangelog": "View Changelog"
     },
     "projects": {
       "name": "Projects",

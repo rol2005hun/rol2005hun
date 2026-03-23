@@ -6,7 +6,7 @@
         <input
           v-model="searchQuery"
           type="text"
-          :placeholder="$t('os.startMenu.searchPlaceholder')" >
+          :placeholder="$t('os.startMenu.searchPlaceholder')" />
       </div>
 
       <div class="pinned-section">
@@ -78,10 +78,12 @@ onUnmounted(() => {
 });
 
 const filteredApps = computed(() => {
-  const query = searchQuery.value.trim().toLowerCase();
-  if (!query) return registryStore.installedApps;
+  const visibleApps = registryStore.installedApps.filter((app) => app.showInStartMenu !== false);
 
-  return registryStore.installedApps.filter((app) => {
+  const query = searchQuery.value.trim().toLowerCase();
+  if (!query) return visibleApps;
+
+  return visibleApps.filter((app) => {
     const keyPath = app.nameKey.split('.');
 
     for (const locale of Object.keys(messages.value)) {

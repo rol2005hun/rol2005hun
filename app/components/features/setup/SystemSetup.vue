@@ -32,7 +32,7 @@
               type="text"
               placeholder="XXXX-XXXX-XXXX"
               :class="{ 'is-invalid': hasError }"
-              @keyup.enter="verifyLicense" >
+              @keyup.enter="verifyLicense" />
             <div class="focus-ring" />
           </div>
           <transition name="fade">
