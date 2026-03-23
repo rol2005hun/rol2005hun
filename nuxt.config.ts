@@ -16,9 +16,6 @@ export default defineNuxtConfig({
   serverDir: 'server/',
   modules: ['@pinia/nuxt', '@nuxt/eslint', '@nuxt/icon'],
   css: ['@/assets/scss/main.scss'],
-  routeRules: {
-    '/**': { prerender: true }
-  },
   vite: {
     optimizeDeps: {
       include: ['vue-i18n']
