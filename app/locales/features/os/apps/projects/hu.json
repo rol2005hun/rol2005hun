@@ -1,5 +1,6 @@
 {
   "name": "Projektek",
+  "githubInfo": "Rengeteg más projekt is megtalálható a <a href=\"https://github.com/rol2005hun\" target=\"_blank\">GitHubomon</a>, túl sok lenne itt mindet felsorolni, nézz rá arra is!",
   "backToProjects": "Vissza a projektekhez",
   "viewProject": "Projekt megtekintése",
   "project1": {
@@ -9,5 +10,71 @@
   "project2": {
     "title": "Második Projekt",
     "description": "Egy másik dinamikusan betöltött komponens."
+  },
+  "sanovise": {
+    "title": "Sanovise",
+    "description": "AI-alapú Egészségügyi Konzultációs digitális asszisztens.",
+    "links": {
+      "demo": "Demo Videó megtekintése",
+      "thesis": "Egyetemi Szakdolgozat (DE)"
+    },
+    "details": {
+      "description": "A Sanovise egy mesterséges intelligenciával működő digitális egészségügyi asszisztens, amely a felhasználói egészségügyi adatok elemzésére és hasznos betekintések nyújtására szolgál.",
+      "stack": "Technológiák: Nuxt.js, TypeScript, Node.js, Express.js, Transformers.js",
+      "features": "Funkciók: Egészségügyi adatok elemzése, AI orvosi lelet feldolgozás, JSON export/import."
+    }
+  },
+  "wolimby": {
+    "title": "Wolimby [Archívum]",
+    "description": "Egy weboldal, amely tanulás és szórakozás céljából készült.",
+    "links": {
+      "demo": "Bemutató videó",
+      "discord": "Discord Szerver",
+      "github": "Forráskód"
+    },
+    "details": {
+      "description": "2024 decemberétől végleg megszűnt futni, viszont a projekt felhasználásra került a Debreceni Egyetem egyik óráján 2025-ben.",
+      "stack": "Technológiák: Nuxt.js, TypeScript, Pinia, SCSS, Node.js, Express.js, Mongoose",
+      "features": "Funkciók: Link rövidítés, chat, bejegyzések, játékok, GIF profilképek támogatása."
+    }
+  },
+  "knightswap": {
+    "title": "Knight Swap",
+    "description": "Sakk-logikai játék, ahol a cél a sötét és világos huszárok helycseréje.",
+    "links": {
+      "github": "Forráskód"
+    },
+    "details": {
+      "description": "Egy 4x3-as sakktáblán játszható logikai feladvány, ahol a felső és alsó sorban lévő huszárok helyzeteit kell megcserélni anélkül, hogy ütésben lennének.",
+      "stack": "Technológiák: Java, JavaFX, Maven",
+      "features": "Funkciók: Grafikus felhasználói felület (GUI), Breadth-First Search (BFS) algoritmikus megoldó, ranglista, és interaktív játékmenet."
+    }
+  },
+  "nexus": {
+    "title": "Operation: NEXUS",
+    "description": "Egy immerzív FBI-stílusú digitális nyomozós játék.",
+    "links": {
+      "github": "Forráskód",
+      "demo": "Bemutató videó",
+      "website": "Weboldal megtekintése"
+    },
+    "details": {
+      "description": "A NEXUS egy böngésző-alapú nyomozós szimuláció, ahol digitális detektívként játszol. Használj profi eszközöket kibertámadások felderítéséhez, elemezz bizonyítékokat, és leplezz le összeesküvéseket reális szituációkon keresztül!",
+      "stack": "Technológiák: Nuxt 4, Vue 3, TypeScript, SCSS, Pinia, Node.js, MongoDB, JWT",
+      "features": "Funkciók: Teljes OS szimuláció, SecureMail (Email kliens), CipherChat (titkosított chat), CryptoCracker (dekódoló eszköz), Evidence Locker (bizonyíték tároló)."
+    }
+  },
+  "deik": {
+    "title": "Debreceni Egyetem Informatikai Kar",
+    "description": "Egyetemi tananyagok, feladatok és beadandók gyűjteménye.",
+    "links": {
+      "github": "GitHub Repozitórium",
+      "website": "Weboldal"
+    },
+    "details": {
+      "description": "Ez a repozitórium a Debreceni Egyetem Informatikai Karán (DE-IK) végzett tanulmányaim során készített jegyzeteket, feladatokat és projekteket tartalmazza.",
+      "stack": "Kifejezetten diákok és érdeklődők számára fenntartva.",
+      "features": "Tartalom: Rendszerezett tantárgyak, kidolgozott vizsgatételek, egyetemi segédletek."
+    }
   }
 }

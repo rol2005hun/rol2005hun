@@ -1,5 +1,6 @@
 {
   "name": "Projects",
+  "githubInfo": "Many other projects can be found on my <a href=\"https://github.com/rol2005hun\" target=\"_blank\">GitHub</a>, it would be too much to list them all here, definitely check it out!",
   "backToProjects": "Back to Projects",
   "viewProject": "View Project",
   "project1": {
@@ -9,5 +10,71 @@
   "project2": {
     "title": "Second Project",
     "description": "Another component loaded dynamically."
+  },
+  "sanovise": {
+    "title": "Sanovise",
+    "description": "AI-Powered Health Consultation digital assistant.",
+    "links": {
+      "demo": "Watch Demo Video",
+      "thesis": "University Thesis"
+    },
+    "details": {
+      "description": "Sanovise is a digital health assistant powered by artificial intelligence, designed to analyze user health data and provide meaningful insights.",
+      "stack": "Tech Stack: Nuxt.js, TypeScript, Node.js, Express.js, Transformers.js",
+      "features": "Features: Health data analysis, AI medical record processing, JSON export/import."
+    }
+  },
+  "wolimby": {
+    "title": "Wolimby [Archived]",
+    "description": "A web project created for learning and entertainment.",
+    "links": {
+      "demo": "Demo Video",
+      "discord": "Discord Server",
+      "github": "Source Code"
+    },
+    "details": {
+      "description": "Archived since December 2024. Used in a class at the University of Debrecen in 2025.",
+      "stack": "Tech Stack: Nuxt.js, TypeScript, Pinia, SCSS, Node.js, Express.js, Mongoose",
+      "features": "Features: Link shortening, real-time chat, posts, games, and GIF profile pictures."
+    }
+  },
+  "knightswap": {
+    "title": "Knight Swap",
+    "description": "Chess-based logic puzzle where the goal is to swap dark and light knights.",
+    "links": {
+      "github": "Source Code"
+    },
+    "details": {
+      "description": "A 4x3 chessboard puzzle. The goal is to swap the positions of the three black and three white knights without them threatening each other.",
+      "stack": "Tech Stack: Java, JavaFX, Maven",
+      "features": "Features: Graphic User Interface (GUI), Search Algorithm (BFS) console solver, Leaderboard and Interactive gameplay."
+    }
+  },
+  "nexus": {
+    "title": "Operation: NEXUS",
+    "description": "An immersive FBI-style digital forensics investigation game.",
+    "links": {
+      "github": "Source Code",
+      "demo": "Video Showcase",
+      "website": "Visit Website"
+    },
+    "details": {
+      "description": "NEXUS is a web-based investigation simulation where you play as a digital detective. Using professional-grade tools, investigate cyber crimes, analyze digital evidence, and uncover conspiracies in realistic scenarios.",
+      "stack": "Tech Stack: Nuxt 4, Vue 3, TypeScript, SCSS, Pinia, Node.js, MongoDB, JWT",
+      "features": "Features: Full Laptop Simulation, SecureMail, CipherChat, CryptoCracker (decryption tool), Evidence Locker, File Reader."
+    }
+  },
+  "deik": {
+    "title": "University of Debrecen - IT Faculty",
+    "description": "Collection of university study materials, assignments, and projects.",
+    "links": {
+      "github": "GitHub Repository",
+      "website": "Website"
+    },
+    "details": {
+      "description": "This repository contains notes, assignments, and projects created during my studies at the Faculty of Informatics, University of Debrecen.",
+      "stack": "Maintained specifically for students and knowledge seekers.",
+      "features": "Content: Organized subjects, solved exam topics, educational resources."
+    }
   }
 }

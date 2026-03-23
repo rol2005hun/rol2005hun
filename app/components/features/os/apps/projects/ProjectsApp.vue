@@ -1,21 +1,42 @@
 <script setup lang="ts">
 import { defineAsyncComponent, shallowRef } from 'vue';
 
-const ProjectOne = defineAsyncComponent(() => import('./content/ProjectOne.vue'));
-const ProjectTwo = defineAsyncComponent(() => import('./content/ProjectTwo.vue'));
+const SanoviseProject = defineAsyncComponent(() => import('./content/SanoviseProject.vue'));
+const WolimbyProject = defineAsyncComponent(() => import('./content/WolimbyProject.vue'));
+const KnightSwapProject = defineAsyncComponent(() => import('./content/KnightSwapProject.vue'));
+const NexusProject = defineAsyncComponent(() => import('./content/NexusProject.vue'));
+const DeikProject = defineAsyncComponent(() => import('./content/DeikProject.vue'));
 
 const projects = [
   {
-    id: 'project1',
-    titleKey: 'os.apps.projects.project1.title',
-    descKey: 'os.apps.projects.project1.description',
-    component: ProjectOne
+    id: 'nexus',
+    titleKey: 'os.apps.projects.nexus.title',
+    descKey: 'os.apps.projects.nexus.description',
+    component: NexusProject
   },
   {
-    id: 'project2',
-    titleKey: 'os.apps.projects.project2.title',
-    descKey: 'os.apps.projects.project2.description',
-    component: ProjectTwo
+    id: 'deik',
+    titleKey: 'os.apps.projects.deik.title',
+    descKey: 'os.apps.projects.deik.description',
+    component: DeikProject
+  },
+  {
+    id: 'sanovise',
+    titleKey: 'os.apps.projects.sanovise.title',
+    descKey: 'os.apps.projects.sanovise.description',
+    component: SanoviseProject
+  },
+  {
+    id: 'wolimby',
+    titleKey: 'os.apps.projects.wolimby.title',
+    descKey: 'os.apps.projects.wolimby.description',
+    component: WolimbyProject
+  },
+  {
+    id: 'knightswap',
+    titleKey: 'os.apps.projects.knightswap.title',
+    descKey: 'os.apps.projects.knightswap.description',
+    component: KnightSwapProject
   }
 ];
 
@@ -36,6 +57,8 @@ const closeProject = () => {
       <div v-if="!activeProject" key="grid" class="grid-view">
         <div class="header">
           <h2 class="title">{{ $t('os.apps.projects.name') }}</h2>
+          <!-- eslint-disable-next-line vue/no-v-html -->
+          <p class="github-info" v-html="$t('os.apps.projects.githubInfo')" />
           <div class="header-divider" />
         </div>
 
@@ -126,6 +149,25 @@ const closeProject = () => {
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  .github-info {
+    margin: 8px 0 16px 0;
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+
+    :deep(a) {
+      color: #58a6ff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #79b8ff;
+        text-decoration: underline;
+      }
+    }
   }
 
   .header-divider {
