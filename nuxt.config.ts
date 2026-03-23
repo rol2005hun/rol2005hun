@@ -17,7 +17,7 @@ export default defineNuxtConfig({
   modules: ['@pinia/nuxt', '@nuxt/eslint', '@nuxt/icon'],
   css: ['@/assets/scss/main.scss'],
   routeRules: {
-    '/': { prerender: true }
+    '/**': { prerender: true }
   },
   vite: {
     optimizeDeps: {
