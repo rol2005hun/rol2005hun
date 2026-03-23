@@ -9,7 +9,10 @@
 </template>
 
 <script setup lang="ts">
-const currentScreen = useCookie('currentScreen') as Ref<string>;
+const currentScreen = useCookie('currentScreen', { 
+    sameSite: 'none', 
+    secure: true 
+}) as Ref<string>;
 
 function turnOff() {
     currentScreen.value = 'logout';    
