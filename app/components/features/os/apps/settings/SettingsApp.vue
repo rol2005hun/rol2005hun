@@ -17,91 +17,111 @@
       </ul>
     </div>
     <div class="content">
-      <div v-if="activeTab === 'appearance'">
-        <h2>{{ $t('os.apps.settings.themeSelection') }}</h2>
-        <p class="subtitle">{{ $t('os.apps.settings.themeSubtitle') }}</p>
+      <transition name="fade-slide" mode="out-in">
+        <div v-if="activeTab === 'appearance'" key="appearance" class="tab-content">
+          <div class="header">
+            <h2>{{ $t('os.apps.settings.themeSelection') }}</h2>
+            <p class="subtitle">{{ $t('os.apps.settings.themeSubtitle') }}</p>
+          </div>
 
-        <div class="theme-grid">
-          <button
-            v-for="theme in themeStore.availableThemes"
-            :key="theme.id"
-            class="theme-card"
-            :class="{ active: themeStore.currentTheme === theme.id }"
-            @click="themeStore.setTheme(theme.id)">
-            <div class="color-preview" :style="{ backgroundColor: theme.color }" />
-            <span>{{ $t(theme.nameKey) }}</span>
-          </button>
-        </div>
-      </div>
-
-      <div v-if="activeTab === 'wallpaper'">
-        <h2>{{ $t('os.apps.settings.wallpaperSelection') }}</h2>
-        <p class="subtitle">{{ $t('os.apps.settings.wallpaperSubtitle') }}</p>
-
-        <div class="wallpaper-grid">
-          <button
-            v-for="wp in themeStore.availableWallpapers"
-            :key="wp.id"
-            class="wallpaper-card"
-            :class="{ active: themeStore.currentWallpaper === wp.id }"
-            @click="themeStore.setWallpaper(wp.id)">
-            <div class="wallpaper-preview" :style="{ backgroundImage: 'url(' + wp.thumb + ')' }" />
-          </button>
+          <div class="theme-grid">
+            <button
+              v-for="theme in themeStore.availableThemes"
+              :key="theme.id"
+              class="theme-card"
+              :class="{ active: themeStore.currentTheme === theme.id }"
+              :style="{ '--theme-color': theme.color }"
+              @click="themeStore.setTheme(theme.id)">
+              <div class="color-preview" :style="{ backgroundColor: theme.color }" />
+              <span>{{ $t(theme.nameKey) }}</span>
+            </button>
+          </div>
         </div>
 
-        <h3 class="section-title">{{ $t('os.apps.settings.customWallpaper') }}</h3>
+        <div v-else-if="activeTab === 'wallpaper'" key="wallpaper" class="tab-content">
+          <div class="header">
+            <h2>{{ $t('os.apps.settings.wallpaperSelection') }}</h2>
+            <p class="subtitle">{{ $t('os.apps.settings.wallpaperSubtitle') }}</p>
+          </div>
 
-        <div class="custom-wallpaper-form">
-          <div class="input-group">
-            <label>{{ $t('os.apps.settings.wallpaperUrl') }}</label>
-            <div class="input-row">
-              <input v-model="customUrlInput" type="text" placeholder="https://..." />
-              <button class="apply-btn" @click="applyCustomUrl">
-                <Icon name="ph:check-bold" />
-              </button>
+          <div class="wallpaper-grid">
+            <button
+              v-for="wp in themeStore.availableWallpapers"
+              :key="wp.id"
+              class="wallpaper-card"
+              :class="{ active: themeStore.currentWallpaper === wp.id }"
+              @click="themeStore.setWallpaper(wp.id)">
+              <div
+                class="wallpaper-preview"
+                :style="{ backgroundImage: 'url(' + wp.thumb + ')' }" />
+              <div class="active-indicator">
+                <Icon name="ph:check-circle-fill" />
+              </div>
+            </button>
+          </div>
+
+          <div class="section-title">
+            <Icon name="ph:paint-brush-broad-duotone" />
+            <span>{{ $t('os.apps.settings.customWallpaper') }}</span>
+          </div>
+
+          <div class="custom-wallpaper-form glass-panel">
+            <div class="input-group">
+              <label>{{ $t('os.apps.settings.wallpaperUrl') }}</label>
+              <div class="input-row">
+                <input v-model="customUrlInput" type="text" placeholder="https://..." />
+                <button
+                  class="apply-btn"
+                  @click="applyCustomUrl"
+                  :disabled="!customUrlInput.trim()">
+                  <Icon name="ph:check-bold" />
+                </button>
+              </div>
+            </div>
+
+            <div class="divider">
+              <span>{{ $t('os.apps.settings.or') || 'OR' }}</span>
+            </div>
+
+            <div class="input-group">
+              <label>{{ $t('os.apps.settings.uploadWallpaper') }}</label>
+              <input type="file" accept="image/*" class="file-input" @change="handleFileUpload" />
+            </div>
+
+            <div
+              v-if="themeStore.currentWallpaper === 'custom' && themeStore.customWallpaperData"
+              class="custom-preview-box">
+              <div
+                class="wallpaper-preview"
+                :style="{ backgroundImage: 'url(' + themeStore.customWallpaperData + ')' }" />
             </div>
           </div>
+        </div>
 
-          <div class="divider">
-            <span>{{ $t('os.apps.settings.or') || 'OR' }}</span>
+        <div v-else-if="activeTab === 'language'" key="language" class="tab-content">
+          <div class="header">
+            <h2>{{ $t('os.apps.settings.languageSelection') }}</h2>
+            <p class="subtitle">{{ $t('os.apps.settings.languageSubtitle') }}</p>
           </div>
 
-          <div class="input-group">
-            <label>{{ $t('os.apps.settings.uploadWallpaper') }}</label>
-            <input type="file" accept="image/*" class="file-input" @change="handleFileUpload" />
-          </div>
-
-          <div
-            v-if="themeStore.currentWallpaper === 'custom' && themeStore.customWallpaperData"
-            class="custom-preview-box">
-            <div
-              class="wallpaper-preview"
-              :style="{ backgroundImage: 'url(' + themeStore.customWallpaperData + ')' }" />
+          <div class="theme-grid">
+            <button
+              class="theme-card lang-card"
+              :class="{ active: languageStore.currentLanguage === 'en' }"
+              @click="languageStore.setLanguage('en')">
+              <div class="language-icon"><Icon name="flag:gb-4x3" /></div>
+              <span>{{ $t('os.apps.settings.english') }}</span>
+            </button>
+            <button
+              class="theme-card lang-card"
+              :class="{ active: languageStore.currentLanguage === 'hu' }"
+              @click="languageStore.setLanguage('hu')">
+              <div class="language-icon"><Icon name="flag:hu-4x3" /></div>
+              <span>{{ $t('os.apps.settings.hungarian') }}</span>
+            </button>
           </div>
         </div>
-      </div>
-
-      <div v-if="activeTab === 'language'">
-        <h2>{{ $t('os.apps.settings.languageSelection') }}</h2>
-        <p class="subtitle">{{ $t('os.apps.settings.languageSubtitle') }}</p>
-
-        <div class="theme-grid">
-          <button
-            class="theme-card"
-            :class="{ active: languageStore.currentLanguage === 'en' }"
-            @click="languageStore.setLanguage('en')">
-            <div class="language-icon"><Icon name="flag:gb-4x3" /></div>
-            <span>{{ $t('os.apps.settings.english') }}</span>
-          </button>
-          <button
-            class="theme-card"
-            :class="{ active: languageStore.currentLanguage === 'hu' }"
-            @click="languageStore.setLanguage('hu')">
-            <div class="language-icon"><Icon name="flag:hu-4x3" /></div>
-            <span>{{ $t('os.apps.settings.hungarian') }}</span>
-          </button>
-        </div>
-      </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -179,47 +199,95 @@ const handleFileUpload = (event: Event) => {
 <style scoped lang="scss">
 .settings-app {
   display: flex;
+  flex-direction: row;
   width: 100%;
   height: 100%;
   background: var(--os-window-bg, rgba(30, 30, 30, 0.95));
   color: var(--os-text, #fff);
   border-radius: inherit;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .sidebar {
-  width: 200px;
+  width: 220px;
   background: rgba(0, 0, 0, 0.2);
   border-right: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
-  padding: 20px 10px;
+  padding: 24px 12px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 12px;
+    border-right: none;
+    border-bottom: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome/Safari */
+    }
+  }
 
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    @media (max-width: 768px) {
+      flex-direction: row;
+      gap: 12px;
+      width: max-content;
+    }
 
     li {
-      padding: 10px 15px;
-      border-radius: 6px;
+      padding: 12px 16px;
+      border-radius: 12px;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       font-size: 14px;
-      transition:
-        background 0.2s,
-        color 0.2s;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.7);
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+      .icon {
+        font-size: 20px;
+        transition: color 0.3s ease;
+      }
 
       &:hover {
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.95);
+        transform: translateX(4px);
+
+        @media (max-width: 768px) {
+          transform: translateY(-2px);
+        }
       }
+
       &.active {
-        background: var(--os-primary-color, rgba(255, 255, 255, 0.1));
+        background: var(--os-primary-color, rgba(255, 255, 255, 0.15));
         color: var(--os-primary-text, #000);
         font-weight: 600;
+        box-shadow: 0 4px 15px color-mix(in srgb, var(--os-primary-color, #fff) 20%, transparent);
 
         .icon {
           color: var(--os-primary-text, #000);
+        }
+
+        &:hover {
+          transform: translateY(0);
         }
       }
     }
@@ -228,19 +296,49 @@ const handleFileUpload = (event: Event) => {
 
 .content {
   flex: 1;
-  padding: 30px;
+  padding: 32px;
   overflow-y: auto;
+  position: relative;
+  background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.03), transparent 70%);
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+}
+
+/* Animations */
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateY(15px);
+}
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-15px);
+}
+
+.header {
+  margin-bottom: 32px;
 
   h2 {
-    margin-bottom: 5px;
-    font-size: 24px;
-    font-weight: 600;
+    margin: 0 0 8px 0;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.7));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .subtitle {
-    font-size: 14px;
+    font-size: 15px;
     opacity: 0.7;
-    margin-bottom: 30px;
+    margin: 0;
+    line-height: 1.5;
   }
 }
 
@@ -248,169 +346,259 @@ const handleFileUpload = (event: Event) => {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 20px;
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 16px;
+  }
 }
 
 .theme-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
-  border-radius: 12px;
-  padding: 15px;
+  --theme-color: #fff;
+  background: rgba(20, 20, 25, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 20px 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   color: var(--os-text, #fff);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
   &:hover {
     background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   }
 
   &.active {
-    border-color: var(--os-primary-color, #fff);
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    border-color: var(--theme-color);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow:
+      0 8px 30px color-mix(in srgb, var(--theme-color) 30%, transparent),
+      0 0 0 1px var(--theme-color) inset;
   }
 
   .color-preview {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  &:hover .color-preview {
+    transform: scale(1.05);
   }
 
   .language-icon {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 40px;
-    border-radius: 4px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    font-size: 48px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   span {
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 600;
   }
 }
 
 .wallpaper-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+  margin-bottom: 40px;
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
+  }
 }
 
 .wallpaper-card {
+  position: relative;
   background: rgba(255, 255, 255, 0.05);
   border: 2px solid transparent;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 4px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+
+  .active-indicator {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: #fff;
+    background: var(--os-primary-color, #3b82f6);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    opacity: 0;
+    transform: scale(0.8) translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
 
   &:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px) scale(1.02);
     background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
   }
 
   &.active {
     border-color: var(--os-primary-color, #fff);
+    box-shadow: 0 0 20px color-mix(in srgb, var(--os-primary-color, #fff) 30%, transparent);
+
+    .active-indicator {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
   }
 
   .wallpaper-preview {
     width: 100%;
-    height: 100px;
-    border-radius: 8px;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
     background-size: cover;
     background-position: center;
+    transition: filter 0.3s ease;
+  }
+
+  &:not(.active):hover .wallpaper-preview {
+    filter: brightness(1.1);
   }
 }
 
 .section-title {
-  margin-top: 40px;
-  margin-bottom: 20px;
-  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 48px;
+  margin-bottom: 24px;
+  font-size: 20px;
   font-weight: 600;
-  border-bottom: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
-  padding-bottom: 8px;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 12px;
+
+  svg {
+    font-size: 24px;
+    color: var(--os-primary-color, #fff);
+  }
+}
+
+.glass-panel {
+  background: rgba(20, 20, 25, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 24px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .custom-wallpaper-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  max-width: 400px;
+  gap: 24px;
+  max-width: 500px;
+  width: 100%;
 
   .input-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
 
     label {
-      font-size: 13px;
-      opacity: 0.8;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
       font-weight: 500;
     }
 
     .input-row {
       display: flex;
-      gap: 10px;
+      gap: 12px;
 
       input[type='text'] {
         flex: 1;
-        background: rgba(0, 0, 0, 0.2);
-        border: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.15));
-        color: var(--os-text, #fff);
-        padding: 10px 14px;
-        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #fff;
+        padding: 12px 16px;
+        border-radius: 12px;
         font-size: 14px;
         outline: none;
-        transition: border-color 0.2s;
+        transition: all 0.2s;
 
         &:focus {
           border-color: var(--os-primary-color, rgba(255, 255, 255, 0.4));
+          box-shadow: 0 0 0 3px color-mix(in srgb, var(--os-primary-color, #fff) 15%, transparent);
         }
       }
 
       .apply-btn {
-        background: var(--os-primary-color, rgba(255, 255, 255, 0.2));
-        color: var(--os-primary-text, #000);
+        background: var(--os-primary-color, #3b82f6);
+        color: #fff;
         border: none;
-        border-radius: 8px;
-        width: 40px;
+        border-radius: 12px;
+        width: 46px;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        transition: opacity 0.2s;
+        transition: all 0.2s;
 
-        &:hover {
-          opacity: 0.8;
+        &:hover:not(:disabled) {
+          filter: brightness(1.1);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px
+            color-mix(in srgb, var(--os-primary-color, #3b82f6) 40%, transparent);
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          background: rgba(255, 255, 255, 0.1);
         }
       }
     }
 
     .file-input {
       font-size: 14px;
-      color: var(--os-text, #fff);
+      color: rgba(255, 255, 255, 0.8);
+      width: 100%;
 
       &::file-selector-button {
         background: rgba(255, 255, 255, 0.1);
-        border: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.15));
-        color: var(--os-text, #fff);
-        padding: 8px 16px;
-        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 10px;
         cursor: pointer;
-        margin-right: 15px;
-        transition: background 0.2s;
+        margin-right: 16px;
+        font-weight: 500;
+        transition: all 0.2s;
 
         &:hover {
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, 0.15);
+          border-color: rgba(255, 255, 255, 0.2);
         }
       }
     }
@@ -420,41 +608,52 @@ const handleFileUpload = (event: Event) => {
     display: flex;
     align-items: center;
     text-align: center;
-    color: var(--os-text, #fff);
-    opacity: 0.5;
+    color: rgba(255, 255, 255, 0.4);
     font-size: 12px;
-    margin: 10px 0;
+    font-weight: 600;
+    margin: 8px 0;
 
     &::before,
     &::after {
       content: '';
       flex: 1;
-      border-bottom: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.2));
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    &:not(:empty)::before {
-      margin-right: 0.5em;
+    &::before {
+      margin-right: 16px;
     }
-
-    &:not(:empty)::after {
-      margin-left: 0.5em;
+    &::after {
+      margin-left: 16px;
     }
   }
 
   .custom-preview-box {
-    margin-top: 10px;
+    margin-top: 16px;
     border: 2px solid var(--os-primary-color, #fff);
-    border-radius: 12px;
-    padding: 4px;
-    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 6px;
+    background: rgba(0, 0, 0, 0.2);
+    animation: fadeSlideUp 0.4s ease-out forwards;
 
     .wallpaper-preview {
       width: 100%;
-      height: 150px;
-      border-radius: 8px;
+      aspect-ratio: 16 / 9;
+      border-radius: 10px;
       background-size: cover;
       background-position: center;
     }
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>

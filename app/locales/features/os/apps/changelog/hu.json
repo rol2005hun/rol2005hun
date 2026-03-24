@@ -3,6 +3,24 @@
   "subtitle": "Legújabb OS frissítések és funkciók",
   "empty": "Nincs elérhető változat.",
   "history": {
+    "2026.03.24-2": {
+      "version": "1.0.3",
+      "title": "Beállítások App felújítás & Reszponzivitás",
+      "changes": [
+        "A \u003cstrong\u003eBeállítások alkalmazás\u003c/strong\u003e teljes UI frissítést kapott modern üveghatással és új animációkkal.",
+        "Teljes \u003cem\u003emobil reszponzivitás\u003c/em\u003e: kis képernyőn a bal oldali menü egy vízszintesen görgethető felső sávvá alakul.",
+        "Látványosabb Téma és Háttérkép kártyák hover effektekkel és aktív állapot-jelzőkkel."
+      ]
+    },
+    "2026.03.24": {
+      "version": "1.0.2",
+      "title": "Projektek App UI Fejlesztés",
+      "changes": [
+        "Újradolgoztuk a \u003cstrong\u003eProjektek alkalmazás\u003c/strong\u003e felületét a modernebb, szebb megjelenés érdekében.",
+        "Egyedi ikonok és egérkövető ragyogó effektek kerültek a projekt kártyákra.",
+        "A kártyák belépő animációi és az átmenetek finomításra kerültek."
+      ]
+    },
     "2026.03.23-2": {
       "version": "1.0.1",
       "title": "Legacy mód \u0026 UI Finomhangolások",

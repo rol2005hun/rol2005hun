@@ -1,6 +1,7 @@
 {
   "name": "Projektek",
-  "githubInfo": "Rengeteg más projekt is megtalálható a <a href=\"https://github.com/rol2005hun\" target=\"_blank\">GitHubomon</a>, túl sok lenne itt mindet felsorolni, nézz rá arra is!",
+  "githubInfo": "Rengeteg más projekt is megtalálható a {githubLink}, túl sok lenne itt mindet felsorolni, nézz rá arra is!",
+  "githubLinkText": "GitHubomon",
   "backToProjects": "Vissza a projektekhez",
   "viewProject": "Projekt megtekintése",
   "project1": {

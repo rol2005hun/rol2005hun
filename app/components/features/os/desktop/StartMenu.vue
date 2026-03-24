@@ -55,7 +55,7 @@ const registryStore = useAppRegistry();
 const windowStore = useWindowStore();
 const desktopStore = useDesktopStore();
 const systemStore = useSystemStore();
-const { messages } = useI18n();
+const { messages } = useI18n({ useScope: 'global' });
 
 const searchQuery = ref('');
 const menuRef = ref<HTMLElement | null>(null);

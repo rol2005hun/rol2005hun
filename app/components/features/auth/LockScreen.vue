@@ -77,7 +77,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useAuthStore } from '@/composables/features/auth/useAuthStore';
 
-const { t } = useI18n();
+const { t } = useI18n({ useScope: 'global' });
 const authStore = useAuthStore();
 const isUnlocking = ref(false);
 const isSuccess = ref(false);

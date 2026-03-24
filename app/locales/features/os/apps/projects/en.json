@@ -1,6 +1,7 @@
 {
   "name": "Projects",
-  "githubInfo": "Many other projects can be found on my <a href=\"https://github.com/rol2005hun\" target=\"_blank\">GitHub</a>, it would be too much to list them all here, definitely check it out!",
+  "githubInfo": "Many other projects can be found on my {githubLink}, it would be too much to list them all here, definitely check it out!",
+  "githubLinkText": "GitHub",
   "backToProjects": "Back to Projects",
   "viewProject": "View Project",
   "project1": {

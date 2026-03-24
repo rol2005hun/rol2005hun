@@ -41,7 +41,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-const { tm } = useI18n();
+const { tm } = useI18n({ useScope: 'global' });
 
 const versions = computed(() => {
   const data = tm('os.apps.changelog.history') as Record<string, any>;

@@ -28,7 +28,7 @@ const props = defineProps<{
   isSelected?: boolean;
 }>();
 
-const { t } = useI18n();
+const { t } = useI18n({ useScope: 'global' });
 const appRegistry = useAppRegistry();
 const windowStore = useWindowStore();
 const desktopStore = useDesktopStore();

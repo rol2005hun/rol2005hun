@@ -4,7 +4,7 @@ import { useCookie } from '#imports';
 import { useI18n } from 'vue-i18n';
 
 export const useLanguageStore = defineStore('os-language', () => {
-  const { locale } = useI18n();
+  const { locale } = useI18n({ useScope: 'global' });
   const langCookie = useCookie<'en' | 'hu'>('os_locale', {
     default: () => 'en',
     maxAge: 31536000

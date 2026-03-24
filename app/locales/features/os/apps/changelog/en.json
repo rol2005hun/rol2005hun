@@ -3,6 +3,24 @@
   "subtitle": "Latest OS updates and features",
   "empty": "No versions available.",
   "history": {
+    "2026-03-24-2": {
+      "version": "3.0.3-beta",
+      "title": "Settings App Responsiveness & UI",
+      "changes": [
+        "Completely revamped the \u003cstrong\u003eSettings App\u003c/strong\u003e with a modern design and smooth animations.",
+        "Added full \u003cem\u003emobile responsiveness\u003c/em\u003e with a scrollable top navigation bar for smaller screens.",
+        "Enhanced Theme and Wallpaper cards with hover effects, active indicators, and glassmorphism styling."
+      ]
+    },
+    "2026-03-24": {
+      "version": "3.0.2-beta",
+      "title": "Projects App UI Enhancement",
+      "changes": [
+        "Redesigned the \u003cstrong\u003eProjects App\u003c/strong\u003e UI making it more modern and fancy.",
+        "Added unique project icons and dynamic mouse-tracking glow effects for project cards.",
+        "Improved transition and entrance animations within the Projects overview."
+      ]
+    },
     "2026-03-23-2": {
       "version": "3.0.1-beta",
       "title": "Legacy Mode \u0026 UI Improvements",

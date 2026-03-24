@@ -31,7 +31,7 @@ import type { TerminalLine, TerminalContext } from '@/utils/terminal/types';
 import { getCommand } from '@/utils/terminal/registry';
 import { useAuthStore } from '@/composables/features/auth/useAuthStore';
 
-const { t } = useI18n();
+const { t } = useI18n({ useScope: 'global' });
 const authStore = useAuthStore();
 
 const history = ref<TerminalLine[]>([]);

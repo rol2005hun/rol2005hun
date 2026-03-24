@@ -162,7 +162,10 @@ export const asciiCommand: TerminalCommand = {
       return;
     }
     try {
-      const response = await fetch(`https://api.zjm.im/ascii/?text=${encodeURIComponent(text)}`);
+      const response = await fetch(
+        `https://asciified.thelicato.io/api/v2/ascii?text=${encodeURIComponent(text)}`
+      );
+
       if (!response.ok) throw new Error('Fetch failed');
       const data = await response.json();
       context.print(data.ascii || context.t('os.apps.terminal.commands.asciiError'));

@@ -12,31 +12,41 @@ const projects = [
     id: 'nexus',
     titleKey: 'os.apps.projects.nexus.title',
     descKey: 'os.apps.projects.nexus.description',
-    component: NexusProject
+    component: NexusProject,
+    icon: 'ph:planet-duotone',
+    color: '#8b5cf6'
   },
   {
     id: 'deik',
     titleKey: 'os.apps.projects.deik.title',
     descKey: 'os.apps.projects.deik.description',
-    component: DeikProject
+    component: DeikProject,
+    icon: 'ph:graduation-cap-duotone',
+    color: '#3b82f6'
   },
   {
     id: 'sanovise',
     titleKey: 'os.apps.projects.sanovise.title',
     descKey: 'os.apps.projects.sanovise.description',
-    component: SanoviseProject
+    component: SanoviseProject,
+    icon: 'ph:heartbeat-duotone',
+    color: '#10b981'
   },
   {
     id: 'wolimby',
     titleKey: 'os.apps.projects.wolimby.title',
     descKey: 'os.apps.projects.wolimby.description',
-    component: WolimbyProject
+    component: WolimbyProject,
+    icon: 'ph:cloud-fog-duotone',
+    color: '#f59e0b'
   },
   {
     id: 'knightswap',
     titleKey: 'os.apps.projects.knightswap.title',
     descKey: 'os.apps.projects.knightswap.description',
-    component: KnightSwapProject
+    component: KnightSwapProject,
+    icon: 'ph:sword-duotone',
+    color: '#ef4444'
   }
 ];
 
@@ -49,6 +59,14 @@ const openProject = (projectComponent: any) => {
 const closeProject = () => {
   activeProject.value = null;
 };
+
+const handleMouseMove = (e: MouseEvent, target: HTMLElement) => {
+  const rect = target.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  target.style.setProperty('--mouse-x', `${x}px`);
+  target.style.setProperty('--mouse-y', `${y}px`);
+};
 </script>
 
 <template>
@@ -57,20 +75,40 @@ const closeProject = () => {
       <div v-if="!activeProject" key="grid" class="grid-view">
         <div class="header">
           <h2 class="title">{{ $t('os.apps.projects.name') }}</h2>
-          <!-- eslint-disable-next-line vue/no-v-html -->
-          <p class="github-info" v-html="$t('os.apps.projects.githubInfo')" />
+          <i18n-t keypath="os.apps.projects.githubInfo" tag="p" class="github-info">
+            <template #githubLink>
+              <a href="https://github.com/rol2005hun" target="_blank">
+                {{ $t('os.apps.projects.githubLinkText') }}
+              </a>
+            </template>
+          </i18n-t>
           <div class="header-divider" />
         </div>
 
         <div class="projects-grid">
           <div
-            v-for="project in projects"
+            v-for="(project, index) in projects"
             :key="project.id"
             class="project-card"
-            @click="openProject(project.component)">
+            :style="{ '--app-color': project.color, 'animation-delay': `${index * 0.05}s` }"
+            @click="openProject(project.component)"
+            @mousemove="handleMouseMove($event, $event.currentTarget as HTMLElement)">
             <div class="card-bg" />
+            <div class="card-border" />
             <div class="card-content">
-              <h3>{{ $t(project.titleKey) }}</h3>
+              <div class="card-header">
+                <div
+                  class="icon-wrapper"
+                  :style="{
+                    backgroundColor: `color-mix(in srgb, ${project.color} 15%, transparent)`
+                  }">
+                  <Icon
+                    :name="project.icon"
+                    class="project-icon"
+                    :style="{ color: project.color }" />
+                </div>
+                <h3>{{ $t(project.titleKey) }}</h3>
+              </div>
               <p>{{ $t(project.descKey) }}</p>
             </div>
             <div class="card-actions">
@@ -181,53 +219,97 @@ const closeProject = () => {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 24px;
 }
 
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .project-card {
+  --mouse-x: 50%;
+  --mouse-y: 50%;
   position: relative;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  background: rgba(20, 20, 25, 0.4);
+  border-radius: 20px;
   padding: 24px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 180px;
-  overflow: hidden;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  min-height: 200px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform: translateY(0) scale(1);
+  transition:
+    transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.4s ease;
 
   .card-bg {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+      color-mix(in srgb, var(--app-color, #ffffff) 12%, transparent),
+      transparent 40%
+    );
     opacity: 0;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.5s ease;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .card-border {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(
+      400px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+      color-mix(in srgb, var(--app-color, #ffffff) 60%, transparent),
+      rgba(255, 255, 255, 0.05) 40%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0.5;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
     z-index: 0;
   }
 
   &:hover {
-    transform: translateY(-4px) scale(1.02);
-    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-6px) scale(1.02);
     box-shadow:
-      0 12px 30px rgba(0, 0, 0, 0.3),
-      0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+      0 20px 40px -10px rgba(0, 0, 0, 0.5),
+      0 0 20px -5px color-mix(in srgb, var(--app-color, #fff) 20%, transparent);
 
     .card-bg {
       opacity: 1;
     }
 
+    .card-border {
+      opacity: 1;
+    }
+
     .view-btn {
-      background: var(--os-accent, #3b82f6);
+      background: var(--app-color, #3b82f6);
       color: #fff;
       padding-right: 16px;
+      box-shadow: 0 4px 15px color-mix(in srgb, var(--app-color, #3b82f6) 40%, transparent);
 
       .btn-icon {
         opacity: 1;
@@ -242,17 +324,41 @@ const closeProject = () => {
   position: relative;
   z-index: 1;
 
-  h3 {
-    margin: 0 0 12px 0;
-    font-size: 20px;
-    font-weight: 600;
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+
+    .icon-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: inset 0 2px 10px rgba(255, 255, 255, 0.05);
+
+      .project-icon {
+        font-size: 24px;
+      }
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
   }
 
   p {
     margin: 0;
     font-size: 14px;
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.65);
   }
 }
 
@@ -267,22 +373,22 @@ const closeProject = () => {
 .view-btn {
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 10px 20px;
+  border-radius: 24px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   overflow: hidden;
 
   .btn-icon {
     opacity: 0;
-    transform: translateX(-10px);
+    transform: translateX(-15px);
     width: 0;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 }
 
