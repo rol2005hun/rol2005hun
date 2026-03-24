@@ -4,18 +4,26 @@
       class="wallpaper"
       :style="{ backgroundImage: 'url(' + themeStore.currentWallpaperUrl + ')' }" />
 
-    <Desktop v-if="!isMobile" />
-    <MobileOS v-else />
+    <template v-if="authStore.isUnlocked">
+      <Desktop v-if="!isMobile" />
+      <MobileOS v-else />
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import Desktop from '@/components/features/os/desktop/Desktop.vue';
-import MobileOS from '@/components/features/os/mobile/MobileOS.vue';
+import { defineAsyncComponent } from 'vue';
 import { useDevice } from '@/composables/features/os/useDevice';
 import { useThemeStore } from '@/stores/features/os/useThemeStore';
+import { useAuthStore } from '@/composables/features/auth/useAuthStore';
+
+// Késleltetett betöltés, hogy a Desktop, MobileOS és a velük járó Store-ok
+// ne töltődjenek be előre a memóriába a LockScreen (Auth) alatt.
+const Desktop = defineAsyncComponent(() => import('@/components/features/os/desktop/Desktop.vue'));
+const MobileOS = defineAsyncComponent(() => import('@/components/features/os/mobile/MobileOS.vue'));
 
 const themeStore = useThemeStore();
+const authStore = useAuthStore();
 const { isMobile } = useDevice();
 </script>
 

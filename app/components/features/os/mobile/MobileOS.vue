@@ -38,21 +38,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, defineAsyncComponent } from 'vue';
 import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
 
-import BrowserApp from '@/components/features/os/apps/browser/BrowserApp.vue';
-import TerminalApp from '@/components/features/os/apps/terminal/TerminalApp.vue';
-import AboutApp from '@/components/features/os/apps/about/AboutApp.vue';
-import ProjectsApp from '@/components/features/os/apps/projects/ProjectsApp.vue';
-import SettingsApp from '@/components/features/os/apps/settings/SettingsApp.vue';
-
 const appComponents: Record<string, any> = {
-  settings: SettingsApp,
-  browser: BrowserApp,
-  terminal: TerminalApp,
-  about: AboutApp,
-  projects: ProjectsApp
+  settings: defineAsyncComponent(
+    () => import('@/components/features/os/apps/settings/SettingsApp.vue')
+  ),
+  browser: defineAsyncComponent(
+    () => import('@/components/features/os/apps/browser/BrowserApp.vue')
+  ),
+  terminal: defineAsyncComponent(
+    () => import('@/components/features/os/apps/terminal/TerminalApp.vue')
+  ),
+  about: defineAsyncComponent(() => import('@/components/features/os/apps/about/AboutApp.vue')),
+  projects: defineAsyncComponent(
+    () => import('@/components/features/os/apps/projects/ProjectsApp.vue')
+  )
 };
 
 const appRegistry = useAppRegistry();

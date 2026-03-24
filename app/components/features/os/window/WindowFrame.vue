@@ -42,25 +42,28 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, defineAsyncComponent } from 'vue';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
 import type { OSWindow } from '@/stores/features/os/useWindowStore';
 import AppIcon from '@/components/features/os/shared/AppIcon.vue';
 
-import SettingsApp from '@/components/features/os/apps/settings/SettingsApp.vue';
-import BrowserApp from '@/components/features/os/apps/browser/BrowserApp.vue';
-import TerminalApp from '@/components/features/os/apps/terminal/TerminalApp.vue';
-import AboutApp from '@/components/features/os/apps/about/AboutApp.vue';
-import ProjectsApp from '@/components/features/os/apps/projects/ProjectsApp.vue';
-import ChangelogApp from '@/components/features/os/apps/changelog/ChangelogApp.vue';
-
 const appComponents: Record<string, any> = {
-  settings: SettingsApp,
-  browser: BrowserApp,
-  terminal: TerminalApp,
-  about: AboutApp,
-  projects: ProjectsApp,
-  changelog: ChangelogApp
+  settings: defineAsyncComponent(
+    () => import('@/components/features/os/apps/settings/SettingsApp.vue')
+  ),
+  browser: defineAsyncComponent(
+    () => import('@/components/features/os/apps/browser/BrowserApp.vue')
+  ),
+  terminal: defineAsyncComponent(
+    () => import('@/components/features/os/apps/terminal/TerminalApp.vue')
+  ),
+  about: defineAsyncComponent(() => import('@/components/features/os/apps/about/AboutApp.vue')),
+  projects: defineAsyncComponent(
+    () => import('@/components/features/os/apps/projects/ProjectsApp.vue')
+  ),
+  changelog: defineAsyncComponent(
+    () => import('@/components/features/os/apps/changelog/ChangelogApp.vue')
+  )
 };
 
 const props = defineProps<{
