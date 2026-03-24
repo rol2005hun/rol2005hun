@@ -199,7 +199,6 @@ const updateSelection = () => {
   position: relative;
   flex: 1;
   width: 100%;
-  height: calc(100% - 48px);
   overflow: hidden;
 }
 
@@ -242,10 +241,7 @@ const updateSelection = () => {
 }
 
 .fixed-bottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  margin-top: auto;
 }
 
 .slide-up-enter-active,

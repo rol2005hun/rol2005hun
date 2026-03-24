@@ -102,9 +102,32 @@ const onDrag = (e: MouseEvent) => {
   const dx = e.clientX - startX;
   const dy = e.clientY - startY;
 
+  let newX = initialWinX + dx;
+  let newY = initialWinY + dy;
+
+  // OS behavior: Window can be dragged partially off-screen
+  const VISIBLE_MARGIN = 100; // at least 100px width visible
+
+  const surfaceEl = document.querySelector('.desktop-surface');
+  const surfaceWidth = surfaceEl ? surfaceEl.clientWidth : window.innerWidth;
+  const surfaceHeight = surfaceEl ? surfaceEl.clientHeight : window.innerHeight - 48;
+
+  const HEADER_HEIGHT = 38; // height of the window top panel
+
+  const minX = -(props.windowInfo.width - VISIBLE_MARGIN);
+  const maxX = surfaceWidth - VISIBLE_MARGIN;
+
+  // Top: cannot go above screen
+  const minY = 0;
+  // Bottom: header must remain strictly inside the desktop surface
+  const maxY = surfaceHeight - HEADER_HEIGHT;
+
+  newX = Math.max(minX, Math.min(newX, maxX));
+  newY = Math.max(minY, Math.min(newY, maxY));
+
   windowStore.updateWindow(props.windowInfo.id, {
-    x: initialWinX + dx,
-    y: initialWinY + dy
+    x: newX,
+    y: newY
   });
 };
 
