@@ -61,6 +61,7 @@ const appComponents: Record<string, any> = {
   projects: defineAsyncComponent(
     () => import('@/components/features/os/apps/projects/ProjectsApp.vue')
   ),
+  music: defineAsyncComponent(() => import('@/components/features/os/apps/music/MusicApp.vue')),
   changelog: defineAsyncComponent(
     () => import('@/components/features/os/apps/changelog/ChangelogApp.vue')
   )

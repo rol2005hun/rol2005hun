@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1",
+    "title": "Welcome to ranzakOS",
+    "artist": "System Audio",
+    "url": "https://pixabay.com/music/search/genre/synthwave/",
+    "cover": "https://images.unsplash.com/photo-1614113489855-66422ad300a4?q=80&w=200&auto=format&fit=crop",
+    "duration": "0:00"
+  },
+  {
+    "id": "2",
+    "title": "Example Track 2",
+    "artist": "Unknown Artist",
+    "url": "",
+    "cover": "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=200&auto=format&fit=crop",
+    "duration": "3:45"
+  }
+]

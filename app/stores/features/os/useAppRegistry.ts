@@ -49,6 +49,15 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       showOnDesktop: false
     },
     {
+      id: 'music',
+      nameKey: 'os.apps.music.name',
+      icon: 'ph:music-notes-fill',
+      defaultWidth: 800,
+      defaultHeight: 600,
+      allowMultipleInstances: false,
+      showOnDesktop: true
+    },
+    {
       id: 'about',
       nameKey: 'os.apps.about.name',
       icon: 'ph:info-fill',

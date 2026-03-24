@@ -1,0 +1,13 @@
+{
+  "name": "Music",
+  "nowPlaying": "Now Playing",
+  "playlist": "Playlist",
+  "unknownArtist": "Unknown Artist",
+  "controls": {
+    "play": "Play",
+    "pause": "Pause",
+    "next": "Next",
+    "previous": "Previous"
+  },
+  "emptyPlaylist": "No tracks found in the playlist."
+}

@@ -1,0 +1,13 @@
+{
+  "name": "Zene",
+  "nowPlaying": "Most szól",
+  "playlist": "Lejátszási lista",
+  "unknownArtist": "Ismeretlen előadó",
+  "controls": {
+    "play": "Lejátszás",
+    "pause": "Szünet",
+    "next": "Következő",
+    "previous": "Előző"
+  },
+  "emptyPlaylist": "Nincsenek zeneszámok a listán."
+}

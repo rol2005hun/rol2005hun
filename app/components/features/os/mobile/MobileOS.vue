@@ -54,7 +54,8 @@ const appComponents: Record<string, any> = {
   about: defineAsyncComponent(() => import('@/components/features/os/apps/about/AboutApp.vue')),
   projects: defineAsyncComponent(
     () => import('@/components/features/os/apps/projects/ProjectsApp.vue')
-  )
+  ),
+  music: defineAsyncComponent(() => import('@/components/features/os/apps/music/MusicApp.vue'))
 };
 
 const appRegistry = useAppRegistry();
