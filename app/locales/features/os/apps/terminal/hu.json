@@ -58,7 +58,7 @@
       "statusPlaying": "Lejátszás alatt",
       "statusPaused": "Szüneteltetve",
       "noTrack": "Jelenleg nem szól semmi.",
-      "usage": "Használat: music play | pause | next | prev | vol [0-100]",
+      "usage": "Használat: music <akció> [opciók]\nAkciók:\n  play    - Zene elindítása\n  pause   - Zene megállítása\n  next    - Ugrás a következő zenére\n  prev    - Ugrás az előző zenére\n  vol [x] - Hangerő lekérése vagy beállítása (0-100)",
       "alreadyPlaying": "A zene már szól.",
       "started": "Zene elindítva.",
       "alreadyPaused": "A zene már le van állítva.",

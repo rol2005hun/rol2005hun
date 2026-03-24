@@ -58,7 +58,7 @@
       "statusPlaying": "Playing",
       "statusPaused": "Paused",
       "noTrack": "No track is currently playing.",
-      "usage": "Usage: music play | pause | next | prev | vol [0-100]",
+      "usage": "Usage: music <action> [options]\nActions:\n  play    - Start playing music\n  pause   - Pause music\n  next    - Skip to next track\n  prev    - Skip to previous track\n  vol [x] - Get or set volume level (0-100)",
       "alreadyPlaying": "Music is already playing.",
       "started": "Started playing music.",
       "alreadyPaused": "Music is already paused.",
