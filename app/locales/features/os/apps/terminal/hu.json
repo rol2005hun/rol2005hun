@@ -66,9 +66,9 @@
       "next": "Következő zenére ugrás.",
       "prev": "Előző zenére ugrás.",
       "currentVol": "Jelenlegi hangerő: {vol}%",
-      "volError": "<span class=\"text-error\">Hiba: A hangerőnek 0 és 100 közötti számnak kell lennie.</span>",
+      "volError": "Hiba: A hangerőnek 0 és 100 közötti számnak kell lennie.",
       "volSet": "Hangerő beállítva: {vol}%",
-      "unknownAction": "<span class=\"text-error\">Ismeretlen akció: {action}</span>"
+      "unknownAction": "Ismeretlen akció: {action}"
     },
     "weatherCodes": {
       "0": "Tiszta égbolt",

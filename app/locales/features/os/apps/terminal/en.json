@@ -66,9 +66,9 @@
       "next": "Skipped to next track.",
       "prev": "Skipped to previous track.",
       "currentVol": "Current volume is {vol}%",
-      "volError": "<span class=\"text-error\">Error: Volume must be a number between 0 and 100.</span>",
+      "volError": "Error: Volume must be a number between 0 and 100.",
       "volSet": "Volume set to {vol}%",
-      "unknownAction": "<span class=\"text-error\">Unknown action: {action}</span>"
+      "unknownAction": "Unknown action: {action}"
     },
     "weatherCodes": {
       "0": "Clear sky",
