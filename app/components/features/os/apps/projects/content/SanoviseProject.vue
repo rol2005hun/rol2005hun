@@ -39,7 +39,10 @@ import { Icon } from '#components';
           <Icon name="ph:video-camera-fill" size="20px" />
           <span>{{ $t('os.apps.projects.sanovise.links.demo') }}</span>
         </a>
-        <a href="http://lajos.com/szakdogaaa" target="_blank" class="action-btn highlight">
+        <a
+          href="https://web.unideb.hu/rol2005hun/felho/szakdolgozat.pdf"
+          target="_blank"
+          class="action-btn highlight">
           <Icon name="ph:student-fill" size="20px" />
           <span>{{ $t('os.apps.projects.sanovise.links.thesis') }}</span>
         </a>
