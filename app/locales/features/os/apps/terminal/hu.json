@@ -53,6 +53,23 @@
     "closeUsage": "Használat: close [app_id]\\nElérhető alkalmazások: {apps}",
     "closeNotFound": "Az '{app}' alkalmazás nem található.",
     "closeSuccess": "{app} bezárása...",
+    "music": {
+      "nowPlaying": "Most szól: {title} - {artist} [{status}]",
+      "statusPlaying": "Lejátszás alatt",
+      "statusPaused": "Szüneteltetve",
+      "noTrack": "Jelenleg nem szól semmi.",
+      "usage": "Használat: music play | pause | next | prev | vol [0-100]",
+      "alreadyPlaying": "A zene már szól.",
+      "started": "Zene elindítva.",
+      "alreadyPaused": "A zene már le van állítva.",
+      "paused": "Zene megállítva.",
+      "next": "Következő zenére ugrás.",
+      "prev": "Előző zenére ugrás.",
+      "currentVol": "Jelenlegi hangerő: {vol}%",
+      "volError": "<span class=\"text-error\">Hiba: A hangerőnek 0 és 100 közötti számnak kell lennie.</span>",
+      "volSet": "Hangerő beállítva: {vol}%",
+      "unknownAction": "<span class=\"text-error\">Ismeretlen akció: {action}</span>"
+    },
     "weatherCodes": {
       "0": "Tiszta égbolt",
       "1": "Főként napos",

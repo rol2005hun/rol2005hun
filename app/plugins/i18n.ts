@@ -26,12 +26,15 @@ export default defineNuxtPlugin((nuxtApp) => {
       let currentAnd: any = messages[locale];
       for (let i = 0; i < keys.length - 1; i++) {
         const k = keys[i];
+        if (!k) continue;
         if (!currentAnd[k]) currentAnd[k] = {};
         currentAnd = currentAnd[k];
       }
 
       const lastKey = keys[keys.length - 1];
-      currentAnd[lastKey] = { ...(currentAnd[lastKey] || {}), ...content };
+      if (lastKey) {
+        currentAnd[lastKey] = { ...(currentAnd[lastKey] || {}), ...content };
+      }
     }
   }
 

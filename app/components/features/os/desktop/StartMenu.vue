@@ -35,7 +35,7 @@
         </div>
         <span>{{ $t('os.startMenu.user') }}</span>
       </div>
-      <button class="power-btn" @click="systemStore.requestShutdown()">
+      <button class="power-btn" @click="systemStore.initiateShutdown()">
         <Icon name="ph:power-bold" size="18px" />
       </button>
     </div>
@@ -87,7 +87,7 @@ const filteredApps = computed(() => {
     const keyPath = app.nameKey.split('.');
 
     for (const locale of Object.keys(messages.value)) {
-      let currentVal: any = messages.value[locale];
+      let currentVal: any = (messages.value as Record<string, any>)[locale];
 
       for (const key of keyPath) {
         if (currentVal && currentVal[key]) {

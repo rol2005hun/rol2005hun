@@ -53,6 +53,23 @@
     "closeUsage": "Usage: close [app_id]\nAvailable apps: {apps}",
     "closeNotFound": "App '{app}' not found.",
     "closeSuccess": "Closing {app}...",
+    "music": {
+      "nowPlaying": "Now playing: {title} - {artist} [{status}]",
+      "statusPlaying": "Playing",
+      "statusPaused": "Paused",
+      "noTrack": "No track is currently playing.",
+      "usage": "Usage: music play | pause | next | prev | vol [0-100]",
+      "alreadyPlaying": "Music is already playing.",
+      "started": "Started playing music.",
+      "alreadyPaused": "Music is already paused.",
+      "paused": "Paused music.",
+      "next": "Skipped to next track.",
+      "prev": "Skipped to previous track.",
+      "currentVol": "Current volume is {vol}%",
+      "volError": "<span class=\"text-error\">Error: Volume must be a number between 0 and 100.</span>",
+      "volSet": "Volume set to {vol}%",
+      "unknownAction": "<span class=\"text-error\">Unknown action: {action}</span>"
+    },
     "weatherCodes": {
       "0": "Clear sky",
       "1": "Mainly clear",

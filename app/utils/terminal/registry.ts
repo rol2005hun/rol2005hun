@@ -3,6 +3,7 @@ import * as basicCommands from './commands/basic';
 import * as systemCommands from './commands/system';
 import * as osCommands from './commands/os';
 import * as adminCommands from './commands/admin';
+import * as musicCommands from './commands/music';
 
 const commands = new Map<string, TerminalCommand>();
 
@@ -17,6 +18,7 @@ Object.values(basicCommands).forEach(registerCommand);
 Object.values(systemCommands).forEach(registerCommand);
 Object.values(osCommands).forEach(registerCommand);
 Object.values(adminCommands).forEach(registerCommand);
+Object.values(musicCommands).forEach(registerCommand);
 
 export const getCommand = (name: string): TerminalCommand | undefined => {
   return commands.get(name.toLowerCase());

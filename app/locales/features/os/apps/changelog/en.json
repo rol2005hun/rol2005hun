@@ -3,6 +3,15 @@
   "subtitle": "Latest OS updates and features",
   "empty": "No versions available.",
   "history": {
+    "2026-03-24-3": {
+      "version": "3.0.4-beta",
+      "title": "Window Management & Layout Fixes",
+      "changes": [
+        "Fixed an issue where maximized windows would overlap or hide behind the taskbar.",
+        "Refined window dragging behavior to prevent windows from being dragged completely off-screen, maintaining visibility of the header.",
+        "Improved window resizing constraints allowing dynamic resizing while obeying minimum constraints and screen boundaries."
+      ]
+    },
     "2026-03-24-2": {
       "version": "3.0.3-beta",
       "title": "Settings App Responsiveness & UI",

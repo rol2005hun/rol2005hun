@@ -15,7 +15,7 @@
           :key="track.id"
           class="track-item"
           :class="{ active: currentTrackIndex === index }"
-          @click="playTrack(index)">
+          @click="musicStore.playTrack(index)">
           <div class="track-cover" :style="{ backgroundImage: `url(${track.cover})` }">
             <div class="play-overlay">
               <Icon
@@ -57,13 +57,16 @@
 
       <div class="player-controls">
         <div class="buttons">
-          <button class="ctrl-btn" :disabled="tracks.length === 0" @click="prevTrack">
+          <button class="ctrl-btn" :disabled="tracks.length === 0" @click="musicStore.prevTrack">
             <Icon name="ph:skip-back-fill" />
           </button>
-          <button class="ctrl-btn play-btn" :disabled="tracks.length === 0" @click="togglePlay">
+          <button
+            class="ctrl-btn play-btn"
+            :disabled="tracks.length === 0"
+            @click="musicStore.togglePlay">
             <Icon :name="isPlaying ? 'ph:pause-fill' : 'ph:play-fill'" />
           </button>
-          <button class="ctrl-btn" :disabled="tracks.length === 0" @click="nextTrack">
+          <button class="ctrl-btn" :disabled="tracks.length === 0" @click="musicStore.nextTrack">
             <Icon name="ph:skip-forward-fill" />
           </button>
         </div>
@@ -96,145 +99,33 @@
           step="0.01" />
       </div>
     </div>
-
-    <audio
-      ref="audioPlayer"
-      @timeupdate="onTimeUpdate"
-      @loadedmetadata="onLoadedMetadata"
-      @ended="onEnded"></audio>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
+import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useMusicStore } from '@/stores/features/os/useMusicStore';
 
-interface Track {
-  id: string;
-  title: string;
-  artist: string;
-  url: string;
-  cover: string;
-  duration: string;
-}
+const musicStore = useMusicStore();
+const {
+  tracks,
+  currentTrackIndex,
+  isPlaying,
+  currentTime,
+  duration,
+  volume,
+  currentTrack,
+  progressPercent
+} = storeToRefs(musicStore);
 
-const tracks = ref<Track[]>([]);
-const currentTrackIndex = ref<number | null>(null);
-const isPlaying = ref(false);
-const currentTime = ref(0);
-const duration = ref(0);
-const volume = ref(0.7);
-
-const audioPlayer = ref<HTMLAudioElement | null>(null);
 const progressBar = ref<HTMLElement | null>(null);
 
-const currentTrack = computed(() => {
-  return currentTrackIndex.value !== null ? tracks.value[currentTrackIndex.value] : null;
-});
-
-const progressPercent = computed(() => {
-  if (!duration.value) return 0;
-  return (currentTime.value / duration.value) * 100;
-});
-
-const loadTracks = async () => {
-  try {
-    const res = await fetch('/data/music.json');
-    if (res.ok) {
-      const data = await res.json();
-      tracks.value = data;
-    }
-  } catch (err) {
-    console.error('Failed to load music metadata:', err);
-  }
-};
-
-onMounted(() => {
-  loadTracks();
-  if (audioPlayer.value) {
-    audioPlayer.value.volume = volume.value;
-  }
-});
-
-watch(volume, (newVol) => {
-  if (audioPlayer.value) {
-    audioPlayer.value.volume = newVol;
-  }
-});
-
-const playTrack = (index: number) => {
-  if (currentTrackIndex.value === index) {
-    togglePlay();
-    return;
-  }
-
-  currentTrackIndex.value = index;
-  const track = tracks.value[index];
-
-  if (audioPlayer.value && track) {
-    audioPlayer.value.src = track.url;
-    audioPlayer.value
-      .play()
-      .then(() => {
-        isPlaying.value = true;
-      })
-      .catch((e) => {
-        console.warn('Autoplay blocked or invalid source.', e);
-        isPlaying.value = false;
-      });
-  }
-};
-
-const togglePlay = () => {
-  if (!audioPlayer.value || currentTrackIndex.value === null) {
-    if (tracks.value.length > 0) playTrack(0);
-    return;
-  }
-
-  if (isPlaying.value) {
-    audioPlayer.value.pause();
-    isPlaying.value = false;
-  } else {
-    audioPlayer.value.play();
-    isPlaying.value = true;
-  }
-};
-
-const nextTrack = () => {
-  if (tracks.value.length === 0) return;
-  let next = (currentTrackIndex.value ?? -1) + 1;
-  if (next >= tracks.value.length) next = 0;
-  playTrack(next);
-};
-
-const prevTrack = () => {
-  if (tracks.value.length === 0) return;
-  let prev = (currentTrackIndex.value ?? 0) - 1;
-  if (prev < 0) prev = tracks.value.length - 1;
-  playTrack(prev);
-};
-
-const onTimeUpdate = () => {
-  if (audioPlayer.value) {
-    currentTime.value = audioPlayer.value.currentTime;
-  }
-};
-
-const onLoadedMetadata = () => {
-  if (audioPlayer.value) {
-    duration.value = audioPlayer.value.duration;
-  }
-};
-
-const onEnded = () => {
-  nextTrack();
-};
-
 const seek = (e: MouseEvent) => {
-  if (!progressBar.value || !audioPlayer.value || currentTrackIndex.value === null) return;
-
+  if (!progressBar.value || currentTrackIndex.value === null) return;
   const rect = progressBar.value.getBoundingClientRect();
   const pos = (e.clientX - rect.left) / rect.width;
-  audioPlayer.value.currentTime = pos * duration.value;
+  musicStore.seek(pos);
 };
 
 const formatTime = (seconds: number) => {
@@ -243,13 +134,6 @@ const formatTime = (seconds: number) => {
   const secs = Math.floor(seconds % 60);
   return `${mins}:${secs.toString().padStart(2, '0')}`;
 };
-
-onUnmounted(() => {
-  if (audioPlayer.value) {
-    audioPlayer.value.pause();
-    audioPlayer.value.src = '';
-  }
-});
 </script>
 
 <style scoped lang="scss">
@@ -367,9 +251,9 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 24px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(20, 20, 20, 0.6);
+  padding: 10px 16px;
+  border-top: 1px solid var(--os-border-color);
+  background: var(--os-taskbar-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   z-index: 10;
@@ -378,29 +262,30 @@ onUnmounted(() => {
 .now-playing {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   width: 30%;
-  min-width: 200px;
+  min-width: 180px;
 
   .current-cover {
-    width: 56px;
-    height: 56px;
-    border-radius: 10px;
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
     background-size: cover;
     background-position: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
 
   .current-cover-placeholder {
-    width: 56px;
-    height: 56px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.1);
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    background: var(--os-hover);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
-    color: rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    color: var(--os-text);
+    opacity: 0.5;
   }
 
   .current-info {
@@ -408,12 +293,12 @@ onUnmounted(() => {
     flex-direction: column;
 
     .current-title {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
     }
 
     .current-artist {
-      font-size: 12px;
+      font-size: 11px;
       opacity: 0.6;
       margin-top: 4px;
     }
@@ -431,19 +316,20 @@ onUnmounted(() => {
   .buttons {
     display: flex;
     align-items: center;
-    gap: 20px;
-    margin-bottom: 8px;
+    gap: 16px;
+    margin-bottom: 6px;
 
     .ctrl-btn {
       background: transparent;
       border: none;
-      color: rgba(255, 255, 255, 0.8);
+      color: var(--os-text);
+      opacity: 0.8;
       font-size: 20px;
       cursor: pointer;
       transition: all 0.2s;
 
       &:hover:not(:disabled) {
-        color: #fff;
+        opacity: 1;
         transform: scale(1.1);
       }
 
@@ -453,19 +339,20 @@ onUnmounted(() => {
       }
 
       &.play-btn {
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
         border-radius: 50%;
-        background: #fff;
-        color: #000;
+        background: var(--os-primary-color);
+        color: var(--os-primary-text);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 20px;
+        font-size: 18px;
+        opacity: 1;
 
         &:hover:not(:disabled) {
           transform: scale(1.05);
-          box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+          box-shadow: 0 4px 15px var(--os-border-color);
         }
       }
     }
@@ -488,7 +375,7 @@ onUnmounted(() => {
     .progress-bar {
       flex: 1;
       height: 4px;
-      background: rgba(255, 255, 255, 0.2);
+      background: var(--os-border-color);
       border-radius: 2px;
       cursor: pointer;
       position: relative;
@@ -502,7 +389,7 @@ onUnmounted(() => {
 
       .progress-fill {
         height: 100%;
-        background: #fff;
+        background: var(--os-primary-color, var(--os-text));
         border-radius: 2px;
         position: relative;
         pointer-events: none;
@@ -514,9 +401,9 @@ onUnmounted(() => {
         top: -4px;
         width: 12px;
         height: 12px;
-        background: #fff;
+        background: var(--os-primary-color, var(--os-text));
         border-radius: 50%;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         opacity: 0;
         transform: scale(0.5);
         transition: all 0.2s;
@@ -531,7 +418,8 @@ onUnmounted(() => {
   gap: 10px;
   width: 30%;
   justify-content: flex-end;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--os-text);
+  opacity: 0.8;
 
   svg {
     font-size: 20px;
@@ -542,7 +430,7 @@ onUnmounted(() => {
     height: 4px;
     appearance: none;
     -webkit-appearance: none;
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--os-border-color);
     border-radius: 2px;
     outline: none;
 
@@ -551,7 +439,7 @@ onUnmounted(() => {
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background: #fff;
+      background: var(--os-text);
       cursor: pointer;
     }
   }
