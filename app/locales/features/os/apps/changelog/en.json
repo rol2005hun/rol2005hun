@@ -3,6 +3,18 @@
   "subtitle": "Latest OS updates and features",
   "empty": "No versions available.",
   "history": {
+    "2026-03-24-4": {
+      "version": "3.0.5-beta",
+      "title": "Music App Overhaul & System Fixes",
+      "changes": [
+        "Completely overhauled the <strong>Music App</strong> UI, fixing hover colors and reducing the footer thickness.",
+        "Implemented global background playback: music now continues playing even when the app is closed.",
+        "Music volume preference is now saved locally and restored on reload.",
+        "Added <code>music</code> terminal command to control playback (play, pause, next, prev, vol).",
+        "Added new Christmas music tracks and removed the old radio stream.",
+        "Resolved TypeScript compilation issues across the system (StartMenu, i18n, terminal commands)."
+      ]
+    },
     "2026-03-24-3": {
       "version": "3.0.4-beta",
       "title": "Window Management & Layout Fixes",
