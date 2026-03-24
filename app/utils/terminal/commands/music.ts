@@ -25,6 +25,8 @@ export const musicCommand = {
     const action = (args[0] || '').toLowerCase();
 
     switch (action) {
+      case 'start':
+      case 'resume':
       case 'play':
         if (musicStore.isPlaying) {
           print(t('os.apps.terminal.commands.music.alreadyPlaying'));
@@ -47,6 +49,7 @@ export const musicCommand = {
         print(t('os.apps.terminal.commands.music.next'));
         break;
       case 'prev':
+      case 'previous':
         musicStore.prevTrack();
         print(t('os.apps.terminal.commands.music.prev'));
         break;

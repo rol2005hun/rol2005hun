@@ -11,11 +11,7 @@
 
       <div class="pinned-section">
         <h3>
-          {{
-            searchQuery
-              ? $t('os.startMenu.searchResults', 'Keresési eredmények')
-              : $t('os.startMenu.pinnedApps')
-          }}
+          {{ searchQuery ? $t('os.startMenu.searchResults') : $t('os.startMenu.pinnedApps') }}
         </h3>
         <div class="app-grid">
           <div v-for="app in filteredApps" :key="app.id" class="app-item" @click="openApp(app.id)">
