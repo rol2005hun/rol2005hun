@@ -1,67 +1,76 @@
-ï»¿{
-  "title": "VÃ¡ltozÃ¡sok jegyzÃ©ke",
-  "subtitle": "LegÃºjabb OS frissÃ­tÃ©sek Ã©s funkciÃ³k",
-  "empty": "Nincs elÃ©rhetÅ‘ vÃ¡ltozat.",
-  "history": {
-    "2026.03.24-4": {
-      "version": "1.0.5",
-      "title": "Zene App ÃtalakÃ­tÃ¡s Ã©s RendszerjavÃ­tÃ¡sok",
-      "changes": [
-        "Teljesen megÃºjult a <strong>Zene alkalmazÃ¡s</strong> elrendezÃ©se, vÃ©konyabb alsÃ³ sÃ¡vval Ã©s javÃ­tott vilÃ¡gos mÃ³dos szÃ­nekkel.",
-        "A zenelejÃ¡tszÃ¡s immÃ¡r a hÃ¡ttÃ©rben is folytatÃ³dik (az ablak bezÃ¡rÃ¡sa utÃ¡n is).",
-        "A beÃ¡llÃ­tott hangerÅ‘t a rendszer most mÃ¡r automatikusan elmenti Ã©s betÃ¶lti az ÃºjraindulÃ¡s utÃ¡n.",
-        "BekerÃ¼lt az Ãºj <code>music</code> parancs a TerminÃ¡lba a zene vezÃ©rlÃ©sÃ©re (lejÃ¡tszÃ¡s, megÃ¡llÃ­tÃ¡s, lÃ©ptetÃ©s, hangerÅ‘).",
-        "Ãšj karÃ¡csonyi dalok kerÃ¼ltek be a repertoÃ¡rba, a rÃ©gi rÃ¡diÃ³ eltÃ¡volÃ­tÃ¡sra kerÃ¼lt.",
-        "KijavÃ­tottuk a TypeScript tÃ­pusellenÅ‘rzÃ©si hibÃ¡kat a rendszerben (Start menÃ¼, nyelvi fÃ¡jlok Ã©s terminÃ¡l)."
-      ]
-    },
-    "2026.03.24-3": {
-      "version": "1.0.4",
-      "title": "AblakkezelÃ©s Ã©s ElrendezÃ©s JavÃ­tÃ¡sai",
-      "changes": [
-        "JavÃ­tva a megjelenÃ­tÃ©si hiba, amely miatt a maximalizÃ¡lt alkalmazÃ¡sok belÃ³gtak a tÃ¡lca mÃ¶gÃ©.",
-        "FinomÃ­tott ablak mozgatÃ¡si logika: az asztalrÃ³l lehÃºzva/oldalra tolva 100px mindig lÃ¡thatÃ³ marad Ã©s a fejlÃ©c sem tÅ±nhet el felfelÃ©.",
-        "JavÃ­tott ablakmÃ©retezÃ©s: mostantÃ³l a dinamikus mÃ©retezÃ©s maximÃ¡lisan figyelembe veszi a kÃ©pernyÅ‘ hatÃ¡rait Ã©s asztal felÃ¼letÃ©t."
-      ]
-    },
-    "2026.03.24-2": {
-      "version": "1.0.3",
-      "title": "BeÃ¡llÃ­tÃ¡sok App felÃºjÃ­tÃ¡s & ReszponzivitÃ¡s",
-      "changes": [
-        "A \u003cstrong\u003eBeÃ¡llÃ­tÃ¡sok alkalmazÃ¡s\u003c/strong\u003e teljes UI frissÃ­tÃ©st kapott modern Ã¼veghatÃ¡ssal Ã©s Ãºj animÃ¡ciÃ³kkal.",
-        "Teljes \u003cem\u003emobil reszponzivitÃ¡s\u003c/em\u003e: kis kÃ©pernyÅ‘n a bal oldali menÃ¼ egy vÃ­zszintesen gÃ¶rgethetÅ‘ felsÅ‘ sÃ¡vvÃ¡ alakul.",
-        "LÃ¡tvÃ¡nyosabb TÃ©ma Ã©s HÃ¡ttÃ©rkÃ©p kÃ¡rtyÃ¡k hover effektekkel Ã©s aktÃ­v Ã¡llapot-jelzÅ‘kkel."
-      ]
-    },
-    "2026.03.24": {
-      "version": "1.0.2",
-      "title": "Projektek App UI FejlesztÃ©s",
-      "changes": [
-        "Ãšjradolgoztuk a \u003cstrong\u003eProjektek alkalmazÃ¡s\u003c/strong\u003e felÃ¼letÃ©t a modernebb, szebb megjelenÃ©s Ã©rdekÃ©ben.",
-        "Egyedi ikonok Ã©s egÃ©rkÃ¶vetÅ‘ ragyogÃ³ effektek kerÃ¼ltek a projekt kÃ¡rtyÃ¡kra.",
-        "A kÃ¡rtyÃ¡k belÃ©pÅ‘ animÃ¡ciÃ³i Ã©s az Ã¡tmenetek finomÃ­tÃ¡sra kerÃ¼ltek."
-      ]
-    },
-    "2026.03.23-2": {
-      "version": "1.0.1",
-      "title": "Legacy mÃ³d \u0026 UI FinomhangolÃ¡sok",
-      "changes": [
-        "HozzÃ¡adva a \u003cstrong\u003eLegacy OS Viewer\u003c/strong\u003e (IdÅ‘gÃ©p) a NÃ©vjegy apphoz, amivel a v1 Ã©s v2 portfÃ³liÃ³k natÃ­van, iframe-ben futtathatÃ³k.",
-        "MegnÃ¶velt alapÃ©rtelmezett Ã©s minimum ablakmÃ©retek a jobb olvashatÃ³sÃ¡gÃ©rt.",
-        "TerminÃ¡l sortÃ¶rÃ©s hibÃ¡jÃ¡nak javÃ­tÃ¡sa (az elÃ©rhetÅ‘ appok listÃ¡ja mostantÃ³l szÃ©pen, formÃ¡zva jelenik meg).",
-        "BiztonsÃ¡gos kilÃ©pÃ©s tÃ¡mogatÃ¡sa a Legacy mÃ³dbÃ³l egy dedikÃ¡lt bezÃ¡rÃ¡s gombbal.",
-        "JavÃ­tva: App nÃ©v, random karakterek."
-      ]
-    },
-    "2026.03.23": {
-      "version": "1.0.0",
-      "title": "MegÃºjult DizÃ¡jn \u0026 TeljesÃ­tmÃ©ny",
-      "changes": [
-        "Teljes \u003cstrong\u003eGlassmorphism\u003c/strong\u003e Ã¡tÃ¡llÃ¡s az OS felÃ¼letein.",
-        "Ãšj \u003cem\u003eVÃ¡ltozÃ¡sok jegyzÃ©ke\u003c/em\u003e integrÃ¡ciÃ³ a NÃ©vjegy alkalmazÃ¡sba.",
-        "Teljes kÃ¶rÅ± \u003cstrong\u003eESLint \u0026 Prettier\u003c/strong\u003e szabÃ¡lyozÃ¡s Ã©s kÃ³dformÃ¡zÃ¡s.",
-        "Kisebb bugfixek Ã©s ablakkezelÅ‘ optimalizÃ¡lÃ¡sok."
-      ]
-    }
-  }
+{
+    "title":  "Változások jegyzéke",
+    "subtitle":  "Legújabb OS frissítések és funkciók",
+    "empty":  "Nincs elérhetõ változat.",
+    "history":  {
+                    "2026.03.24-4":  {
+                                         "version":  "1.0.5",
+                                         "title":  "Zene App Átalakítás és Rendszerjavítások",
+                                         "changes":  [
+                                                         "Teljesen megújult a \u003cstrong\u003eZene alkalmazás\u003c/strong\u003e elrendezése, vékonyabb alsó sávval és javított világos módos színekkel.",
+                                                         "A zenelejátszás immár a háttérben is folytatódik (az ablak bezárása után is).",
+                                                         "A beállított hangerõt a rendszer most már automatikusan elmenti és betölti az újraindulás után.",
+                                                         "Bekerült az új \u003ccode\u003emusic\u003c/code\u003e parancs a Terminálba a zene vezérlésére (lejátszás, megállítás, léptetés, hangerõ).",
+                                                         "Új karácsonyi dalok kerültek be a repertoárba, a régi rádió eltávolításra került.",
+                                                         "Kijavítottuk a TypeScript típusellenõrzési hibákat a rendszerben (Start menü, nyelvi fájlok és terminál)."
+                                                     ]
+                                     },
+                    "2026.03.24-3":  {
+                                         "version":  "1.0.4",
+                                         "title":  "Ablakkezelés és Elrendezés Javításai",
+                                         "changes":  [
+                                                         "Javítva a megjelenítési hiba, amely miatt a maximalizált alkalmazások belógtak a tálca mögé.",
+                                                         "Finomított ablak mozgatási logika: az asztalról lehúzva/oldalra tolva 100px mindig látható marad és a fejléc sem tûnhet el felfelé.",
+                                                         "Javított ablakméretezés: mostantól a dinamikus méretezés maximálisan figyelembe veszi a képernyõ határait és asztal felületét."
+                                                     ]
+                                     },
+                    "2026.03.24-2":  {
+                                         "version":  "1.0.3",
+                                         "title":  "Beállítások App felújítás \u0026 Reszponzivitás",
+                                         "changes":  [
+                                                         "A \u003cstrong\u003eBeállítások alkalmazás\u003c/strong\u003e teljes UI frissítést kapott modern üveghatással és új animációkkal.",
+                                                         "Teljes \u003cem\u003emobil reszponzivitás\u003c/em\u003e: kis képernyõn a bal oldali menü egy vízszintesen görgethetõ felsõ sávvá alakul.",
+                                                         "Látványosabb Téma és Háttérkép kártyák hover effektekkel és aktív állapot-jelzõkkel."
+                                                     ]
+                                     },
+                    "2026.03.24":  {
+                                       "version":  "1.0.2",
+                                       "title":  "Projektek App UI Fejlesztés",
+                                       "changes":  [
+                                                       "Újradolgoztuk a \u003cstrong\u003eProjektek alkalmazás\u003c/strong\u003e felületét a modernebb, szebb megjelenés érdekében.",
+                                                       "Egyedi ikonok és egérkövetõ ragyogó effektek kerültek a projekt kártyákra.",
+                                                       "A kártyák belépõ animációi és az átmenetek finomításra kerültek."
+                                                   ]
+                                   },
+                    "2026.03.23-2":  {
+                                         "version":  "1.0.1",
+                                         "title":  "Legacy mód \u0026 UI Finomhangolások",
+                                         "changes":  [
+                                                         "Hozzáadva a \u003cstrong\u003eLegacy OS Viewer\u003c/strong\u003e (Idõgép) a Névjegy apphoz, amivel a v1 és v2 portfóliók natívan, iframe-ben futtathatók.",
+                                                         "Megnövelt alapértelmezett és minimum ablakméretek a jobb olvashatóságért.",
+                                                         "Terminál sortörés hibájának javítása (az elérhetõ appok listája mostantól szépen, formázva jelenik meg).",
+                                                         "Biztonságos kilépés támogatása a Legacy módból egy dedikált bezárás gombbal.",
+                                                         "Javítva: App név, random karakterek."
+                                                     ]
+                                     },
+                    "2026.03.23":  {
+                                       "version":  "1.0.0",
+                                       "title":  "Megújult Dizájn \u0026 Teljesítmény",
+                                       "changes":  [
+                                                       "Teljes \u003cstrong\u003eGlassmorphism\u003c/strong\u003e átállás az OS felületein.",
+                                                       "Új \u003cem\u003eVáltozások jegyzéke\u003c/em\u003e integráció a Névjegy alkalmazásba.",
+                                                       "Teljes körû \u003cstrong\u003eESLint \u0026 Prettier\u003c/strong\u003e szabályozás és kódformázás.",
+                                                       "Kisebb bugfixek és ablakkezelõ optimalizálások."
+                                                   ]
+                                   },
+                    "2026.03.26":  {
+                                       "changes":  [
+                                                       "Új \\u003cstrong\\u003eKapcsolat alkalmazás\\u003c/strong\\u003e bevezetése modern üveg-szerû megjelenéssel.",
+                                                       "A Névjegy app stílusainak finomhangolása, a közösségi ikonok és a kapcsolat gomb egységesítése.",
+                                                       "A Kapcsolat ûrlap reszponzivitásának javítása, kisebb ablakméretnél a vágódás megakadályozása."
+                                                   ],
+                                       "title":  "Új Kapcsolat App és UI Fejlesztések",
+                                       "version":  "1.0.6"
+                                   }
+                }
 }

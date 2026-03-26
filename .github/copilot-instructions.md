@@ -10,3 +10,4 @@
 - If you are adding new terminal commands, make sure to include help text and usage instructions that are clear and concise. This will help users understand how to use the commands effectively.
 - Always keep performance in mind. Avoid unnecessary re-renders and optimize any expensive operations to ensure that the application remains fast and responsive.
 - Always update the Changelog application with the maded changes, including a brief description of the change and the files affected. This will help keep track of all modifications and make it easier for other developers to understand the history of changes in the project.
+- After making any changes, please use the git add ., and commit the changes with conventional commit messages like `git commit -am "feat: add calendar"`

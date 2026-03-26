@@ -112,22 +112,24 @@ const resetForm = () => {
 .app-container.contact-app {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   height: 100%;
-  padding: 20px;
+  padding: 40px 20px;
   background: var(--os-window-bg);
   overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .glass-panel {
+  margin: auto;
   width: 100%;
   max-width: 500px;
   padding: 30px;
   border-radius: 16px;
-  background: rgba(var(--os-bg-rgb), 0.3);
+  background: var(--os-menu-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(var(--os-border-rgb), 0.2);
+  border: 1px solid var(--os-border-color);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
@@ -144,7 +146,6 @@ const resetForm = () => {
   .header-icon {
     font-size: 3rem;
     color: var(--os-primary-color);
-    filter: drop-shadow(0 0 10px rgba(var(--os-primary-color-rgb), 0.4));
   }
 
   h2 {
@@ -156,7 +157,7 @@ const resetForm = () => {
 
   p {
     margin: 0;
-    color: rgba(var(--os-text-rgb), 0.7);
+    color: var(--os-text);
     font-size: 0.95rem;
   }
 }
@@ -175,21 +176,21 @@ const resetForm = () => {
     width: 100%;
     padding: 12px 16px;
     border-radius: 10px;
-    background: rgba(var(--os-bg-rgb), 0.4);
-    border: 1px solid rgba(var(--os-border-rgb), 0.3);
+    background: var(--os-menu-bg);
+    border: 1px solid var(--os-border-color);
     color: var(--os-text);
     font-size: 0.95rem;
     transition: all 0.3s ease;
     outline: none;
 
     &::placeholder {
-      color: rgba(var(--os-text-rgb), 0.5);
+      color: var(--os-text);
     }
 
     &:focus {
-      background: rgba(var(--os-bg-rgb), 0.6);
+      background: var(--os-menu-bg);
       border-color: var(--os-primary-color);
-      box-shadow: 0 0 0 3px rgba(var(--os-primary-color-rgb), 0.15);
+      box-shadow: 0 0 0 1px var(--os-primary-color);
     }
 
     &.textarea {
@@ -203,7 +204,7 @@ const resetForm = () => {
     padding: 14px;
     border-radius: 10px;
     background: var(--os-primary-color);
-    color: #fff;
+    color: var(--os-primary-text);
     border: none;
     font-size: 1rem;
     font-weight: 600;
@@ -216,7 +217,7 @@ const resetForm = () => {
 
     &:hover:not(:disabled) {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(var(--os-primary-color-rgb), 0.4);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
     }
 
     &:active:not(:disabled) {
@@ -264,15 +265,15 @@ const resetForm = () => {
 
   p {
     margin: 0;
-    color: rgba(var(--os-text-rgb), 0.7);
+    color: var(--os-text);
     margin-bottom: 24px;
   }
 
   .back-btn {
     padding: 10px 20px;
     border-radius: 8px;
-    background: rgba(var(--os-bg-rgb), 0.5);
-    border: 1px solid rgba(var(--os-border-rgb), 0.3);
+    background: var(--os-menu-bg);
+    border: 1px solid var(--os-border-color);
     color: var(--os-text);
     display: flex;
     align-items: center;
@@ -281,8 +282,8 @@ const resetForm = () => {
     transition: all 0.2s ease;
 
     &:hover {
-      background: rgba(var(--os-bg-rgb), 0.8);
-      border-color: rgba(var(--os-text-rgb), 0.3);
+      background: var(--os-menu-bg);
+      border-color: var(--os-text);
     }
   }
 }

@@ -64,14 +64,14 @@
           <Icon name="mdi:laptop-mac" size="20" />
           <span>
             {{ $t('os.apps.about.developedBy') }}:
-            <strong>?? ranzak ??</strong>
+            <strong>❤️ ranzak 💖</strong>
           </span>
         </div>
         <div class="links">
-            <button class="os-button contact-me-btn" @click="openContact">
-              <Icon name="ph:envelope-simple-fill" size="20" />
-              {{ $t('os.apps.about.contactMe') }}
-            </button>
+          <button class="os-button contact-me-btn" @click="openContact">
+            <Icon name="ph:envelope-simple-fill" size="20" />
+            {{ $t('os.apps.about.contactMe') }}
+          </button>
           <a href="https://github.com/rol2005hun" target="_blank" rel="noopener noreferrer">
             <Icon name="mdi:github" size="20" />
             GitHub
@@ -344,7 +344,8 @@ const openContact = () => {
   display: flex;
   gap: 15px;
 
-  a {
+  a,
+  .contact-me-btn {
     display: flex;
     align-items: center;
     gap: 6px;
@@ -353,6 +354,10 @@ const openContact = () => {
     padding: 8px 16px;
     background-color: rgba(96, 165, 250, 0.1);
     border-radius: 20px;
+    border: none;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
     transition: all 0.2s;
 
     &:hover {
@@ -362,5 +367,3 @@ const openContact = () => {
   }
 }
 </style>
-
-
