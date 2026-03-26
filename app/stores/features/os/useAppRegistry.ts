@@ -16,6 +16,15 @@ export interface AppDefinition {
 export const useAppRegistry = defineStore('os-app-registry', () => {
   const installedApps = ref<AppDefinition[]>([
     {
+      id: 'contact',
+      nameKey: 'os.apps.contact.name',
+      icon: 'ph:envelope-simple-fill',
+      defaultWidth: 600,
+      defaultHeight: 500,
+      allowMultipleInstances: false,
+      showOnDesktop: true
+    },
+    {
       id: 'browser',
       nameKey: 'os.apps.browser.name',
       icon: 'ph:globe-hemisphere-west-fill',

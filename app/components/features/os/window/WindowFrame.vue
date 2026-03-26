@@ -62,6 +62,9 @@ const appComponents: Record<string, any> = {
     () => import('@/components/features/os/apps/projects/ProjectsApp.vue')
   ),
   music: defineAsyncComponent(() => import('@/components/features/os/apps/music/MusicApp.vue')),
+  contact: defineAsyncComponent(
+    () => import('@/components/features/os/apps/contact/ContactApp.vue')
+  ),
   changelog: defineAsyncComponent(
     () => import('@/components/features/os/apps/changelog/ChangelogApp.vue')
   )

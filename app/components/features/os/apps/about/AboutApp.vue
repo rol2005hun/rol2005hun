@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="about-app">
     <div class="about-header">
       <div class="os-logo">
@@ -64,10 +64,14 @@
           <Icon name="mdi:laptop-mac" size="20" />
           <span>
             {{ $t('os.apps.about.developedBy') }}:
-            <strong>❤️ ranzak 💖</strong>
+            <strong>?? ranzak ??</strong>
           </span>
         </div>
         <div class="links">
+            <button class="os-button contact-me-btn" @click="openContact">
+              <Icon name="ph:envelope-simple-fill" size="20" />
+              {{ $t('os.apps.about.contactMe') }}
+            </button>
           <a href="https://github.com/rol2005hun" target="_blank" rel="noopener noreferrer">
             <Icon name="mdi:github" size="20" />
             GitHub
@@ -125,6 +129,19 @@ const openChangelog = () => {
       titleKey: appConfig.nameKey,
       width: appConfig.defaultWidth || 650,
       height: appConfig.defaultHeight || 550
+    });
+  }
+};
+
+const openContact = () => {
+  const appConfig = registryStore.getAppById('contact');
+  if (appConfig) {
+    windowStore.openWindow({
+      id: `contact-${Date.now()}`,
+      appId: appConfig.id,
+      titleKey: appConfig.nameKey,
+      width: appConfig.defaultWidth || 500,
+      height: appConfig.defaultHeight || 650
     });
   }
 };
@@ -345,3 +362,5 @@ const openChangelog = () => {
   }
 }
 </style>
+
+

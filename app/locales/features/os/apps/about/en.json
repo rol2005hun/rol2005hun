@@ -11,6 +11,7 @@
   "credits": "Credits",
   "creditsText": "ranzakOS is a web-based operating system designed to showcase web development skills and provide a unique portfolio experience.",
   "developedBy": "Developed by",
+  "contactMe": "Contact Me",
   "legacy": {
     "title": "Legacy Versions",
     "desc": "Take a trip down memory lane and explore previous versions of the ranzak portfolio running natively inside ranzakOS.",
