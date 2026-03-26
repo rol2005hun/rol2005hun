@@ -24,10 +24,34 @@ const submitForm = async () => {
 
   isSubmitting.value = true;
 
-  await new Promise((resolve) => setTimeout(resolve, 1500));
+  try {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        access_key: '8fd184a8-f07b-4fac-8ae0-adf2bfd854a0',
+        name: form.value.name,
+        email: form.value.email,
+        subject: form.value.subject,
+        message: form.value.message,
+        from_name: 'ranzakOS Contact Form'
+      })
+    });
 
-  isSubmitting.value = false;
-  isSuccess.value = true;
+    const result = await response.json();
+    if (result.success) {
+      isSuccess.value = true;
+    } else {
+      console.error('Failed to send message:', result.message);
+    }
+  } catch (error) {
+    console.error('Error sending message:', error);
+  } finally {
+    isSubmitting.value = false;
+  }
 };
 
 const resetForm = () => {
