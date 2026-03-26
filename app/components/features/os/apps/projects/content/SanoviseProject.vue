@@ -35,7 +35,10 @@ import { Icon } from '#components';
           <Icon name="ph:github-logo-fill" size="20px" />
           <span>GitHub</span>
         </a>
-        <a href="https://youtu.be/..." target="_blank" class="action-btn secondary">
+        <a
+          href="https://www.youtube.com/watch?v=1CuafcQSEeg"
+          target="_blank"
+          class="action-btn secondary">
           <Icon name="ph:video-camera-fill" size="20px" />
           <span>{{ $t('os.apps.projects.sanovise.links.demo') }}</span>
         </a>

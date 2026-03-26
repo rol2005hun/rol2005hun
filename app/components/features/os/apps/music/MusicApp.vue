@@ -103,7 +103,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onUnmounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useMusicStore } from '@/stores/features/os/useMusicStore';
 
@@ -134,6 +134,12 @@ const formatTime = (seconds: number) => {
   const secs = Math.floor(seconds % 60);
   return `${mins}:${secs.toString().padStart(2, '0')}`;
 };
+
+onUnmounted(() => {
+  if (musicStore.isPlaying) {
+    musicStore.togglePlay();
+  }
+});
 </script>
 
 <style scoped lang="scss">

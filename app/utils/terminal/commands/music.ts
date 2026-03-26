@@ -1,11 +1,31 @@
 import { type TerminalContext } from '../types';
 import { useMusicStore } from '@/stores/features/os/useMusicStore';
+import { useWindowStore } from '@/stores/features/os/useWindowStore';
+import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
 
 export const musicCommand = {
   name: 'music',
   descriptionKey: 'os.apps.terminal.commands.music.usage',
   execute: async (args: string[], { print, t }: TerminalContext) => {
     const musicStore = useMusicStore();
+    const windowStore = useWindowStore();
+
+    const ensureAppOpen = () => {
+      const isMusicOpen = windowStore.windows.some((w) => w.appId === 'music');
+      if (!isMusicOpen) {
+        const registry = useAppRegistry();
+        const app = registry.getAppById('music');
+        if (app) {
+          windowStore.openWindow({
+            id: `${app.id}-${Date.now()}`,
+            appId: app.id,
+            titleKey: app.nameKey,
+            width: app.defaultWidth || 850,
+            height: app.defaultHeight || 600
+          });
+        }
+      }
+    };
 
     if (args.length === 0) {
       if (musicStore.currentTrack) {
@@ -28,6 +48,7 @@ export const musicCommand = {
       case 'start':
       case 'resume':
       case 'play':
+        ensureAppOpen();
         if (musicStore.isPlaying) {
           print(t('os.apps.terminal.commands.music.alreadyPlaying'));
         } else {
@@ -45,11 +66,13 @@ export const musicCommand = {
         }
         break;
       case 'next':
+        ensureAppOpen();
         musicStore.nextTrack();
         print(t('os.apps.terminal.commands.music.next'));
         break;
       case 'prev':
       case 'previous':
+        ensureAppOpen();
         musicStore.prevTrack();
         print(t('os.apps.terminal.commands.music.prev'));
         break;
