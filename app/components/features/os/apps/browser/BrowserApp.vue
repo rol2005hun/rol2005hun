@@ -192,7 +192,7 @@ const saveHistory = () => {
   transition: background-color 0.2s;
 
   &:hover:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--os-text); opacity: 0.1;
   }
 
   &:disabled {
@@ -218,7 +218,7 @@ const saveHistory = () => {
   outline: none;
 
   &:focus {
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: var(--os-text); opacity: 0.3;
     background-color: rgba(0, 0, 0, 0.4);
   }
 }
@@ -226,7 +226,7 @@ const saveHistory = () => {
 .browser-content {
   flex: 1;
   position: relative;
-  background-color: #fff;
+  background-color: var(--os-text);
 }
 
 .browser-iframe {
@@ -247,3 +247,4 @@ const saveHistory = () => {
   font-size: 14px;
 }
 </style>
+

@@ -162,7 +162,7 @@ const openContact = () => {
   align-items: center;
   gap: 20px;
   padding: 30px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), transparent);
+  background: linear-gradient(to bottom, var(--os-border-color), transparent);
   border-bottom: 1px solid var(--os-border-color);
 
   .os-logo {
@@ -173,7 +173,7 @@ const openContact = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: var(--os-text);
     box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
   }
 
@@ -203,16 +203,16 @@ const openContact = () => {
         padding: 3px 8px;
         font-size: 12px;
         font-weight: 600;
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: var(--os-hover);
+        border: 1px solid var(--os-border-color);
         border-radius: 6px;
-        color: white;
+        color: var(--os-text);
         cursor: pointer;
         transition: all 0.2s ease;
 
         &:hover {
-          background: rgba(255, 255, 255, 0.2);
-          border-color: rgba(255, 255, 255, 0.3);
+          background: var(--os-hover);
+          border-color: var(--os-text); opacity: 0.3;
         }
 
         &:active {
@@ -223,7 +223,7 @@ const openContact = () => {
 
     p {
       margin: 0;
-      color: rgba(255, 255, 255, 0.7);
+      color: var(--os-text); opacity: 0.7;
 
       &.copyright {
         font-size: 12px;
@@ -245,7 +245,7 @@ const openContact = () => {
     font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--os-text); opacity: 0.5;
     border-bottom: 1px solid var(--os-border-color);
     padding-bottom: 8px;
   }
@@ -260,12 +260,12 @@ const openContact = () => {
     display: flex;
     justify-content: space-between;
     padding: 8px 12px;
-    background-color: rgba(255, 255, 255, 0.03);
+    background-color: var(--os-hover);
     border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--os-border-color);
 
     .label {
-      color: rgba(255, 255, 255, 0.6);
+      color: var(--os-text); opacity: 0.6;
     }
 
     .value {
@@ -276,7 +276,7 @@ const openContact = () => {
 
 .legacy-section {
   .legacy-desc {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--os-text); opacity: 0.7;
     font-size: 14px;
     line-height: 1.5;
     margin-bottom: 16px;
@@ -293,7 +293,7 @@ const openContact = () => {
       align-items: center;
       gap: 10px;
       padding: 20px 16px;
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--os-hover);
       border: 1px solid var(--os-border-color);
       border-radius: 12px;
       color: var(--os-text);
@@ -301,7 +301,7 @@ const openContact = () => {
       transition: all 0.2s ease;
 
       &:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: var(--os-hover);
         transform: translateY(-2px);
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 
@@ -325,7 +325,7 @@ const openContact = () => {
 
 .credits-text {
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--os-text); opacity: 0.8;
   margin-bottom: 15px;
 }
 
@@ -367,3 +367,6 @@ const openContact = () => {
   }
 }
 </style>
+
+
+

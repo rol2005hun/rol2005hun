@@ -102,10 +102,10 @@ import { Icon } from '#components';
   display: flex;
   align-items: center;
   gap: 16px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--os-hover);
   padding: 16px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--os-border-color);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
   .card-icon {
@@ -132,12 +132,12 @@ import { Icon } from '#components';
     gap: 8px;
     padding: 10px 16px;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--os-hover);
     color: var(--os-text);
     text-decoration: none;
     font-weight: 500;
     transition: all 0.2s ease;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--os-border-color);
 
     &:hover {
       background: rgba(255, 255, 255, 0.15);
@@ -167,3 +167,4 @@ import { Icon } from '#components';
   }
 }
 </style>
+

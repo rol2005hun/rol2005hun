@@ -70,7 +70,7 @@ const versions = computed(() => {
 
 .changelog-header {
   padding: 24px;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--os-hover);
   border-bottom: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
   display: flex;
   flex-direction: column;
@@ -83,7 +83,7 @@ const versions = computed(() => {
     width: 56px;
     height: 56px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--os-border-color);
     border-radius: 16px;
     display: flex;
     justify-content: center;
@@ -92,7 +92,7 @@ const versions = computed(() => {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 
     font-size: 28px;
-    color: #fff;
+    color: var(--os-text);
   }
 
   h2 {
@@ -120,7 +120,7 @@ const versions = computed(() => {
     background: transparent;
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--os-hover);
     border-radius: 4px;
   }
 }
@@ -141,7 +141,7 @@ const versions = computed(() => {
 }
 
 .version-entry {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--os-hover);
   border: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
   border-radius: 12px;
   padding: 20px;
@@ -175,7 +175,7 @@ const versions = computed(() => {
     font-family: monospace;
     font-size: 14px;
     font-weight: 600;
-    color: #fff;
+    color: var(--os-text);
 
     .v-text {
       color: #aaa;
@@ -225,7 +225,7 @@ const versions = computed(() => {
       color: #ddd;
 
       :deep(strong) {
-        color: #fff;
+        color: var(--os-text);
         font-weight: 600;
       }
 
@@ -240,3 +240,4 @@ const versions = computed(() => {
   }
 }
 </style>
+

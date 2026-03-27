@@ -182,7 +182,7 @@ onUnmounted(() => {
   background: transparent;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--os-hover);
 
     .track-cover .play-overlay {
       opacity: 1;
@@ -190,7 +190,7 @@ onUnmounted(() => {
   }
 
   &.active {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--os-hover);
 
     .track-title {
       color: var(--os-primary-color, #3b82f6);
@@ -220,7 +220,7 @@ onUnmounted(() => {
 
       svg {
         font-size: 24px;
-        color: #fff;
+        color: var(--os-text);
       }
     }
   }
@@ -470,3 +470,4 @@ onUnmounted(() => {
   }
 }
 </style>
+

@@ -203,7 +203,7 @@ const handleFileUpload = (event: Event) => {
   width: 100%;
   height: 100%;
   background: var(--os-window-bg, rgba(30, 30, 30, 0.95));
-  color: var(--os-text, #fff);
+  color: var(--os-text, var(--os-text));
   border-radius: inherit;
   overflow: hidden;
 
@@ -215,7 +215,7 @@ const handleFileUpload = (event: Event) => {
 .sidebar {
   width: 220px;
   background: rgba(0, 0, 0, 0.2);
-  border-right: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+  border-right: 1px solid var(--os-border-color, var(--os-border-color));
   padding: 24px 12px;
   flex-shrink: 0;
   overflow-y: auto;
@@ -226,7 +226,7 @@ const handleFileUpload = (event: Event) => {
     width: 100%;
     padding: 12px;
     border-right: none;
-    border-bottom: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+    border-bottom: 1px solid var(--os-border-color, var(--os-border-color));
     display: flex;
     overflow-x: auto;
     scrollbar-width: none;
@@ -258,7 +258,7 @@ const handleFileUpload = (event: Event) => {
       gap: 12px;
       font-size: 14px;
       font-weight: 500;
-      color: rgba(255, 255, 255, 0.7);
+      color: var(--os-text); opacity: 0.7;
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
       .icon {
@@ -267,8 +267,8 @@ const handleFileUpload = (event: Event) => {
       }
 
       &:hover {
-        background: rgba(255, 255, 255, 0.08);
-        color: rgba(255, 255, 255, 0.95);
+        background: var(--os-hover);
+        color: var(--os-text); opacity: 0.95;
         transform: translateX(4px);
 
         @media (max-width: 768px) {
@@ -277,10 +277,10 @@ const handleFileUpload = (event: Event) => {
       }
 
       &.active {
-        background: var(--os-primary-color, rgba(255, 255, 255, 0.15));
+        background: var(--os-primary-color, var(--os-border-color));
         color: var(--os-primary-text, #000);
         font-weight: 600;
-        box-shadow: 0 4px 15px color-mix(in srgb, var(--os-primary-color, #fff) 20%, transparent);
+        box-shadow: 0 4px 15px color-mix(in srgb, var(--os-primary-color, var(--os-text)) 20%, transparent);
 
         .icon {
           color: var(--os-primary-text, #000);
@@ -299,7 +299,7 @@ const handleFileUpload = (event: Event) => {
   padding: 32px;
   overflow-y: auto;
   position: relative;
-  background: radial-gradient(circle at top right, rgba(255, 255, 255, 0.03), transparent 70%);
+  background: radial-gradient(circle at top right, var(--os-border-color), transparent 70%);
 
   @media (max-width: 768px) {
     padding: 20px;
@@ -328,10 +328,10 @@ const handleFileUpload = (event: Event) => {
     font-size: 28px;
     font-weight: 700;
     letter-spacing: -0.5px;
-    background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.7));
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    
+    
+    -webkit-
+    color: var(--os-text);
   }
 
   .subtitle {
@@ -354,9 +354,9 @@ const handleFileUpload = (event: Event) => {
 }
 
 .theme-card {
-  --theme-color: #fff;
+  --theme-color: var(--os-text);
   background: rgba(20, 20, 25, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--os-border-color);
   border-radius: 16px;
   padding: 20px 15px;
   display: flex;
@@ -365,20 +365,20 @@ const handleFileUpload = (event: Event) => {
   gap: 16px;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  color: var(--os-text, #fff);
+  color: var(--os-text, var(--os-text));
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 
   &:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--os-hover);
     transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--os-text); opacity: 0.2;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   }
 
   &.active {
     border-color: var(--theme-color);
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--os-hover);
     box-shadow:
       0 8px 30px color-mix(in srgb, var(--theme-color) 30%, transparent),
       0 0 0 1px var(--theme-color) inset;
@@ -389,7 +389,7 @@ const handleFileUpload = (event: Event) => {
     height: 60px;
     border-radius: 50%;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    border: 3px solid rgba(255, 255, 255, 0.1);
+    border: 3px solid var(--os-primary-color);
     transition: transform 0.3s ease;
   }
 
@@ -405,9 +405,9 @@ const handleFileUpload = (event: Event) => {
     justify-content: center;
     font-size: 48px;
     border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--os-hover);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--os-border-color);
   }
 
   span {
@@ -430,7 +430,7 @@ const handleFileUpload = (event: Event) => {
 
 .wallpaper-card {
   position: relative;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--os-hover);
   border: 2px solid transparent;
   border-radius: 16px;
   padding: 4px;
@@ -442,7 +442,7 @@ const handleFileUpload = (event: Event) => {
     position: absolute;
     top: 12px;
     right: 12px;
-    color: #fff;
+    color: var(--os-text);
     background: var(--os-primary-color, #3b82f6);
     border-radius: 50%;
     width: 24px;
@@ -459,13 +459,13 @@ const handleFileUpload = (event: Event) => {
 
   &:hover {
     transform: translateY(-4px) scale(1.02);
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--os-hover);
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
   }
 
   &.active {
-    border-color: var(--os-primary-color, #fff);
-    box-shadow: 0 0 20px color-mix(in srgb, var(--os-primary-color, #fff) 30%, transparent);
+    border-color: var(--os-primary-color, var(--os-text));
+    box-shadow: 0 0 20px color-mix(in srgb, var(--os-primary-color, var(--os-text)) 30%, transparent);
 
     .active-indicator {
       opacity: 1;
@@ -495,19 +495,19 @@ const handleFileUpload = (event: Event) => {
   margin-bottom: 24px;
   font-size: 20px;
   font-weight: 600;
-  color: #fff;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--os-text);
+  border-bottom: 1px solid var(--os-border-color);
   padding-bottom: 12px;
 
   svg {
     font-size: 24px;
-    color: var(--os-primary-color, #fff);
+    color: var(--os-primary-color, var(--os-text));
   }
 }
 
 .glass-panel {
   background: rgba(20, 20, 25, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--os-border-color);
   border-radius: 20px;
   padding: 24px;
   backdrop-filter: blur(20px);
@@ -528,7 +528,7 @@ const handleFileUpload = (event: Event) => {
 
     label {
       font-size: 14px;
-      color: rgba(255, 255, 255, 0.8);
+      color: var(--os-text); opacity: 0.8;
       font-weight: 500;
     }
 
@@ -539,8 +539,8 @@ const handleFileUpload = (event: Event) => {
       input[type='text'] {
         flex: 1;
         background: rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: #fff;
+        border: 1px solid var(--os-border-color);
+        color: var(--os-text);
         padding: 12px 16px;
         border-radius: 12px;
         font-size: 14px;
@@ -548,14 +548,14 @@ const handleFileUpload = (event: Event) => {
         transition: all 0.2s;
 
         &:focus {
-          border-color: var(--os-primary-color, rgba(255, 255, 255, 0.4));
-          box-shadow: 0 0 0 3px color-mix(in srgb, var(--os-primary-color, #fff) 15%, transparent);
+          border-color: var(--os-primary-color, var(--os-border-color));
+          box-shadow: 0 0 0 3px color-mix(in srgb, var(--os-primary-color, var(--os-text)) 15%, transparent);
         }
       }
 
       .apply-btn {
         background: var(--os-primary-color, #3b82f6);
-        color: #fff;
+        color: var(--os-text);
         border: none;
         border-radius: 12px;
         width: 46px;
@@ -575,20 +575,20 @@ const handleFileUpload = (event: Event) => {
         &:disabled {
           opacity: 0.5;
           cursor: not-allowed;
-          background: rgba(255, 255, 255, 0.1);
+          background: var(--os-hover);
         }
       }
     }
 
     .file-input {
       font-size: 14px;
-      color: rgba(255, 255, 255, 0.8);
+      color: var(--os-text); opacity: 0.8;
       width: 100%;
 
       &::file-selector-button {
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        color: #fff;
+        background: var(--os-hover);
+        border: 1px solid var(--os-border-color);
+        color: var(--os-text);
         padding: 10px 20px;
         border-radius: 10px;
         cursor: pointer;
@@ -597,8 +597,8 @@ const handleFileUpload = (event: Event) => {
         transition: all 0.2s;
 
         &:hover {
-          background: rgba(255, 255, 255, 0.15);
-          border-color: rgba(255, 255, 255, 0.2);
+          background: var(--os-hover);
+          border-color: var(--os-text); opacity: 0.2;
         }
       }
     }
@@ -608,7 +608,7 @@ const handleFileUpload = (event: Event) => {
     display: flex;
     align-items: center;
     text-align: center;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--os-text); opacity: 0.4;
     font-size: 12px;
     font-weight: 600;
     margin: 8px 0;
@@ -617,7 +617,7 @@ const handleFileUpload = (event: Event) => {
     &::after {
       content: '';
       flex: 1;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid var(--os-border-color);
     }
 
     &::before {
@@ -630,7 +630,7 @@ const handleFileUpload = (event: Event) => {
 
   .custom-preview-box {
     margin-top: 16px;
-    border: 2px solid var(--os-primary-color, #fff);
+    border: 2px solid var(--os-primary-color, var(--os-text));
     border-radius: 16px;
     padding: 6px;
     background: rgba(0, 0, 0, 0.2);
@@ -657,3 +657,7 @@ const handleFileUpload = (event: Event) => {
   }
 }
 </style>
+
+
+
+

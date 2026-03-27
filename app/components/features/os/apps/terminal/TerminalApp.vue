@@ -192,7 +192,7 @@ const handleEnter = async () => {
 
 .prompt {
   margin-right: 8px;
-  color: #fff;
+  color: var(--os-text);
   white-space: pre;
 }
 
@@ -211,3 +211,4 @@ input {
   outline: none;
 }
 </style>
+

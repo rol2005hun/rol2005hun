@@ -192,7 +192,7 @@ const handleMouseMove = (e: MouseEvent, target: HTMLElement) => {
   .github-info {
     margin: 8px 0 16px 0;
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--os-text); opacity: 0.8;
     line-height: 1.5;
 
     :deep(a) {
@@ -307,7 +307,7 @@ const handleMouseMove = (e: MouseEvent, target: HTMLElement) => {
 
     .view-btn {
       background: var(--app-color, #3b82f6);
-      color: #fff;
+      color: var(--os-text);
       padding-right: 16px;
       box-shadow: 0 4px 15px color-mix(in srgb, var(--app-color, #3b82f6) 40%, transparent);
 
@@ -337,8 +337,8 @@ const handleMouseMove = (e: MouseEvent, target: HTMLElement) => {
       width: 48px;
       height: 48px;
       border-radius: 14px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: var(--os-hover);
+      border: 1px solid var(--os-border-color);
       box-shadow: inset 0 2px 10px rgba(255, 255, 255, 0.05);
 
       .project-icon {
@@ -358,7 +358,7 @@ const handleMouseMove = (e: MouseEvent, target: HTMLElement) => {
     margin: 0;
     font-size: 14px;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.65);
+    color: var(--os-text); opacity: 0.65;
   }
 }
 
@@ -374,8 +374,8 @@ const handleMouseMove = (e: MouseEvent, target: HTMLElement) => {
   display: flex;
   align-items: center;
   background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--os-border-color);
+  color: var(--os-text); opacity: 0.9;
   padding: 10px 20px;
   border-radius: 24px;
   font-size: 13px;
@@ -405,7 +405,7 @@ const handleMouseMove = (e: MouseEvent, target: HTMLElement) => {
   background: rgba(0, 0, 0, 0.2);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--os-border-color);
   display: flex;
   align-items: center;
 }
@@ -414,9 +414,9 @@ const handleMouseMove = (e: MouseEvent, target: HTMLElement) => {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: var(--os-hover);
+  border: 1px solid var(--os-border-color);
+  color: var(--os-text);
   padding: 8px 16px;
   border-radius: 8px;
   font-size: 14px;
@@ -437,7 +437,7 @@ const handleMouseMove = (e: MouseEvent, target: HTMLElement) => {
 .project-wrapper {
   flex: 1;
   background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--os-border-color);
   border-radius: 16px;
   padding: 30px;
   overflow-y: auto;
@@ -470,7 +470,7 @@ const handleMouseMove = (e: MouseEvent, target: HTMLElement) => {
 
       .view-btn {
         background: var(--os-accent, #3b82f6);
-        color: #fff;
+        color: var(--os-text);
       }
     }
   }
@@ -503,3 +503,4 @@ const handleMouseMove = (e: MouseEvent, target: HTMLElement) => {
   }
 }
 </style>
+
