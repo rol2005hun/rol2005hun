@@ -28,7 +28,6 @@
             <div class="change-bullet">
               <Icon name="ph:check-circle-fill" />
             </div>
-            <!-- eslint-disable-next-line vue/no-v-html -->
             <div class="change-text" v-html="change" />
           </li>
         </ul>
