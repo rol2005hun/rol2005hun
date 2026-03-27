@@ -662,4 +662,3 @@ const handleFileUpload = (event: Event) => {
   }
 }
 </style>
-
