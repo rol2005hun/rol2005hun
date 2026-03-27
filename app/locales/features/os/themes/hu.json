@@ -1,10 +1,10 @@
 {
-    "dark":  "Sötét Mód",
-    "light":  "Világos Mód",
-    "orange":  "Naplemente Narancs",
-    "purple":  "Cyber Lila",
-    "green":  "Erdei Zöld",
-    "rose":  "R�zsa V�r�s",
-    "cyan":  "�ce�n Ci�n",
-    "dracula":  "Dracula S�t�t"
+  "dark": "Sötét Mód",
+  "light": "Világos Mód",
+  "orange": "Naplemente Narancs",
+  "purple": "Cyber Lila",
+  "green": "Erdei Zöld",
+  "rose": "Rózsa Vörös",
+  "cyan": "Cyan Cián",
+  "dracula": "Dracula Sötét"
 }

@@ -2,7 +2,15 @@ import { defineStore } from 'pinia';
 import { ref, watch, computed } from 'vue';
 import { useCookie } from '#imports';
 
-export type OSTheme = 'dark' | 'light' | 'orange' | 'purple' | 'green' | 'rose' | 'cyan' | 'dracula';
+export type OSTheme =
+  | 'dark'
+  | 'light'
+  | 'orange'
+  | 'purple'
+  | 'green'
+  | 'rose'
+  | 'cyan'
+  | 'dracula';
 
 export interface ThemeConfig {
   id: OSTheme;

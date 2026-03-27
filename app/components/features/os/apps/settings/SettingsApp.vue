@@ -72,8 +72,8 @@
                 <input v-model="customUrlInput" type="text" placeholder="https://..." />
                 <button
                   class="apply-btn"
-                  @click="applyCustomUrl"
-                  :disabled="!customUrlInput.trim()">
+                  :disabled="!customUrlInput.trim()"
+                  @click="applyCustomUrl">
                   <Icon name="ph:check-bold" />
                 </button>
               </div>
@@ -229,9 +229,9 @@ const handleFileUpload = (event: Event) => {
     border-bottom: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
     display: flex;
     overflow-x: auto;
-    scrollbar-width: none; /* Firefox */
+    scrollbar-width: none;
     &::-webkit-scrollbar {
-      display: none; /* Chrome/Safari */
+      display: none;
     }
   }
 
