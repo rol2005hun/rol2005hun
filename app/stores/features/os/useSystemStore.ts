@@ -1,4 +1,4 @@
-﻿import { defineStore } from 'pinia';
+import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useSystemStore = defineStore('system', () => {
@@ -17,6 +17,15 @@ export const useSystemStore = defineStore('system', () => {
   const confirmShutdown = () => {
     showShutdownModal.value = false;
     isShuttingDown.value = true;
+
+    // Megpróbálja bezárni a böngésző ablakot
+    window.close();
+
+    // Biztonsági (fallback) megoldás arra az esetre, ha a böngésző a felhasználó 
+    // interakciójának hiányában (pl. scriptből indítva) blokkolja az ablakbezárást.
+    setTimeout(() => {
+      window.location.href = 'about:blank';
+    }, 200);
   };
 
   const bootLegacyOS = (url: string) => {
@@ -38,3 +47,4 @@ export const useSystemStore = defineStore('system', () => {
     exitLegacyOS
   };
 });
+
