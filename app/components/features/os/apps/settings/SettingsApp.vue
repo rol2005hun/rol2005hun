@@ -258,7 +258,8 @@ const handleFileUpload = (event: Event) => {
       gap: 12px;
       font-size: 14px;
       font-weight: 500;
-      color: var(--os-text); opacity: 0.7;
+      color: var(--os-text);
+      opacity: 0.7;
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 
       .icon {
@@ -268,7 +269,8 @@ const handleFileUpload = (event: Event) => {
 
       &:hover {
         background: var(--os-hover);
-        color: var(--os-text); opacity: 0.95;
+        color: var(--os-text);
+        opacity: 0.95;
         transform: translateX(4px);
 
         @media (max-width: 768px) {
@@ -280,7 +282,8 @@ const handleFileUpload = (event: Event) => {
         background: var(--os-primary-color, var(--os-border-color));
         color: var(--os-primary-text, #000);
         font-weight: 600;
-        box-shadow: 0 4px 15px color-mix(in srgb, var(--os-primary-color, var(--os-text)) 20%, transparent);
+        box-shadow: 0 4px 15px
+          color-mix(in srgb, var(--os-primary-color, var(--os-text)) 20%, transparent);
 
         .icon {
           color: var(--os-primary-text, #000);
@@ -328,9 +331,6 @@ const handleFileUpload = (event: Event) => {
     font-size: 28px;
     font-weight: 700;
     letter-spacing: -0.5px;
-    
-    
-    -webkit-
     color: var(--os-text);
   }
 
@@ -372,7 +372,7 @@ const handleFileUpload = (event: Event) => {
   &:hover {
     background: var(--os-hover);
     transform: translateY(-4px);
-    border-color: var(--os-text); opacity: 0.2;
+    border-color: color-mix(in srgb, var(--os-text) 20%, transparent);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   }
 
@@ -465,7 +465,8 @@ const handleFileUpload = (event: Event) => {
 
   &.active {
     border-color: var(--os-primary-color, var(--os-text));
-    box-shadow: 0 0 20px color-mix(in srgb, var(--os-primary-color, var(--os-text)) 30%, transparent);
+    box-shadow: 0 0 20px
+      color-mix(in srgb, var(--os-primary-color, var(--os-text)) 30%, transparent);
 
     .active-indicator {
       opacity: 1;
@@ -528,7 +529,8 @@ const handleFileUpload = (event: Event) => {
 
     label {
       font-size: 14px;
-      color: var(--os-text); opacity: 0.8;
+      color: var(--os-text);
+      opacity: 0.8;
       font-weight: 500;
     }
 
@@ -549,7 +551,8 @@ const handleFileUpload = (event: Event) => {
 
         &:focus {
           border-color: var(--os-primary-color, var(--os-border-color));
-          box-shadow: 0 0 0 3px color-mix(in srgb, var(--os-primary-color, var(--os-text)) 15%, transparent);
+          box-shadow: 0 0 0 3px
+            color-mix(in srgb, var(--os-primary-color, var(--os-text)) 15%, transparent);
         }
       }
 
@@ -582,7 +585,8 @@ const handleFileUpload = (event: Event) => {
 
     .file-input {
       font-size: 14px;
-      color: var(--os-text); opacity: 0.8;
+      color: var(--os-text);
+      opacity: 0.8;
       width: 100%;
 
       &::file-selector-button {
@@ -598,7 +602,7 @@ const handleFileUpload = (event: Event) => {
 
         &:hover {
           background: var(--os-hover);
-          border-color: var(--os-text); opacity: 0.2;
+          border-color: color-mix(in srgb, var(--os-text) 20%, transparent);
         }
       }
     }
@@ -608,7 +612,8 @@ const handleFileUpload = (event: Event) => {
     display: flex;
     align-items: center;
     text-align: center;
-    color: var(--os-text); opacity: 0.4;
+    color: var(--os-text);
+    opacity: 0.4;
     font-size: 12px;
     font-weight: 600;
     margin: 8px 0;
@@ -657,7 +662,4 @@ const handleFileUpload = (event: Event) => {
   }
 }
 </style>
-
-
-
 

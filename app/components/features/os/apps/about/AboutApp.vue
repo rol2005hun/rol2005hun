@@ -212,7 +212,7 @@ const openContact = () => {
 
         &:hover {
           background: var(--os-hover);
-          border-color: var(--os-text); opacity: 0.3;
+          border-color: color-mix(in srgb, var(--os-text) 0.3%, transparent);
         }
 
         &:active {
@@ -223,7 +223,7 @@ const openContact = () => {
 
     p {
       margin: 0;
-      color: var(--os-text); opacity: 0.7;
+      color: color-mix(in srgb, var(--os-text) 70%, transparent);
 
       &.copyright {
         font-size: 12px;
@@ -245,7 +245,7 @@ const openContact = () => {
     font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--os-text); opacity: 0.5;
+    color: color-mix(in srgb, var(--os-text) 0.5%, transparent);
     border-bottom: 1px solid var(--os-border-color);
     padding-bottom: 8px;
   }
@@ -265,7 +265,7 @@ const openContact = () => {
     border: 1px solid var(--os-border-color);
 
     .label {
-      color: var(--os-text); opacity: 0.6;
+      color: color-mix(in srgb, var(--os-text) 0.6%, transparent);
     }
 
     .value {
@@ -276,7 +276,7 @@ const openContact = () => {
 
 .legacy-section {
   .legacy-desc {
-    color: var(--os-text); opacity: 0.7;
+    color: color-mix(in srgb, var(--os-text) 70%, transparent);
     font-size: 14px;
     line-height: 1.5;
     margin-bottom: 16px;
@@ -325,7 +325,7 @@ const openContact = () => {
 
 .credits-text {
   line-height: 1.6;
-  color: var(--os-text); opacity: 0.8;
+  color: color-mix(in srgb, var(--os-text) 80%, transparent);
   margin-bottom: 15px;
 }
 
@@ -367,6 +367,7 @@ const openContact = () => {
   }
 }
 </style>
+
 
 
 
