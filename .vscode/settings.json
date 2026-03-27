@@ -26,6 +26,7 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "i18n-ally.localesPaths": ["app/components/features/auth/locales"],
-  "i18n-ally.pathMatcher": "{namespace}/{locale}.json"
+  "i18n-ally.localesPaths": ["app/locales/features"],
+  "i18n-ally.pathMatcher": "{namespaces}/{locale}.json",
+  "i18n-ally.namespace": true
 }
