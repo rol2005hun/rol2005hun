@@ -71,6 +71,14 @@
                                                    ],
                                        "title":  "New Contact App \u0026 UI Polish",
                                        "version":  "3.0.6-beta"
+                                   },
+                    "2026-03-27":  {
+                                       "changes":  [
+                                                       "Overhauled the \\u003cstrong\\u003eLight Theme\\u003c/strong\\u003e to be more modern, aesthetic, and softer on the eyes.",
+                                                       "Introduced 3 new beautiful themes: \\u003cstrong\\u003eRose Red\\u003c/strong\\u003e, \\u003cstrong\\u003eOcean Cyan\\u003c/strong\\u003e, and \\u003cstrong\\u003eDracula Dark\\u003c/strong\\u003e."
+                                                   ],
+                                       "title":  "New Themes \u0026 Improved Light Mode",
+                                       "version":  "3.0.7-beta"
                                    }
                 }
 }

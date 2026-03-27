@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { ref, watch, computed } from 'vue';
 import { useCookie } from '#imports';
 
-export type OSTheme = 'dark' | 'light' | 'orange' | 'purple' | 'green';
+export type OSTheme = 'dark' | 'light' | 'orange' | 'purple' | 'green' | 'rose' | 'cyan' | 'dracula';
 
 export interface ThemeConfig {
   id: OSTheme;
@@ -12,10 +12,13 @@ export interface ThemeConfig {
 
 export const availableThemes: ThemeConfig[] = [
   { id: 'dark', nameKey: 'os.themes.dark', color: '#1a1a1a' },
-  { id: 'light', nameKey: 'os.themes.light', color: '#ffffff' },
+  { id: 'light', nameKey: 'os.themes.light', color: '#f5f5f8' },
   { id: 'orange', nameKey: 'os.themes.orange', color: '#ff7a00' },
   { id: 'purple', nameKey: 'os.themes.purple', color: '#9d00ff' },
-  { id: 'green', nameKey: 'os.themes.green', color: '#00c853' }
+  { id: 'green', nameKey: 'os.themes.green', color: '#00c853' },
+  { id: 'rose', nameKey: 'os.themes.rose', color: '#f43f5e' },
+  { id: 'cyan', nameKey: 'os.themes.cyan', color: '#06b6d4' },
+  { id: 'dracula', nameKey: 'os.themes.dracula', color: '#282a36' }
 ];
 
 export const availableWallpapers = [

@@ -1,7 +1,10 @@
 {
-  "dark": "Dark Mode",
-  "light": "Light Mode",
-  "orange": "Sunset Orange",
-  "purple": "Cyber Purple",
-  "green": "Forest Green"
+    "dark":  "Dark Mode",
+    "light":  "Light Mode",
+    "orange":  "Sunset Orange",
+    "purple":  "Cyber Purple",
+    "green":  "Forest Green",
+    "rose":  "Rose Red",
+    "cyan":  "Ocean Cyan",
+    "dracula":  "Dracula Dark"
 }

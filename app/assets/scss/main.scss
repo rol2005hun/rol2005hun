@@ -12,47 +12,80 @@
 }
 
 :root[data-theme='light'] {
-  --os-primary-color: #000000;
+  --os-primary-color: #0066cc;
   --os-primary-text: #ffffff;
-  --os-taskbar-bg: rgba(240, 240, 240, 0.85);
-  --os-window-bg: rgba(255, 255, 255, 0.95);
-  --os-menu-bg: rgba(250, 250, 250, 0.9);
-  --os-border-color: rgba(0, 0, 0, 0.1);
-  --os-text: #1a1a1a;
-  --os-hover: rgba(0, 0, 0, 0.05);
+  --os-taskbar-bg: rgba(255, 255, 255, 0.85);
+  --os-window-bg: rgba(250, 250, 252, 0.95);
+  --os-menu-bg: rgba(245, 245, 248, 0.9);
+  --os-border-color: rgba(0, 0, 0, 0.15);
+  --os-text: #222222;
+  --os-hover: rgba(0, 0, 0, 0.06);
 }
 
 :root[data-theme='orange'] {
-  --os-primary-color: #ff7a00;
+  --os-primary-color: #f97316;
   --os-primary-text: #ffffff;
-  --os-taskbar-bg: rgba(30, 15, 0, 0.85);
-  --os-window-bg: rgba(45, 20, 0, 0.95);
-  --os-menu-bg: rgba(40, 15, 0, 0.9);
-  --os-border-color: rgba(255, 122, 0, 0.2);
-  --os-text: #fff3e6;
-  --os-hover: rgba(255, 122, 0, 0.15);
+  --os-taskbar-bg: rgba(20, 15, 10, 0.85);
+  --os-window-bg: rgba(30, 20, 15, 0.95);
+  --os-menu-bg: rgba(25, 18, 12, 0.9);
+  --os-border-color: rgba(249, 115, 22, 0.2);
+  --os-text: #fff6ee;
+  --os-hover: rgba(249, 115, 22, 0.15);
 }
 
 :root[data-theme='purple'] {
-  --os-primary-color: #9d00ff;
+  --os-primary-color: #a855f7;
   --os-primary-text: #ffffff;
-  --os-taskbar-bg: rgba(15, 0, 25, 0.85);
-  --os-window-bg: rgba(25, 0, 40, 0.95);
-  --os-menu-bg: rgba(20, 0, 35, 0.9);
-  --os-border-color: rgba(157, 0, 255, 0.2);
-  --os-text: #f7e6ff;
-  --os-hover: rgba(157, 0, 255, 0.15);
+  --os-taskbar-bg: rgba(15, 10, 25, 0.85);
+  --os-window-bg: rgba(25, 15, 35, 0.95);
+  --os-menu-bg: rgba(20, 12, 30, 0.9);
+  --os-border-color: rgba(168, 85, 247, 0.2);
+  --os-text: #faefff;
+  --os-hover: rgba(168, 85, 247, 0.15);
 }
 
 :root[data-theme='green'] {
-  --os-primary-color: #00c853;
+  --os-primary-color: #10b981;
   --os-primary-text: #ffffff;
-  --os-taskbar-bg: rgba(0, 20, 5, 0.85);
-  --os-window-bg: rgba(0, 35, 10, 0.95);
-  --os-menu-bg: rgba(0, 25, 5, 0.9);
-  --os-border-color: rgba(0, 200, 83, 0.2);
-  --os-text: #e6fff0;
-  --os-hover: rgba(0, 200, 83, 0.15);
+  --os-taskbar-bg: rgba(10, 20, 15, 0.85);
+  --os-window-bg: rgba(15, 30, 20, 0.95);
+  --os-menu-bg: rgba(12, 25, 18, 0.9);
+  --os-border-color: rgba(16, 185, 129, 0.2);
+  --os-text: #ecfdf5;
+  --os-hover: rgba(16, 185, 129, 0.15);
+}
+
+:root[data-theme='rose'] {
+  --os-primary-color: #f43f5e;
+  --os-primary-text: #ffffff;
+  --os-taskbar-bg: rgba(25, 10, 15, 0.85);
+  --os-window-bg: rgba(35, 15, 20, 0.95);
+  --os-menu-bg: rgba(30, 12, 18, 0.9);
+  --os-border-color: rgba(244, 63, 94, 0.2);
+  --os-text: #fff1f2;
+  --os-hover: rgba(244, 63, 94, 0.15);
+}
+
+:root[data-theme='cyan'] {
+  --os-primary-color: #06b6d4;
+  --os-primary-text: #ffffff;
+  --os-taskbar-bg: rgba(10, 20, 25, 0.85);
+  --os-window-bg: rgba(15, 30, 35, 0.95);
+  --os-menu-bg: rgba(12, 25, 30, 0.9);
+  --os-border-color: rgba(6, 182, 212, 0.2);
+  --os-text: #ecfeff;
+  --os-hover: rgba(6, 182, 212, 0.15);
+}
+
+:root[data-theme='dracula'] {
+  --os-primary-color: #ff79c6;
+  --os-primary-text: #282a36;
+  --os-taskbar-bg: rgba(40, 42, 54, 0.85);
+  --os-window-bg: rgba(68, 71, 90, 0.95);
+  --os-menu-bg: rgba(56, 58, 80, 0.9);
+  --os-border-color: rgba(255, 121, 198, 0.3);
+  --os-text: #f8f8f2;
+  --os-hover: rgba(255, 121, 198, 0.15);
 }
 
 *,
@@ -91,3 +124,4 @@ input,
 textarea {
   user-select: auto;
 }
+

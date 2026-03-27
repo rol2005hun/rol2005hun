@@ -1,7 +1,10 @@
 {
-  "dark": "SÃ¶tÃ©t MÃ³d",
-  "light": "VilÃ¡gos MÃ³d",
-  "orange": "Naplemente Narancs",
-  "purple": "Cyber Lila",
-  "green": "Erdei ZÃ¶ld"
+    "dark":  "SÃ¶tÃ©t MÃ³d",
+    "light":  "VilÃ¡gos MÃ³d",
+    "orange":  "Naplemente Narancs",
+    "purple":  "Cyber Lila",
+    "green":  "Erdei ZÃ¶ld",
+    "rose":  "Rózsa Vörös",
+    "cyan":  "Óceán Cián",
+    "dracula":  "Dracula Sötét"
 }

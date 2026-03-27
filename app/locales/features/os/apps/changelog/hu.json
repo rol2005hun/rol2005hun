@@ -71,6 +71,14 @@
                                                    ],
                                        "title":  "Új Kapcsolat App és UI Fejlesztések",
                                        "version":  "1.0.6"
+                                   },
+                    "2026.03.27":  {
+                                       "changes":  [
+                                                       "A \\u003cstrong\\u003eVilágos Téma\\u003c/strong\\u003e (Light Theme) jelentõs ráncfelvarrást kapott: lágyabb árnyalatok és szebb elsõdleges kék szín.",
+                                                       "3 teljesen új téma került bevezetésre: \\u003cstrong\\u003eRózsa Vörös\\u003c/strong\\u003e, \\u003cstrong\\u003eÓceán Cián\\u003c/strong\\u003e és \\u003cstrong\\u003eDracula Sötét\\u003c/strong\\u003e."
+                                                   ],
+                                       "title":  "Új Témák és Szebb Világos Mód",
+                                       "version":  "1.0.7"
                                    }
                 }
 }
