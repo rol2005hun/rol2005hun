@@ -239,4 +239,3 @@ const versions = computed(() => {
   }
 }
 </style>
-
