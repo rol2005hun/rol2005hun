@@ -18,11 +18,8 @@ export const useSystemStore = defineStore('system', () => {
     showShutdownModal.value = false;
     isShuttingDown.value = true;
 
-    // Megpróbálja bezárni a böngésző ablakot
     window.close();
 
-    // Biztonsági (fallback) megoldás arra az esetre, ha a böngésző a felhasználó 
-    // interakciójának hiányában (pl. scriptből indítva) blokkolja az ablakbezárást.
     setTimeout(() => {
       window.location.href = 'about:blank';
     }, 200);
@@ -47,4 +44,3 @@ export const useSystemStore = defineStore('system', () => {
     exitLegacyOS
   };
 });
-

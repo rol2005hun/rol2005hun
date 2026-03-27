@@ -48,7 +48,6 @@ export const useMusicStore = defineStore('os-music', () => {
       isPlaying.value = false;
     });
 
-    // Load tracks
     fetch('/data/music.json')
       .then((res) => res.json())
       .then((data) => {

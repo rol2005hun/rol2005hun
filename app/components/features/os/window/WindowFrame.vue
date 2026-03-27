@@ -108,21 +108,18 @@ const onDrag = (e: MouseEvent) => {
   let newX = initialWinX + dx;
   let newY = initialWinY + dy;
 
-  // OS behavior: Window can be dragged partially off-screen
-  const VISIBLE_MARGIN = 100; // at least 100px width visible
+  const VISIBLE_MARGIN = 100;
 
   const surfaceEl = document.querySelector('.desktop-surface');
   const surfaceWidth = surfaceEl ? surfaceEl.clientWidth : window.innerWidth;
   const surfaceHeight = surfaceEl ? surfaceEl.clientHeight : window.innerHeight - 48;
 
-  const HEADER_HEIGHT = 38; // height of the window top panel
+  const HEADER_HEIGHT = 38;
 
   const minX = -(props.windowInfo.width - VISIBLE_MARGIN);
   const maxX = surfaceWidth - VISIBLE_MARGIN;
 
-  // Top: cannot go above screen
   const minY = 0;
-  // Bottom: header must remain strictly inside the desktop surface
   const maxY = surfaceHeight - HEADER_HEIGHT;
 
   newX = Math.max(minX, Math.min(newX, maxX));
