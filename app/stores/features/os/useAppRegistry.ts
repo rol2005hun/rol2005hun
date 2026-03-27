@@ -22,7 +22,8 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       defaultWidth: 600,
       defaultHeight: 500,
       allowMultipleInstances: false,
-      showOnDesktop: true
+      showOnDesktop: false,
+      showInStartMenu: false
     },
     {
       id: 'browser',
