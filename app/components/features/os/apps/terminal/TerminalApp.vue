@@ -40,8 +40,7 @@ const cmdInput = ref<HTMLInputElement | null>(null);
 const terminalContainer = ref<HTMLElement | null>(null);
 
 const isMaskedMode = ref(false);
-// eslint-disable-next-line no-unused-vars
-const passwordCallback = ref<((pwd: string) => void) | null>(null);
+const passwordCallback = ref<Parameters<TerminalContext['setPromptMode']>[1] | null>(null);
 
 const isRoot = computed(() => authStore.user?.role === 'admin');
 
@@ -211,4 +210,3 @@ input {
   outline: none;
 }
 </style>
-
