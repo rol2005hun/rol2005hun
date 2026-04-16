@@ -1,84 +1,95 @@
 {
-    "title":  "Changelog",
-    "subtitle":  "Latest OS updates and features",
-    "empty":  "No versions available.",
-    "history":  {
-                    "2026-03-24-4":  {
-                                         "version":  "3.0.5-beta",
-                                         "title":  "Music App Overhaul \u0026 System Fixes",
-                                         "changes":  [
-                                                         "Completely overhauled the \u003cstrong\u003eMusic App\u003c/strong\u003e UI, fixing hover colors and reducing the footer thickness.",
-                                                         "Implemented global background playback: music now continues playing even when the app is closed.",
-                                                         "Music volume preference is now saved locally and restored on reload.",
-                                                         "Added \u003ccode\u003emusic\u003c/code\u003e terminal command to control playback (play, pause, next, prev, vol).",
-                                                         "Added new Christmas music tracks and removed the old radio stream.",
-                                                         "Resolved TypeScript compilation issues across the system (StartMenu, i18n, terminal commands)."
-                                                     ]
-                                     },
-                    "2026-03-24-3":  {
-                                         "version":  "3.0.4-beta",
-                                         "title":  "Window Management \u0026 Layout Fixes",
-                                         "changes":  [
-                                                         "Fixed an issue where maximized windows would overlap or hide behind the taskbar.",
-                                                         "Refined window dragging behavior to prevent windows from being dragged completely off-screen, maintaining visibility of the header.",
-                                                         "Improved window resizing constraints allowing dynamic resizing while obeying minimum constraints and screen boundaries."
-                                                     ]
-                                     },
-                    "2026-03-24-2":  {
-                                         "version":  "3.0.3-beta",
-                                         "title":  "Settings App Responsiveness \u0026 UI",
-                                         "changes":  [
-                                                         "Completely revamped the \u003cstrong\u003eSettings App\u003c/strong\u003e with a modern design and smooth animations.",
-                                                         "Added full \u003cem\u003emobile responsiveness\u003c/em\u003e with a scrollable top navigation bar for smaller screens.",
-                                                         "Enhanced Theme and Wallpaper cards with hover effects, active indicators, and glassmorphism styling."
-                                                     ]
-                                     },
-                    "2026-03-24":  {
-                                       "version":  "3.0.2-beta",
-                                       "title":  "Projects App UI Enhancement",
-                                       "changes":  [
-                                                       "Redesigned the \u003cstrong\u003eProjects App\u003c/strong\u003e UI making it more modern and fancy.",
-                                                       "Added unique project icons and dynamic mouse-tracking glow effects for project cards.",
-                                                       "Improved transition and entrance animations within the Projects overview."
-                                                   ]
-                                   },
-                    "2026-03-23-2":  {
-                                         "version":  "3.0.1-beta",
-                                         "title":  "Legacy Mode \u0026 UI Improvements",
-                                         "changes":  [
-                                                         "Added \u003cstrong\u003eLegacy OS Viewer\u003c/strong\u003e (Time Machine) to explore v1 and v2 natively in a fullscreen iframe.",
-                                                         "Increased default and minimum window sizes for OS applications to improve user experience.",
-                                                         "Fixed terminal text formatting issues (proper newline parsing for app lists).",
-                                                         "Added close button and Escape key listener to exit legacy mode safely.",
-                                                         "Fixed: App name, random characters."
-                                                     ]
-                                     },
-                    "2026-03-23":  {
-                                       "version":  "3.0.0-beta",
-                                       "title":  "Overhauled Design \u0026 Performance",
-                                       "changes":  [
-                                                       "Complete \u003cstrong\u003eGlassmorphism\u003c/strong\u003e redesign across all OS interfaces.",
-                                                       "New \u003cem\u003eChangelog Viewer\u003c/em\u003e integration via the About app.",
-                                                       "Comprehensive \u003cstrong\u003eESLint \u0026 Prettier\u003c/strong\u003e rule enforcement and codebase formatting.",
-                                                       "Minor bug fixes and performance optimizations in window management."
-                                                   ]
-                                   },
-                    "2026-03-26":  {
-                                       "changes":  [
-                                                       "Added a brand new \\u003cstrong\\u003eContact App\\u003c/strong\\u003e with a modern glassmorphism design.",
-                                                       "Refined the About App UI, unifying the look of social and contact buttons.",
-                                                       "Improved the responsiveness of the Contact App to prevent scrolling cutoff on small screens."
-                                                   ],
-                                       "title":  "New Contact App \u0026 UI Polish",
-                                       "version":  "3.0.6-beta"
-                                   },
-                    "2026-03-27":  {
-                                       "changes":  [
-                                                       "Overhauled the \\u003cstrong\\u003eLight Theme\\u003c/strong\\u003e to be more modern, aesthetic, and softer on the eyes.",
-                                                       "Introduced 3 new beautiful themes: \\u003cstrong\\u003eRose Red\\u003c/strong\\u003e, \\u003cstrong\\u003eOcean Cyan\\u003c/strong\\u003e, and \\u003cstrong\\u003eDracula Dark\\u003c/strong\\u003e."
-                                                   ],
-                                       "title":  "New Themes \u0026 Improved Light Mode",
-                                       "version":  "3.0.7-beta"
-                                   }
-                }
+    "title": "Changelog",
+    "subtitle": "Latest OS updates and features",
+    "empty": "No versions available.",
+    "history": {
+        "2026-03-24-4": {
+            "version": "3.0.5-beta",
+            "title": "Music App Overhaul & System Fixes",
+            "changes": [
+                "Completely overhauled the <strong>Music App</strong> UI, fixing hover colors and reducing the footer thickness.",
+                "Implemented global background playback: music now continues playing even when the app is closed.",
+                "Music volume preference is now saved locally and restored on reload.",
+                "Added <code>music</code> terminal command to control playback (play, pause, next, prev, vol).",
+                "Added new Christmas music tracks and removed the old radio stream.",
+                "Resolved TypeScript compilation issues across the system (StartMenu, i18n, terminal commands)."
+            ]
+        },
+        "2026-03-24-3": {
+            "version": "3.0.4-beta",
+            "title": "Window Management & Layout Fixes",
+            "changes": [
+                "Fixed an issue where maximized windows would overlap or hide behind the taskbar.",
+                "Refined window dragging behavior to prevent windows from being dragged completely off-screen, maintaining visibility of the header.",
+                "Improved window resizing constraints allowing dynamic resizing while obeying minimum constraints and screen boundaries."
+            ]
+        },
+        "2026-03-24-2": {
+            "version": "3.0.3-beta",
+            "title": "Settings App Responsiveness & UI",
+            "changes": [
+                "Completely revamped the <strong>Settings App</strong> with a modern design and smooth animations.",
+                "Added full <em>mobile responsiveness</em> with a scrollable top navigation bar for smaller screens.",
+                "Enhanced Theme and Wallpaper cards with hover effects, active indicators, and glassmorphism styling."
+            ]
+        },
+        "2026-03-24": {
+            "version": "3.0.2-beta",
+            "title": "Projects App UI Enhancement",
+            "changes": [
+                "Redesigned the <strong>Projects App</strong> UI making it more modern and fancy.",
+                "Added unique project icons and dynamic mouse-tracking glow effects for project cards.",
+                "Improved transition and entrance animations within the Projects overview."
+            ]
+        },
+        "2026-03-23-2": {
+            "version": "3.0.1-beta",
+            "title": "Legacy Mode & UI Improvements",
+            "changes": [
+                "Added <strong>Legacy OS Viewer</strong> (Time Machine) to explore v1 and v2 natively in a fullscreen iframe.",
+                "Increased default and minimum window sizes for OS applications to improve user experience.",
+                "Fixed terminal text formatting issues (proper newline parsing for app lists).",
+                "Added close button and Escape key listener to exit legacy mode safely.",
+                "Fixed: App name, random characters."
+            ]
+        },
+        "2026-03-23": {
+            "version": "3.0.0-beta",
+            "title": "Overhauled Design & Performance",
+            "changes": [
+                "Complete <strong>Glassmorphism</strong> redesign across all OS interfaces.",
+                "New <em>Changelog Viewer</em> integration via the About app.",
+                "Comprehensive <strong>ESLint & Prettier</strong> rule enforcement and codebase formatting.",
+                "Minor bug fixes and performance optimizations in window management."
+            ]
+        },
+        "2026-03-26": {
+            "changes": [
+                "Added a brand new \\u003cstrong\\u003eContact App\\u003c/strong\\u003e with a modern glassmorphism design.",
+                "Refined the About App UI, unifying the look of social and contact buttons.",
+                "Improved the responsiveness of the Contact App to prevent scrolling cutoff on small screens."
+            ],
+            "title": "New Contact App & UI Polish",
+            "version": "3.0.6-beta"
+        },
+        "2026-03-27": {
+            "changes": [
+                "Overhauled the \\u003cstrong\\u003eLight Theme\\u003c/strong\\u003e to be more modern, aesthetic, and softer on the eyes.",
+                "Introduced 3 new beautiful themes: \\u003cstrong\\u003eRose Red\\u003c/strong\\u003e, \\u003cstrong\\u003eOcean Cyan\\u003c/strong\\u003e, and \\u003cstrong\\u003eDracula Dark\\u003c/strong\\u003e."
+            ],
+            "title": "New Themes & Improved Light Mode",
+            "version": "3.0.7-beta"
+        },
+        "2026-03-27-2": {
+            "version": "3.0.8-beta",
+            "title": "Mobile Responsiveness & UI Improvements",
+            "changes": [
+                "Enlarged window control buttons (minimize, maximize, close) for better accessibility.",
+                "Completely redesigned the <strong>Projects App</strong> into a modern split-view layout.",
+                "Fixed overlapping UI issues on mobile devices (e.g. apps getting cut off by the status bar).",
+                "Added responsive layouts to Projects, Settings, and About apps for optimal phone viewing.",
+                "Introduced platform-specific app visibility logic (showing certain apps only on desktop or mobile)."
+            ]
+        }
+    }
 }

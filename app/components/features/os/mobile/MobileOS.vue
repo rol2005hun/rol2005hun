@@ -18,7 +18,7 @@
       <div v-else key="home" class="home-screen">
         <div class="app-grid">
           <div
-            v-for="app in appRegistry.installedApps"
+            v-for="app in mobileVisibleApps"
             :key="app.id"
             class="app-icon"
             @click="openApp(app.id)">
@@ -38,8 +38,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, defineAsyncComponent } from 'vue';
+import { ref, onMounted, onUnmounted, defineAsyncComponent, computed } from 'vue';
 import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
+
+const appRegistry = useAppRegistry();
+
+const mobileVisibleApps = computed(() => {
+  return appRegistry.installedApps.filter((app) => {
+    if (app.showOnDesktop === false) return false;
+    if (Array.isArray(app.showOnDesktop) && !app.showOnDesktop.includes('mobile')) return false;
+    return true;
+  });
+});
 
 const appComponents: Record<string, any> = {
   settings: defineAsyncComponent(
@@ -58,10 +68,7 @@ const appComponents: Record<string, any> = {
   music: defineAsyncComponent(() => import('@/components/features/os/apps/music/MusicApp.vue'))
 };
 
-const appRegistry = useAppRegistry();
-
-const currentTime = ref('');
-const activeAppId = ref<string | null>(null);
+  const currentTime = ref('');const activeAppId = ref<string | null>(null);
 let timer: ReturnType<typeof setInterval>;
 
 const updateTime = () => {
@@ -101,6 +108,10 @@ onUnmounted(() => {
 }
 
 .status-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 44px;
   width: 100%;
   display: flex;
@@ -109,8 +120,9 @@ onUnmounted(() => {
   padding: 0 20px;
   font-size: 14px;
   font-weight: 600;
-  z-index: 20;
+  z-index: 50;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%);
+  pointer-events: none;
 }
 
 .notch {
@@ -147,25 +159,26 @@ onUnmounted(() => {
 
 .active-app-container {
   position: absolute;
-  top: 44px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  background: var(--os-bg, #000);
-  overflow: hidden;
-  z-index: 15;
-}
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background: var(--os-window-bg);
+    overflow: hidden;
+    padding-top: 44px;
+    box-sizing: border-box;
+    z-index: 15;
+  }
 
-.home-screen {
-  position: absolute;
-  top: 44px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 40px 20px;
-  overflow-y: auto;
-
+  .home-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 84px 20px 40px 20px;
+    box-sizing: border-box;
   &::-webkit-scrollbar {
     display: none;
   }

@@ -17,7 +17,11 @@ export const useDesktopStore = defineStore('os-desktop', () => {
 
   const defaultIcons = computed<DesktopIconItem[]>(() => {
     return appRegistry.installedApps
-      .filter((app) => app.showOnDesktop !== false)
+      .filter((app) => {
+        if (app.showOnDesktop === false) return false;
+        if (Array.isArray(app.showOnDesktop) && !app.showOnDesktop.includes('desktop')) return false;
+        return true;
+      })
       .map((app, index) => ({
         id: `icon-${app.id}`,
         appId: app.id,

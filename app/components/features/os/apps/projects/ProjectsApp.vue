@@ -123,6 +123,10 @@ const selectProject = (project: any) => {
   color: var(--os-text, #fff);
   overflow: hidden;
   border-radius: inherit;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .sidebar {
@@ -133,11 +137,21 @@ const selectProject = (project: any) => {
   background: color-mix(in srgb, var(--os-window-bg) 60%, rgba(0,0,0,0.2));
   border-right: 1px solid var(--os-border-color);
   backdrop-filter: blur(10px);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--os-border-color);
+  }
 }
 
 .sidebar-header {
   padding: 24px 20px;
   border-bottom: 1px solid var(--os-border-color);
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
 
   .title {
     font-size: 24px;
@@ -172,10 +186,23 @@ const selectProject = (project: any) => {
 
   &::-webkit-scrollbar {
     width: 4px;
+    height: 4px;
   }
   &::-webkit-scrollbar-thumb {
     background: var(--os-hover);
     border-radius: 4px;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 8px 12px;
+    gap: 8px;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 
@@ -188,6 +215,12 @@ const selectProject = (project: any) => {
   cursor: pointer;
   transition: all 0.2s ease;
   border: 1px solid transparent;
+
+  @media (max-width: 768px) {
+    flex-shrink: 0;
+    width: 250px;
+    max-width: 80vw;
+  }
 
   &:hover {
     background: var(--os-hover);
@@ -248,6 +281,10 @@ const selectProject = (project: any) => {
   padding: 32px;
   max-width: 900px;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
 }
 
 .detail-header {
@@ -257,10 +294,20 @@ const selectProject = (project: any) => {
   padding-bottom: 16px;
   margin-bottom: 24px;
 
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
   .content-title {
     font-size: 32px;
     font-weight: 700;
     margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 24px;
+    }
   }
 
   .content-badge {

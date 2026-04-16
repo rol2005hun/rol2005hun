@@ -9,8 +9,8 @@ export interface AppDefinition {
   defaultWidth?: number;
   defaultHeight?: number;
   allowMultipleInstances?: boolean;
-  showOnDesktop?: boolean;
-  showInStartMenu?: boolean;
+  showOnDesktop?: boolean | ('mobile' | 'desktop')[];
+  showInStartMenu?: boolean | ('mobile' | 'desktop')[];
 }
 
 export const useAppRegistry = defineStore('os-app-registry', () => {

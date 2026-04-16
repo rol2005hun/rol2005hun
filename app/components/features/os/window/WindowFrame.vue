@@ -263,7 +263,7 @@ const toggleMaximize = () => {
 }
 
 .window-header {
-  height: 48px;
+  height: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -294,8 +294,8 @@ const toggleMaximize = () => {
   align-items: center;
 
   .ctrl-btn {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     border: none;
     display: flex;

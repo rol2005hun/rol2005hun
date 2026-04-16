@@ -224,11 +224,12 @@ const handleFileUpload = (event: Event) => {
 
   @media (max-width: 768px) {
     width: 100%;
-    padding: 12px;
+    padding: 12px 0;
     border-right: none;
     border-bottom: 1px solid var(--os-border-color, var(--os-border-color));
-    display: flex;
+    display: block;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     &::-webkit-scrollbar {
       display: none;
@@ -247,6 +248,7 @@ const handleFileUpload = (event: Event) => {
       flex-direction: row;
       gap: 12px;
       width: max-content;
+      padding: 0 16px;
     }
 
     li {

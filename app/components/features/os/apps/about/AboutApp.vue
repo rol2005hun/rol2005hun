@@ -165,6 +165,13 @@ const openContact = () => {
   background: linear-gradient(to bottom, var(--os-border-color), transparent);
   border-bottom: 1px solid var(--os-border-color);
 
+  @media (max-width: 600px) {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    gap: 15px;
+  }
+
   .os-logo {
     width: 80px;
     height: 80px;
@@ -190,6 +197,13 @@ const openContact = () => {
       align-items: center;
       gap: 10px;
       margin-bottom: 2px;
+
+      @media (max-width: 600px) {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
 
       .version {
         font-weight: 500;
@@ -237,6 +251,11 @@ const openContact = () => {
   display: flex;
   flex-direction: column;
   gap: 30px;
+
+  @media (max-width: 600px) {
+    padding: 20px;
+    gap: 20px;
+  }
 }
 
 .info-section {
@@ -285,6 +304,10 @@ const openContact = () => {
   .legacy-buttons {
     display: flex;
     gap: 16px;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
 
     .legacy-btn {
       flex: 1;
@@ -343,6 +366,17 @@ const openContact = () => {
 .links {
   display: flex;
   gap: 15px;
+  flex-wrap: wrap;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    gap: 10px;
+
+    a, .contact-me-btn {
+      justify-content: center;
+      text-align: center;
+    }
+  }
 
   a,
   .contact-me-btn {
