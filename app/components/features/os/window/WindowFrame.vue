@@ -17,15 +17,15 @@
       </div>
       <div class="window-controls">
         <button class="ctrl-btn minimize" @click.stop="toggleMinimize">
-          <Icon name="ph:minus-bold" size="10px" />
+          <Icon name="ph:minus-bold" size="12px" />
         </button>
         <button class="ctrl-btn maximize" @click.stop="toggleMaximize">
           <Icon
             :name="windowInfo.isMaximized ? 'ph:copy-simple-bold' : 'ph:square-bold'"
-            size="10px" />
+            size="12px" />
         </button>
         <button class="ctrl-btn close" @click.stop="closeWindow">
-          <Icon name="ph:x-bold" size="10px" />
+          <Icon name="ph:x-bold" size="12px" />
         </button>
       </div>
     </div>
@@ -114,7 +114,7 @@ const onDrag = (e: MouseEvent) => {
   const surfaceWidth = surfaceEl ? surfaceEl.clientWidth : window.innerWidth;
   const surfaceHeight = surfaceEl ? surfaceEl.clientHeight : window.innerHeight - 48;
 
-  const HEADER_HEIGHT = 38;
+  const HEADER_HEIGHT = 48;
 
   const minX = -(props.windowInfo.width - VISIBLE_MARGIN);
   const maxX = surfaceWidth - VISIBLE_MARGIN;
@@ -263,23 +263,23 @@ const toggleMaximize = () => {
 }
 
 .window-header {
-  height: 38px;
+  height: 48px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
+  padding: 0 16px;
   background: rgba(255, 255, 255, 0.05);
   user-select: none;
   cursor: default;
 }
 
 .window-title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--os-text, #fff);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 
   .title-icon {
     display: flex;
@@ -290,12 +290,12 @@ const toggleMaximize = () => {
 
 .window-controls {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   align-items: center;
 
   .ctrl-btn {
-    width: 14px;
-    height: 14px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     border: none;
     display: flex;

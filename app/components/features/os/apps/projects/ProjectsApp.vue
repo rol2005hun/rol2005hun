@@ -50,457 +50,245 @@ const projects = [
   }
 ];
 
-const activeProject = shallowRef<any>(null);
+const activeProject = shallowRef<any>(projects[0]);
 
-const openProject = (projectComponent: any) => {
-  activeProject.value = projectComponent;
-};
-
-const closeProject = () => {
-  activeProject.value = null;
-};
-
-const handleMouseMove = (e: MouseEvent, target: HTMLElement) => {
-  const rect = target.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-  target.style.setProperty('--mouse-x', `${x}px`);
-  target.style.setProperty('--mouse-y', `${y}px`);
+const selectProject = (project: any) => {
+  activeProject.value = project;
 };
 </script>
 
 <template>
-  <div class="app-container">
-    <transition name="fade" mode="out-in">
-      <div v-if="!activeProject" key="grid" class="grid-view">
-        <div class="header">
-          <h2 class="title">{{ $t('os.apps.projects.name') }}</h2>
-          <i18n-t keypath="os.apps.projects.githubInfo" tag="p" class="github-info">
-            <template #githubLink>
-              <a href="https://github.com/rol2005hun" target="_blank">
-                {{ $t('os.apps.projects.githubLinkText') }}
-              </a>
-            </template>
-          </i18n-t>
-          <div class="header-divider" />
-        </div>
+  <div class="split-view-container">
+    <!-- Sidebar / List -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h2 class="title">{{ $t('os.apps.projects.name') }}</h2>
+        <i18n-t keypath="os.apps.projects.githubInfo" tag="p" class="github-info">
+          <template #githubLink>
+            <a href="https://github.com/rol2005hun" target="_blank" class="github-link">
+              {{ $t('os.apps.projects.githubLinkText') }}
+            </a>
+          </template>
+        </i18n-t>
+      </div>
 
-        <div class="projects-grid">
+      <div class="projects-list">
+        <div
+          v-for="project in projects"
+          :key="project.id"
+          class="project-item"
+          :class="{ active: activeProject?.id === project.id }"
+          @click="selectProject(project)"
+        >
           <div
-            v-for="(project, index) in projects"
-            :key="project.id"
-            class="project-card"
-            :style="{ '--app-color': project.color, 'animation-delay': `${index * 0.05}s` }"
-            @click="openProject(project.component)"
-            @mousemove="handleMouseMove($event, $event.currentTarget as HTMLElement)">
-            <div class="card-bg" />
-            <div class="card-border" />
-            <div class="card-content">
-              <div class="card-header">
-                <div
-                  class="icon-wrapper"
-                  :style="{
-                    backgroundColor: `color-mix(in srgb, ${project.color} 15%, transparent)`
-                  }">
-                  <Icon
-                    :name="project.icon"
-                    class="project-icon"
-                    :style="{ color: project.color }" />
-                </div>
-                <h3>{{ $t(project.titleKey) }}</h3>
-              </div>
-              <p>{{ $t(project.descKey) }}</p>
-            </div>
-            <div class="card-actions">
-              <button class="view-btn">
-                <span>{{ $t('os.apps.projects.viewProject') }}</span>
-                <Icon name="ph:arrow-right-bold" class="btn-icon" />
-              </button>
-            </div>
+            class="item-icon-wrapper"
+            :style="{ backgroundColor: 'color-mix(in srgb, ' + project.color + ' 15%, transparent)' }"
+          >
+            <Icon :name="project.icon" class="item-icon" :style="{ color: project.color }" />
+          </div>
+          <div class="item-details">
+            <h3 class="item-title">{{ $t(project.titleKey) }}</h3>
+            <p class="item-desc">{{ $t(project.descKey) }}</p>
           </div>
         </div>
       </div>
+    </div>
 
-      <div v-else key="detail" class="detail-view">
-        <div class="toolbar glass-toolbar">
-          <button class="back-btn" @click="closeProject">
-            <Icon name="ph:caret-left-bold" size="16px" />
-            <span>{{ $t('os.apps.projects.backToProjects') }}</span>
-          </button>
+    <!-- Main Content Area -->
+    <div class="main-content">
+      <transition name="fade-slide" mode="out-in">
+        <div v-if="activeProject" :key="activeProject.id" class="project-detail-wrapper">
+          <div class="detail-header" :style="{ borderBottom: '2px solid color-mix(in srgb, ' + activeProject.color + ' 30%, transparent)' }">
+            <h1 class="content-title">{{ $t(activeProject.titleKey) }}</h1>
+            <div class="content-badge" :style="{ color: activeProject.color, backgroundColor: 'color-mix(in srgb, ' + activeProject.color + ' 15%, transparent)' }">
+              <Icon :name="activeProject.icon" />
+              <span>Project View</span>
+            </div>
+          </div>
+          <div class="detail-body">
+            <component :is="activeProject.component" />
+          </div>
         </div>
-        <div class="project-wrapper">
-          <transition name="slide-up" appear>
-            <component :is="activeProject" />
-          </transition>
-        </div>
-      </div>
-    </transition>
+      </transition>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.app-container {
+.split-view-container {
+  display: flex;
   height: 100%;
-  padding: 24px;
+  width: 100%;
+  background: var(--os-window-bg);
   color: var(--os-text, #fff);
-  box-sizing: border-box;
-  overflow-y: auto;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  background: var(
-    --os-bg,
-    radial-gradient(circle at top right, rgba(255, 255, 255, 0.05), transparent 50%)
-  );
+  overflow: hidden;
+  border-radius: inherit;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.fade-enter-from {
-  opacity: 0;
-  transform: translateY(10px) scale(0.98);
-}
-.fade-leave-to {
-  opacity: 0;
-  transform: translateY(-10px) scale(0.98);
+.sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  background: color-mix(in srgb, var(--os-window-bg) 60%, rgba(0,0,0,0.2));
+  border-right: 1px solid var(--os-border-color);
+  backdrop-filter: blur(10px);
 }
 
-.slide-up-enter-active {
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.slide-up-enter-from {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.header {
-  margin-bottom: 30px;
+.sidebar-header {
+  padding: 24px 20px;
+  border-bottom: 1px solid var(--os-border-color);
 
   .title {
-    margin: 0;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
-    letter-spacing: -0.5px;
-    background: linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.6));
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    margin: 0 0 4px 0;
   }
 
   .github-info {
-    margin: 8px 0 16px 0;
-    font-size: 0.95rem;
-    color: var(--os-text); opacity: 0.8;
-    line-height: 1.5;
+    font-size: 13px;
+    color: color-mix(in srgb, var(--os-text) 60%, transparent);
+    margin: 0;
 
-    :deep(a) {
-      color: #58a6ff;
-      text-decoration: none;
+    .github-link {
+      color: var(--os-text);
       font-weight: 500;
-      transition: color 0.2s;
-
+      text-decoration: none;
+      
       &:hover {
-        color: #79b8ff;
         text-decoration: underline;
       }
     }
   }
-
-  .header-divider {
-    height: 1px;
-    width: 60px;
-    background: linear-gradient(90deg, var(--os-accent, #3b82f6), transparent);
-    margin-top: 12px;
-    border-radius: 2px;
-  }
 }
 
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 24px;
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.project-card {
-  --mouse-x: 50%;
-  --mouse-y: 50%;
-  position: relative;
-  background: rgba(20, 20, 25, 0.4);
-  border-radius: 20px;
-  padding: 24px;
-  cursor: pointer;
+.projects-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 200px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-  transform: translateY(0) scale(1);
-  transition:
-    transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-    box-shadow 0.4s ease;
+  gap: 6px;
 
-  .card-bg {
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(
-      600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
-      color-mix(in srgb, var(--app-color, #ffffff) 12%, transparent),
-      transparent 40%
-    );
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    z-index: 0;
-    pointer-events: none;
+  &::-webkit-scrollbar {
+    width: 4px;
   }
-
-  .card-border {
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: radial-gradient(
-      400px circle at var(--mouse-x, 0) var(--mouse-y, 0),
-      color-mix(in srgb, var(--app-color, #ffffff) 60%, transparent),
-      rgba(255, 255, 255, 0.05) 40%
-    );
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0.5;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  &:hover {
-    transform: translateY(-6px) scale(1.02);
-    box-shadow:
-      0 20px 40px -10px rgba(0, 0, 0, 0.5),
-      0 0 20px -5px color-mix(in srgb, var(--app-color, #fff) 20%, transparent);
-
-    .card-bg {
-      opacity: 1;
-    }
-
-    .card-border {
-      opacity: 1;
-    }
-
-    .view-btn {
-      background: var(--app-color, #3b82f6);
-      color: var(--os-text);
-      padding-right: 16px;
-      box-shadow: 0 4px 15px color-mix(in srgb, var(--app-color, #3b82f6) 40%, transparent);
-
-      .btn-icon {
-        opacity: 1;
-        transform: translateX(0);
-        margin-left: 8px;
-      }
-    }
+  &::-webkit-scrollbar-thumb {
+    background: var(--os-hover);
+    border-radius: 4px;
   }
 }
 
-.card-content {
-  position: relative;
-  z-index: 1;
-
-  .card-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 16px;
-
-    .icon-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: var(--os-hover);
-      border: 1px solid var(--os-border-color);
-      box-shadow: inset 0 2px 10px rgba(255, 255, 255, 0.05);
-
-      .project-icon {
-        font-size: 24px;
-      }
-    }
-
-    h3 {
-      margin: 0;
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-    }
-  }
-
-  p {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--os-text); opacity: 0.65;
-  }
-}
-
-.card-actions {
-  position: relative;
-  z-index: 1;
-  margin-top: 24px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.view-btn {
+.project-item {
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid var(--os-border-color);
-  color: var(--os-text); opacity: 0.9;
-  padding: 10px 20px;
-  border-radius: 24px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  overflow: hidden;
-
-  .btn-icon {
-    opacity: 0;
-    transform: translateX(-15px);
-    width: 0;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-}
-
-.detail-view {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.glass-toolbar {
-  margin-bottom: 20px;
+  gap: 14px;
   padding: 12px;
   border-radius: 12px;
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--os-border-color);
-  display: flex;
-  align-items: center;
-}
-
-.back-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--os-hover);
-  border: 1px solid var(--os-border-color);
-  color: var(--os-text);
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
+  border: 1px solid transparent;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateX(-2px);
+    background: var(--os-hover);
   }
 
-  &:active {
-    transform: translateX(-2px) scale(0.95);
+  &.active {
+    background: var(--os-hover);
+    border-color: color-mix(in srgb, var(--os-text) 10%, transparent);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .item-icon-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+
+    .item-icon {
+      font-size: 24px;
+    }
+  }
+
+  .item-details {
+    flex: 1;
+    overflow: hidden;
+
+    .item-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0 0 2px 0;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .item-desc {
+      font-size: 12px;
+      margin: 0;
+      color: color-mix(in srgb, var(--os-text) 60%, transparent);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
 }
 
-.project-wrapper {
+.main-content {
   flex: 1;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--os-border-color);
-  border-radius: 16px;
-  padding: 30px;
   overflow-y: auto;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+  position: relative;
+  background: var(--os-window-bg);
 }
 
-:root[data-theme='light'] {
-  .project-card {
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    color: #1a1a1a;
+.project-detail-wrapper {
+  padding: 32px;
+  max-width: 900px;
+  margin: 0 auto;
+}
 
-    .card-content p {
-      color: rgba(0, 0, 0, 0.6);
-    }
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 16px;
+  margin-bottom: 24px;
 
-    .card-bg {
-      background: radial-gradient(circle at 100% 0%, rgba(0, 0, 0, 0.03) 0%, transparent 60%);
-    }
-
-    .view-btn {
-      background: rgba(0, 0, 0, 0.05);
-      color: #1a1a1a;
-      border-color: rgba(0, 0, 0, 0.1);
-    }
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-
-      .view-btn {
-        background: var(--os-accent, #3b82f6);
-        color: var(--os-text);
-      }
-    }
+  .content-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
   }
 
-  .header .title {
-    background: linear-gradient(90deg, #1a1a1a, #4a4a4a);
-    background-clip: text;
-    -webkit-background-clip: text;
+  .content-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
   }
+}
 
-  .glass-toolbar {
-    background: rgba(255, 255, 255, 0.4);
-    border-color: rgba(0, 0, 0, 0.1);
-  }
+.detail-body {
+  line-height: 1.6;
+}
 
-  .back-btn {
-    background: rgba(0, 0, 0, 0.05);
-    border-color: rgba(0, 0, 0, 0.1);
-    color: #1a1a1a;
-
-    &:hover {
-      background: rgba(0, 0, 0, 0.1);
-    }
-  }
-
-  .project-wrapper {
-    background: rgba(255, 255, 255, 0.5);
-    border-color: rgba(0, 0, 0, 0.1);
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
-  }
+/* Animations */
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateX(15px);
+}
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateX(-15px);
 }
 </style>
-
