@@ -228,7 +228,9 @@ const finishUnlock = () => {
   .user-profile .avatar-container {
     width: 70px;
     height: 70px;
-    .avatar-placeholder { font-size: 40px; }
+    .avatar-placeholder {
+      font-size: 40px;
+    }
   }
   .user-profile .username {
     font-size: 1.3rem;
@@ -239,7 +241,9 @@ const finishUnlock = () => {
     .sensor-icon-wrapper {
       width: 60px;
       height: 60px;
-      .sensor-icon { font-size: 32px; }
+      .sensor-icon {
+        font-size: 32px;
+      }
     }
   }
   .progress-ring {

@@ -113,21 +113,16 @@ onUnmounted(() => {
   top: 0;
   left: 0;
   right: 0;
-  height: 30px;
+  height: 34px; /* Increased from 30px to accommodate bottom padding */
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 20px 4px 20px; /* Added 4px bottom padding */
   font-size: 14px;
   font-weight: 600;
   z-index: 50;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%);
-  pointer-events: none;
-  box-sizing: border-box;
-
-  &.app-active {
-    background: var(--os-window-bg);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 }
@@ -166,7 +161,7 @@ onUnmounted(() => {
 
 .active-app-container {
   position: absolute;
-  top: 30px;
+  top: 34px; /* Matches new status-bar height */
   left: 0;
   right: 0;
   bottom: 34px;
@@ -258,6 +253,19 @@ onUnmounted(() => {
   &.active {
     background: var(--os-window-bg);
     border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+}
+
+.nav-pill {
+  width: 130px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 100px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root[data-theme='light'] {
   .icon-box {
     background: rgba(255, 255, 255, 0.5);
     color: #1a1a1a;
@@ -271,6 +279,3 @@ onUnmounted(() => {
     text-shadow: none;
     color: #1a1a1a;
     font-weight: 600;
-  }
-}
-</style>

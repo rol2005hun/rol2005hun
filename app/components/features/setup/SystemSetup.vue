@@ -147,7 +147,9 @@ const copyKey = async () => {
     margin-bottom: 1.5rem;
     width: 64px;
     height: 64px;
-    .setup-icon { font-size: 32px; }
+    .setup-icon {
+      font-size: 32px;
+    }
   }
   .setup-content h1 {
     font-size: 1.5rem;
