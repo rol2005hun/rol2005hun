@@ -1,113 +1,123 @@
 {
-  "title": "Változások jegyzéke",
-  "subtitle": "Legújabb OS frissítések és funkciók",
-  "empty": "Nincs elérhető változat.",
-  "history": {
-    "2026.03.24-4": {
-      "version": "1.0.5",
-      "title": "Zene App átalakítás és Rendszerjavítások",
-      "changes": [
-        "Teljesen megújult a <strong>Zene alkalmazás</strong> elrendezése, vékonyabb alsó sávval és javított világos módos színekkel.",
-        "A zenelejátszás immár a háttérben is folytatódik (az ablak bezárása után is).",
-        "A beállított hangerőt a rendszer most már automatikusan elmenti és betölti az újraindulás után.",
-        "Bekerült az új <code>music</code> parancs a Terminálba a zene vezérlésére (lejátszás, megállítás, léptetés, hangerő).",
-        "Új karácsonyi dalok kerültek be a repertoárba, a régi rádió eltávolításra került.",
-        "Kijavítottuk a TypeScript típusellenőrzési hibákat a rendszerben (Start menü, nyelvi fájlok és terminál)."
-      ]
-    },
-    "2026.03.24-3": {
-      "version": "1.0.4",
-      "title": "Ablakkezelés és Elrendezés Javításai",
-      "changes": [
-        "Javítva a megjelenítési hiba, amely miatt a maximalizált alkalmazások belógtak a tálca mögé.",
-        "Finomított ablak mozgatási logika: az asztalról lehúzva/oldalra tolva 100px mindig látható marad és a fejléc sem tűnhet el felfelé.",
-        "Javított ablakméretezés: mostantól a dinamikus méretezés maximálisan figyelembe veszi a képernyő határait és az asztal felületét."
-      ]
-    },
-    "2026.03.24-2": {
-      "version": "1.0.3",
-      "title": "Beállítások App felújítás & Reszponzivitás",
-      "changes": [
-        "A <strong>Beállítások alkalmazás</strong> teljes UI frissítést kapott modern üveghatással és új animációkkal.",
-        "Teljes <em>mobil reszponzivitás</em>: kis képernyőn a bal oldali menü egy vízszintesen görgethető felső sávvá alakul.",
-        "Látványosabb Téma és Háttérkép kártyák hover effektekkel és aktív állapot-jelzőkkel."
-      ]
-    },
-    "2026.03.24": {
-      "version": "1.0.2",
-      "title": "Projektek App UI Fejlesztés",
-      "changes": [
-        "Újradolgoztuk a <strong>Projektek alkalmazás</strong> felületét a modernebb, szebb megjelenés érdekében.",
-        "Egyedi ikonok és egérkövető ragyogó effektek kerültek a projekt kártyákra.",
-        "A kártyák belépő animációi és az átmenetek finomításra kerültek."
-      ]
-    },
-    "2026.03.23-2": {
-      "version": "1.0.1",
-      "title": "Legacy mód & UI Finomhangolások",
-      "changes": [
-        "Hozzáadva a <strong>Legacy OS Viewer</strong> (Időgép) a Névjegy apphoz, amivel a v1 és v2 portfóliók natívan, iframe-ben futtathatók.",
-        "Megnövelt alapértelmezett és minimum ablakméretek a jobb olvashatóságért.",
-        "Terminál sortörés hibájának javítása (az elérhető appok listája mostantól szépen, formázva jelenik meg).",
-        "Biztonságos kilépés támogatása a Legacy módból egy dedikált bezárás gombbal.",
-        "Javítva: App név, random karakterek."
-      ]
-    },
-    "2026.03.23": {
-      "version": "1.0.0",
-      "title": "Megújult Dizájn & Teljesítmény",
-      "changes": [
-        "Teljes <strong>Glassmorphism</strong> átállás az OS felületein.",
-        "Új <em>Változások jegyzéke</em> integráció a Névjegy alkalmazásba.",
-        "Teljes körű <strong>ESLint & Prettier</strong> szabályozás és kódformázás.",
-        "Kisebb bugfixek és ablakkezelő optimalizálások."
-      ]
-    },
-    "2026.03.26": {
-      "changes": [
-        "Új \\u003cstrong\\u003eKapcsolat alkalmazás\\u003c/strong\\u003e bevezetése modern üveg-szerű megjelenéssel.",
-        "A Névjegy app stílusainak finomhangolása, a közösségi ikonok és a kapcsolat gomb egységesítése.",
-        "A Kapcsolat űrlap reszponzivitásának javítása, kisebb ablakméretnél a vágódás megakadályozása."
-      ],
-      "title": "Új Kapcsolat App és UI Fejlesztések",
-      "version": "1.0.6"
-    },
-    "2026.03.27": {
-      "changes": [
-        "A \\u003cstrong\\u003eVilágos Téma\\u003c/strong\\u003e (Light Theme) jelentős ráncfelvarrást kapott: lágyabb árnyalatok és szebb elsődleges kék szín.",
-        "3 teljesen új téma került bevezetésre: \\u003cstrong\\u003eRózsa Vörös\\u003c/strong\\u003e, \\u003cstrong\\u003eÓceán Cián\\u003c/strong\\u003e és \\u003cstrong\\u003eDracula Sötét\\u003c/strong\\u003e."
-      ],
-      "title": "Új Témák és Szebb Világos Mód",
-      "version": "1.0.7"
-    },
-    "2026.03.27-2": {
-      "version": "1.0.8",
-      "title": "Mobil Reszponzivitás & UI Fejlesztések",
-      "changes": [
-        "Megnövelt ablakvezérlő gombok (kicsinyítés, nagyítás, bezárás) a jobb érintési élményért.",
-        "A <strong>Projektek App</strong> teljesen új, modern osztott-nézetes (split-view) dizájnt kapott.",
-        "Javítva a mobilos elcsúszás: az alkalmazások teteje már nem lóg be az állapotsor alá.",
-        "Reszponzív nézetek kerültek be a Projektek, Beállítások és Névjegy alkalmazásokba kis képernyőkhöz.",
-        "Új platform-specifikus alkalmazás-megjelenítési logika (bizonyos appok csak asztalon vagy csak mobilon láthatóak)."
-      ]
-    },
-    "2026.04.17": {
-      "version": "1.0.9",
-      "title": "Zárolási & Telepítő Képernyő Finomítás",
-      "changes": [
-        "Reszponzív lett a Telepítő/Licensz képernyő, eltűnt a dizájnhiba kis méret vagy 150%-os skálázás esetén.",
-        "A Zárolási Képernyő is kapott egy mobil/kisképernyős nézetet, így a gombok és elemek többet nem lógnak le a képernyőről.",
-        "Automatikus nyelvfelismerés: a rendszer induláskor érzékeli a felhasználó böngészőjének nyelvét, és automatikusan beállítja a megfelelő i18n lokalizációt (alapértelmezett: angol)."
-      ]
-    },
-    "2026.04.17-2": {
-      "version": "1.0.10",
-      "title": "Globális Gördítősávok & Projekt Görgetés Javítva",
-      "changes": [
-        "Készült egy fasza globális, modern gördítősáv (scrollbar) az egész operációs rendszer számára.",
-        "Javítva lett a hiba, ami miatt a Projektek alkalmazásban mobilon nem lehetett oldalra görgetni a projekteket.",
-        "Okos scroll-snapping (kártyára ugró görgetés) került a mobilos felsősávba a simább érintési élményért."
-      ]
+    "title": "Változások jegyzéke",
+    "subtitle": "Legújabb OS frissítések és funkciók",
+    "empty": "Nincs elérhető változat.",
+    "history": {
+        "2026.03.24-4": {
+            "version": "1.0.5",
+            "title": "Zene App átalakítás és Rendszerjavítások",
+            "changes": [
+                "Teljesen megújult a <strong>Zene alkalmazás</strong> elrendezése, vékonyabb alsó sávval és javított világos módos színekkel.",
+                "A zenelejátszás immár a háttérben is folytatódik (az ablak bezárása után is).",
+                "A beállított hangerőt a rendszer most már automatikusan elmenti és betölti az újraindulás után.",
+                "Bekerült az új <code>music</code> parancs a Terminálba a zene vezérlésére (lejátszás, megállítás, léptetés, hangerő).",
+                "Új karácsonyi dalok kerültek be a repertoárba, a régi rádió eltávolításra került.",
+                "Kijavítottuk a TypeScript típusellenőrzési hibákat a rendszerben (Start menü, nyelvi fájlok és terminál)."
+            ]
+        },
+        "2026.03.24-3": {
+            "version": "1.0.4",
+            "title": "Ablakkezelés és Elrendezés Javításai",
+            "changes": [
+                "Javítva a megjelenítési hiba, amely miatt a maximalizált alkalmazások belógtak a tálca mögé.",
+                "Finomított ablak mozgatási logika: az asztalról lehúzva/oldalra tolva 100px mindig látható marad és a fejléc sem tűnhet el felfelé.",
+                "Javított ablakméretezés: mostantól a dinamikus méretezés maximálisan figyelembe veszi a képernyő határait és az asztal felületét."
+            ]
+        },
+        "2026.03.24-2": {
+            "version": "1.0.3",
+            "title": "Beállítások App felújítás & Reszponzivitás",
+            "changes": [
+                "A <strong>Beállítások alkalmazás</strong> teljes UI frissítést kapott modern üveghatással és új animációkkal.",
+                "Teljes <em>mobil reszponzivitás</em>: kis képernyőn a bal oldali menü egy vízszintesen görgethető felső sávvá alakul.",
+                "Látványosabb Téma és Háttérkép kártyák hover effektekkel és aktív állapot-jelzőkkel."
+            ]
+        },
+        "2026.03.24": {
+            "version": "1.0.2",
+            "title": "Projektek App UI Fejlesztés",
+            "changes": [
+                "Újradolgoztuk a <strong>Projektek alkalmazás</strong> felületét a modernebb, szebb megjelenés érdekében.",
+                "Egyedi ikonok és egérkövető ragyogó effektek kerültek a projekt kártyákra.",
+                "A kártyák belépő animációi és az átmenetek finomításra kerültek."
+            ]
+        },
+        "2026.03.23-2": {
+            "version": "1.0.1",
+            "title": "Legacy mód & UI Finomhangolások",
+            "changes": [
+                "Hozzáadva a <strong>Legacy OS Viewer</strong> (Időgép) a Névjegy apphoz, amivel a v1 és v2 portfóliók natívan, iframe-ben futtathatók.",
+                "Megnövelt alapértelmezett és minimum ablakméretek a jobb olvashatóságért.",
+                "Terminál sortörés hibájának javítása (az elérhető appok listája mostantól szépen, formázva jelenik meg).",
+                "Biztonságos kilépés támogatása a Legacy módból egy dedikált bezárás gombbal.",
+                "Javítva: App név, random karakterek."
+            ]
+        },
+        "2026.03.23": {
+            "version": "1.0.0",
+            "title": "Megújult Dizájn & Teljesítmény",
+            "changes": [
+                "Teljes <strong>Glassmorphism</strong> átállás az OS felületein.",
+                "Új <em>Változások jegyzéke</em> integráció a Névjegy alkalmazásba.",
+                "Teljes körű <strong>ESLint & Prettier</strong> szabályozás és kódformázás.",
+                "Kisebb bugfixek és ablakkezelő optimalizálások."
+            ]
+        },
+        "2026.03.26": {
+            "changes": [
+                "Új \\u003cstrong\\u003eKapcsolat alkalmazás\\u003c/strong\\u003e bevezetése modern üveg-szerű megjelenéssel.",
+                "A Névjegy app stílusainak finomhangolása, a közösségi ikonok és a kapcsolat gomb egységesítése.",
+                "A Kapcsolat űrlap reszponzivitásának javítása, kisebb ablakméretnél a vágódás megakadályozása."
+            ],
+            "title": "Új Kapcsolat App és UI Fejlesztések",
+            "version": "1.0.6"
+        },
+        "2026.03.27": {
+            "changes": [
+                "A \\u003cstrong\\u003eVilágos Téma\\u003c/strong\\u003e (Light Theme) jelentős ráncfelvarrást kapott: lágyabb árnyalatok és szebb elsődleges kék szín.",
+                "3 teljesen új téma került bevezetésre: \\u003cstrong\\u003eRózsa Vörös\\u003c/strong\\u003e, \\u003cstrong\\u003eÓceán Cián\\u003c/strong\\u003e és \\u003cstrong\\u003eDracula Sötét\\u003c/strong\\u003e."
+            ],
+            "title": "Új Témák és Szebb Világos Mód",
+            "version": "1.0.7"
+        },
+        "2026.03.27-2": {
+            "version": "1.0.8",
+            "title": "Mobil Reszponzivitás & UI Fejlesztések",
+            "changes": [
+                "Megnövelt ablakvezérlő gombok (kicsinyítés, nagyítás, bezárás) a jobb érintési élményért.",
+                "A <strong>Projektek App</strong> teljesen új, modern osztott-nézetes (split-view) dizájnt kapott.",
+                "Javítva a mobilos elcsúszás: az alkalmazások teteje már nem lóg be az állapotsor alá.",
+                "Reszponzív nézetek kerültek be a Projektek, Beállítások és Névjegy alkalmazásokba kis képernyőkhöz.",
+                "Új platform-specifikus alkalmazás-megjelenítési logika (bizonyos appok csak asztalon vagy csak mobilon láthatóak)."
+            ]
+        },
+        "2026.04.17": {
+            "version": "1.0.9",
+            "title": "Zárolási & Telepítő Képernyő Finomítás",
+            "changes": [
+                "Reszponzív lett a Telepítő/Licensz képernyő, eltűnt a dizájnhiba kis méret vagy 150%-os skálázás esetén.",
+                "A Zárolási Képernyő is kapott egy mobil/kisképernyős nézetet, így a gombok és elemek többet nem lógnak le a képernyőről.",
+                "Automatikus nyelvfelismerés: a rendszer induláskor érzékeli a felhasználó böngészőjének nyelvét, és automatikusan beállítja a megfelelő i18n lokalizációt (alapértelmezett: angol)."
+            ]
+        },
+        "2026.04.17-2": {
+            "version": "1.0.10",
+            "title": "Globális Gördítősávok & Projekt Görgetés Javítva",
+            "changes": [
+                "Készült egy fasza globális, modern gördítősáv (scrollbar) az egész operációs rendszer számára.",
+                "Javítva lett a hiba, ami miatt a Projektek alkalmazásban mobilon nem lehetett oldalra görgetni a projekteket.",
+                "Okos scroll-snapping (kártyára ugró görgetés) került a mobilos felsősávba a simább érintési élményért."
+            ]
+        },
+        "2026-04-18": {
+            "version": "3.0.11-beta",
+            "title": "Új Terminál Parancsok és Navigációs Javítások",
+            "changes": [
+                "Kijavítva a hiányzó Project View fordítás a Projektek alkalmazásban.",
+                "Hozzáadva egy új killall adminisztrátori terminál parancs az összes ablak bezárásához.",
+                "Új látványos és szórakoztató terminál parancsok: neofetch, ping, df, matrix, és theme.",
+                "Dinamikus nyelvkezelés a terminál parancsokban is (i18n integráció)."
+            ]
+        }
     }
-  }
 }

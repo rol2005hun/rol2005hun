@@ -5,8 +5,8 @@
     </div>
     <button
       class="legacy-close-btn"
-      @click="systemStore.exitLegacyOS()"
-      :title="$t('os.apps.about.legacy.exitHint')">
+      :title="$t('os.apps.about.legacy.exitHint')"
+      @click="systemStore.exitLegacyOS()">
       <Icon name="ph:x-bold" size="24" />
     </button>
     <iframe

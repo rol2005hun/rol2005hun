@@ -108,6 +108,16 @@
                 "Fixed an issue in the Projects app where horizontal scrolling was broken on mobile devices.",
                 "Added scroll snapping to the Projects mobile top-bar for a smoother touch experience."
             ]
+        },
+        "2026-04-18": {
+            "version": "3.0.11-beta",
+            "title": "New Terminal Commands & UI Fixes",
+            "changes": [
+                "Fixed missing Project View translation in the Projects app.",
+                "Added a new killall root terminal command to instantly close all active windows.",
+                "Introduced visually impressive commands: neofetch, ping, df, matrix, and theme.",
+                "Corrected hardcoded terminal strings to exclusively utilize context.t for dynamic localization."
+            ]
         }
     }
 }
