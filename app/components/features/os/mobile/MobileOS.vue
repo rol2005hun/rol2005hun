@@ -123,6 +123,11 @@ onUnmounted(() => {
   font-weight: 600;
   z-index: 50;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%);
+  pointer-events: none;
+  box-sizing: border-box;
+
+  &.app-active {
+    background: var(--os-window-bg);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 }
@@ -279,3 +284,6 @@ onUnmounted(() => {
     text-shadow: none;
     color: #1a1a1a;
     font-weight: 600;
+}
+}
+</style>
