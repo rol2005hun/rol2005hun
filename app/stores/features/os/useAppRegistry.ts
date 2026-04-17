@@ -56,7 +56,7 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       defaultWidth: 700,
       defaultHeight: 550,
       allowMultipleInstances: false,
-      showOnDesktop: false
+      showOnDesktop: ['mobile']
     },
     {
       id: 'music',

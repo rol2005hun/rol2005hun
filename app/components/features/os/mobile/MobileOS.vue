@@ -1,6 +1,6 @@
 <template>
   <div class="mobile-environment">
-    <div class="status-bar">
+    <div class="status-bar" :class="{ 'app-active': activeAppId }">
       <div class="time">{{ currentTime }}</div>
       <div class="notch" />
       <div class="status-icons">
@@ -113,7 +113,7 @@ onUnmounted(() => {
   top: 0;
   left: 0;
   right: 0;
-  height: 44px;
+  height: 30px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -124,11 +124,17 @@ onUnmounted(() => {
   z-index: 50;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%);
   pointer-events: none;
+  box-sizing: border-box;
+
+  &.app-active {
+    background: var(--os-window-bg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
 }
 
 .notch {
   width: 120px;
-  height: 28px;
+  height: 25px;
   background-color: #000;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
@@ -160,14 +166,13 @@ onUnmounted(() => {
 
 .active-app-container {
   position: absolute;
-  top: 0;
+  top: 30px;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 34px;
   width: 100%;
   background: var(--os-window-bg);
   overflow: hidden;
-  padding-top: 44px;
   box-sizing: border-box;
   z-index: 15;
 }
@@ -242,6 +247,7 @@ onUnmounted(() => {
   pointer-events: auto;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%);
   transition: all 0.3s ease;
+  box-sizing: border-box;
 
   &:hover .nav-pill {
     background: rgba(255, 255, 255, 1);
@@ -250,20 +256,8 @@ onUnmounted(() => {
   }
 
   &.active {
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
-  }
-}
-
-.nav-pill {
-  width: 130px;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 100px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-:root[data-theme='light'] {
+    background: var(--os-window-bg);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
   .icon-box {
     background: rgba(255, 255, 255, 0.5);
     color: #1a1a1a;
