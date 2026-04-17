@@ -93,7 +93,7 @@
     },
     "killallSuccess": "Successfully closed {count} process(es)!",
     "fun": {
-      "neofetchTitle": "visitor@ranzakOS",
+      "neofetchTitle": "guest&#64;ranzakOS",
       "os": "OS: ranzakOS (Web Environment)",
       "kernel": "Kernel: Browser Engine",
       "uptime": "Uptime: {hours}h {minutes}m",

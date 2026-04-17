@@ -93,7 +93,7 @@
     },
     "killallSuccess": "Sikeresen bezárva {count} ablak!",
     "fun": {
-      "neofetchTitle": "latogato@ranzakOS",
+      "neofetchTitle": "guest&#64;ranzakOS",
       "os": "Rendszer: ranzakOS (Web-es Környezet)",
       "kernel": "Rendszermag: Böngésző Motor",
       "uptime": "Futási idő: {hours}ó {minutes}p",

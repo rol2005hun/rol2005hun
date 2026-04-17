@@ -8,7 +8,7 @@
             <span v-html="line.content"></span>
           </template>
           <template v-else>
-            <template v-for="(part, j) in line.content.split('\n')" :key="j">   
+            <template v-for="(part, j) in line.content.split('\n')" :key="j">
               {{ part }}
               <br v-if="j < line.content.split('\n').length - 1" />
             </template>
