@@ -3,7 +3,9 @@
   "githubInfo": "Rengeteg más projekt is megtalálható a {githubLink}, túl sok lenne itt mindet felsorolni, nézz rá arra is!",
   "githubLinkText": "GitHubomon",
   "backToProjects": "Vissza a projektekhez",
-  "viewProject": "Projekt megtekintése",  "projectView": "Projekt nĂ©zet",  "project1": {
+  "viewProject": "Projekt megtekintése",
+  "projectView": "Projekt nézet",
+  "project1": {
     "title": "Első Projekt",
     "description": "Ez az első minta projekt komponens."
   },
