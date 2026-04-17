@@ -99,6 +99,15 @@
         "A Zárolási Képernyő is kapott egy mobil/kisképernyős nézetet, így a gombok és elemek többet nem lógnak le a képernyőről.",
         "Automatikus nyelvfelismerés: a rendszer induláskor érzékeli a felhasználó böngészőjének nyelvét, és automatikusan beállítja a megfelelő i18n lokalizációt (alapértelmezett: angol)."
       ]
+    },
+    "2026.04.17-2": {
+      "version": "1.0.10",
+      "title": "Globális Gördítősávok & Projekt Görgetés Javítva",
+      "changes": [
+        "Készült egy fasza globális, modern gördítősáv (scrollbar) az egész operációs rendszer számára.",
+        "Javítva lett a hiba, ami miatt a Projektek alkalmazásban mobilon nem lehetett oldalra görgetni a projekteket.",
+        "Okos scroll-snapping (kártyára ugró görgetés) került a mobilos felsősávba a simább érintési élményért."
+      ]
     }
   }
 }

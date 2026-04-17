@@ -166,10 +166,10 @@ onUnmounted(() => {
 
 .active-app-container {
   position: absolute;
-  top: 34px; /* Matches new status-bar height */
+  top: 34px;
   left: 0;
   right: 0;
-  bottom: 34px;
+  bottom: 25px;
   width: 100%;
   background: var(--os-window-bg);
   overflow: hidden;
@@ -236,18 +236,18 @@ onUnmounted(() => {
   position: absolute;
   bottom: 0;
   left: 0;
-  height: 34px;
+  height: 25px;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 8px;
   z-index: 9999;
   cursor: pointer;
   pointer-events: auto;
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.3) 0%, transparent 100%);
   transition: all 0.3s ease;
   box-sizing: border-box;
+  padding-bottom: 2px;
 
   &:hover .nav-pill {
     background: rgba(255, 255, 255, 1);
@@ -284,6 +284,6 @@ onUnmounted(() => {
     text-shadow: none;
     color: #1a1a1a;
     font-weight: 600;
-}
+  }
 }
 </style>

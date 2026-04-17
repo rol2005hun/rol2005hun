@@ -99,6 +99,15 @@
                 "Enhanced the Lock Screen to gracefully handle smaller heights, preventing UI cutoff on 150% scaled displays.",
                 "Implemented automatic language detection based on browser preferences, falling back to English seamlessly."
             ]
+        },
+        "2026-04-17-2": {
+            "version": "3.0.10-beta",
+            "title": "Global Scrollbars & Project Scrolling Fix",
+            "changes": [
+                "Added a cool global OS-level custom scrollbar to match the modern aesthetic.",
+                "Fixed an issue in the Projects app where horizontal scrolling was broken on mobile devices.",
+                "Added scroll snapping to the Projects mobile top-bar for a smoother touch experience."
+            ]
         }
     }
 }

@@ -210,33 +210,30 @@ const selectProject = (project: any) => {
     padding: 8px 12px;
     gap: 8px;
     scrollbar-width: none;
-    &::-webkit-scrollbar {
-      display: none;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: mandatory;
+      scroll-snap-type: x mandatory;
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
-}
 
-.project-item {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border: 1px solid transparent;
+  .project-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
 
-  @media (max-width: 768px) {
-    flex-shrink: 0;
-    width: 250px;
-    max-width: 80vw;
-  }
-
-  &:hover {
-    background: var(--os-hover);
-  }
-
-  &.active {
+    @media (max-width: 768px) {
+      flex-shrink: 0;
+      width: 250px;
+      max-width: 80vw;
+      scroll-snap-align: start;
     background: var(--os-hover);
     border-color: color-mix(in srgb, var(--os-text) 10%, transparent);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
