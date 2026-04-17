@@ -210,9 +210,17 @@ const selectProject = (project: any) => {
       overflow-y: hidden;
       padding: 16px 20px;
       gap: 16px;
-      scrollbar-width: none;
+      width: 100vw;
+      box-sizing: border-box;
+      scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      overscroll-behavior-x: contain;
+      
+      /* Make sure we can see the scrollbar */
+      &::-webkit-scrollbar {
+        display: block;
+        height: 6px;
+      }
+      scrollbar-width: thin;
     }
   }
 
