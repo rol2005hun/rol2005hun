@@ -149,10 +149,11 @@ const selectProject = (project: any) => {
   backdrop-filter: blur(10px);
 
   @media (max-width: 768px) {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid var(--os-border-color);
-  }
+      width: 100vw;
+      max-width: 100vw;
+      border-right: none;
+      border-bottom: 1px solid var(--os-border-color);
+      overflow: hidden;
 }
 
 .sidebar-header {
@@ -207,15 +208,11 @@ const selectProject = (project: any) => {
     flex-direction: row;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 8px 12px;
-    gap: 8px;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: mandatory;
-    scroll-snap-type: x mandatory;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+      padding: 16px 20px;
+      gap: 16px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
   }
 }
 
@@ -231,11 +228,16 @@ const selectProject = (project: any) => {
 
   @media (max-width: 768px) {
     flex-shrink: 0;
-    width: 250px;
-    max-width: 80vw;
-    scroll-snap-align: start;
-    background: var(--os-hover);
-    border-color: color-mix(in srgb, var(--os-text) 10%, transparent);
+      width: 280px;
+      max-width: 85vw;
+      scroll-snap-align: center;
+    }
+
+    &:hover {
+      background: var(--os-hover);
+    }
+
+    &.active {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
