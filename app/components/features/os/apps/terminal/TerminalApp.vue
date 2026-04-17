@@ -4,9 +4,14 @@
       <div v-for="(line, i) in history" :key="i" class="line">
         <span v-if="line.prompt" class="prompt">{{ line.prompt }}</span>
         <span class="content">
-          <template v-for="(part, j) in line.content.split('\n')" :key="j">
-            {{ part }}
-            <br v-if="j < line.content.split('\n').length - 1" />
+          <template v-if="line.isHtml">
+            <span v-html="line.content"></span>
+          </template>
+          <template v-else>
+            <template v-for="(part, j) in line.content.split('\n')" :key="j">   
+              {{ part }}
+              <br v-if="j < line.content.split('\n').length - 1" />
+            </template>
           </template>
         </span>
       </div>
@@ -67,14 +72,15 @@ const scrollToBottom = async () => {
   }
 };
 
-const print = (text: string, inlinePrefix?: boolean) => {
+const print = (text: string, inlinePrefix?: boolean, isHtml?: boolean) => {
   if (inlinePrefix) {
     history.value.push({
       prompt: text,
-      content: ''
+      content: '',
+      isHtml
     });
   } else {
-    history.value.push({ content: text });
+    history.value.push({ content: text, isHtml });
   }
 };
 

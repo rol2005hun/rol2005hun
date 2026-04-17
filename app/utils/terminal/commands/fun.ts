@@ -42,7 +42,9 @@ export const neofetchCommand: TerminalCommand = {
             <div style="width: 15px; height: 15px; background: #fff; border-radius: 50%;"></div>
           </div>
         </div>
-      </div>`
+      </div>`,
+      false,
+      true
     );
   }
 };
@@ -94,7 +96,9 @@ export const matrixCommand: TerminalCommand = {
   name: 'matrix',
   execute: async (args, context) => {
     context.print(
-      `<span style="color: #0f0; opacity: 0.8">${context.t('os.apps.terminal.fun.matrixInit')}</span>`
+      `<span style="color: #0f0; opacity: 0.8">${context.t('os.apps.terminal.fun.matrixInit')}</span>`,
+      false,
+      true
     );
     for (let i = 0; i < 25; i++) {
       await new Promise((r) => setTimeout(r, 70));
@@ -103,7 +107,9 @@ export const matrixCommand: TerminalCommand = {
         chars += String.fromCharCode(Math.floor(Math.random() * 94) + 33) + ' ';
       }
       context.print(
-        `<span style="color: #0f0; opacity: ${Math.random() * 0.5 + 0.3}; font-family: monospace;">${chars}</span>`
+        `<span style="color: #0f0; opacity: ${Math.random() * 0.5 + 0.3}; font-family: monospace;">${chars}</span>`,
+        false,
+        true
       );
     }
   }

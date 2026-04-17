@@ -1,10 +1,11 @@
 export interface TerminalLine {
   prompt?: string;
   content: string;
+  isHtml?: boolean;
 }
 
 export interface TerminalContext {
-  print: (text: string, inlinePrefix?: boolean) => void;
+  print: (text: string, inlinePrefix?: boolean, isHtml?: boolean) => void;
   clear: () => void;
   setPromptMode: (mode: 'password' | 'text', callback: (pwd: string) => void) => void;
   t: (key: string, params?: Record<string, any>) => string;
