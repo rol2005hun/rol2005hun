@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineAsyncComponent, shallowRef } from 'vue';
+import { defineAsyncComponent, shallowRef, ref } from 'vue';
 
 const SanoviseProject = defineAsyncComponent(() => import('./content/SanoviseProject.vue'));
 const WolimbyProject = defineAsyncComponent(() => import('./content/WolimbyProject.vue'));
@@ -51,8 +51,56 @@ const projects = [
 ];
 
 const activeProject = shallowRef<any>(projects[0]);
+const scrollContainer = ref<HTMLElement | null>(null);
+
+let isDown = false;
+let startX = 0;
+let scrollLeft = 0;
+let isDragging = false;
+
+const onMouseDown = (e: MouseEvent) => {
+  if (!scrollContainer.value) return;
+  isDown = true;
+  isDragging = false;
+  scrollContainer.value.style.scrollSnapType = 'none';
+  scrollContainer.value.style.cursor = 'grabbing';
+  startX = e.pageX - scrollContainer.value.offsetLeft;
+  scrollLeft = scrollContainer.value.scrollLeft;
+};
+
+const onMouseLeave = () => {
+  isDown = false;
+  if (scrollContainer.value) {
+    scrollContainer.value.style.scrollSnapType = '';
+    scrollContainer.value.style.cursor = 'grab';
+  }
+};
+
+const onMouseUp = () => {
+  isDown = false;
+  if (scrollContainer.value) {
+    scrollContainer.value.style.scrollSnapType = '';
+    scrollContainer.value.style.cursor = 'grab';
+  }
+  // Delay removing dragging flag to prevent click event
+  setTimeout(() => {
+    isDragging = false;
+  }, 50);
+};
+
+const onMouseMove = (e: MouseEvent) => {
+  if (!isDown || !scrollContainer.value) return;
+  e.preventDefault();
+  const x = e.pageX - scrollContainer.value.offsetLeft;
+  const walk = (x - startX) * 1.5; // Scroll speed
+  if (Math.abs(walk) > 5) {
+    isDragging = true;
+  }
+  scrollContainer.value.scrollLeft = scrollLeft - walk;
+};
 
 const selectProject = (project: any) => {
+  if (isDragging) return;
   activeProject.value = project;
 };
 </script>
@@ -72,7 +120,12 @@ const selectProject = (project: any) => {
         </i18n-t>
       </div>
 
-      <div class="projects-list">
+      <div class="projects-list"
+           ref="scrollContainer"
+           @mousedown="onMouseDown"
+           @mouseleave="onMouseLeave"
+           @mouseup="onMouseUp"
+           @mousemove="onMouseMove">
         <div
           v-for="project in projects"
           :key="project.id"
@@ -214,13 +267,12 @@ const selectProject = (project: any) => {
       box-sizing: border-box;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
+      cursor: grab;
       
-      /* Make sure we can see the scrollbar */
       &::-webkit-scrollbar {
-        display: block;
-        height: 6px;
+        display: none;
       }
-      scrollbar-width: thin;
+      scrollbar-width: none;
     }
   }
 
