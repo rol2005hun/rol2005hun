@@ -68,7 +68,8 @@ const appComponents: Record<string, any> = {
   music: defineAsyncComponent(() => import('@/components/features/os/apps/music/MusicApp.vue'))
 };
 
-  const currentTime = ref('');const activeAppId = ref<string | null>(null);
+const currentTime = ref('');
+const activeAppId = ref<string | null>(null);
 let timer: ReturnType<typeof setInterval>;
 
 const updateTime = () => {
@@ -159,26 +160,26 @@ onUnmounted(() => {
 
 .active-app-container {
   position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    background: var(--os-window-bg);
-    overflow: hidden;
-    padding-top: 44px;
-    box-sizing: border-box;
-    z-index: 15;
-  }
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  background: var(--os-window-bg);
+  overflow: hidden;
+  padding-top: 44px;
+  box-sizing: border-box;
+  z-index: 15;
+}
 
-  .home-screen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 84px 20px 40px 20px;
-    box-sizing: border-box;
+.home-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 84px 20px 40px 20px;
+  box-sizing: border-box;
   &::-webkit-scrollbar {
     display: none;
   }

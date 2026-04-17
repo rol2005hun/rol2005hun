@@ -40,9 +40,19 @@ export default defineNuxtPlugin((nuxtApp) => {
 
   const localeCookie = useCookie('os_locale');
 
+  const getDefaultLocale = () => {
+    if (localeCookie.value) return localeCookie.value;
+    if (typeof navigator !== 'undefined' && navigator.language) {
+      const navLang = navigator.language.toLowerCase();
+      if (navLang.startsWith('hu')) return 'hu';
+    }
+    return 'en';
+  };
+
   const i18n = createI18n({
     legacy: false,
-    locale: localeCookie.value || 'en',
+    locale: getDefaultLocale() || 'en',
+    fallbackLocale: 'en',
     messages,
     globalInjection: true
   });

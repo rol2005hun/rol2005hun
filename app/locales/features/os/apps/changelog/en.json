@@ -90,6 +90,15 @@
                 "Added responsive layouts to Projects, Settings, and About apps for optimal phone viewing.",
                 "Introduced platform-specific app visibility logic (showing certain apps only on desktop or mobile)."
             ]
+        },
+        "2026-04-17": {
+            "version": "3.0.9-beta",
+            "title": "Setup & Lock Screen Polish",
+            "changes": [
+                "Added responsive UI styling for the Setup/License screen on small screens and large UI scales.",
+                "Enhanced the Lock Screen to gracefully handle smaller heights, preventing UI cutoff on 150% scaled displays.",
+                "Implemented automatic language detection based on browser preferences, falling back to English seamlessly."
+            ]
         }
     }
 }

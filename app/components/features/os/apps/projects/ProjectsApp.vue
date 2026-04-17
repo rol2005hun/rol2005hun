@@ -78,12 +78,12 @@ const selectProject = (project: any) => {
           :key="project.id"
           class="project-item"
           :class="{ active: activeProject?.id === project.id }"
-          @click="selectProject(project)"
-        >
+          @click="selectProject(project)">
           <div
             class="item-icon-wrapper"
-            :style="{ backgroundColor: 'color-mix(in srgb, ' + project.color + ' 15%, transparent)' }"
-          >
+            :style="{
+              backgroundColor: 'color-mix(in srgb, ' + project.color + ' 15%, transparent)'
+            }">
             <Icon :name="project.icon" class="item-icon" :style="{ color: project.color }" />
           </div>
           <div class="item-details">
@@ -98,9 +98,19 @@ const selectProject = (project: any) => {
     <div class="main-content">
       <transition name="fade-slide" mode="out-in">
         <div v-if="activeProject" :key="activeProject.id" class="project-detail-wrapper">
-          <div class="detail-header" :style="{ borderBottom: '2px solid color-mix(in srgb, ' + activeProject.color + ' 30%, transparent)' }">
+          <div
+            class="detail-header"
+            :style="{
+              borderBottom:
+                '2px solid color-mix(in srgb, ' + activeProject.color + ' 30%, transparent)'
+            }">
             <h1 class="content-title">{{ $t(activeProject.titleKey) }}</h1>
-            <div class="content-badge" :style="{ color: activeProject.color, backgroundColor: 'color-mix(in srgb, ' + activeProject.color + ' 15%, transparent)' }">
+            <div
+              class="content-badge"
+              :style="{
+                color: activeProject.color,
+                backgroundColor: 'color-mix(in srgb, ' + activeProject.color + ' 15%, transparent)'
+              }">
               <Icon :name="activeProject.icon" />
               <span>Project View</span>
             </div>
@@ -134,7 +144,7 @@ const selectProject = (project: any) => {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  background: color-mix(in srgb, var(--os-window-bg) 60%, rgba(0,0,0,0.2));
+  background: color-mix(in srgb, var(--os-window-bg) 60%, rgba(0, 0, 0, 0.2));
   border-right: 1px solid var(--os-border-color);
   backdrop-filter: blur(10px);
 
@@ -168,7 +178,7 @@ const selectProject = (project: any) => {
       color: var(--os-text);
       font-weight: 500;
       text-decoration: none;
-      
+
       &:hover {
         text-decoration: underline;
       }
@@ -229,7 +239,7 @@ const selectProject = (project: any) => {
   &.active {
     background: var(--os-hover);
     border-color: color-mix(in srgb, var(--os-text) 10%, transparent);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
 
   .item-icon-wrapper {

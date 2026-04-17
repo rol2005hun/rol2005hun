@@ -90,6 +90,15 @@
         "Reszponzív nézetek kerültek be a Projektek, Beállítások és Névjegy alkalmazásokba kis képernyőkhöz.",
         "Új platform-specifikus alkalmazás-megjelenítési logika (bizonyos appok csak asztalon vagy csak mobilon láthatóak)."
       ]
+    },
+    "2026.04.17": {
+      "version": "1.0.9",
+      "title": "Zárolási & Telepítő Képernyő Finomítás",
+      "changes": [
+        "Reszponzív lett a Telepítő/Licensz képernyő, eltűnt a dizájnhiba kis méret vagy 150%-os skálázás esetén.",
+        "A Zárolási Képernyő is kapott egy mobil/kisképernyős nézetet, így a gombok és elemek többet nem lógnak le a képernyőről.",
+        "Automatikus nyelvfelismerés: a rendszer induláskor érzékeli a felhasználó böngészőjének nyelvét, és automatikusan beállítja a megfelelő i18n lokalizációt (alapértelmezett: angol)."
+      ]
     }
   }
 }

@@ -372,7 +372,8 @@ const openContact = () => {
     flex-direction: column;
     gap: 10px;
 
-    a, .contact-me-btn {
+    a,
+    .contact-me-btn {
       justify-content: center;
       text-align: center;
     }
@@ -401,7 +402,3 @@ const openContact = () => {
   }
 }
 </style>
-
-
-
-

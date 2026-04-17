@@ -112,6 +112,8 @@ const copyKey = async () => {
   color: #f8fafc;
   overflow: hidden;
   position: relative;
+  padding: 1.5rem;
+  box-sizing: border-box;
 }
 
 .setup-card {
@@ -128,6 +130,34 @@ const copyKey = async () => {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  max-height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (max-width: 480px), (max-height: 700px) {
+  .setup-card {
+    padding: 2.5rem 1.5rem;
+  }
+  .icon-wrapper {
+    margin-bottom: 1.5rem;
+    width: 64px;
+    height: 64px;
+    .setup-icon { font-size: 32px; }
+  }
+  .setup-content h1 {
+    font-size: 1.5rem;
+  }
+  .beta-key-hint {
+    margin-bottom: 1.5rem;
+  }
+  .license-form {
+    margin-bottom: 1.5rem;
+  }
 }
 
 .icon-wrapper {

@@ -181,8 +181,12 @@ const finishUnlock = () => {
   color: #f8fafc;
   padding: 8vh 2rem;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow-y: auto;
   position: relative;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .clock-widget {
@@ -190,7 +194,7 @@ const finishUnlock = () => {
   animation: fadeInDown 1s ease-out;
 
   .time {
-    font-size: 6rem;
+    font-size: min(15vw, 6rem);
     font-weight: 100;
     margin: 0;
     letter-spacing: -3px;
@@ -198,11 +202,48 @@ const finishUnlock = () => {
   }
 
   .date {
-    font-size: 1.4rem;
+    font-size: min(4vw, 1.4rem);
     font-weight: 300;
     color: #94a3b8;
     margin-top: -5px;
     text-transform: capitalize;
+  }
+}
+
+@media (max-height: 700px), (max-width: 480px) {
+  .lock-screen-container {
+    padding: 2rem 1rem;
+    justify-content: space-around;
+  }
+  .clock-widget .time {
+    font-size: 4.5rem;
+    letter-spacing: -1px;
+  }
+  .clock-widget .date {
+    font-size: 1.1rem;
+  }
+  .auth-wrapper {
+    gap: 1.5rem;
+  }
+  .user-profile .avatar-container {
+    width: 70px;
+    height: 70px;
+    .avatar-placeholder { font-size: 40px; }
+  }
+  .user-profile .username {
+    font-size: 1.3rem;
+  }
+  .fingerprint-sensor {
+    width: 90px;
+    height: 90px;
+    .sensor-icon-wrapper {
+      width: 60px;
+      height: 60px;
+      .sensor-icon { font-size: 32px; }
+    }
+  }
+  .progress-ring {
+    transform: scale(0.8) rotate(-90deg);
   }
 }
 

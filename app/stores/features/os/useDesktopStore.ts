@@ -19,7 +19,8 @@ export const useDesktopStore = defineStore('os-desktop', () => {
     return appRegistry.installedApps
       .filter((app) => {
         if (app.showOnDesktop === false) return false;
-        if (Array.isArray(app.showOnDesktop) && !app.showOnDesktop.includes('desktop')) return false;
+        if (Array.isArray(app.showOnDesktop) && !app.showOnDesktop.includes('desktop'))
+          return false;
         return true;
       })
       .map((app, index) => ({
