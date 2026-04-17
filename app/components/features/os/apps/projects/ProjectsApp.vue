@@ -120,12 +120,13 @@ const selectProject = (project: any) => {
         </i18n-t>
       </div>
 
-      <div class="projects-list"
-           ref="scrollContainer"
-           @mousedown="onMouseDown"
-           @mouseleave="onMouseLeave"
-           @mouseup="onMouseUp"
-           @mousemove="onMouseMove">
+      <div
+        ref="scrollContainer"
+        class="projects-list"
+        @mousedown="onMouseDown"
+        @mouseleave="onMouseLeave"
+        @mouseup="onMouseUp"
+        @mousemove="onMouseMove">
         <div
           v-for="project in projects"
           :key="project.id"
@@ -165,7 +166,7 @@ const selectProject = (project: any) => {
                 backgroundColor: 'color-mix(in srgb, ' + activeProject.color + ' 15%, transparent)'
               }">
               <Icon :name="activeProject.icon" />
-              <span>Project View</span>
+              <span>{{ $t('os.apps.projects.projectView') }}</span>
             </div>
           </div>
           <div class="detail-body">
@@ -268,7 +269,7 @@ const selectProject = (project: any) => {
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       cursor: grab;
-      
+
       &::-webkit-scrollbar {
         display: none;
       }

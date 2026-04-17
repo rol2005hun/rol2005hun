@@ -4,6 +4,7 @@
   "githubLinkText": "GitHub",
   "backToProjects": "Back to Projects",
   "viewProject": "View Project",
+  "projectView": "Project View",
   "project1": {
     "title": "First Project",
     "description": "This is the first sample project component."
