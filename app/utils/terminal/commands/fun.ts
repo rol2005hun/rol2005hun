@@ -92,7 +92,7 @@ export const dfCommand: TerminalCommand = {
 export const matrixCommand: TerminalCommand = {
   name: 'matrix',
   execute: async (args, context) => {
-    context.print(\`<span style="color: #0f0; opacity: 0.8">\${context.t('os.apps.terminal.fun.matrixInit')}</span>\`);
+    context.print(`<span style="color: #0f0; opacity: 0.8">${context.t('os.apps.terminal.fun.matrixInit')}</span>`);
     for (let i = 0; i < 25; i++) {
       await new Promise((r) => setTimeout(r, 70));
       let chars = '';

@@ -90,7 +90,31 @@
       "96": "Zivatar jégesővel",
       "99": "Erős zivatar jégesővel",
       "unknown": "Ismeretlen időjárás"
+    },
+    "killallSuccess": "Sikeresen bezárva {count} ablak!",
+    "fun": {
+      "neofetchTitle": "latogato@ranzakOS",
+      "os": "Rendszer: ranzakOS (Web-es Környezet)",
+      "kernel": "Rendszermag: Böngésző Motor",
+      "uptime": "Futási idő: {hours}ó {minutes}p",
+      "resolution": "Zöldített Képernyő: {res}",
+      "theme": "Téma: {theme}",
+      "browser": "Böngésző: {browser}",
+      "pingUsage": "Használat: ping [hosztnév]",
+      "pingData": "PING {host} ({ip}): 56 adat bájt",
+      "pingReply": "64 bájt innen {ip}: icmp_seq={seq} ttl=64 idő={time} ms",
+      "pingStatHeader": "--- {host} ping statisztika ---",
+      "pingStatDetail": "4 csomag küldve, 4 csomag megérkezett, 0.0% csomag veszteség",
+      "matrixInit": "Mátrix kapcsolat inicializálása... nyomj CTRL+C-t a megszakításhoz",
+      "dfHeader": "Fájlrendszer    1K-blokkok    Használt   Szabad  Haszn% Csatolva ide",
+      "dfRoot": "/dev/root        {rootTotal}      {rootUsed}    ...      20% /",
+      "dfTmpfs": "tmpfs             1048576       104     1048472   1% /run",
+      "dfBrowserfs": "browserFS         5000000      5000     4995000   1% /localstorage",
+      "themeSuccess": "Téma sikeresen átállítva: '{theme}'.",
+      "themeNotFound": "Téma nem található. Elérhető témák: {available}",
+      "themeCurrent": "Jelenlegi téma: {theme}",
+      "themeUsage": "Használat: theme [téma_neve]",
+      "themeAvailable": "Elérhető témák: {available}"
     }
   }
 }
-

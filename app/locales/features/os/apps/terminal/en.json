@@ -115,3 +115,5 @@
     "themeCurrent": "Current theme: {theme}",
     "themeUsage": "Usage: theme [theme_name]",
     "themeAvailable": "Available themes: {available}"
+  }
+}
