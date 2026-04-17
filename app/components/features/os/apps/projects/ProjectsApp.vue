@@ -82,7 +82,7 @@ const onMouseUp = () => {
     scrollContainer.value.style.scrollSnapType = '';
     scrollContainer.value.style.cursor = 'grab';
   }
-  // Delay removing dragging flag to prevent click event
+
   setTimeout(() => {
     isDragging = false;
   }, 50);
@@ -92,7 +92,7 @@ const onMouseMove = (e: MouseEvent) => {
   if (!isDown || !scrollContainer.value) return;
   e.preventDefault();
   const x = e.pageX - scrollContainer.value.offsetLeft;
-  const walk = (x - startX) * 1.5; // Scroll speed
+  const walk = (x - startX) * 1.5;
   if (Math.abs(walk) > 5) {
     isDragging = true;
   }

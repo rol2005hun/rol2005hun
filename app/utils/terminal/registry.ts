@@ -21,5 +21,11 @@ Object.values(osCommands).forEach(registerCommand);
 Object.values(adminCommands).forEach(registerCommand);
 Object.values(musicCommands).forEach(registerCommand);
 Object.values(funCommands).forEach(registerCommand);
+
+export const getCommand = (name: string): TerminalCommand | undefined => {
+  return commands.get(name.toLowerCase());
+};
+
+export const getAllCommands = (): TerminalCommand[] => {
   return Array.from(new Set(commands.values()));
 };

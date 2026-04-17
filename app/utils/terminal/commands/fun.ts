@@ -12,7 +12,6 @@ export const neofetchCommand: TerminalCommand = {
     const uptimeHours = Math.floor(performance.now() / 3600000);
     const uptimeMins = Math.floor((performance.now() % 3600000) / 60000);
 
-    // We render an HTML output for maximum wow factor
     context.print(
       `<div style="display: flex; gap: 20px; align-items: flex-start; margin-top: 10px; margin-bottom: 10px;">
         <pre style="color: var(--os-primary-color); font-size: 11px; line-height: 1.2; margin: 0;">
@@ -56,13 +55,12 @@ export const pingCommand: TerminalCommand = {
       return;
     }
     const host = args[0];
-    // Use a slightly varied IP that fits local scenarios
     const ip = `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
 
     context.print(context.t('os.apps.terminal.fun.pingData', { host, ip }));
 
     for (let i = 1; i <= 4; i++) {
-      await new Promise((r) => setTimeout(r, 900)); // Fake network delay
+      await new Promise((r) => setTimeout(r, 900));
       const time = (Math.random() * 30 + 10).toFixed(1);
       context.print(context.t('os.apps.terminal.fun.pingReply', { ip, seq: i, time }));
     }
@@ -78,11 +76,14 @@ export const dfCommand: TerminalCommand = {
   aliases: ['free'],
   execute: (args, context) => {
     const memoryNav = (navigator as any).deviceMemory;
-    const gb = memoryNav ? memoryNav : 8; // fallback to 8GB
+    const gb = memoryNav ? memoryNav : 8;
 
     context.print(context.t('os.apps.terminal.fun.dfHeader'));
     context.print(
-      context.t('os.apps.terminal.fun.dfRoot', { rootTotal: gb * 1024 * 1024, rootUsed: Math.floor(Math.random() * 2000000) })
+      context.t('os.apps.terminal.fun.dfRoot', {
+        rootTotal: gb * 1024 * 1024,
+        rootUsed: Math.floor(Math.random() * 2000000)
+      })
     );
     context.print(context.t('os.apps.terminal.fun.dfTmpfs'));
     context.print(context.t('os.apps.terminal.fun.dfBrowserfs'));
@@ -92,12 +93,13 @@ export const dfCommand: TerminalCommand = {
 export const matrixCommand: TerminalCommand = {
   name: 'matrix',
   execute: async (args, context) => {
-    context.print(`<span style="color: #0f0; opacity: 0.8">${context.t('os.apps.terminal.fun.matrixInit')}</span>`);
+    context.print(
+      `<span style="color: #0f0; opacity: 0.8">${context.t('os.apps.terminal.fun.matrixInit')}</span>`
+    );
     for (let i = 0; i < 25; i++) {
       await new Promise((r) => setTimeout(r, 70));
       let chars = '';
       for (let j = 0; j < 40; j++) {
-        // Japanese or obscure unicode blocks to look like code rain
         chars += String.fromCharCode(Math.floor(Math.random() * 94) + 33) + ' ';
       }
       context.print(
@@ -127,7 +129,9 @@ export const themeCommand: TerminalCommand = {
     }
 
     const available = themeStore.availableThemes.map((t) => t.id).join(', ');
-    context.print(context.t('os.apps.terminal.fun.themeCurrent', { theme: themeStore.currentTheme }));
+    context.print(
+      context.t('os.apps.terminal.fun.themeCurrent', { theme: themeStore.currentTheme })
+    );
     context.print(context.t('os.apps.terminal.fun.themeUsage'));
     context.print(context.t('os.apps.terminal.fun.themeAvailable', { available }));
   }
