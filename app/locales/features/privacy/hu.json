@@ -1,0 +1,12 @@
+{
+  "title": "Adatvédelmi és Sütikezelési Nyilatkozat",
+  "intro": "Üdvözlünk a ranzakOS-ben! Mielőtt továbblépnél, kérjük, olvasd el, hogyan kezeljük az adataidat és a sütiket ezen a weboldalon.",
+  "section1Title": "1. Mi az a ranzakOS?",
+  "section1Text": "A ranzakOS egy webalapú portfólió és operációs rendszer szimulátor, ami személyes bemutatkozásra és interaktív élmény nyújtására szolgál. Teljes mértékben a böngésződben fut.",
+  "section2Title": "2. Sütik és Helyi Tárolás (LocalStorage)",
+  "section2Text": "Az állapotok, beállítások és a hitelesítés (például a bejelentkezve maradás frissítéskor, vagy ablakok/témák mentése) fenntartásához ez az oldal intenzíven használja a LocalStorage-t és a sütiket. Ezeket NEM használjuk nyomon követésre, hirdetésre vagy harmadik felekkel való megosztásra.",
+  "section3Title": "3. Adatkezelés",
+  "section3Text": "Nem gyűjtünk személyazonosításra alkalmas adatokat (PII), azon túl, amit te önszántadból adsz meg bizonyos alkalmazások használata során. Minden adat a te gépeden marad.",
+  "section4Title": "4. Analitika",
+  "section4Text": "Előfordulhat, hogy alapvető analitikát használunk az oldal forgalmának figyelésére. Ezek az adatok teljes mértékben anonimizáltak."
+}

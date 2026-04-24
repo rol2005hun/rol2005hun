@@ -1,8 +1,13 @@
 <template>
   <div class="os-root">
-    <SystemSetup v-if="!isInstalled" @setup-complete="handleSetupComplete" />
+    <Transition name="fade">
+      <SystemSetup
+        v-if="!isInstalled"
+        class="setup-overlay"
+        @setup-complete="handleSetupComplete" />
+    </Transition>
 
-    <template v-else>
+    <div v-show="isInstalled" class="os-content-wrapper">
       <Transition name="fade">
         <LockScreen v-if="!authStore.isUnlocked" class="lock-screen-overlay" />
       </Transition>
@@ -16,7 +21,7 @@
       <div class="desktop-container" :class="{ 'is-locked': !authStore.isUnlocked }">
         <slot />
       </div>
-    </template>
+    </div>
   </div>
 </template>
 
@@ -100,5 +105,16 @@ onBeforeUnmount(() => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.setup-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10000;
+}
+
+.os-content-wrapper {
+  width: 100%;
+  height: 100%;
 }
 </style>

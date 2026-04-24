@@ -1,0 +1,14 @@
+{
+  "title": "Rendszer Inicializálása",
+  "description": "Üdvözlünk a ranzakOS telepítőjében. Kérjük, add meg az érvényes béta kulcsodat a folytatáshoz.",
+  "learnMore": "Adatvédelmi Nyilatkozat és Használat",
+  "betaKeyHint": "Béta Kulcs:",
+  "keyLabel": "Licenckulcs:",
+  "invalidKey": "Érvénytelen licenckulcs. Próbáld újra.",
+  "verifyBtn": "ELLENŐRZÉS ÉS TELEPÍTÉS",
+  "acceptPrivacy": "Elolvastam és elfogadom az Adatvédelmi Nyilatkozatot.",
+  "closeBtn": "Bezárás",
+  "language": "Nyelv",
+  "modalTitle": "Adatvédelmi Nyilatkozat",
+  "acceptBtn": "Elfogadás és Bezárás"
+}
