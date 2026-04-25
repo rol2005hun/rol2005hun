@@ -170,4 +170,3 @@ import { Icon } from '#components';
   }
 }
 </style>
-

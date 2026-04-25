@@ -1,14 +1,14 @@
 {
-    "title":  "System Initialization",
-    "description":  "Welcome to the RanzakOS setup. Please enter your valid beta license key to continue the installation.",
-    "learnMore":  "Privacy Policy \u0026 Usage",
-    "betaKeyHint":  "Beta Key:",
-    "keyLabel":  "License Key:",
-    "invalidKey":  "Invalid license key. Please try again.",
-    "verifyBtn":  "VERIFY AND INSTALL",
-    "acceptPrivacy":  "I have read and accepted the Privacy Policy.",
-    "closeBtn":  "Close",
-    "language":  "Language",
-    "modalTitle":  "Privacy Policy",
-    "acceptBtn":  "Accept \u0026 Close"
+  "title": "System Initialization",
+  "description": "Welcome to the RanzakOS setup. Please enter your valid beta license key to continue the installation.",
+  "learnMore": "Privacy Policy \u0026 Usage",
+  "betaKeyHint": "Beta Key:",
+  "keyLabel": "License Key:",
+  "invalidKey": "Invalid license key. Please try again.",
+  "verifyBtn": "VERIFY AND INSTALL",
+  "acceptPrivacy": "I have read and accepted the Privacy Policy.",
+  "closeBtn": "Close",
+  "language": "Language",
+  "modalTitle": "Privacy Policy",
+  "acceptBtn": "Accept \u0026 Close"
 }

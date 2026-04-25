@@ -192,7 +192,8 @@ const saveHistory = () => {
   transition: background-color 0.2s;
 
   &:hover:not(:disabled) {
-    background-color: var(--os-text); opacity: 0.1;
+    background-color: var(--os-text);
+    opacity: 0.1;
   }
 
   &:disabled {
@@ -218,7 +219,8 @@ const saveHistory = () => {
   outline: none;
 
   &:focus {
-    border-color: var(--os-text); opacity: 0.3;
+    border-color: var(--os-text);
+    opacity: 0.3;
     background-color: rgba(0, 0, 0, 0.4);
   }
 }
@@ -247,4 +249,3 @@ const saveHistory = () => {
   font-size: 14px;
 }
 </style>
-
