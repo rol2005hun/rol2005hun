@@ -128,6 +128,15 @@
         "Corrected hardcoded terminal strings to exclusively utilize context.t for dynamic localization."
       ]
     },
+    "2026-04-27-2": {
+      "version": "3.1.1-beta",
+      "title": "New Calculator Application",
+      "changes": [
+        "Introduced a sleek, glassmorphic \\u003cstrong\\u003eCalculator\\u003c/strong\\u003e app as a surprise addition.",
+        "Features full keyboard support (numpad, operators, Enter, Backspace) for power users.",
+        "Includes a running history display and standard calculator functions (+, -, ×, ÷, +/-)."
+      ]
+    },
     "2026-04-27": {
       "version": "3.1.0-beta",
       "title": "Paint Application Overhaul",

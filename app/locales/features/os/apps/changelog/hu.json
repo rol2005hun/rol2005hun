@@ -128,6 +128,15 @@
         "Dinamikus nyelvkezelés a terminál parancsokban is (i18n integráció)."
       ]
     },
+    "2026-04-27-2": {
+      "version": "1.0.12",
+      "title": "Új Számológép Alkalmazás",
+      "changes": [
+        "Meglepetésként bekerült a rendszerbe egy elegáns, üveghatású dizájnnal rendelkező \\u003cstrong\\u003eSzámológép\\u003c/strong\\u003e.",
+        "Teljes billentyűzet-támogatás (NumPad, operátorok, Enter, Backspace) a kényelmesebb használatért.",
+        "Minden alapvető számítási funkció (+, -, ×, ÷, +/-) és művelettörténet kijelző."
+      ]
+    },
     "2026-04-27": {
       "version": "1.0.11",
       "title": "Rajzoló Alkalmazás Újítások",

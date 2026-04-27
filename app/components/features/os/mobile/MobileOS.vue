@@ -56,6 +56,9 @@ const appComponents: Record<string, any> = {
     () => import('@/components/features/os/apps/settings/SettingsApp.vue')
   ),
   paint: defineAsyncComponent(() => import('@/components/features/os/apps/paint/PaintApp.vue')),
+  calculator: defineAsyncComponent(
+    () => import('@/components/features/os/apps/calculator/CalculatorApp.vue')
+  ),
   browser: defineAsyncComponent(
     () => import('@/components/features/os/apps/browser/BrowserApp.vue')
   ),

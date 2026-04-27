@@ -68,6 +68,15 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       showOnDesktop: true
     },
     {
+      id: 'calculator',
+      nameKey: 'os.apps.calculator.name',
+      icon: 'ph:calculator-fill',
+      defaultWidth: 350,
+      defaultHeight: 500,
+      allowMultipleInstances: true,
+      showOnDesktop: true
+    },
+    {
       id: 'music',
       nameKey: 'os.apps.music.name',
       icon: 'ph:music-notes-fill',
