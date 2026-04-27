@@ -130,10 +130,12 @@
     },
     "2026-04-27": {
       "version": "3.1.0-beta",
-      "title": "Paint Application Added",
+      "title": "Paint Application Overhaul",
       "changes": [
         "Added a brand new \\u003cstrong\\u003ePaint\\u003c/strong\\u003e application for drawing and saving images.",
-        "Included brush size and color picker controls in a responsive interface."
+        "Included multiple tools: Pencil, Eraser, Line, Rectangle, and Circle.",
+        "Added Undo/Redo functionality with history tracking.",
+        "Redesigned the toolbar with modern glassmorphism style and better responsive layout."
       ]
     },
     "2026-04-24": {

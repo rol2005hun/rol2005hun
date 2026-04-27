@@ -1,7 +1,18 @@
 {
   "name": "Paint",
+  "tools": {
+    "pencil": "Pencil",
+    "eraser": "Eraser",
+    "line": "Line",
+    "rect": "Rectangle",
+    "circle": "Circle"
+  },
+  "actions": {
+    "undo": "Undo",
+    "redo": "Redo",
+    "clear": "Clear",
+    "save": "Save"
+  },
   "color": "Color",
-  "size": "Size",
-  "clear": "Clear",
-  "save": "Save"
+  "size": "Size"
 }

@@ -1,7 +1,18 @@
 {
   "name": "Rajz",
+  "tools": {
+    "pencil": "Ceruza",
+    "eraser": "Radír",
+    "line": "Vonal",
+    "rect": "Téglalap",
+    "circle": "Kör"
+  },
+  "actions": {
+    "undo": "Visszavonás",
+    "redo": "Mégsem von vissza",
+    "clear": "Törlés",
+    "save": "Mentés"
+  },
   "color": "Szín",
-  "size": "Méret",
-  "clear": "Törlés",
-  "save": "Mentés"
+  "size": "Méret"
 }

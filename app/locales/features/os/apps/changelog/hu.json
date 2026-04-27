@@ -130,10 +130,12 @@
     },
     "2026-04-27": {
       "version": "1.0.11",
-      "title": "Rajzoló Alkalmazás",
+      "title": "Rajzoló Alkalmazás Újítások",
       "changes": [
         "Hozzáadva egy teljesen új \\u003cstrong\\u003eRajz\\u003c/strong\\u003e alkalmazás rajzoláshoz és képek mentéséhez.",
-        "Ecsetméret és színválasztó integrációja reszponzív felületen."
+        "Több új eszköz: Ceruza, Radír, Vonal, Téglalap és Kör formák.",
+        "Új Visszavonás/Mégsem von vissza (Undo/Redo) funkció előzménykövetéssel.",
+        "Modern, üveghatású és reszponzívabb eszköztár elrendezés."
       ]
     },
     "2026-04-24": {
