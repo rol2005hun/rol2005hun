@@ -23,8 +23,7 @@
       <div
         v-for="(day, index) in days"
         :key="index"
-        :class="['day', { 'not-current-month': !day.isCurrentMonth, 'is-today': day.isToday }]"
-      >
+        :class="['day', { 'not-current-month': !day.isCurrentMonth, 'is-today': day.isToday }]">
         <span>{{ day.day }}</span>
       </div>
     </div>
@@ -61,20 +60,18 @@ const days = computed(() => {
       date: new Date(cYear, cMonth - 1, daysInPrevMonth - i),
       day: daysInPrevMonth - i,
       isCurrentMonth: false,
-      isToday: false,
+      isToday: false
     });
   }
 
   for (let i = 1; i <= daysInMonth; i++) {
     const isToday =
-      today.getDate() === i &&
-      today.getMonth() === cMonth &&
-      today.getFullYear() === cYear;
+      today.getDate() === i && today.getMonth() === cMonth && today.getFullYear() === cYear;
     calendarDays.push({
       date: new Date(cYear, cMonth, i),
       day: i,
       isCurrentMonth: true,
-      isToday,
+      isToday
     });
   }
 
@@ -84,7 +81,7 @@ const days = computed(() => {
       date: new Date(cYear, cMonth + 1, i),
       day: i,
       isCurrentMonth: false,
-      isToday: false,
+      isToday: false
     });
   }
 
@@ -162,7 +159,7 @@ const goToday = () => {
       &.icon-only {
         padding: 8px;
       }
-      
+
       .iconify {
         font-size: 1.2rem;
       }
@@ -215,7 +212,7 @@ const goToday = () => {
     color: #4da3ff;
     font-weight: bold;
     border-color: rgba(0, 122, 255, 0.3);
-    
+
     &::after {
       content: '';
       position: absolute;

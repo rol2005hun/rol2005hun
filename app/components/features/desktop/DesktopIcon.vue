@@ -140,15 +140,19 @@ const openApp = () => {
   top: 0;
   left: 0;
   width: 80px;
-  height: 90px;
+  height: fit-content;
+  padding: 8px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   cursor: pointer;
   user-select: none;
   border-radius: 8px;
-  transition: background-color 0.2s;
+  border: 1px solid transparent;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);

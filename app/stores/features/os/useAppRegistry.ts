@@ -111,11 +111,6 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       defaultHeight: 550,
       allowMultipleInstances: true,
       showOnDesktop: true
-    }
-      defaultWidth: 800,
-      defaultHeight: 600,
-      allowMultipleInstances: false,
-      showOnDesktop: true
     },
     {
       id: 'about',

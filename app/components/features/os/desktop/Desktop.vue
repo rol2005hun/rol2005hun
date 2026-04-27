@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed } from 'vue';
+import { ref, reactive, computed, onMounted, onUnmounted } from 'vue';
 import Taskbar from '@/components/features/os/taskbar/Taskbar.vue';
 import StartMenu from '@/components/features/os/desktop/StartMenu.vue';
 import WindowFrame from '@/components/features/os/window/WindowFrame.vue';
@@ -182,6 +182,19 @@ const updateSelection = () => {
 
   desktopStore.setSelection(newSelection);
 };
+
+const handleResize = () => {
+  desktopStore.ensureIconsInBounds(window.innerWidth, window.innerHeight);
+};
+
+onMounted(() => {
+  handleResize();
+  window.addEventListener('resize', handleResize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize);
+});
 </script>
 
 <style scoped lang="scss">

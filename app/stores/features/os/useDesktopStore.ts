@@ -97,6 +97,42 @@ export const useDesktopStore = defineStore('os-desktop', () => {
     desktopIconsCookie.value = defaultIcons.value;
   };
 
+  const ensureIconsInBounds = (width: number, height: number) => {
+    if (!desktopIconsCookie.value) return;
+
+    let updated = false;
+    const currentIcons = [...icons.value];
+
+    const iconWidth = 80;
+    const iconHeight = 100;
+    const paddingX = 20;
+    const paddingY = 20;
+    const taskbarHeight = 60;
+    const availableHeight = height - taskbarHeight;
+    const maxRows = Math.floor((availableHeight - paddingY) / iconHeight) || 1;
+
+    currentIcons.forEach((icon, index) => {
+      let { x, y } = icon;
+      let changed = false;
+
+      if (x < 0 || y < 0 || x + iconWidth > width || y + iconHeight > availableHeight) {
+        // Reflow out of bounds icon to grid
+        y = paddingY + (index % maxRows) * iconHeight;
+        x = paddingX + Math.floor(index / maxRows) * (iconWidth + paddingX);
+        changed = true;
+      }
+
+      if (changed) {
+        currentIcons[index] = { ...icon, x, y };
+        updated = true;
+      }
+    });
+
+    if (updated) {
+      desktopIconsCookie.value = currentIcons;
+    }
+  };
+
   return {
     isStartMenuOpen,
     icons,
@@ -107,6 +143,7 @@ export const useDesktopStore = defineStore('os-desktop', () => {
     selectIcon,
     clearSelection,
     setSelection,
-    resetIcons
+    resetIcons,
+    ensureIconsInBounds
   };
 });

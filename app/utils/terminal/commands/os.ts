@@ -80,7 +80,7 @@ export const calendarCommand: TerminalCommand = {
     const registry = useAppRegistry();
     const app = registry.getAppById('calendar');
     if (!app) return;
-    
+
     const windowStore = useWindowStore();
     windowStore.openWindow({
       id: `calendar-${Date.now()}`,
