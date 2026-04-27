@@ -14,8 +14,7 @@
     </Transition>
 
     <iframe
-      v-show="!isLoading"
-      src="https://play.wolimby.site"
+      src="https://games.wolimby.site"
       frameborder="0"
       class="games-iframe"
       allow="fullscreen"

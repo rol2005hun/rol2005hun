@@ -3,6 +3,13 @@
   "subtitle": "Latest OS updates and features",
   "empty": "No versions available.",
   "history": {
+    "2026-04-27-4": {
+      "version": "3.1.3-beta",
+      "title": "Games App Fix",
+      "changes": [
+        "Fixed an issue in the Games app where the embedded website was not interactive."
+      ]
+    },
     "2026-04-25": {
       "version": "3.0.6-beta",
       "title": "Music App UI & Mobile Responsiveness",

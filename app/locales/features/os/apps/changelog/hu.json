@@ -3,6 +3,13 @@
   "subtitle": "Legújabb OS frissítések és funkciók",
   "empty": "Nincs elérhető változat.",
   "history": {
+    "2026.04.27-4": {
+      "version": "1.0.14",
+      "title": "Játékok App Javítás",
+      "changes": [
+        "Javítva egy hiba a Játékok alkalmazásban, amely miatt a beágyazott weboldal nem volt interaktív."
+      ]
+    },
     "2026.04.25": {
       "version": "1.0.6",
       "title": "Zene App UX/UI és Mobilos Reszponzivitás",
