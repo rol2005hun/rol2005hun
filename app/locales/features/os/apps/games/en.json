@@ -1,3 +1,5 @@
 {
-  "name": "Wolimby Games"
+  "name": "Wolimby Games",
+  "loading": "Loading games...",
+  "langWarning": "Note: The games on this site are currently only available in Hungarian."
 }

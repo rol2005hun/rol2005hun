@@ -1,3 +1,5 @@
 {
-  "name": "Wolimby Játékok"
+  "name": "Wolimby Játékok",
+  "loading": "Játékok betöltése...",
+  "langWarning": "Megjegyzés: A játékok jelenleg csak magyar nyelven érhetőek el."
 }
