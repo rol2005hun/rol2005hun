@@ -77,6 +77,24 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       showOnDesktop: true
     },
     {
+      id: 'games',
+      nameKey: 'os.apps.games.name',
+      icon: 'ph:game-controller-fill',
+      defaultWidth: 900,
+      defaultHeight: 650,
+      allowMultipleInstances: false,
+      showOnDesktop: true
+    },
+    {
+      id: 'notepad',
+      nameKey: 'os.apps.notepad.name',
+      icon: 'ph:notepad-fill',
+      defaultWidth: 700,
+      defaultHeight: 500,
+      allowMultipleInstances: true,
+      showOnDesktop: true
+    },
+    {
       id: 'music',
       nameKey: 'os.apps.music.name',
       icon: 'ph:music-notes-fill',

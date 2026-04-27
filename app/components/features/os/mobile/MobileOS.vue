@@ -59,6 +59,10 @@ const appComponents: Record<string, any> = {
   calculator: defineAsyncComponent(
     () => import('@/components/features/os/apps/calculator/CalculatorApp.vue')
   ),
+  games: defineAsyncComponent(() => import('@/components/features/os/apps/games/GamesApp.vue')),
+  notepad: defineAsyncComponent(
+    () => import('@/components/features/os/apps/notepad/NotepadApp.vue')
+  ),
   browser: defineAsyncComponent(
     () => import('@/components/features/os/apps/browser/BrowserApp.vue')
   ),
