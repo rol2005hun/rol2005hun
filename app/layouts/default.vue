@@ -51,6 +51,25 @@ const preventRefresh = (e: KeyboardEvent) => {
   }
 };
 
+const preventZoom = (e: KeyboardEvent | WheelEvent) => {
+  if (e.ctrlKey) {
+    if (e.type === 'wheel') {
+      e.preventDefault();
+    } else if (e.type === 'keydown') {
+      const ke = e as KeyboardEvent;
+      if (
+        ke.key === '+' ||
+        ke.key === '-' ||
+        ke.key === '=' ||
+        ke.key === 'NumpadAdd' ||
+        ke.key === 'NumpadSubtract'
+      ) {
+        e.preventDefault();
+      }
+    }
+  }
+};
+
 const handleBeforeUnload = (e: BeforeUnloadEvent) => {
   if (systemStore.isShuttingDown) {
     return;
@@ -61,11 +80,15 @@ const handleBeforeUnload = (e: BeforeUnloadEvent) => {
 
 onMounted(() => {
   window.addEventListener('keydown', preventRefresh);
+  window.addEventListener('keydown', preventZoom as any, { passive: false });
+  window.addEventListener('wheel', preventZoom as any, { passive: false });
   window.addEventListener('beforeunload', handleBeforeUnload);
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener('keydown', preventRefresh);
+  window.removeEventListener('keydown', preventZoom as any);
+  window.removeEventListener('wheel', preventZoom as any);
   window.removeEventListener('beforeunload', handleBeforeUnload);
 });
 </script>

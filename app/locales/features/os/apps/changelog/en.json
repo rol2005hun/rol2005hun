@@ -136,7 +136,9 @@
         "Included multiple tools: Pencil, Eraser, Line, Rectangle, and Circle.",
         "Added Undo/Redo functionality with history tracking.",
         "Implemented fixed-size, manually resizable canvas (like MS Paint) with draggable handles and scrollbars.",
-        "Redesigned the toolbar with modern glassmorphism style and better responsive layout."
+        "Added Canvas Zoom functionality via Ctrl + / Ctrl - and Ctrl + Mouse Wheel, scaling perfectly.",
+        "Dynamic cursor representing brush size and color applied to all tools for precise drawing.",
+        "Globally disabled browser default zooming on the whole OS to ensure apps feel native."
       ]
     },
     "2026-04-24": {

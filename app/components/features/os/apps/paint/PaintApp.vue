@@ -1,5 +1,5 @@
 <template>
-  <div class="paint-app">
+  <div ref="appRef" class="paint-app" tabindex="-1" @keydown="handleKeyDown">
     <div class="toolbar">
       <div class="toolbar-section">
         <div class="tools-group">
@@ -56,6 +56,7 @@
         <div class="separator" />
 
         <div class="actions-group">
+          <div class="zoom-indicator" title="Zoom">{{ Math.round(zoomLevel * 100) }}%</div>
           <button class="action-btn" @click="clearCanvas">
             <Icon name="ph:trash-bold" />
             <span class="btn-text">{{ $t('os.apps.paint.actions.clear') }}</span>
@@ -68,15 +69,15 @@
       </div>
     </div>
 
-    <div ref="containerRef" class="canvas-container">
+    <div ref="containerRef" class="canvas-container" @wheel="handleWheel">
       <div
         class="canvas-wrapper"
-        :style="{ width: canvasWidth + 'px', height: canvasHeight + 'px' }">
+        :style="{ width: canvasWidth * zoomLevel + 'px', height: canvasHeight * zoomLevel + 'px' }">
         <canvas
           ref="canvasRef"
           :width="canvasWidth"
           :height="canvasHeight"
-          :style="{ cursor: cursorUrl }"
+          :style="{ width: '100%', height: '100%', cursor: cursorUrl }"
           @mousedown="startDrawing"
           @mousemove="draw"
           @mouseup="stopDrawing"
@@ -122,16 +123,15 @@
           v-if="isResizing"
           class="resize-ghost"
           :style="{
-            width: previewWidth + 'px',
-            height: previewHeight + 'px',
-            left: previewLeft + 'px',
-            top: previewTop + 'px'
+            width: previewWidth * zoomLevel + 'px',
+            height: previewHeight * zoomLevel + 'px',
+            left: previewLeft * zoomLevel + 'px',
+            top: previewTop * zoomLevel + 'px'
           }"></div>
       </div>
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
 import { ref, onMounted, shallowRef, nextTick, watchEffect } from 'vue';
 
@@ -151,11 +151,13 @@ const availableTools = [
   { id: 'circle' as ToolType, icon: 'ph:circle-bold', titleKey: 'os.apps.paint.tools.circle' }
 ];
 
+const appRef = ref<HTMLDivElement | null>(null);
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const containerRef = ref<HTMLDivElement | null>(null);
 
 const canvasWidth = ref(800);
 const canvasHeight = ref(600);
+const zoomLevel = ref(1);
 
 const isDrawing = ref(false);
 const color = ref('#000000');
@@ -165,12 +167,7 @@ const activeTool = ref<ToolType>('pencil');
 const cursorUrl = ref('');
 
 watchEffect(() => {
-  if (activeTool.value === 'line' || activeTool.value === 'rect' || activeTool.value === 'circle') {
-    cursorUrl.value = 'crosshair';
-    return;
-  }
-
-  const size = brushSize.value;
+  const size = brushSize.value * zoomLevel.value;
   const canvas = document.createElement('canvas');
   const padding = 2;
   canvas.width = size + padding * 2;
@@ -209,6 +206,31 @@ watchEffect(() => {
   cursorUrl.value = `url(${canvas.toDataURL()}) ${size / 2 + padding} ${size / 2 + padding}, crosshair`;
 });
 
+const handleKeyDown = (e: KeyboardEvent) => {
+  if (e.ctrlKey) {
+    if (e.key === '+' || e.key === '=' || e.key === 'NumpadAdd') {
+      e.preventDefault();
+      zoomLevel.value = Math.min(5, zoomLevel.value + 0.1);
+    } else if (e.key === '-' || e.key === 'NumpadSubtract') {
+      e.preventDefault();
+      zoomLevel.value = Math.max(0.1, zoomLevel.value - 0.1);
+    } else if (e.key === '0' || e.key === 'Numpad0') {
+      e.preventDefault();
+      zoomLevel.value = 1;
+    }
+  }
+};
+
+const handleWheel = (e: WheelEvent) => {
+  if (e.ctrlKey) {
+    e.preventDefault();
+    if (e.deltaY < 0) {
+      zoomLevel.value = Math.min(5, zoomLevel.value + 0.1);
+    } else {
+      zoomLevel.value = Math.max(0.1, zoomLevel.value - 0.1);
+    }
+  }
+};
 let ctx: CanvasRenderingContext2D | null = null;
 let startX = 0;
 let startY = 0;
@@ -298,6 +320,9 @@ const redo = async () => {
 
 onMounted(() => {
   setTimeout(() => {
+    if (appRef.value) {
+      appRef.value.focus();
+    }
     if (containerRef.value) {
       canvasWidth.value = Math.max(containerRef.value.clientWidth - 40, 400);
       canvasHeight.value = Math.max(containerRef.value.clientHeight - 40, 300);
@@ -442,7 +467,7 @@ const getCoordinates = (e: MouseEvent | TouchEvent): [number, number] => {
   const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
   const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
 
-  return [clientX - rect.left, clientY - rect.top];
+  return [(clientX - rect.left) / zoomLevel.value, (clientY - rect.top) / zoomLevel.value];
 };
 
 const startDrawing = (e: MouseEvent | TouchEvent) => {
