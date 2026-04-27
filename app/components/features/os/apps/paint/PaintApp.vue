@@ -69,23 +69,48 @@
     </div>
 
     <div ref="containerRef" class="canvas-container">
-      <canvas
-        ref="canvasRef"
-        @mousedown="startDrawing"
-        @mousemove="draw"
-        @mouseup="stopDrawing"
-        @mouseleave="stopDrawing"
-        @touchstart.prevent="startDrawing"
-        @touchmove.prevent="draw"
-        @touchend.prevent="stopDrawing"></canvas>
+      <div
+        class="canvas-wrapper"
+        :style="{ width: canvasWidth + 'px', height: canvasHeight + 'px' }">
+        <canvas
+          ref="canvasRef"
+          :width="canvasWidth"
+          :height="canvasHeight"
+          @mousedown="startDrawing"
+          @mousemove="draw"
+          @mouseup="stopDrawing"
+          @mouseleave="stopDrawing"
+          @touchstart.prevent="startDrawing"
+          @touchmove.prevent="draw"
+          @touchend.prevent="stopDrawing"></canvas>
+
+        <div
+          class="resize-handle right"
+          @mousedown.stop.prevent="startResize($event, 'right')"
+          @touchstart.stop.prevent="startResizeTouch($event, 'right')"></div>
+        <div
+          class="resize-handle bottom"
+          @mousedown.stop.prevent="startResize($event, 'bottom')"
+          @touchstart.stop.prevent="startResizeTouch($event, 'bottom')"></div>
+        <div
+          class="resize-handle bottom-right"
+          @mousedown.stop.prevent="startResize($event, 'both')"
+          @touchstart.stop.prevent="startResizeTouch($event, 'both')"></div>
+
+        <div
+          v-if="isResizing"
+          class="resize-ghost"
+          :style="{ width: previewWidth + 'px', height: previewHeight + 'px' }"></div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, shallowRef } from 'vue';
+import { ref, onMounted, shallowRef, nextTick } from 'vue';
 
 type ToolType = 'pencil' | 'eraser' | 'line' | 'rect' | 'circle';
+type HistoryState = { imgData: ImageData; width: number; height: number };
 
 const availableTools = [
   {
@@ -101,6 +126,10 @@ const availableTools = [
 
 const canvasRef = ref<HTMLCanvasElement | null>(null);
 const containerRef = ref<HTMLDivElement | null>(null);
+
+const canvasWidth = ref(800);
+const canvasHeight = ref(600);
+
 const isDrawing = ref(false);
 const color = ref('#000000');
 const brushSize = ref(5);
@@ -111,91 +140,189 @@ let startX = 0;
 let startY = 0;
 let tempState: ImageData | null = null;
 
-const undoStack = shallowRef<ImageData[]>([]);
-const redoStack = shallowRef<ImageData[]>([]);
+const undoStack = shallowRef<HistoryState[]>([]);
+const redoStack = shallowRef<HistoryState[]>([]);
 const MAX_HISTORY = 30;
+
+const isResizing = ref(false);
+const resizeDirection = ref<'right' | 'bottom' | 'both'>('both');
+const previewWidth = ref(800);
+const previewHeight = ref(600);
+let resizeStartX = 0;
+let resizeStartY = 0;
+let resizeStartWidth = 0;
+let resizeStartHeight = 0;
 
 const saveState = () => {
   const canvas = canvasRef.value;
   if (!canvas || !ctx) return;
-  undoStack.value = [...undoStack.value, ctx.getImageData(0, 0, canvas.width, canvas.height)];
+  undoStack.value = [
+    ...undoStack.value,
+    {
+      imgData: ctx.getImageData(0, 0, canvas.width, canvas.height),
+      width: canvas.width,
+      height: canvas.height
+    }
+  ];
   if (undoStack.value.length > MAX_HISTORY) {
     undoStack.value = undoStack.value.slice(1);
   }
   redoStack.value = [];
 };
 
-const undo = () => {
-  if (undoStack.value.length === 0 || !ctx || !canvasRef.value) return;
-  const canvas = canvasRef.value;
+const restoreState = async (state: HistoryState, isUndo: boolean) => {
+  if (!canvasRef.value || !ctx) return;
+  const current = {
+    imgData: ctx.getImageData(0, 0, canvasWidth.value, canvasHeight.value),
+    width: canvasWidth.value,
+    height: canvasHeight.value
+  };
 
-  const current = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  redoStack.value = [...redoStack.value, current];
+  if (isUndo) {
+    redoStack.value = [...redoStack.value, current];
+  } else {
+    undoStack.value = [...undoStack.value, current];
+  }
 
+  canvasWidth.value = state.width;
+  canvasHeight.value = state.height;
+
+  await nextTick();
+
+  ctx = canvasRef.value.getContext('2d');
+  if (ctx) {
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvasWidth.value, canvasHeight.value);
+    ctx.putImageData(state.imgData, 0, 0);
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+  }
+};
+
+const undo = async () => {
+  if (undoStack.value.length === 0) return;
   const newUndoStack = [...undoStack.value];
   const lastState = newUndoStack.pop();
   undoStack.value = newUndoStack;
-
   if (lastState) {
-    ctx.putImageData(lastState, 0, 0);
+    await restoreState(lastState, true);
   }
 };
 
-const redo = () => {
-  if (redoStack.value.length === 0 || !ctx || !canvasRef.value) return;
-  const canvas = canvasRef.value;
-
-  const current = ctx.getImageData(0, 0, canvas.width, canvas.height);
-  undoStack.value = [...undoStack.value, current];
-
+const redo = async () => {
+  if (redoStack.value.length === 0) return;
   const newRedoStack = [...redoStack.value];
   const nextState = newRedoStack.pop();
   redoStack.value = newRedoStack;
-
   if (nextState) {
-    ctx.putImageData(nextState, 0, 0);
-  }
-};
-
-const resizeCanvas = () => {
-  const canvas = canvasRef.value;
-  const container = containerRef.value;
-  if (!canvas || !container) return;
-
-  let tempCanvas = document.createElement('canvas');
-  let tempCtx = tempCanvas.getContext('2d');
-  tempCanvas.width = canvas.width;
-  tempCanvas.height = canvas.height;
-  if (tempCtx && canvas.width > 0) {
-    tempCtx.drawImage(canvas, 0, 0);
-  }
-
-  canvas.width = container.clientWidth;
-  canvas.height = container.clientHeight;
-
-  ctx = canvas.getContext('2d');
-  if (ctx) {
-    ctx.lineJoin = 'round';
-    ctx.lineCap = 'round';
-    if (tempCanvas.width > 0 && tempCanvas.height > 0) {
-      ctx.drawImage(tempCanvas, 0, 0);
-    } else {
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }
+    await restoreState(nextState, false);
   }
 };
 
 onMounted(() => {
   setTimeout(() => {
-    resizeCanvas();
+    if (containerRef.value) {
+      canvasWidth.value = Math.max(containerRef.value.clientWidth - 40, 400);
+      canvasHeight.value = Math.max(containerRef.value.clientHeight - 40, 300);
+
+      nextTick(() => {
+        if (canvasRef.value) {
+          ctx = canvasRef.value.getContext('2d');
+          if (ctx) {
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvasWidth.value, canvasHeight.value);
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+          }
+        }
+      });
+    }
   }, 50);
-  window.addEventListener('resize', resizeCanvas);
 });
 
-onUnmounted(() => {
-  window.removeEventListener('resize', resizeCanvas);
-});
+const startResize = (e: MouseEvent, dir: 'right' | 'bottom' | 'both') => {
+  if (e.button !== 0) return;
+  initResize(e.clientX, e.clientY, dir);
+  window.addEventListener('mousemove', onResizeMove);
+  window.addEventListener('mouseup', stopResize);
+};
+
+const startResizeTouch = (e: TouchEvent, dir: 'right' | 'bottom' | 'both') => {
+  initResize(e.touches[0].clientX, e.touches[0].clientY, dir);
+  window.addEventListener('touchmove', onResizeMoveTouch, { passive: false });
+  window.addEventListener('touchend', stopResizeTouch);
+};
+
+const initResize = (clientX: number, clientY: number, dir: 'right' | 'bottom' | 'both') => {
+  isResizing.value = true;
+  resizeDirection.value = dir;
+  resizeStartX = clientX;
+  resizeStartY = clientY;
+  resizeStartWidth = canvasWidth.value;
+  resizeStartHeight = canvasHeight.value;
+  previewWidth.value = canvasWidth.value;
+  previewHeight.value = canvasHeight.value;
+};
+
+const onResizeMove = (e: MouseEvent) => {
+  updateResizePreview(e.clientX, e.clientY);
+};
+
+const onResizeMoveTouch = (e: TouchEvent) => {
+  e.preventDefault();
+  updateResizePreview(e.touches[0].clientX, e.touches[0].clientY);
+};
+
+const updateResizePreview = (clientX: number, clientY: number) => {
+  if (!isResizing.value) return;
+  const deltaX = clientX - resizeStartX;
+  const deltaY = clientY - resizeStartY;
+
+  if (resizeDirection.value === 'right' || resizeDirection.value === 'both') {
+    previewWidth.value = Math.max(50, resizeStartWidth + deltaX);
+  }
+  if (resizeDirection.value === 'bottom' || resizeDirection.value === 'both') {
+    previewHeight.value = Math.max(50, resizeStartHeight + deltaY);
+  }
+};
+
+const stopResize = async () => {
+  window.removeEventListener('mousemove', onResizeMove);
+  window.removeEventListener('mouseup', stopResize);
+  await finalizeResize();
+};
+
+const stopResizeTouch = async () => {
+  window.removeEventListener('touchmove', onResizeMoveTouch);
+  window.removeEventListener('touchend', stopResizeTouch);
+  await finalizeResize();
+};
+
+const finalizeResize = async () => {
+  if (!isResizing.value) return;
+  isResizing.value = false;
+
+  if (previewWidth.value !== canvasWidth.value || previewHeight.value !== canvasHeight.value) {
+    if (!canvasRef.value || !ctx) return;
+
+    saveState();
+    const imgData = ctx.getImageData(0, 0, canvasWidth.value, canvasHeight.value);
+
+    canvasWidth.value = previewWidth.value;
+    canvasHeight.value = previewHeight.value;
+
+    await nextTick();
+
+    ctx = canvasRef.value.getContext('2d');
+    if (ctx) {
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvasWidth.value, canvasHeight.value);
+      ctx.putImageData(imgData, 0, 0);
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+    }
+  }
+};
 
 const getCoordinates = (e: MouseEvent | TouchEvent): [number, number] => {
   const canvas = canvasRef.value;
@@ -209,7 +336,7 @@ const getCoordinates = (e: MouseEvent | TouchEvent): [number, number] => {
 };
 
 const startDrawing = (e: MouseEvent | TouchEvent) => {
-  if ('button' in e && e.button !== 0) return; // Only left click
+  if ('button' in e && e.button !== 0) return;
 
   isDrawing.value = true;
   saveState();
@@ -240,7 +367,6 @@ const draw = (e: MouseEvent | TouchEvent) => {
     ctx.lineTo(currentX, currentY);
     ctx.stroke();
   } else if (tempState) {
-    // Restore the state before the shape was started
     ctx.putImageData(tempState, 0, 0);
 
     ctx.strokeStyle = color.value;
@@ -458,19 +584,63 @@ const saveImage = () => {
   flex: 1;
   width: 100%;
   height: 100%;
-  position: relative;
   background-color: color-mix(in srgb, var(--os-window-bg) 50%, #000);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
+  overflow: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.canvas-wrapper {
+  position: relative;
+  background-color: #ffffff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  margin: 0;
 
   canvas {
+    display: block;
     cursor: crosshair;
-    background-color: #ffffff;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
     touch-action: none;
-    border-radius: 4px;
+    border-radius: 0;
   }
+}
+
+.resize-handle {
+  position: absolute;
+  background-color: #ffffff;
+  border: 1px solid #0078d4;
+  width: 8px;
+  height: 8px;
+  z-index: 10;
+  box-sizing: border-box;
+
+  &.right {
+    top: 50%;
+    right: -4px;
+    transform: translateY(-50%);
+    cursor: e-resize;
+  }
+
+  &.bottom {
+    left: 50%;
+    bottom: -4px;
+    transform: translateX(-50%);
+    cursor: s-resize;
+  }
+
+  &.bottom-right {
+    right: -4px;
+    bottom: -4px;
+    cursor: se-resize;
+  }
+}
+
+.resize-ghost {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 1px dashed #0078d4;
+  pointer-events: none;
+  z-index: 5;
+  background-color: rgba(0, 120, 212, 0.05);
 }
 </style>

@@ -135,6 +135,7 @@
         "Added a brand new \\u003cstrong\\u003ePaint\\u003c/strong\\u003e application for drawing and saving images.",
         "Included multiple tools: Pencil, Eraser, Line, Rectangle, and Circle.",
         "Added Undo/Redo functionality with history tracking.",
+        "Implemented fixed-size, manually resizable canvas (like MS Paint) with draggable handles and scrollbars.",
         "Redesigned the toolbar with modern glassmorphism style and better responsive layout."
       ]
     },
