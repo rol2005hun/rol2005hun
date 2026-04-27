@@ -59,6 +59,15 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       showOnDesktop: ['mobile']
     },
     {
+      id: 'paint',
+      nameKey: 'os.apps.paint.name',
+      icon: 'ph:palette-fill',
+      defaultWidth: 800,
+      defaultHeight: 600,
+      allowMultipleInstances: true,
+      showOnDesktop: true
+    },
+    {
       id: 'music',
       nameKey: 'os.apps.music.name',
       icon: 'ph:music-notes-fill',

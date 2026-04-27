@@ -128,6 +128,14 @@
         "Dinamikus nyelvkezelés a terminál parancsokban is (i18n integráció)."
       ]
     },
+    "2026-04-27": {
+      "version": "1.0.11",
+      "title": "Rajzoló Alkalmazás",
+      "changes": [
+        "Hozzáadva egy teljesen új \\u003cstrong\\u003eRajz\\u003c/strong\\u003e alkalmazás rajzoláshoz és képek mentéséhez.",
+        "Ecsetméret és színválasztó integrációja reszponzív felületen."
+      ]
+    },
     "2026-04-24": {
       "changes": [
         "Teljesen megújult az \\u003cstrong\\u003eAdatvédelmi Szabályzat\\u003c/strong\\u003e (Privacy Policy) ablak, gyönyörű üveghatással.",

@@ -128,6 +128,24 @@
         "Corrected hardcoded terminal strings to exclusively utilize context.t for dynamic localization."
       ]
     },
-    "2026-04-24": null
+    "2026-04-27": {
+      "version": "3.1.0-beta",
+      "title": "Paint Application Added",
+      "changes": [
+        "Added a brand new \\u003cstrong\\u003ePaint\\u003c/strong\\u003e application for drawing and saving images.",
+        "Included brush size and color picker controls in a responsive interface."
+      ]
+    },
+    "2026-04-24": {
+      "version": "3.0.12-beta",
+      "title": "Privacy Policy & Setup Refinements",
+      "changes": [
+        "Completely revamped the \\u003cstrong\\u003ePrivacy Policy\\u003c/strong\\u003e window with beautiful glassmorphism.",
+        "Created a dedicated \\u003ccode\\u003e/privacy\\u003c/code\\u003e subpage, embedded as an iframe in the Setup.",
+        "Fixed unscrollability in the Privacy Policy caused by a global Nuxt CSS rule.",
+        "Resolved text overflow on the long 'Accept' button in the Setup screen.",
+        "Fixed ASCII art wrapping and text processing issues in the 'neofetch' terminal command."
+      ]
+    }
   }
 }
