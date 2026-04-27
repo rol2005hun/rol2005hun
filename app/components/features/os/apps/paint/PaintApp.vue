@@ -69,10 +69,14 @@
       </div>
     </div>
 
-    <div ref="containerRef" class="canvas-container" @wheel="handleWheel">
+    <div ref="containerRef" class="canvas-container" @wheel="handleWheel" @mousedown="startPan">
       <div
         class="canvas-wrapper"
-        :style="{ width: canvasWidth * zoomLevel + 'px', height: canvasHeight * zoomLevel + 'px' }">
+        :style="{
+          width: canvasWidth + 'px',
+          height: canvasHeight + 'px',
+          transform: `translate(${panX}px, ${panY}px) scale(${zoomLevel})`
+        }">
         <canvas
           ref="canvasRef"
           :width="canvasWidth"
@@ -123,10 +127,10 @@
           v-if="isResizing"
           class="resize-ghost"
           :style="{
-            width: previewWidth * zoomLevel + 'px',
-            height: previewHeight * zoomLevel + 'px',
-            left: previewLeft * zoomLevel + 'px',
-            top: previewTop * zoomLevel + 'px'
+            width: previewWidth + 'px',
+            height: previewHeight + 'px',
+            left: previewLeft + 'px',
+            top: previewTop + 'px'
           }"></div>
       </div>
     </div>
@@ -206,6 +210,14 @@ watchEffect(() => {
   cursorUrl.value = `url(${canvas.toDataURL()}) ${size / 2 + padding} ${size / 2 + padding}, crosshair`;
 });
 
+const panX = ref(0);
+const panY = ref(0);
+const isPanning = ref(false);
+let startPanX = 0;
+let startPanY = 0;
+let startMouseX = 0;
+let startMouseY = 0;
+
 const handleKeyDown = (e: KeyboardEvent) => {
   if (e.ctrlKey) {
     if (e.key === '+' || e.key === '=' || e.key === 'NumpadAdd') {
@@ -224,12 +236,53 @@ const handleKeyDown = (e: KeyboardEvent) => {
 const handleWheel = (e: WheelEvent) => {
   if (e.ctrlKey) {
     e.preventDefault();
+    const container = containerRef.value;
+    if (!container) return;
+
+    const rect = container.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    const relativeX = (mouseX - panX.value) / zoomLevel.value;
+    const relativeY = (mouseY - panY.value) / zoomLevel.value;
+
     if (e.deltaY < 0) {
       zoomLevel.value = Math.min(5, zoomLevel.value + 0.1);
     } else {
       zoomLevel.value = Math.max(0.1, zoomLevel.value - 0.1);
     }
+
+    panX.value = mouseX - relativeX * zoomLevel.value;
+    panY.value = mouseY - relativeY * zoomLevel.value;
+  } else {
+    // Normal scroll for vertical panning if not ctrl-key
+    panY.value -= e.deltaY;
+    panX.value -= e.deltaX;
   }
+};
+
+const startPan = (e: MouseEvent) => {
+  if (e.button !== 1) return; // Middle click
+  e.preventDefault();
+  isPanning.value = true;
+  startPanX = panX.value;
+  startPanY = panY.value;
+  startMouseX = e.clientX;
+  startMouseY = e.clientY;
+  window.addEventListener('mousemove', doPan);
+  window.addEventListener('mouseup', stopPan);
+};
+
+const doPan = (e: MouseEvent) => {
+  if (!isPanning.value) return;
+  panX.value = startPanX + (e.clientX - startMouseX);
+  panY.value = startPanY + (e.clientY - startMouseY);
+};
+
+const stopPan = () => {
+  isPanning.value = false;
+  window.removeEventListener('mousemove', doPan);
+  window.removeEventListener('mouseup', stopPan);
 };
 let ctx: CanvasRenderingContext2D | null = null;
 let startX = 0;
@@ -324,8 +377,13 @@ onMounted(() => {
       appRef.value.focus();
     }
     if (containerRef.value) {
-      canvasWidth.value = Math.max(containerRef.value.clientWidth - 40, 400);
-      canvasHeight.value = Math.max(containerRef.value.clientHeight - 40, 300);
+      const w = Math.max(containerRef.value.clientWidth - 40, 400);
+      const h = Math.max(containerRef.value.clientHeight - 40, 300);
+      canvasWidth.value = w;
+      canvasHeight.value = h;
+
+      panX.value = (containerRef.value.clientWidth - w) / 2;
+      panY.value = (containerRef.value.clientHeight - h) / 2;
 
       nextTick(() => {
         if (canvasRef.value) {
@@ -379,8 +437,8 @@ const onResizeMoveTouch = (e: TouchEvent) => {
 
 const updateResizePreview = (clientX: number, clientY: number) => {
   if (!isResizing.value) return;
-  const deltaX = clientX - resizeStartX;
-  const deltaY = clientY - resizeStartY;
+  const deltaX = (clientX - resizeStartX) / zoomLevel.value;
+  const deltaY = (clientY - resizeStartY) / zoomLevel.value;
 
   let newWidth = resizeStartWidth;
   let newHeight = resizeStartHeight;
@@ -720,16 +778,19 @@ const saveImage = () => {
   width: 100%;
   height: 100%;
   background-color: color-mix(in srgb, var(--os-window-bg) 50%, #000);
-  overflow: auto;
-  padding: 20px;
-  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
 }
 
 .canvas-wrapper {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   background-color: #ffffff;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
   margin: 0;
+  transform-origin: top left;
+  will-change: transform;
 
   canvas {
     display: block;
