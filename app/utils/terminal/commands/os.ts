@@ -73,6 +73,26 @@ export const openCommand: TerminalCommand = {
   }
 };
 
+export const calendarCommand: TerminalCommand = {
+  name: 'calendar',
+  aliases: ['cal'],
+  execute: (args, context) => {
+    const registry = useAppRegistry();
+    const app = registry.getAppById('calendar');
+    if (!app) return;
+    
+    const windowStore = useWindowStore();
+    windowStore.openWindow({
+      id: `calendar-${Date.now()}`,
+      appId: app.id,
+      titleKey: app.nameKey,
+      width: app.defaultWidth || 700,
+      height: app.defaultHeight || 550
+    });
+    context.print(context.t('os.apps.terminal.commands.openSuccess', { app: 'calendar' }));
+  }
+};
+
 export const closeCommand: TerminalCommand = {
   name: 'close',
   execute: (args, context) => {

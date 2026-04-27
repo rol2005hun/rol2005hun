@@ -3,6 +3,14 @@
   "subtitle": "Latest OS updates and features",
   "empty": "No versions available.",
   "history": {
+    "2026-04-27-5": {
+      "version": "3.2.0",
+      "title": "Calendar App Added",
+      "changes": [
+        "Introduced a new \u003cstrong\u003eCalendar App\u003c/strong\u003e.",
+        "Modern, interactive UI for date checking and tracking."
+      ]
+    },
     "2026-04-27-4": {
       "version": "3.1.3-beta",
       "title": "Games App Fix",

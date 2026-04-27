@@ -98,6 +98,20 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       id: 'music',
       nameKey: 'os.apps.music.name',
       icon: 'ph:music-notes-fill',
+      defaultWidth: 1000,
+      defaultHeight: 700,
+      allowMultipleInstances: false,
+      showOnDesktop: true
+    },
+    {
+      id: 'calendar',
+      nameKey: 'os.apps.calendar.name',
+      icon: 'ph:calendar-blank',
+      defaultWidth: 700,
+      defaultHeight: 550,
+      allowMultipleInstances: true,
+      showOnDesktop: true
+    }
       defaultWidth: 800,
       defaultHeight: 600,
       allowMultipleInstances: false,

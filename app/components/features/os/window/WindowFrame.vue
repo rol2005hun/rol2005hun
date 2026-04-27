@@ -75,6 +75,9 @@ const appComponents: Record<string, any> = {
   ),
   changelog: defineAsyncComponent(
     () => import('@/components/features/os/apps/changelog/ChangelogApp.vue')
+  ),
+  calendar: defineAsyncComponent(
+    () => import('@/components/features/os/apps/calendar/CalendarApp.vue')
   )
 };
 

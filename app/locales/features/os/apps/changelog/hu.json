@@ -3,6 +3,14 @@
   "subtitle": "Legújabb OS frissítések és funkciók",
   "empty": "Nincs elérhető változat.",
   "history": {
+    "2026.04.27-5": {
+      "version": "1.1.0",
+      "title": "Naptár App Hozzáadva",
+      "changes": [
+        "Új \u003cstrong\u003eNaptár App\u003c/strong\u003e hozzáadva a rendszerhez.",
+        "Modern és interaktív felület az időpontok egyszerű követéséhez."
+      ]
+    },
     "2026.04.27-4": {
       "version": "1.0.14",
       "title": "Játékok App Javítás",

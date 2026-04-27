@@ -1,0 +1,27 @@
+{
+  "name": "Naptár",
+  "today": "Ma",
+  "months": {
+    "0": "Január",
+    "1": "Február",
+    "2": "Március",
+    "3": "Április",
+    "4": "Május",
+    "5": "Június",
+    "6": "Július",
+    "7": "Augusztus",
+    "8": "Szeptember",
+    "9": "Október",
+    "10": "November",
+    "11": "December"
+  },
+  "weekdays": {
+    "0": "Vas",
+    "1": "Hét",
+    "2": "Ked",
+    "3": "Sze",
+    "4": "Csü",
+    "5": "Pén",
+    "6": "Szo"
+  }
+}
