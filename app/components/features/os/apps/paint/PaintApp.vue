@@ -76,6 +76,7 @@
           ref="canvasRef"
           :width="canvasWidth"
           :height="canvasHeight"
+          :style="{ cursor: cursorUrl }"
           @mousedown="startDrawing"
           @mousemove="draw"
           @mouseup="stopDrawing"
@@ -85,32 +86,58 @@
           @touchend.prevent="stopDrawing"></canvas>
 
         <div
+          class="resize-handle top"
+          @mousedown.stop.prevent="startResize($event, 'n')"
+          @touchstart.stop.prevent="startResizeTouch($event, 'n')"></div>
+        <div
+          class="resize-handle left"
+          @mousedown.stop.prevent="startResize($event, 'w')"
+          @touchstart.stop.prevent="startResizeTouch($event, 'w')"></div>
+        <div
+          class="resize-handle top-left"
+          @mousedown.stop.prevent="startResize($event, 'nw')"
+          @touchstart.stop.prevent="startResizeTouch($event, 'nw')"></div>
+        <div
+          class="resize-handle top-right"
+          @mousedown.stop.prevent="startResize($event, 'ne')"
+          @touchstart.stop.prevent="startResizeTouch($event, 'ne')"></div>
+        <div
+          class="resize-handle bottom-left"
+          @mousedown.stop.prevent="startResize($event, 'sw')"
+          @touchstart.stop.prevent="startResizeTouch($event, 'sw')"></div>
+        <div
           class="resize-handle right"
-          @mousedown.stop.prevent="startResize($event, 'right')"
-          @touchstart.stop.prevent="startResizeTouch($event, 'right')"></div>
+          @mousedown.stop.prevent="startResize($event, 'e')"
+          @touchstart.stop.prevent="startResizeTouch($event, 'e')"></div>
         <div
           class="resize-handle bottom"
-          @mousedown.stop.prevent="startResize($event, 'bottom')"
-          @touchstart.stop.prevent="startResizeTouch($event, 'bottom')"></div>
+          @mousedown.stop.prevent="startResize($event, 's')"
+          @touchstart.stop.prevent="startResizeTouch($event, 's')"></div>
         <div
           class="resize-handle bottom-right"
-          @mousedown.stop.prevent="startResize($event, 'both')"
-          @touchstart.stop.prevent="startResizeTouch($event, 'both')"></div>
+          @mousedown.stop.prevent="startResize($event, 'se')"
+          @touchstart.stop.prevent="startResizeTouch($event, 'se')"></div>
 
         <div
           v-if="isResizing"
           class="resize-ghost"
-          :style="{ width: previewWidth + 'px', height: previewHeight + 'px' }"></div>
+          :style="{
+            width: previewWidth + 'px',
+            height: previewHeight + 'px',
+            left: previewLeft + 'px',
+            top: previewTop + 'px'
+          }"></div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, shallowRef, nextTick } from 'vue';
+import { ref, onMounted, shallowRef, nextTick, watchEffect } from 'vue';
 
 type ToolType = 'pencil' | 'eraser' | 'line' | 'rect' | 'circle';
 type HistoryState = { imgData: ImageData; width: number; height: number };
+type ResizeDirection = 'n' | 's' | 'e' | 'w' | 'ne' | 'nw' | 'se' | 'sw';
 
 const availableTools = [
   {
@@ -135,6 +162,53 @@ const color = ref('#000000');
 const brushSize = ref(5);
 const activeTool = ref<ToolType>('pencil');
 
+const cursorUrl = ref('');
+
+watchEffect(() => {
+  if (activeTool.value === 'line' || activeTool.value === 'rect' || activeTool.value === 'circle') {
+    cursorUrl.value = 'crosshair';
+    return;
+  }
+
+  const size = brushSize.value;
+  const canvas = document.createElement('canvas');
+  const padding = 2;
+  canvas.width = size + padding * 2;
+  canvas.height = size + padding * 2;
+  const c = canvas.getContext('2d');
+  if (c) {
+    const center = size / 2 + padding;
+
+    if (activeTool.value === 'eraser') {
+      c.beginPath();
+      c.arc(center, center, size / 2, 0, 2 * Math.PI);
+      c.fillStyle = '#ffffff';
+      c.fill();
+      c.strokeStyle = '#000000';
+      c.lineWidth = 1;
+      c.stroke();
+    } else {
+      c.beginPath();
+      c.arc(center, center, size / 2, 0, 2 * Math.PI);
+      c.fillStyle = color.value;
+      c.fill();
+
+      c.beginPath();
+      c.arc(center, center, Math.max(0.1, size / 2 - 0.5), 0, 2 * Math.PI);
+      c.strokeStyle = 'rgba(255,255,255,0.8)';
+      c.lineWidth = 1;
+      c.stroke();
+
+      c.beginPath();
+      c.arc(center, center, size / 2 + 0.5, 0, 2 * Math.PI);
+      c.strokeStyle = 'rgba(0,0,0,0.8)';
+      c.lineWidth = 1;
+      c.stroke();
+    }
+  }
+  cursorUrl.value = `url(${canvas.toDataURL()}) ${size / 2 + padding} ${size / 2 + padding}, crosshair`;
+});
+
 let ctx: CanvasRenderingContext2D | null = null;
 let startX = 0;
 let startY = 0;
@@ -145,9 +219,12 @@ const redoStack = shallowRef<HistoryState[]>([]);
 const MAX_HISTORY = 30;
 
 const isResizing = ref(false);
-const resizeDirection = ref<'right' | 'bottom' | 'both'>('both');
+const resizeDirection = ref<ResizeDirection>('se');
 const previewWidth = ref(800);
 const previewHeight = ref(600);
+const previewLeft = ref(0);
+const previewTop = ref(0);
+
 let resizeStartX = 0;
 let resizeStartY = 0;
 let resizeStartWidth = 0;
@@ -240,20 +317,20 @@ onMounted(() => {
   }, 50);
 });
 
-const startResize = (e: MouseEvent, dir: 'right' | 'bottom' | 'both') => {
+const startResize = (e: MouseEvent, dir: ResizeDirection) => {
   if (e.button !== 0) return;
   initResize(e.clientX, e.clientY, dir);
   window.addEventListener('mousemove', onResizeMove);
   window.addEventListener('mouseup', stopResize);
 };
 
-const startResizeTouch = (e: TouchEvent, dir: 'right' | 'bottom' | 'both') => {
+const startResizeTouch = (e: TouchEvent, dir: ResizeDirection) => {
   initResize(e.touches[0].clientX, e.touches[0].clientY, dir);
   window.addEventListener('touchmove', onResizeMoveTouch, { passive: false });
   window.addEventListener('touchend', stopResizeTouch);
 };
 
-const initResize = (clientX: number, clientY: number, dir: 'right' | 'bottom' | 'both') => {
+const initResize = (clientX: number, clientY: number, dir: ResizeDirection) => {
   isResizing.value = true;
   resizeDirection.value = dir;
   resizeStartX = clientX;
@@ -262,6 +339,8 @@ const initResize = (clientX: number, clientY: number, dir: 'right' | 'bottom' | 
   resizeStartHeight = canvasHeight.value;
   previewWidth.value = canvasWidth.value;
   previewHeight.value = canvasHeight.value;
+  previewLeft.value = 0;
+  previewTop.value = 0;
 };
 
 const onResizeMove = (e: MouseEvent) => {
@@ -278,12 +357,29 @@ const updateResizePreview = (clientX: number, clientY: number) => {
   const deltaX = clientX - resizeStartX;
   const deltaY = clientY - resizeStartY;
 
-  if (resizeDirection.value === 'right' || resizeDirection.value === 'both') {
-    previewWidth.value = Math.max(50, resizeStartWidth + deltaX);
+  let newWidth = resizeStartWidth;
+  let newHeight = resizeStartHeight;
+  let newLeft = 0;
+  let newTop = 0;
+
+  if (['w', 'nw', 'sw'].includes(resizeDirection.value)) {
+    newWidth = Math.max(50, resizeStartWidth - deltaX);
+    newLeft = resizeStartWidth - newWidth;
+  } else if (['e', 'ne', 'se'].includes(resizeDirection.value)) {
+    newWidth = Math.max(50, resizeStartWidth + deltaX);
   }
-  if (resizeDirection.value === 'bottom' || resizeDirection.value === 'both') {
-    previewHeight.value = Math.max(50, resizeStartHeight + deltaY);
+
+  if (['n', 'nw', 'ne'].includes(resizeDirection.value)) {
+    newHeight = Math.max(50, resizeStartHeight - deltaY);
+    newTop = resizeStartHeight - newHeight;
+  } else if (['s', 'sw', 'se'].includes(resizeDirection.value)) {
+    newHeight = Math.max(50, resizeStartHeight + deltaY);
   }
+
+  previewWidth.value = newWidth;
+  previewHeight.value = newHeight;
+  previewLeft.value = newLeft;
+  previewTop.value = newTop;
 };
 
 const stopResize = async () => {
@@ -307,9 +403,14 @@ const finalizeResize = async () => {
 
     saveState();
     const imgData = ctx.getImageData(0, 0, canvasWidth.value, canvasHeight.value);
+    const oldWidth = canvasWidth.value;
+    const oldHeight = canvasHeight.value;
 
     canvasWidth.value = previewWidth.value;
     canvasHeight.value = previewHeight.value;
+
+    const offsetX = -previewLeft.value;
+    const offsetY = -previewTop.value;
 
     await nextTick();
 
@@ -317,7 +418,16 @@ const finalizeResize = async () => {
     if (ctx) {
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, canvasWidth.value, canvasHeight.value);
-      ctx.putImageData(imgData, 0, 0);
+
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = oldWidth;
+      tempCanvas.height = oldHeight;
+      const tempCtx = tempCanvas.getContext('2d');
+      if (tempCtx) {
+        tempCtx.putImageData(imgData, 0, 0);
+      }
+      ctx.drawImage(tempCanvas, offsetX, offsetY);
+
       ctx.lineJoin = 'round';
       ctx.lineCap = 'round';
     }
@@ -598,7 +708,6 @@ const saveImage = () => {
 
   canvas {
     display: block;
-    cursor: crosshair;
     touch-action: none;
     border-radius: 0;
   }
@@ -612,6 +721,20 @@ const saveImage = () => {
   height: 8px;
   z-index: 10;
   box-sizing: border-box;
+
+  &.top {
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: n-resize;
+  }
+
+  &.left {
+    top: 50%;
+    left: -4px;
+    transform: translateY(-50%);
+    cursor: w-resize;
+  }
 
   &.right {
     top: 50%;
@@ -627,6 +750,24 @@ const saveImage = () => {
     cursor: s-resize;
   }
 
+  &.top-left {
+    top: -4px;
+    left: -4px;
+    cursor: nw-resize;
+  }
+
+  &.top-right {
+    top: -4px;
+    right: -4px;
+    cursor: ne-resize;
+  }
+
+  &.bottom-left {
+    bottom: -4px;
+    left: -4px;
+    cursor: sw-resize;
+  }
+
   &.bottom-right {
     right: -4px;
     bottom: -4px;
@@ -636,8 +777,6 @@ const saveImage = () => {
 
 .resize-ghost {
   position: absolute;
-  top: 0;
-  left: 0;
   border: 1px dashed #0078d4;
   pointer-events: none;
   z-index: 5;
