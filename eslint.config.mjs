@@ -4,19 +4,19 @@ import oxlint from 'eslint-plugin-oxlint';
 export default withNuxt(
   oxlint.configs['flat/recommended'],
   {
-    ignores: ['patch_modal.js', '.eslintignore']
+    ignores: ['.nuxt', '.output', 'node_modules', 'dist', 'public', 'package-lock.json']
   },
   {
-    languageOptions: {
-      parserOptions: {
-        parser: '@typescript-eslint/parser',
-        ecmaVersion: 'latest',
-        sourceType: 'module'
-      }
-    },
     rules: {
       'vue/html-self-closing': 'off',
-      'vue/no-v-html': 'off'
+      'vue/no-v-html': 'off',
+      'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    }
+  },
+  {
+    files: ['**/*.ts', '**/*.mts', '**/*.vue'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'error'
     }
   }
 );
