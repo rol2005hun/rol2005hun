@@ -32,6 +32,8 @@
     "eslint-plugin-oxlint": "^1.55.0",
     "oxlint": "^1.55.0",
     "prettier": "^3.8.1",
-    "vue-i18n": "^11.3.0"
+    "typescript": "^6.0.3",
+    "vue-i18n": "^11.3.0",
+    "vue-tsc": "^3.2.7"
   }
 }
