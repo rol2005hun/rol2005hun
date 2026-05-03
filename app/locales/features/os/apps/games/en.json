@@ -1,5 +1,12 @@
 {
-  "name": "Wolimby Games",
+  "name": "Games",
+  "select": "Select a game",
+  "back": "Back to games",
   "loading": "Loading games...",
-  "langWarning": "Note: The games on this site are currently only available in Hungarian."
+  "langWarning": "Note: Not all games support multiple languages yet.",
+  "desc": {
+    "ranzagg": "ranzaGG is an open source and free GeoGuessr game, made with Mapillary.",
+    "opnexus": "Operation: NEXUS is an open source and free multiplayer FBI investigation game.",
+    "wolimby": "Wolimby is an open source and free website, where you can play 3 games. HUNGARIAN ONLY."
+  }
 }

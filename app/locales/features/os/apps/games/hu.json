@@ -1,5 +1,12 @@
 {
-  "name": "Wolimby Játékok",
+  "name": "Játékok",
+  "select": "Válassz egy játékot",
+  "back": "Vissza a játékokhoz",
   "loading": "Játékok betöltése...",
-  "langWarning": "Megjegyzés: A játékok jelenleg csak magyar nyelven érhetőek el."
+  "langWarning": "Megjegyzés: Nem mindegyik játék rendelkezik több nyelv támogatásával.",
+  "desc": {
+    "ranzagg": "A ranzagg egy nyílt forráskódú és ingyenes GeoGuessr játék, amit a Mapillary segítségével készítettünk.",
+    "opnexus": "Az Operation: NEXUS egy nyílt forráskódú és ingyenes multiplayer FBI nyomozós játék.",
+    "wolimby": "A Wolimby egy nyílt forráskódú és ingyenes weboldal, ahol 3 játékot játszhatsz. CSAK MAGYAR NYELVŰ."
+  }
 }

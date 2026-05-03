@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted, onUnmounted } from 'vue';
+import { ref, reactive, computed, onMounted, onUnmounted, nextTick } from 'vue';
 import Taskbar from '@/components/features/os/taskbar/Taskbar.vue';
 import StartMenu from '@/components/features/os/desktop/StartMenu.vue';
 import WindowFrame from '@/components/features/os/window/WindowFrame.vue';
@@ -81,8 +81,10 @@ const handleDesktopClick = () => {
   }
 };
 
-const refreshDesktop = () => {
+const refreshDesktop = async () => {
   desktopStore.resetIcons();
+  await nextTick();
+  desktopStore.ensureIconsInBounds(window.innerWidth, window.innerHeight);
   closeContextMenu();
 };
 const changeWallpaper = () => {

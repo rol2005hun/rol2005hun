@@ -111,20 +111,51 @@ export const useDesktopStore = defineStore('os-desktop', () => {
     const availableHeight = height - taskbarHeight;
     const maxRows = Math.floor((availableHeight - paddingY) / iconHeight) || 1;
 
-    currentIcons.forEach((icon, index) => {
-      let { x, y } = icon;
-      let changed = false;
+    const occupied = new Set<string>();
 
-      if (x < 0 || y < 0 || x + iconWidth > width || y + iconHeight > availableHeight) {
-        // Reflow out of bounds icon to grid
-        y = paddingY + (index % maxRows) * iconHeight;
-        x = paddingX + Math.floor(index / maxRows) * (iconWidth + paddingX);
-        changed = true;
+    const getCell = (x: number, y: number) => {
+      const col = Math.max(0, Math.round((x - paddingX) / (iconWidth + paddingX)));
+      const row = Math.max(0, Math.round((y - paddingY) / iconHeight));
+      return { col, row };
+    };
+
+    currentIcons.forEach((icon) => {
+      const { x, y } = icon;
+      const isOutOfBounds = x < 0 || y < 0 || x + iconWidth > width || y + iconHeight > availableHeight;
+      if (!isOutOfBounds) {
+        const { col, row } = getCell(x, y);
+        occupied.add(`${col},${row}`);
       }
+    });
 
-      if (changed) {
-        currentIcons[index] = { ...icon, x, y };
-        updated = true;
+    const findNextAvailableCell = () => {
+      let col = 0;
+      let row = 0;
+      while (occupied.has(`${col},${row}`)) {
+        row++;
+        if (row >= maxRows) {
+          row = 0;
+          col++;
+        }
+      }
+      return { col, row };
+    };
+
+    currentIcons.forEach((icon, index) => {
+      const { x, y } = icon;
+      const isOutOfBounds = x < 0 || y < 0 || x + iconWidth > width || y + iconHeight > availableHeight;
+
+      if (isOutOfBounds) {
+        const { col, row } = findNextAvailableCell();
+        occupied.add(`${col},${row}`);
+
+        const newX = paddingX + col * (iconWidth + paddingX);
+        const newY = paddingY + row * iconHeight;
+
+        if (newX !== x || newY !== y) {
+          currentIcons[index] = { ...icon, x: newX, y: newY };
+          updated = true;
+        }
       }
     });
 
