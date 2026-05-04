@@ -3,6 +3,16 @@
   "subtitle": "Latest OS updates and features",
   "empty": "No versions available.",
   "history": {
+    "2026-05-04-3": {
+      "version": "3.3.2",
+      "title": "Start Menu Enhancements",
+      "changes": [
+        "Implemented 3x3 grid pagination with navigation dots for better app management.",
+        "Improved glassmorphism effects with higher blur and refined borders.",
+        "Redesigned the footer area with increased padding and a more modern power button.",
+        "Added subtle micro-animations to app icons and buttons."
+      ]
+    },
     "2026-05-04-2": {
       "version": "3.3.1",
       "title": "TypeScript Type Safety & Code Cleanup",

@@ -3,6 +3,16 @@
   "subtitle": "Legújabb OS frissítések és funkciók",
   "empty": "Nincs elérhető változat.",
   "history": {
+    "2026-05-04-3": {
+      "version": "1.2.2",
+      "title": "Start Menü Fejlesztések",
+      "changes": [
+        "3x3-as rácsos elrendezés és lapozható nézet (pöttyös navigációval) a jobb átláthatóságért.",
+        "Továbbfejlesztett glassmorphism effektek, erősebb blur és finomabb szegélyek.",
+        "Újratervezett alsó sáv (footer) több paddinggel és modernebb kikapcsoló gombbal.",
+        "Finom mikro-animációk hozzáadása az ikonokhoz és gombokhoz."
+      ]
+    },
     "2026-05-04-2": {
       "version": "1.2.1",
       "title": "TypeScript Típusbiztonság & Kód Tisztítás",
