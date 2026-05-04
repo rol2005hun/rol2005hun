@@ -3,6 +3,15 @@
   "subtitle": "Legújabb OS frissítések és funkciók",
   "empty": "Nincs elérhető változat.",
   "history": {
+    "2026-05-04-4": {
+      "version": "1.2.3",
+      "title": "Start Menü Elrendezés Javítása",
+      "changes": [
+        "Az alsó sáv (footer) levágási hibáinak javítása és jobb skálázódás.",
+        "Finomhangolt térközök és paddingek az elemek tökéletes illeszkedéséért.",
+        "Optimalizált kikapcsoló gomb és felhasználói profil elrendezés."
+      ]
+    },
     "2026-05-04-3": {
       "version": "1.2.2",
       "title": "Start Menü Fejlesztések",

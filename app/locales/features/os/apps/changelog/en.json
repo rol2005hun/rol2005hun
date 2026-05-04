@@ -3,6 +3,15 @@
   "subtitle": "Latest OS updates and features",
   "empty": "No versions available.",
   "history": {
+    "2026-05-04-4": {
+      "version": "3.3.3",
+      "title": "Start Menu Layout Fixes",
+      "changes": [
+        "Fixed footer clipping issues and improved overall component scaling.",
+        "Refined spacing and paddings to ensure a perfect fit for all elements.",
+        "Optimized power button and user profile alignment."
+      ]
+    },
     "2026-05-04-3": {
       "version": "3.3.2",
       "title": "Start Menu Enhancements",

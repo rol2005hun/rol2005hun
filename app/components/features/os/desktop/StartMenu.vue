@@ -155,8 +155,8 @@ const openApp = (appId: string) => {
 
 <style scoped lang="scss">
 .start-menu-container {
-  width: 440px;
-  height: 580px;
+  width: 420px;
+  height: 600px;
   background: var(--os-menu-bg, rgba(20, 20, 20, 0.85));
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
@@ -170,10 +170,11 @@ const openApp = (appId: string) => {
 
 .start-menu-content {
   flex: 1;
-  padding: 32px;
+  padding: 24px 24px 12px 24px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
+  min-height: 0;
 }
 
 .search-bar {
@@ -182,9 +183,10 @@ const openApp = (appId: string) => {
   gap: 12px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 12px 18px;
-  border-radius: 24px;
+  padding: 10px 16px;
+  border-radius: 20px;
   transition: background 0.3s, border-color 0.3s;
+  flex-shrink: 0;
 
   &:focus-within {
     background: rgba(255, 255, 255, 0.1);
@@ -197,7 +199,7 @@ const openApp = (appId: string) => {
     outline: none;
     color: var(--os-text, #fff);
     width: 100%;
-    font-size: 15px;
+    font-size: 14px;
 
     &::placeholder {
       color: rgba(255, 255, 255, 0.4);
@@ -209,31 +211,35 @@ const openApp = (appId: string) => {
   display: flex;
   flex-direction: column;
   flex: 1;
+  min-height: 0;
 
   h3 {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
-    margin-bottom: 20px;
-    padding-left: 10px;
+    margin-bottom: 12px;
+    padding-left: 8px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.8px;
+    color: rgba(255, 255, 255, 0.5);
+    flex-shrink: 0;
   }
 }
 
 .app-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 8px;
   flex: 1;
+  min-height: 0;
+  align-content: start;
 }
 
 .app-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 12px;
+  gap: 8px;
+  padding: 10px;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -243,32 +249,28 @@ const openApp = (appId: string) => {
     transform: translateY(-2px);
   }
 
-  &:active {
-    transform: translateY(0);
-  }
-
   .icon-box {
-    width: 54px;
-    height: 54px;
+    width: 50px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
+    border-radius: 14px;
     color: var(--os-text, #fff);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
 
   span {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
     text-align: center;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.8);
   }
 }
 
@@ -276,12 +278,12 @@ const openApp = (appId: string) => {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 10px;
-  padding-bottom: 10px;
+  padding: 12px 0;
+  flex-shrink: 0;
 
   .page-dot {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.2);
     border: none;
@@ -289,26 +291,23 @@ const openApp = (appId: string) => {
     transition: all 0.3s ease;
     padding: 0;
 
-    &:hover {
-      background: rgba(255, 255, 255, 0.4);
-    }
-
     &.active {
       background: #fff;
-      width: 20px;
-      border-radius: 4px;
+      width: 16px;
+      border-radius: 3px;
     }
   }
 }
 
 .start-menu-footer {
-  height: 80px;
-  background: rgba(0, 0, 0, 0.3);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  height: 72px;
+  background: rgba(0, 0, 0, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 32px;
+  padding: 0 20px;
+  flex-shrink: 0;
 }
 
 .user-profile {
@@ -316,8 +315,8 @@ const openApp = (appId: string) => {
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  padding: 8px 16px 8px 8px;
-  border-radius: 12px;
+  padding: 6px 12px 6px 6px;
+  border-radius: 10px;
   transition: background 0.2s;
 
   &:hover {
@@ -325,37 +324,30 @@ const openApp = (appId: string) => {
   }
 
   .avatar {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
     border: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 
   span {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
-    color: #fff;
+    color: rgba(255, 255, 255, 0.9);
   }
-}
-
-.power-wrapper {
-  padding: 4px;
-  border-radius: 12px;
-  transition: background 0.2s;
 }
 
 .power-btn {
   background: rgba(255, 59, 48, 0.1);
-  border: 1px solid rgba(255, 59, 48, 0.2);
+  border: 1px solid rgba(255, 59, 48, 0.15);
   color: #ff3b30;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -363,14 +355,9 @@ const openApp = (appId: string) => {
   transition: all 0.2s;
 
   &:hover {
-    background: rgba(255, 59, 48, 0.8);
+    background: #ff3b30;
     color: #fff;
-    box-shadow: 0 0 15px rgba(255, 59, 48, 0.4);
-    transform: scale(1.05);
-  }
-
-  &:active {
-    transform: scale(0.95);
+    box-shadow: 0 0 12px rgba(255, 59, 48, 0.3);
   }
 }
 </style>
