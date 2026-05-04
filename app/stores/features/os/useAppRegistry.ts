@@ -113,6 +113,15 @@ export const useAppRegistry = defineStore('os-app-registry', () => {
       showOnDesktop: true
     },
     {
+      id: 'weather',
+      nameKey: 'os.apps.weather.name',
+      icon: 'ph:cloud-sun-fill',
+      defaultWidth: 650,
+      defaultHeight: 580,
+      allowMultipleInstances: false,
+      showOnDesktop: true
+    },
+    {
       id: 'about',
       nameKey: 'os.apps.about.name',
       icon: 'ph:info-fill',

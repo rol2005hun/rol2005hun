@@ -1,0 +1,28 @@
+{
+  "name": "Weather",
+  "loading": "Fetching weather data...",
+  "retry": "Try Again",
+  "refresh": "Refresh",
+  "errorFetch": "Could not load weather data. Please check your internet connection.",
+  "feelsLike": "Feels like",
+  "humidity": "Humidity",
+  "wind": "Wind",
+  "highLow": "High / Low",
+  "precipitation": "Precipitation",
+  "hourlyForecast": "Hourly Forecast",
+  "weeklyForecast": "7-Day Forecast",
+  "now": "Now",
+  "today": "Today",
+  "unknownLocation": "Unknown location",
+  "conditions": {
+    "clear": "Clear sky",
+    "partlyCloudy": "Partly cloudy",
+    "overcast": "Overcast",
+    "fog": "Foggy",
+    "drizzle": "Drizzle",
+    "rain": "Rain",
+    "snow": "Snow",
+    "showers": "Showers",
+    "thunderstorm": "Thunderstorm"
+  }
+}

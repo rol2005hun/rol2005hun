@@ -1,13 +1,24 @@
-﻿{
+{
   "title": "Changelog",
   "subtitle": "Latest OS updates and features",
   "empty": "No versions available.",
   "history": {
+    "2026-05-04": {
+      "version": "3.3.0",
+      "title": "Weather App Added",
+      "changes": [
+        "Introduced a brand new <strong>Weather App</strong> with real-time data via the Open-Meteo API.",
+        "Supports automatic geolocation detection with reverse geocoding via OpenStreetMap Nominatim.",
+        "Displays current conditions, hourly forecast (24h), and a 7-day weekly forecast with temperature bar.",
+        "Fully localised in English and Hungarian.",
+        "Glassmorphism design consistent with the rest of RanzakOS."
+      ]
+    },
     "2026-04-27-5": {
       "version": "3.2.0",
       "title": "Calendar App Added",
       "changes": [
-        "Introduced a new \u003cstrong\u003eCalendar App\u003c/strong\u003e.",
+        "Introduced a new <strong>Calendar App</strong>.",
         "Modern, interactive UI for date checking and tracking."
       ]
     },

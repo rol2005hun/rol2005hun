@@ -78,6 +78,9 @@ const appComponents: Record<string, any> = {
   ),
   calendar: defineAsyncComponent(
     () => import('@/components/features/os/apps/calendar/CalendarApp.vue')
+  ),
+  weather: defineAsyncComponent(
+    () => import('@/components/features/os/apps/weather/WeatherApp.vue')
   )
 };
 

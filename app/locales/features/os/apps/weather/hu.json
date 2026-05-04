@@ -1,0 +1,28 @@
+{
+  "name": "Időjárás",
+  "loading": "Időjárás adatok betöltése...",
+  "retry": "Újra próbál",
+  "refresh": "Frissítés",
+  "errorFetch": "Nem sikerült betölteni az időjárás adatokat. Ellenőrizd az internetkapcsolatot.",
+  "feelsLike": "Érzett hőmérséklet",
+  "humidity": "Páratartalom",
+  "wind": "Szél",
+  "highLow": "Max / Min",
+  "precipitation": "Csapadék",
+  "hourlyForecast": "Óránkénti előrejelzés",
+  "weeklyForecast": "7 napos előrejelzés",
+  "now": "Most",
+  "today": "Ma",
+  "unknownLocation": "Ismeretlen helyszín",
+  "conditions": {
+    "clear": "Derült ég",
+    "partlyCloudy": "Részben felhős",
+    "overcast": "Borult",
+    "fog": "Köd",
+    "drizzle": "Szitálás",
+    "rain": "Eső",
+    "snow": "Hó",
+    "showers": "Zápor",
+    "thunderstorm": "Zivatar"
+  }
+}

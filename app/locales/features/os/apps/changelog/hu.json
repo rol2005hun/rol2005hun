@@ -1,13 +1,24 @@
-﻿{
+{
   "title": "Változások jegyzéke",
   "subtitle": "Legújabb OS frissítések és funkciók",
   "empty": "Nincs elérhető változat.",
   "history": {
+    "2026-05-04": {
+      "version": "1.2.0",
+      "title": "Időjárás App Hozzáadva",
+      "changes": [
+        "Bemutatkozik az új <strong>Időjárás App</strong> valós idejű adatokkal az Open-Meteo API-n keresztül.",
+        "Automatikus helymeghatározás és visszakódolás az OpenStreetMap Nominatim segítségével.",
+        "Jelenlegi időjárás, 24 órás és 7 napos előrejelzés hőmérsékleti sávdiagrammal.",
+        "Teljes magyar és angol nyelvű lokalizáció.",
+        "Glassmorphism dizájn, összhangban a RanzakOS többi alkalmazásával."
+      ]
+    },
     "2026.04.27-5": {
       "version": "1.1.0",
       "title": "Naptár App Hozzáadva",
       "changes": [
-        "Új \u003cstrong\u003eNaptár App\u003c/strong\u003e hozzáadva a rendszerhez.",
+        "Új <strong>Naptár App</strong> hozzáadva a rendszerhez.",
         "Modern és interaktív felület az időpontok egyszerű követéséhez."
       ]
     },
