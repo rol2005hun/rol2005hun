@@ -7,11 +7,28 @@ export interface SystemInfo {
   connectionType: string | null;
 }
 
+interface NetworkInformation extends EventTarget {
+  readonly effectiveType?: string;
+  readonly type?: string;
+  onchange?: EventListener;
+}
+
+interface BatteryManager extends EventTarget {
+  readonly charging: boolean;
+  readonly chargingTime: number;
+  readonly dischargingTime: number;
+  readonly level: number;
+  onchargingchange?: EventListener;
+  onchargingtimechange?: EventListener;
+  ondischargingtimechange?: EventListener;
+  onlevelchange?: EventListener;
+}
+
 interface ExtendedNavigator extends Navigator {
-  connection?: any;
-  mozConnection?: any;
-  webkitConnection?: any;
-  getBattery?: () => Promise<any>;
+  connection?: NetworkInformation;
+  mozConnection?: NetworkInformation;
+  webkitConnection?: NetworkInformation;
+  getBattery?: () => Promise<BatteryManager>;
 }
 
 export function useSystemInfo() {
@@ -32,11 +49,13 @@ export function useSystemInfo() {
     }
   };
 
-  let batteryRef: any = null;
+  let batteryRef: BatteryManager | null = null;
 
-  const updateBatteryStatus = (battery: any) => {
-    batteryLevel.value = battery.level;
-    batteryCharging.value = battery.charging;
+  const updateBatteryStatus = () => {
+    if (batteryRef) {
+      batteryLevel.value = batteryRef.level;
+      batteryCharging.value = batteryRef.charging;
+    }
   };
 
   const initBattery = async () => {
@@ -45,10 +64,10 @@ export function useSystemInfo() {
       try {
         const battery = await nav.getBattery();
         batteryRef = battery;
-        updateBatteryStatus(battery);
+        updateBatteryStatus();
 
-        battery.addEventListener('levelchange', () => updateBatteryStatus(battery));
-        battery.addEventListener('chargingchange', () => updateBatteryStatus(battery));
+        battery.addEventListener('levelchange', updateBatteryStatus);
+        battery.addEventListener('chargingchange', updateBatteryStatus);
       } catch (e) {
         console.error('Battery API access denied or failed:', e);
       }

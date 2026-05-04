@@ -56,14 +56,14 @@
           <div class="stat-item">
             <Icon name="ph:thermometer-hot-fill" size="14px" />
             <span
-              >{{ Math.round(weather.daily.temperature_2m_max[0]) }}° /
-              {{ Math.round(weather.daily.temperature_2m_min[0]) }}°</span
+              >{{ Math.round(weather.daily.temperature_2m_max[0] ?? 0) }}° /
+              {{ Math.round(weather.daily.temperature_2m_min[0] ?? 0) }}°</span
             >
             <small>{{ $t('os.apps.weather.highLow') }}</small>
           </div>
           <div class="stat-item">
             <Icon name="ph:umbrella-fill" size="14px" />
-            <span>{{ weather.daily.precipitation_sum[0] }} mm</span>
+            <span>{{ weather.daily.precipitation_sum[0] ?? 0 }} mm</span>
             <small>{{ $t('os.apps.weather.precipitation') }}</small>
           </div>
         </div>
@@ -154,8 +154,8 @@ const hourlySlice = computed(() => {
   const idx = Math.max(0, currentHourIndex.value);
   return weather.value.hourly.time.slice(idx, idx + 24).map((time, i) => ({
     time,
-    temp: weather.value!.hourly.temperature_2m[idx + i],
-    code: weather.value!.hourly.weathercode[idx + i]
+    temp: weather.value!.hourly.temperature_2m[idx + i] ?? 0,
+    code: weather.value!.hourly.weathercode[idx + i] ?? 0
   }));
 });
 
@@ -163,14 +163,18 @@ const dailySlice = computed(() => {
   if (!weather.value) return [];
   return weather.value.daily.time.slice(0, 7).map((date, i) => ({
     date,
-    code: weather.value!.daily.weathercode[i],
-    max: weather.value!.daily.temperature_2m_max[i],
-    min: weather.value!.daily.temperature_2m_min[i]
+    code: weather.value!.daily.weathercode[i] ?? 0,
+    max: weather.value!.daily.temperature_2m_max[i] ?? 0,
+    min: weather.value!.daily.temperature_2m_min[i] ?? 0
   }));
 });
 
-const weekMin = computed(() => Math.min(...dailySlice.value.map((d) => d.min)));
-const weekMax = computed(() => Math.max(...dailySlice.value.map((d) => d.max)));
+const weekMin = computed(() =>
+  dailySlice.value.length ? Math.min(...dailySlice.value.map((d) => d.min)) : 0
+);
+const weekMax = computed(() =>
+  dailySlice.value.length ? Math.max(...dailySlice.value.map((d) => d.max)) : 0
+);
 
 const getTempBarStyle = (min: number, max: number) => {
   const range = weekMax.value - weekMin.value || 1;
@@ -189,7 +193,8 @@ const formatDay = (iso: string) => {
   return d.toLocaleDateString(undefined, { weekday: 'short' });
 };
 
-const getWeatherEmoji = (code: number): string => {
+const getWeatherEmoji = (code: number | undefined): string => {
+  if (code === undefined) return '🌡️';
   if (code === 0) return '☀️';
   if (code <= 2) return '🌤️';
   if (code === 3) return '☁️';

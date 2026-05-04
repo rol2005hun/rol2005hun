@@ -3,6 +3,16 @@
   "subtitle": "Latest OS updates and features",
   "empty": "No versions available.",
   "history": {
+    "2026-05-04-2": {
+      "version": "3.3.1",
+      "title": "TypeScript Type Safety & Code Cleanup",
+      "changes": [
+        "Eliminated <strong>any</strong> types across the core system (StartMenu, Terminal, Window management).",
+        "Implemented strict typing for Battery, Network, and i18n internal logic.",
+        "Resolved multiple TypeScript compilation errors in the new Weather app and existing components.",
+        "Improved system stability by ensuring proper event listener cleanup in composables."
+      ]
+    },
     "2026-05-04": {
       "version": "3.3.0",
       "title": "Weather App Added",

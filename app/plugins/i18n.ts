@@ -23,17 +23,17 @@ export default defineNuxtPlugin((nuxtApp) => {
 
       const keys = namespacePath.split('/');
 
-      let currentAnd: any = messages[locale];
+      let currentAnd = messages[locale] as MessageSchema;
       for (let i = 0; i < keys.length - 1; i++) {
         const k = keys[i];
         if (!k) continue;
         if (!currentAnd[k]) currentAnd[k] = {};
-        currentAnd = currentAnd[k];
+        currentAnd = currentAnd[k] as MessageSchema;
       }
 
       const lastKey = keys[keys.length - 1];
       if (lastKey) {
-        currentAnd[lastKey] = { ...(currentAnd[lastKey] || {}), ...content };
+        currentAnd[lastKey] = { ...((currentAnd[lastKey] as MessageSchema) || {}), ...content };
       }
     }
   }

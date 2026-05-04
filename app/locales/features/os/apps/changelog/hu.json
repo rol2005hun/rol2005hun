@@ -3,6 +3,16 @@
   "subtitle": "Legújabb OS frissítések és funkciók",
   "empty": "Nincs elérhető változat.",
   "history": {
+    "2026-05-04-2": {
+      "version": "1.2.1",
+      "title": "TypeScript Típusbiztonság & Kód Tisztítás",
+      "changes": [
+        "Az <strong>any</strong> típusok kivezetése a rendszer kritikus pontjairól (Start menü, Terminál, Ablakkezelés).",
+        "Szigorú típusozás bevezetése az Akkumulátor, Hálózat és i18n belső logikájához.",
+        "Számos TypeScript fordítási hiba javítása az új Időjárás appban és a meglévő komponensekben.",
+        "Rendszerstabilitás javítása az eseménykezelők precízebb törlésével a composable-ökben."
+      ]
+    },
     "2026-05-04": {
       "version": "1.2.0",
       "title": "Időjárás App Hozzáadva",

@@ -98,7 +98,7 @@ const context: TerminalContext = {
       passwordCallback.value = null;
     }
   },
-  t: (key: string, params?: any) => t(key, params),
+  t: (key: string, params?: Record<string, unknown>) => (params ? t(key, params) : t(key)),
   isRoot: () => isRoot.value
 };
 

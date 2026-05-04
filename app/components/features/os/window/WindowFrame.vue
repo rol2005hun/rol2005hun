@@ -42,12 +42,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, defineAsyncComponent } from 'vue';
+import { computed, ref, defineAsyncComponent, type Component } from 'vue';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
 import type { OSWindow } from '@/stores/features/os/useWindowStore';
 import AppIcon from '@/components/features/os/shared/AppIcon.vue';
 
-const appComponents: Record<string, any> = {
+const appComponents: Record<string, Component> = {
   settings: defineAsyncComponent(
     () => import('@/components/features/os/apps/settings/SettingsApp.vue')
   ),

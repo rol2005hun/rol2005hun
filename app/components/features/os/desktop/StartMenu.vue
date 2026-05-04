@@ -83,11 +83,15 @@ const filteredApps = computed(() => {
     const keyPath = app.nameKey.split('.');
 
     for (const locale of Object.keys(messages.value)) {
-      let currentVal: any = (messages.value as Record<string, any>)[locale];
+      let currentVal: unknown = (messages.value as Record<string, unknown>)[locale];
 
       for (const key of keyPath) {
-        if (currentVal && currentVal[key]) {
-          currentVal = currentVal[key];
+        if (
+          currentVal &&
+          typeof currentVal === 'object' &&
+          (currentVal as Record<string, unknown>)[key]
+        ) {
+          currentVal = (currentVal as Record<string, unknown>)[key];
         } else {
           currentVal = null;
           break;

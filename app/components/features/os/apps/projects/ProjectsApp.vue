@@ -1,5 +1,14 @@
 <script setup lang="ts">
-import { defineAsyncComponent, shallowRef, ref } from 'vue';
+import { defineAsyncComponent, shallowRef, ref, type Component } from 'vue';
+
+interface Project {
+  id: string;
+  titleKey: string;
+  descKey: string;
+  component: Component;
+  icon: string;
+  color: string;
+}
 
 const SanoviseProject = defineAsyncComponent(() => import('./content/SanoviseProject.vue'));
 const WolimbyProject = defineAsyncComponent(() => import('./content/WolimbyProject.vue'));
@@ -7,7 +16,7 @@ const KnightSwapProject = defineAsyncComponent(() => import('./content/KnightSwa
 const NexusProject = defineAsyncComponent(() => import('./content/NexusProject.vue'));
 const DeikProject = defineAsyncComponent(() => import('./content/DeikProject.vue'));
 
-const projects = [
+const projects: Project[] = [
   {
     id: 'nexus',
     titleKey: 'os.apps.projects.nexus.title',
@@ -50,7 +59,7 @@ const projects = [
   }
 ];
 
-const activeProject = shallowRef<any>(projects[0]);
+const activeProject = shallowRef<Project>(projects[0]!);
 const scrollContainer = ref<HTMLElement | null>(null);
 
 let isDown = false;
@@ -99,7 +108,7 @@ const onMouseMove = (e: MouseEvent) => {
   scrollContainer.value.scrollLeft = scrollLeft - walk;
 };
 
-const selectProject = (project: any) => {
+const selectProject = (project: Project) => {
   if (isDragging) return;
   activeProject.value = project;
 };

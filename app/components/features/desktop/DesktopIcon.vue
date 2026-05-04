@@ -19,7 +19,7 @@
 import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import AppIcon from '@/components/features/os/shared/AppIcon.vue';
-import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
+import { useAppRegistry, type AppDefinition } from '@/stores/features/os/useAppRegistry';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
 import { useDesktopStore, type DesktopIconItem } from '@/stores/features/os/useDesktopStore';
 
@@ -34,7 +34,7 @@ const windowStore = useWindowStore();
 const desktopStore = useDesktopStore();
 
 const appMeta = computed(() =>
-  appRegistry.installedApps.find((app: any) => app.id === props.icon.appId)
+  appRegistry.installedApps.find((app: AppDefinition) => app.id === props.icon.appId)
 );
 
 const isDragging = ref(false);
@@ -108,7 +108,7 @@ const openApp = () => {
     selectedIds.forEach((id, index) => {
       const iconItem = desktopStore.icons.find((i) => i.id === id);
       if (iconItem) {
-        const meta = appRegistry.installedApps.find((app: any) => app.id === iconItem.appId);
+        const meta = appRegistry.installedApps.find((app: AppDefinition) => app.id === iconItem.appId);
         if (meta) {
           setTimeout(() => {
             windowStore.openWindow({
