@@ -1,6 +1,6 @@
 <template>
   <div
-    class="desktop-environment"
+    :class="['desktop-environment', desktopStore.taskbarPosition]"
     @click.self="handleDesktopClick"
     @mousedown.self="startSelection"
     @contextmenu.prevent="openContextMenu">
@@ -230,12 +230,13 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
-.desktop-container {
+.desktop-environment {
   height: 100vh;
   width: 100vw;
   display: flex;
   overflow: hidden;
   position: relative;
+  z-index: 2;
   background-size: cover;
   background-position: center;
   transition: background-image 0.5s ease;
