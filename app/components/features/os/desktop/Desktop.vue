@@ -1,6 +1,7 @@
 <template>
   <div
-    :class="['desktop-environment', desktopStore.taskbarPosition]"
+    class="desktop-environment"
+    :class="[desktopStore.taskbarPosition, { floating: desktopStore.isTaskbarFloating }]"
     @click.self="handleDesktopClick"
     @mousedown.self="startSelection"
     @contextmenu.prevent="openContextMenu">
@@ -242,10 +243,26 @@ onUnmounted(() => {
   background-position: center;
   transition: background-image 0.5s ease;
 
-  &.bottom { flex-direction: column; padding-bottom: 72px; }
-  &.top { flex-direction: column-reverse; padding-top: 72px; }
-  &.left { flex-direction: row-reverse; padding-left: 96px; }
-  &.right { flex-direction: row; padding-right: 96px; }
+  &.bottom { 
+    flex-direction: column; 
+    padding-bottom: 48px; 
+    &.floating { padding-bottom: 0; }
+  }
+  &.top { 
+    flex-direction: column-reverse; 
+    padding-top: 48px; 
+    &.floating { padding-top: 0; }
+  }
+  &.left { 
+    flex-direction: row-reverse; 
+    padding-left: 72px; 
+    &.floating { padding-left: 0; }
+  }
+  &.right { 
+    flex-direction: row; 
+    padding-right: 72px; 
+    &.floating { padding-right: 0; }
+  }
 }
 
 .desktop-surface {

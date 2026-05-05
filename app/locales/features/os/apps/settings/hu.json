@@ -31,6 +31,9 @@
   "taskbarPosition": "Tálca helye",
   "taskbarPosDesc": "Válaszd ki, hol helyezkedjen el a rendszer tálcája.",
   "pos": {
+    "top": "Fent",
+    "bottom": "Lent",
+    "left": "Balra",
     "right": "Jobbra"
   },
   "floatingTaskbar": "Lebegő tálca",
