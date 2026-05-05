@@ -123,24 +123,30 @@ const toggleWindow = (id: string) => {
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
+  position: absolute;
   z-index: 10000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.bottom,
+  &.top {
+    height: 48px;
+    width: auto;
+    min-width: 400px;
+    max-width: 90vw;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20px;
+    padding: 0 15px;
+    border: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
 
   &.bottom {
-    height: 48px;
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    border-top: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    bottom: 12px;
   }
 
   &.top {
-    height: 48px;
-    width: 100%;
-    top: 0;
-    left: 0;
-    border-bottom: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    top: 12px;
   }
 
   &.left,
@@ -148,6 +154,7 @@ const toggleWindow = (id: string) => {
     flex-direction: column;
     width: 64px;
     height: auto;
+    min-height: 200px;
     max-height: calc(100% - 40px);
     top: 50%;
     transform: translateY(-50%);

@@ -241,10 +241,10 @@ onUnmounted(() => {
   background-position: center;
   transition: background-image 0.5s ease;
 
-  &.bottom { flex-direction: column; }
-  &.top { flex-direction: column-reverse; }
-  &.left { flex-direction: row-reverse; }
-  &.right { flex-direction: row; }
+  &.bottom { flex-direction: column; padding-bottom: 72px; }
+  &.top { flex-direction: column-reverse; padding-top: 72px; }
+  &.left { flex-direction: row-reverse; padding-left: 88px; }
+  &.right { flex-direction: row; padding-right: 88px; }
 }
 
 .desktop-surface {
