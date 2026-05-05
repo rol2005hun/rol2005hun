@@ -216,9 +216,9 @@ const handleShutdown = () => {
   }
 
   &.active {
-    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), var(--os-primary-color, #3b82f6);
+    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), var(--os-primary-color, #3b82f6);
     color: white;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     .icon-circle {
       background: rgba(255, 255, 255, 0.2);
     }
@@ -233,13 +233,13 @@ const handleShutdown = () => {
     align-items: center;
     justify-content: center;
     font-size: 16px;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
   }
 
   span {
     font-size: 13px;
     font-weight: 600;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
   }
 }
 
