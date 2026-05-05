@@ -17,6 +17,7 @@
 
     <div class="editor-container">
       <textarea
+        ref="textareaRef"
         v-model="content"
         class="notepad-textarea"
         :placeholder="$t('os.apps.notepad.placeholder')"
@@ -29,6 +30,7 @@
 import { ref, onMounted } from 'vue';
 
 const content = ref('');
+const textareaRef = ref<HTMLTextAreaElement | null>(null);
 
 const newFile = () => {
   if (
@@ -50,7 +52,9 @@ const saveFile = () => {
 };
 
 onMounted(() => {
-  // Focus logic can be added here if needed
+  if (textareaRef.value) {
+    textareaRef.value.focus();
+  }
 });
 </script>
 

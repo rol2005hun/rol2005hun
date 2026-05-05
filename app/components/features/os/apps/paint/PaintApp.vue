@@ -255,14 +255,13 @@ const handleWheel = (e: WheelEvent) => {
     panX.value = mouseX - relativeX * zoomLevel.value;
     panY.value = mouseY - relativeY * zoomLevel.value;
   } else {
-    // Normal scroll for vertical panning if not ctrl-key
     panY.value -= e.deltaY;
     panX.value -= e.deltaX;
   }
 };
 
 const startPan = (e: MouseEvent) => {
-  if (e.button !== 1) return; // Middle click
+  if (e.button !== 1) return;
   e.preventDefault();
   isPanning.value = true;
   startPanX = panX.value;
@@ -408,6 +407,7 @@ const startResize = (e: MouseEvent, dir: ResizeDirection) => {
 };
 
 const startResizeTouch = (e: TouchEvent, dir: ResizeDirection) => {
+  if (!e.touches || !e.touches[0]) return;
   initResize(e.touches[0].clientX, e.touches[0].clientY, dir);
   window.addEventListener('touchmove', onResizeMoveTouch, { passive: false });
   window.addEventListener('touchend', stopResizeTouch);
@@ -431,6 +431,7 @@ const onResizeMove = (e: MouseEvent) => {
 };
 
 const onResizeMoveTouch = (e: TouchEvent) => {
+  if (!e.touches || !e.touches[0]) return;
   e.preventDefault();
   updateResizePreview(e.touches[0].clientX, e.touches[0].clientY);
 };
@@ -522,8 +523,8 @@ const getCoordinates = (e: MouseEvent | TouchEvent): [number, number] => {
   if (!canvas) return [0, 0];
 
   const rect = canvas.getBoundingClientRect();
-  const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
-  const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+  const clientX = 'touches' in e ? (e.touches[0]?.clientX ?? 0) : (e as MouseEvent).clientX;
+  const clientY = 'touches' in e ? (e.touches[0]?.clientY ?? 0) : (e as MouseEvent).clientY;
 
   return [(clientX - rect.left) / zoomLevel.value, (clientY - rect.top) / zoomLevel.value];
 };

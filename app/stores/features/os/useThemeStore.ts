@@ -111,7 +111,7 @@ export const useThemeStore = defineStore('os-theme', () => {
     {
       default: () => ({
         clock: { x: 80, y: 60 },
-        stats: { x: -80, y: 60 }, // negative means from right
+        stats: { x: -80, y: 60 },
         welcome: { x: -80, y: 300 }
       }),
       watch: true,
@@ -184,7 +184,6 @@ export const useThemeStore = defineStore('os-theme', () => {
     if (!import.meta.client) return;
     if (color) {
       document.documentElement.style.setProperty('--os-primary-color', color);
-      // Derive a border color with low opacity
       document.documentElement.style.setProperty('--os-border-color', `${color}33`);
     } else {
       document.documentElement.style.removeProperty('--os-primary-color');

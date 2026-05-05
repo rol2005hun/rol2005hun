@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { ref, onMounted, onUnmounted, computed, type CSSProperties } from 'vue';
 import { useThemeStore } from '@/stores/features/os/useThemeStore';
 import { useI18n } from 'vue-i18n';
 
@@ -89,7 +89,6 @@ const greeting = computed(() => {
   return t('os.widgets.goodEvening');
 });
 
-// Dragging Logic
 const isDragging = ref(false);
 const activeWidget = ref<string | null>(null);
 const offset = { x: 0, y: 0 };
@@ -117,12 +116,11 @@ const onDrag = (e: MouseEvent) => {
   const currentPos = themeStore.widgetPositions[activeWidget.value];
   if (!currentPos) return;
 
-  let x = e.clientX - offset.x;
-  let y = e.clientY - offset.y;
+  const x = e.clientX - offset.x;
+  const y = e.clientY - offset.y;
 
-  // Handle right-aligned widgets (those with negative x in store)
   const isRightAligned = currentPos.x < 0;
-  let storedX = isRightAligned ? x - window.innerWidth : x;
+  const storedX = isRightAligned ? x - window.innerWidth : x;
 
   themeStore.updateWidgetPosition(activeWidget.value, storedX, y);
 };
@@ -134,11 +132,11 @@ const stopDrag = () => {
   document.removeEventListener('mouseup', stopDrag);
 };
 
-const getWidgetStyle = (id: string) => {
+const getWidgetStyle = (id: string): CSSProperties => {
   const pos = themeStore.widgetPositions[id];
   if (!pos) return {};
 
-  const style: any = {
+  const style: CSSProperties = {
     top: `${pos.y}px`,
     cursor: isDragging.value ? 'grabbing' : 'grab'
   };
@@ -193,7 +191,10 @@ onUnmounted(() => {
 
 .widget {
   position: absolute;
-  transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease,
+    box-shadow 0.3s ease;
   user-select: none;
 }
 
@@ -201,7 +202,7 @@ onUnmounted(() => {
   color: white;
   text-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
   width: fit-content;
-  
+
   .time {
     font-size: 120px;
     font-weight: 800;
@@ -219,7 +220,9 @@ onUnmounted(() => {
   }
 
   @media (max-width: 1024px) {
-    .time { font-size: 80px; }
+    .time {
+      font-size: 80px;
+    }
   }
 }
 
@@ -307,4 +310,3 @@ onUnmounted(() => {
   }
 }
 </style>
-

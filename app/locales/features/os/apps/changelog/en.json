@@ -10,6 +10,8 @@
         "Introduced draggable <strong>Desktop Widgets</strong>: Clock, System Stats, and dynamic Greetings.",
         "Individual widget visibility controls added to System Settings.",
         "Added <strong>Custom Accent Color</strong> support with a modern color picker.",
+        "<strong>Notepad</strong>: Added automatic focus on launch for better productivity.",
+        "<strong>Paint</strong>: Fixed touch interaction bugs and improved TypeScript stability.",
         "Refined UI components: improved slider button aesthetics and Start Menu stability."
       ]
     },

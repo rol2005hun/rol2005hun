@@ -10,6 +10,8 @@
         "<strong>Mozgatható Asztali Widgetek</strong>: Óra, Rendszerstatisztika és dinamikus üdvözlés.",
         "Egyedileg szabályozható widget láthatóság a Rendszer beállításoknál.",
         "<strong>Egyedi Hangsúlyszín</strong> támogatás modern színválasztóval.",
+        "<strong>Jegyzettömb</strong>: Automatikus fókuszálás az alkalmazás megnyitásakor.",
+        "<strong>Paint</strong>: Érintésvezérlési hibák javítása és TypeScript stabilitás növelése.",
         "Megszépített UI elemek: finomhangolt kapcsoló gombok és stabil Start menü elrendezés."
       ]
     },

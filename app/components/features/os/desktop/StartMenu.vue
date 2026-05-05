@@ -86,7 +86,6 @@ onUnmounted(() => {
   document.removeEventListener('mousedown', handleClickOutside);
 });
 
-// Reset page on search
 watch(searchQuery, () => {
   currentPage.value = 0;
 });
@@ -185,7 +184,9 @@ const openApp = (appId: string) => {
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 10px 16px;
   border-radius: 20px;
-  transition: background 0.3s, border-color 0.3s;
+  transition:
+    background 0.3s,
+    border-color 0.3s;
   flex-shrink: 0;
 
   &:focus-within {
