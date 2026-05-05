@@ -1,10 +1,9 @@
 <template>
   <div class="os-root">
-    <div
-      class="wallpaper"
-      :style="{ backgroundImage: 'url(' + themeStore.currentWallpaperUrl + ')' }" />
-
     <template v-if="authStore.isUnlocked">
+      <div
+        class="wallpaper"
+        :style="{ backgroundImage: 'url(' + themeStore.currentWallpaperUrl + ')' }" />
       <Desktop v-if="!isMobile" />
       <MobileOS v-else />
     </template>

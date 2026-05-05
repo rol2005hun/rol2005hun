@@ -9,7 +9,7 @@
       </Transition>
     </ClientOnly>
 
-    <div v-show="isInstalled" class="os-content-wrapper">
+    <div v-if="isInstalled" class="os-content-wrapper">
       <ClientOnly>
         <Transition name="fade">
           <LockScreen v-if="!authStore.isUnlocked" class="lock-screen-overlay" />
