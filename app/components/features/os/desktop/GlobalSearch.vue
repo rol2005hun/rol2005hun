@@ -24,10 +24,7 @@
           @mouseenter="selectedIndex = index">
           <AppIcon :app-id="result.id" size="24px" />
           <div class="result-info">
-            <span class="result-name">{{ $t(result.titleKey) }}</span>
-            <span v-if="result.descriptionKey" class="result-desc">
-              {{ $t(result.descriptionKey) }}
-            </span>
+            <span class="result-name">{{ $t(result.nameKey) }}</span>
           </div>
           <Icon name="ph:arrow-return-left-bold" class="enter-icon" />
         </div>
@@ -58,7 +55,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue';
 import { useDesktopStore } from '@/stores/features/os/useDesktopStore';
-import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
+import { useAppRegistry, type AppDefinition } from '@/stores/features/os/useAppRegistry';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
 import { useI18n } from 'vue-i18n';
 import AppIcon from '@/components/features/os/shared/AppIcon.vue';
@@ -75,10 +72,9 @@ const searchInput = ref<HTMLInputElement | null>(null);
 const results = computed(() => {
   if (!query.value.trim()) return [];
   const q = query.value.toLowerCase();
-  return appRegistry.installedApps.filter((app) => {
-    const name = t(app.titleKey).toLowerCase();
-    const desc = app.descriptionKey ? t(app.descriptionKey).toLowerCase() : '';
-    return name.includes(q) || desc.includes(q);
+  return appRegistry.installedApps.filter((app: AppDefinition) => {
+    const name = t(app.nameKey).toLowerCase();
+    return name.includes(q);
   });
 });
 
@@ -100,11 +96,11 @@ const handleEnter = () => {
   }
 };
 
-const openApp = (app: any) => {
+const openApp = (app: AppDefinition) => {
   windowStore.openWindow({
     id: app.id,
     appId: app.id,
-    titleKey: app.titleKey,
+    titleKey: app.nameKey,
     width: app.defaultWidth || 800,
     height: app.defaultHeight || 600
   });
