@@ -22,6 +22,8 @@
       @contextmenu.prevent="openContextMenu">
       <div v-if="isSelecting" class="selection-box" :style="selectionBoxStyle" />
 
+      <DesktopWidgets />
+
       <ClientOnly>
         <DesktopIcon
           v-for="icon in desktopStore.icons"
@@ -45,6 +47,7 @@
 import { ref, reactive, computed, onMounted, onUnmounted, nextTick } from 'vue';
 import Taskbar from '@/components/features/os/taskbar/Taskbar.vue';
 import StartMenu from '@/components/features/os/desktop/StartMenu.vue';
+import DesktopWidgets from '@/components/features/os/desktop/DesktopWidgets.vue';
 import WindowFrame from '@/components/features/os/window/WindowFrame.vue';
 import DesktopIcon from '@/components/features/desktop/DesktopIcon.vue';
 import { useDesktopStore } from '@/stores/features/os/useDesktopStore';

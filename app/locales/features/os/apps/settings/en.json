@@ -14,5 +14,14 @@
   "uploadWallpaper": "Upload Image",
   "or": "OR",
   "english": "English",
-  "hungarian": "Hungarian"
+  "hungarian": "Hungarian",
+  "system": "System",
+  "accentColor": "Accent Color",
+  "accentDesc": "Personalize your OS with a custom accent color.",
+  "resetAccent": "Reset to theme default",
+  "systemInfo": "System Information",
+  "systemSubtitle": "View OS details and manage system-level settings.",
+  "desktopLayout": "Desktop Layout",
+  "showWidgets": "Desktop Widgets",
+  "widgetsDesc": "Show clock and system stats on the desktop background."
 }

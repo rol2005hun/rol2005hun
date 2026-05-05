@@ -14,5 +14,14 @@
   "uploadWallpaper": "Kép feltöltése",
   "or": "VAGY",
   "english": "Angol",
-  "hungarian": "Magyar"
+  "hungarian": "Magyar",
+  "system": "Rendszer",
+  "accentColor": "Hangsúlyszín",
+  "accentDesc": "Szabd személyre az OS megjelenését egy egyedi hangsúlyszínnel.",
+  "resetAccent": "Visszaállítás alapértelmezettre",
+  "systemInfo": "Rendszerinformáció",
+  "systemSubtitle": "OS adatok megtekintése és rendszerszintű beállítások.",
+  "desktopLayout": "Asztali elrendezés",
+  "showWidgets": "Asztali widgetek",
+  "widgetsDesc": "Óra és statisztikák megjelenítése az asztal hátterén."
 }

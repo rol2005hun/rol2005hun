@@ -86,6 +86,22 @@ export const useThemeStore = defineStore('os-theme', () => {
   });
   const customWallpaperLocal = ref<string>('');
 
+  const accentColorCookie = useCookie<string>('os-accent-color', {
+    default: () => '',
+    watch: true,
+    maxAge: 31536000
+  });
+  const accentColor = ref<string>(accentColorCookie.value || '');
+
+  const showWidgetsCookie = useCookie<boolean>('os-show-widgets', {
+    default: () => true,
+    watch: true,
+    maxAge: 31536000
+  });
+  const showWidgets = ref<boolean>(
+    showWidgetsCookie.value !== undefined ? showWidgetsCookie.value : true
+  );
+
   if (import.meta.client) {
     if (customWallpaperCookie.value === 'localstorage') {
       setTimeout(() => {
@@ -130,6 +146,29 @@ export const useThemeStore = defineStore('os-theme', () => {
     setWallpaper('custom');
   };
 
+  const setAccentColor = (color: string) => {
+    accentColor.value = color;
+    accentColorCookie.value = color;
+    applyAccentColor(color);
+  };
+
+  const toggleWidgets = () => {
+    showWidgets.value = !showWidgets.value;
+    showWidgetsCookie.value = showWidgets.value;
+  };
+
+  const applyAccentColor = (color: string) => {
+    if (!import.meta.client) return;
+    if (color) {
+      document.documentElement.style.setProperty('--os-primary-color', color);
+      // Derive a border color with low opacity
+      document.documentElement.style.setProperty('--os-border-color', `${color}33`);
+    } else {
+      document.documentElement.style.removeProperty('--os-primary-color');
+      document.documentElement.style.removeProperty('--os-border-color');
+    }
+  };
+
   const toggleTheme = () => {
     setTheme(currentTheme.value === 'dark' ? 'light' : 'dark');
   };
@@ -143,10 +182,11 @@ export const useThemeStore = defineStore('os-theme', () => {
   });
 
   watch(
-    currentTheme,
-    (newTheme) => {
-      if (import.meta.client && newTheme) {
-        document.documentElement.setAttribute('data-theme', newTheme);
+    [currentTheme, accentColor],
+    ([newTheme, newAccent]) => {
+      if (import.meta.client) {
+        if (newTheme) document.documentElement.setAttribute('data-theme', newTheme);
+        applyAccentColor(newAccent);
       }
     },
     { immediate: true }
@@ -159,9 +199,13 @@ export const useThemeStore = defineStore('os-theme', () => {
     currentWallpaperUrl,
     customWallpaperData,
     availableWallpapers,
+    accentColor,
+    showWidgets,
     setTheme,
     setWallpaper,
     setCustomWallpaper,
+    setAccentColor,
+    toggleWidgets,
     toggleTheme
   };
 });

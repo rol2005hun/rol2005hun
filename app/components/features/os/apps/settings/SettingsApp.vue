@@ -14,6 +14,10 @@
           <Icon name="ph:globe-hemisphere-west-fill" class="icon" />
           {{ $t('os.apps.settings.language') }}
         </li>
+        <li :class="{ active: activeTab === 'system' }" @click="activeTab = 'system'">
+          <Icon name="ph:cpu-fill" class="icon" />
+          {{ $t('os.apps.settings.system') }}
+        </li>
       </ul>
     </div>
     <div class="content">
@@ -35,6 +39,31 @@
               <div class="color-preview" :style="{ backgroundColor: theme.color }" />
               <span>{{ $t(theme.nameKey) }}</span>
             </button>
+          </div>
+
+          <div class="section-title">
+            <Icon name="ph:palette-fill" />
+            <span>{{ $t('os.apps.settings.accentColor') }}</span>
+          </div>
+
+          <div class="accent-customizer glass-panel">
+            <div class="color-picker-row">
+              <input
+                type="color"
+                :value="themeStore.accentColor || '#3b82f6'"
+                class="color-input"
+                @input="(e) => themeStore.setAccentColor((e.target as HTMLInputElement).value)" />
+              <div class="accent-info">
+                <p>{{ $t('os.apps.settings.accentDesc') }}</p>
+                <button
+                  v-if="themeStore.accentColor"
+                  class="reset-link"
+                  @click="themeStore.setAccentColor('')">
+                  {{ $t('os.apps.settings.resetAccent') }}
+                </button>
+              </div>
+            </div>
+            <div class="preview-line" :style="{ backgroundColor: themeStore.accentColor || 'var(--os-primary-color)' }"></div>
           </div>
         </div>
 
@@ -121,6 +150,50 @@
             </button>
           </div>
         </div>
+
+        <div v-else-if="activeTab === 'system'" key="system" class="tab-content">
+          <div class="header">
+            <h2>{{ $t('os.apps.settings.systemInfo') }}</h2>
+            <p class="subtitle">{{ $t('os.apps.settings.systemSubtitle') }}</p>
+          </div>
+
+          <div class="system-grid">
+            <div class="info-card glass-panel">
+              <div class="info-item">
+                <span class="label">OS Name</span>
+                <span class="val">RanzakOS v3.4</span>
+              </div>
+              <div class="info-item">
+                <span class="label">Kernel</span>
+                <span class="val">Nuxt 3.11 / Vue 3.4</span>
+              </div>
+              <div class="info-item">
+                <span class="label">Architecture</span>
+                <span class="val">x86_64 Web-WASM</span>
+              </div>
+            </div>
+
+            <div class="settings-card glass-panel">
+              <div class="card-header">
+                <Icon name="ph:layout-fill" />
+                <h3>{{ $t('os.apps.settings.desktopLayout') }}</h3>
+              </div>
+              <div class="setting-row">
+                <div class="label-group">
+                  <span>{{ $t('os.apps.settings.showWidgets') }}</span>
+                  <p>{{ $t('os.apps.settings.widgetsDesc') }}</p>
+                </div>
+                <label class="switch">
+                  <input
+                    type="checkbox"
+                    :checked="themeStore.showWidgets"
+                    @change="themeStore.toggleWidgets()" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
       </transition>
     </div>
   </div>
@@ -134,7 +207,7 @@ import { useLanguageStore } from '@/stores/features/os/useLanguageStore';
 const themeStore = useThemeStore();
 const languageStore = useLanguageStore();
 
-const activeTab = ref<'appearance' | 'wallpaper' | 'language'>('appearance');
+const activeTab = ref<'appearance' | 'wallpaper' | 'language' | 'system'>('appearance');
 
 const customUrlInput = ref('');
 
@@ -660,6 +733,154 @@ const handleFileUpload = (event: Event) => {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+.accent-customizer {
+  .color-picker-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .color-input {
+      width: 60px;
+      height: 60px;
+      padding: 0;
+      border: none;
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+
+      &::-webkit-color-swatch-wrapper {
+        padding: 0;
+      }
+      &::-webkit-color-swatch {
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    .accent-info {
+      flex: 1;
+      p {
+        font-size: 14px;
+        opacity: 0.7;
+        margin-bottom: 8px;
+      }
+      .reset-link {
+        background: none;
+        border: none;
+        color: var(--os-primary-color);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 0;
+        text-decoration: underline;
+        &:hover { opacity: 0.8; }
+      }
+    }
+  }
+
+  .preview-line {
+    height: 4px;
+    width: 100%;
+    border-radius: 2px;
+    margin-top: 20px;
+    opacity: 0.5;
+  }
+}
+
+.system-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.info-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      opacity: 0.5;
+      font-weight: 700;
+    }
+    .val {
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+}
+
+.settings-card {
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    h3 { margin: 0; font-size: 18px; }
+    svg { font-size: 24px; color: var(--os-primary-color); }
+  }
+
+  .setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+
+    .label-group {
+      span { font-weight: 600; font-size: 15px; }
+      p { font-size: 13px; opacity: 0.6; margin: 4px 0 0; }
+    }
+  }
+}
+
+/* Switch styling */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+
+  input { opacity: 0; width: 0; height: 0; }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: .4s;
+    border-radius: 34px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    &::before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+  }
+
+  input:checked + .slider {
+    background-color: var(--os-primary-color);
+  }
+
+  input:checked + .slider::before {
+    transform: translateX(24px);
   }
 }
 </style>
