@@ -982,6 +982,8 @@ const handleFileUpload = (event: Event) => {
   &.active {
     background: var(--os-primary-color, #0078d4);
     border-color: var(--os-primary-color, #0078d4);
+    color: #000;
+    font-weight: 700;
   }
 }
 

@@ -88,6 +88,7 @@ let isDragging = false;
 
 const handleDesktopClick = () => {
   desktopStore.closeStartMenu();
+  desktopStore.closeControlCenter();
   closeContextMenu();
   if (!isDragging) {
     desktopStore.clearSelection();
@@ -290,20 +291,56 @@ onUnmounted(() => {
   position: absolute;
   z-index: 9999;
 
-  .bottom & { bottom: 60px; left: 10px; }
-  .top & { top: 60px; left: 10px; }
-  .left & { bottom: 10px; left: 70px; }
-  .right & { bottom: 10px; right: 70px; }
+  .bottom & { 
+    bottom: 72px; 
+    left: 50%;
+    transform: translateX(calc(-50% - 180px)) scale(1);
+    
+    &.slide-up-enter-from,
+    &.slide-up-leave-to {
+      transform: translateX(calc(-50% - 180px)) translateY(20px) scale(0.95);
+    }
+  }
+  .top & { 
+    top: 72px; 
+    left: 50%;
+    transform: translateX(calc(-50% - 180px)) scale(1);
+
+    &.slide-up-enter-from,
+    &.slide-up-leave-to {
+      transform: translateX(calc(-50% - 180px)) translateY(-20px) scale(0.95);
+    }
+  }
+  .left & { bottom: 20px; left: 88px; }
+  .right & { bottom: 20px; right: 88px; }
 }
 
 .control-center-panel {
   position: absolute;
   z-index: 9999;
 
-  .bottom & { bottom: 60px; right: 10px; }
-  .top & { top: 60px; right: 10px; }
-  .left & { top: 10px; left: 70px; }
-  .right & { top: 10px; right: 70px; }
+  .bottom & { 
+    bottom: 72px; 
+    right: 50%;
+    transform: translateX(calc(50% + 180px)) scale(1);
+
+    &.slide-up-enter-from,
+    &.slide-up-leave-to {
+      transform: translateX(calc(50% + 180px)) translateY(20px) scale(0.95);
+    }
+  }
+  .top & { 
+    top: 72px; 
+    right: 50%;
+    transform: translateX(calc(50% + 180px)) scale(1);
+
+    &.slide-up-enter-from,
+    &.slide-up-leave-to {
+      transform: translateX(calc(50% + 180px)) translateY(-20px) scale(0.95);
+    }
+  }
+  .left & { top: 20px; left: 88px; }
+  .right & { top: 20px; right: 88px; }
 }
 
 .taskbar-panel {
