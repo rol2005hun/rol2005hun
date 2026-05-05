@@ -13,6 +13,7 @@ export interface DesktopIconItem {
 export const useDesktopStore = defineStore('os-desktop', () => {
   const isStartMenuOpen = ref(false);
   const isControlCenterOpen = ref(false);
+  const isSearchOpen = ref(false);
   const taskbarPositionCookie = useCookie<'bottom' | 'top' | 'left' | 'right'>('os-taskbar-pos', {
     default: () => 'bottom',
     watch: true,
@@ -65,7 +66,10 @@ export const useDesktopStore = defineStore('os-desktop', () => {
 
   const toggleStartMenu = () => {
     isStartMenuOpen.value = !isStartMenuOpen.value;
-    if (isStartMenuOpen.value) isControlCenterOpen.value = false;
+    if (isStartMenuOpen.value) {
+      isControlCenterOpen.value = false;
+      isSearchOpen.value = false;
+    }
   };
 
   const closeStartMenu = () => {
@@ -74,11 +78,26 @@ export const useDesktopStore = defineStore('os-desktop', () => {
 
   const toggleControlCenter = () => {
     isControlCenterOpen.value = !isControlCenterOpen.value;
-    if (isControlCenterOpen.value) isStartMenuOpen.value = false;
+    if (isControlCenterOpen.value) {
+      isStartMenuOpen.value = false;
+      isSearchOpen.value = false;
+    }
   };
 
   const closeControlCenter = () => {
     isControlCenterOpen.value = false;
+  };
+
+  const toggleSearch = () => {
+    isSearchOpen.value = !isSearchOpen.value;
+    if (isSearchOpen.value) {
+      isStartMenuOpen.value = false;
+      isControlCenterOpen.value = false;
+    }
+  };
+
+  const closeSearch = () => {
+    isSearchOpen.value = false;
   };
 
   const setTaskbarPosition = (pos: 'bottom' | 'top' | 'left' | 'right') => {
@@ -206,6 +225,7 @@ export const useDesktopStore = defineStore('os-desktop', () => {
   return {
     isStartMenuOpen,
     isControlCenterOpen,
+    isSearchOpen,
     taskbarPosition,
     icons,
     selectedIcons,
@@ -213,6 +233,8 @@ export const useDesktopStore = defineStore('os-desktop', () => {
     closeStartMenu,
     toggleControlCenter,
     closeControlCenter,
+    toggleSearch,
+    closeSearch,
     setTaskbarPosition,
     updateIconPosition,
     selectIcon,

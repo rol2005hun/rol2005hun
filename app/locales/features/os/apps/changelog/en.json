@@ -4,15 +4,15 @@
   "empty": "No versions available.",
   "history": {
     "2026-05-05": {
-      "version": "3.5.0",
-      "title": "Control Center & Productivity",
+      "version": "3.6.0",
+      "title": "Global Search & Refinement",
       "changes": [
-        "Added a new <strong>Control Center</strong>: manage Wi-Fi, Bluetooth, volume, and brightness from a single panel.",
-        "Introduced draggable <strong>Desktop Widgets</strong>: Clock, System Stats, and dynamic Greetings.",
-        "Added <strong>Custom Accent Color</strong> support with a modern color picker.",
-        "<strong>Notepad</strong>: Added automatic focus on launch.",
-        "<strong>Paint</strong>: Fixed touch interaction bugs.",
-        "Refined UI components: improved slider button aesthetics and Start Menu stability."
+        "Introduced <strong>Global Search (Quick Search)</strong>: open with <code>Alt+Space</code> or <code>Ctrl+K</code> to find apps instantly.",
+        "Added a new <strong>Control Center</strong>: manage Wi-Fi, Bluetooth, volume, and brightness.",
+        "Implemented dynamic <strong>Taskbar Positions</strong>: move it to any edge of the screen.",
+        "Introduced draggable <strong>Desktop Widgets</strong> with persistence.",
+        "Added <strong>Custom Accent Color</strong> support.",
+        "Eliminated all <code>any</code> types for a 100% type-safe codebase."
       ]
     },
     "2026-05-04-4": {

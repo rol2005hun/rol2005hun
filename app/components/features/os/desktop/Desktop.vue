@@ -44,6 +44,10 @@
     <Transition name="slide-up">
       <ControlCenter v-if="desktopStore.isControlCenterOpen" class="control-center-panel" />
     </Transition>
+
+    <Transition name="fade">
+      <GlobalSearch v-if="desktopStore.isSearchOpen" />
+    </Transition>
   </div>
 </template>
 
@@ -52,6 +56,7 @@ import { ref, reactive, computed, onMounted, onUnmounted, nextTick } from 'vue';
 import Taskbar from '@/components/features/os/taskbar/Taskbar.vue';
 import StartMenu from '@/components/features/os/desktop/StartMenu.vue';
 import ControlCenter from '@/components/features/os/desktop/ControlCenter.vue';
+import GlobalSearch from '@/components/features/os/desktop/GlobalSearch.vue';
 import DesktopWidgets from '@/components/features/os/desktop/DesktopWidgets.vue';
 import WindowFrame from '@/components/features/os/window/WindowFrame.vue';
 import DesktopIcon from '@/components/features/desktop/DesktopIcon.vue';
@@ -193,6 +198,21 @@ const updateSelection = () => {
   desktopStore.setSelection(newSelection);
 };
 
+const handleKeyDown = (e: KeyboardEvent) => {
+  if (e.key === 'Escape') {
+    desktopStore.closeStartMenu();
+    desktopStore.closeControlCenter();
+    desktopStore.closeSearch();
+    closeContextMenu();
+  }
+
+  // Search shortcut: Alt+Space or Ctrl+K
+  if ((e.altKey && e.code === 'Space') || (e.ctrlKey && e.key.toLowerCase() === 'k')) {
+    e.preventDefault();
+    desktopStore.toggleSearch();
+  }
+};
+
 const handleResize = () => {
   desktopStore.ensureIconsInBounds(window.innerWidth, window.innerHeight);
 };
@@ -200,10 +220,12 @@ const handleResize = () => {
 onMounted(() => {
   handleResize();
   window.addEventListener('resize', handleResize);
+  window.addEventListener('keydown', handleKeyDown);
 });
 
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize);
+  window.removeEventListener('keydown', handleKeyDown);
 });
 </script>
 

@@ -4,15 +4,15 @@
   "empty": "Nincs elérhető változat.",
   "history": {
     "2026-05-05": {
-      "version": "1.4.0",
-      "title": "Vezérlőközpont és Hatékonyság",
+      "version": "1.5.0",
+      "title": "Globális Kereső és Finomhangolás",
       "changes": [
-        "Új <strong>Vezérlőközpont</strong>: kezeld a Wi-Fi-t, Bluetooth-t, hangerőt és fényerőt egyetlen panelen.",
-        "<strong>Mozgatható Asztali Widgetek</strong>: Óra, Rendszerstatisztika és dinamikus üdvözlés.",
-        "<strong>Egyedi Hangsúlyszín</strong> támogatás modern színválasztóval.",
-        "<strong>Jegyzettömb</strong>: Automatikus fókuszálás az indításkor.",
-        "<strong>Paint</strong>: Érintésvezérlési hibák javítása.",
-        "Megszépített UI elemek: finomhangolt kapcsoló gombok és stabil Start menü elrendezés."
+        "Bevezetett <strong>Globális Kereső (Gyorskereső)</strong>: nyisd meg az <code>Alt+Space</code> vagy <code>Ctrl+K</code> kombinációval az appok azonnali eléréséhez.",
+        "Új <strong>Vezérlőközpont</strong>: Wi-Fi, Bluetooth, hangerő és fényerő kezelése.",
+        "Dinamikus <strong>Tálca Pozíciók</strong>: bárhová áthelyezhető tálca a képernyő szélén.",
+        "<strong>Mozgatható Asztali Widgetek</strong> perzisztens mentéssel.",
+        "<strong>Egyedi Hangsúlyszín</strong> támogatás.",
+        "Az összes <code>any</code> típus kiirtása a 100% típusbiztos kódért."
       ]
     },
     "2026-05-04-4": {
