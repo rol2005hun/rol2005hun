@@ -22,6 +22,10 @@
   "systemInfo": "Rendszerinformáció",
   "systemSubtitle": "OS adatok megtekintése és rendszerszintű beállítások.",
   "desktopLayout": "Asztali elrendezés",
-  "showWidgets": "Asztali widgetek",
-  "widgetsDesc": "Óra és statisztikák megjelenítése az asztal hátterén."
+  "showClock": "Óra widget",
+  "clockDesc": "A nagyméretű digitális óra és dátum megjelenítése.",
+  "showStats": "Rendszer statisztikák",
+  "statsDesc": "CPU és RAM használat valós idejű kijelzése.",
+  "showWelcome": "Üdvözlő kártya",
+  "welcomeDesc": "Személyre szabott üdvözlő üzenet megjelenítése."
 }

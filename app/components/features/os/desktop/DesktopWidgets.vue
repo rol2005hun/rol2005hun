@@ -1,42 +1,50 @@
 <template>
-  <div class="desktop-widgets" :class="{ visible: themeStore.showWidgets }">
-    <div class="widget-container left">
-      <div class="clock-widget">
-        <div class="time">{{ currentTime }}</div>
-        <div class="date">{{ currentDate }}</div>
+  <div class="desktop-widgets visible">
+    <div
+      v-if="themeStore.activeWidgets.clock"
+      class="widget clock-widget"
+      :style="getWidgetStyle('clock')"
+      @mousedown="startDrag($event, 'clock')">
+      <div class="time">{{ currentTime }}</div>
+      <div class="date">{{ currentDate }}</div>
+    </div>
+
+    <div
+      v-if="themeStore.activeWidgets.stats"
+      class="widget stats-widget glass-card"
+      :style="getWidgetStyle('stats')"
+      @mousedown="startDrag($event, 'stats')">
+      <div class="stat-item">
+        <div class="label">
+          <Icon name="ph:cpu-fill" />
+          <span>CPU</span>
+        </div>
+        <div class="bar-container">
+          <div class="bar" :style="{ width: cpuLoad + '%' }"></div>
+        </div>
+        <div class="value">{{ cpuLoad }}%</div>
+      </div>
+      <div class="stat-item">
+        <div class="label">
+          <Icon name="ph:memory-fill" />
+          <span>RAM</span>
+        </div>
+        <div class="bar-container">
+          <div class="bar" :style="{ width: ramUsage + '%' }"></div>
+        </div>
+        <div class="value">{{ ramUsage }}%</div>
       </div>
     </div>
 
-    <div class="widget-container right">
-      <div class="stats-widget glass-card">
-        <div class="stat-item">
-          <div class="label">
-            <Icon name="ph:cpu-fill" />
-            <span>CPU</span>
-          </div>
-          <div class="bar-container">
-            <div class="bar" :style="{ width: cpuLoad + '%' }"></div>
-          </div>
-          <div class="value">{{ cpuLoad }}%</div>
-        </div>
-        <div class="stat-item">
-          <div class="label">
-            <Icon name="ph:memory-fill" />
-            <span>RAM</span>
-          </div>
-          <div class="bar-container">
-            <div class="bar" :style="{ width: ramUsage + '%' }"></div>
-          </div>
-          <div class="value">{{ ramUsage }}%</div>
-        </div>
-      </div>
-
-      <div class="welcome-widget glass-card">
-        <Icon name="ph:sparkle-fill" class="sparkle" />
-        <div class="text">
-          <h3>{{ greeting }}</h3>
-          <p>{{ $t('os.widgets.welcomeMsg') }}</p>
-        </div>
+    <div
+      v-if="themeStore.activeWidgets.welcome"
+      class="widget welcome-widget glass-card"
+      :style="getWidgetStyle('welcome')"
+      @mousedown="startDrag($event, 'welcome')">
+      <Icon name="ph:sparkle-fill" class="sparkle" />
+      <div class="text">
+        <h3>{{ greeting }}</h3>
+        <p>{{ $t('os.widgets.welcomeMsg') }}</p>
       </div>
     </div>
   </div>
@@ -70,7 +78,6 @@ const updateTime = () => {
 };
 
 const updateStats = () => {
-  // Simulated stats
   cpuLoad.value = Math.floor(Math.random() * 15) + 5;
   ramUsage.value = 42 + Math.floor(Math.random() * 5);
 };
@@ -81,6 +88,75 @@ const greeting = computed(() => {
   if (hour < 18) return t('os.widgets.goodAfternoon');
   return t('os.widgets.goodEvening');
 });
+
+// Dragging Logic
+const isDragging = ref(false);
+const activeWidget = ref<string | null>(null);
+const offset = { x: 0, y: 0 };
+
+const startDrag = (e: MouseEvent, id: string) => {
+  const pos = themeStore.widgetPositions[id];
+  if (!pos) return;
+
+  isDragging.value = true;
+  activeWidget.value = id;
+
+  const screenX = pos.x < 0 ? window.innerWidth + pos.x : pos.x;
+  const screenY = pos.y;
+
+  offset.x = e.clientX - screenX;
+  offset.y = e.clientY - screenY;
+
+  document.addEventListener('mousemove', onDrag);
+  document.addEventListener('mouseup', stopDrag);
+};
+
+const onDrag = (e: MouseEvent) => {
+  if (!isDragging.value || !activeWidget.value) return;
+
+  const currentPos = themeStore.widgetPositions[activeWidget.value];
+  if (!currentPos) return;
+
+  let x = e.clientX - offset.x;
+  let y = e.clientY - offset.y;
+
+  // Handle right-aligned widgets (those with negative x in store)
+  const isRightAligned = currentPos.x < 0;
+  let storedX = isRightAligned ? x - window.innerWidth : x;
+
+  themeStore.updateWidgetPosition(activeWidget.value, storedX, y);
+};
+
+const stopDrag = () => {
+  isDragging.value = false;
+  activeWidget.value = null;
+  document.removeEventListener('mousemove', onDrag);
+  document.removeEventListener('mouseup', stopDrag);
+};
+
+const getWidgetStyle = (id: string) => {
+  const pos = themeStore.widgetPositions[id];
+  if (!pos) return {};
+
+  const style: any = {
+    top: `${pos.y}px`,
+    cursor: isDragging.value ? 'grabbing' : 'grab'
+  };
+
+  if (pos.x < 0) {
+    style.right = `${Math.abs(pos.x)}px`;
+  } else {
+    style.left = `${pos.x}px`;
+  }
+
+  if (activeWidget.value === id) {
+    style.zIndex = 100;
+    style.transition = 'none';
+    style.boxShadow = '0 20px 40px rgba(0,0,0,0.4)';
+  }
+
+  return style;
+};
 
 let timeInterval: ReturnType<typeof setInterval>;
 let statsInterval: ReturnType<typeof setInterval>;
@@ -102,42 +178,29 @@ onUnmounted(() => {
 .desktop-widgets {
   position: absolute;
   inset: 0;
-  padding: 60px 80px;
-  display: flex;
-  justify-content: space-between;
   pointer-events: none;
   opacity: 0;
-  transform: scale(1.05);
-  transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1);
   z-index: 5;
 
   &.visible {
     opacity: 1;
-    transform: scale(1);
-  }
-
-  @media (max-width: 1024px) {
-    padding: 40px;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
+    .widget {
+      pointer-events: auto;
+    }
   }
 }
 
-.widget-container {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  width: 320px;
-
-  &.left {
-    justify-content: center;
-  }
+.widget {
+  position: absolute;
+  transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
 }
 
 .clock-widget {
   color: white;
   text-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+  width: fit-content;
   
   .time {
     font-size: 120px;
@@ -156,7 +219,6 @@ onUnmounted(() => {
   }
 
   @media (max-width: 1024px) {
-    text-align: center;
     .time { font-size: 80px; }
   }
 }
@@ -168,13 +230,11 @@ onUnmounted(() => {
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 24px;
   padding: 24px;
-  pointer-events: auto;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease, background 0.3s ease;
+  width: 320px;
 
   &:hover {
     background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-5px);
   }
 }
 
@@ -247,3 +307,4 @@ onUnmounted(() => {
   }
 }
 </style>
+

@@ -22,6 +22,10 @@
   "systemInfo": "System Information",
   "systemSubtitle": "View OS details and manage system-level settings.",
   "desktopLayout": "Desktop Layout",
-  "showWidgets": "Desktop Widgets",
-  "widgetsDesc": "Show clock and system stats on the desktop background."
+  "showClock": "Clock Widget",
+  "clockDesc": "Show the large digital clock and date.",
+  "showStats": "System Stats",
+  "statsDesc": "Show real-time CPU and RAM monitoring.",
+  "showWelcome": "Welcome Card",
+  "welcomeDesc": "Show the personalized greeting message."
 }

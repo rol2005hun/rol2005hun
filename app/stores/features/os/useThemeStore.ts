@@ -93,14 +93,32 @@ export const useThemeStore = defineStore('os-theme', () => {
   });
   const accentColor = ref<string>(accentColorCookie.value || '');
 
-  const showWidgetsCookie = useCookie<boolean>('os-show-widgets', {
-    default: () => true,
+  const activeWidgetsCookie = useCookie<Record<string, boolean>>('os-active-widgets', {
+    default: () => ({
+      clock: true,
+      stats: true,
+      welcome: true
+    }),
     watch: true,
     maxAge: 31536000
   });
-  const showWidgets = ref<boolean>(
-    showWidgetsCookie.value !== undefined ? showWidgetsCookie.value : true
+  const activeWidgets = ref<Record<string, boolean>>(
+    activeWidgetsCookie.value || { clock: true, stats: true, welcome: true }
   );
+
+  const widgetPositionsCookie = useCookie<Record<string, { x: number; y: number }>>(
+    'os-widget-positions',
+    {
+      default: () => ({
+        clock: { x: 80, y: 60 },
+        stats: { x: -80, y: 60 }, // negative means from right
+        welcome: { x: -80, y: 300 }
+      }),
+      watch: true,
+      maxAge: 31536000
+    }
+  );
+  const widgetPositions = ref(widgetPositionsCookie.value || {});
 
   if (import.meta.client) {
     if (customWallpaperCookie.value === 'localstorage') {
@@ -152,9 +170,14 @@ export const useThemeStore = defineStore('os-theme', () => {
     applyAccentColor(color);
   };
 
-  const toggleWidgets = () => {
-    showWidgets.value = !showWidgets.value;
-    showWidgetsCookie.value = showWidgets.value;
+  const toggleWidget = (id: string) => {
+    activeWidgets.value[id] = !activeWidgets.value[id];
+    activeWidgetsCookie.value = { ...activeWidgets.value };
+  };
+
+  const updateWidgetPosition = (id: string, x: number, y: number) => {
+    widgetPositions.value[id] = { x, y };
+    widgetPositionsCookie.value = { ...widgetPositions.value };
   };
 
   const applyAccentColor = (color: string) => {
@@ -200,12 +223,14 @@ export const useThemeStore = defineStore('os-theme', () => {
     customWallpaperData,
     availableWallpapers,
     accentColor,
-    showWidgets,
+    activeWidgets,
+    widgetPositions,
     setTheme,
     setWallpaper,
     setCustomWallpaper,
     setAccentColor,
-    toggleWidgets,
+    toggleWidget,
+    updateWidgetPosition,
     toggleTheme
   };
 });

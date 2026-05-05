@@ -180,14 +180,42 @@
               </div>
               <div class="setting-row">
                 <div class="label-group">
-                  <span>{{ $t('os.apps.settings.showWidgets') }}</span>
-                  <p>{{ $t('os.apps.settings.widgetsDesc') }}</p>
+                  <span>{{ $t('os.apps.settings.showClock') }}</span>
+                  <p>{{ $t('os.apps.settings.clockDesc') }}</p>
                 </div>
                 <label class="switch">
                   <input
                     type="checkbox"
-                    :checked="themeStore.showWidgets"
-                    @change="themeStore.toggleWidgets()" />
+                    :checked="themeStore.activeWidgets.clock"
+                    @change="themeStore.toggleWidget('clock')" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="setting-row">
+                <div class="label-group">
+                  <span>{{ $t('os.apps.settings.showStats') }}</span>
+                  <p>{{ $t('os.apps.settings.statsDesc') }}</p>
+                </div>
+                <label class="switch">
+                  <input
+                    type="checkbox"
+                    :checked="themeStore.activeWidgets.stats"
+                    @change="themeStore.toggleWidget('stats')" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="setting-row">
+                <div class="label-group">
+                  <span>{{ $t('os.apps.settings.showWelcome') }}</span>
+                  <p>{{ $t('os.apps.settings.welcomeDesc') }}</p>
+                </div>
+                <label class="switch">
+                  <input
+                    type="checkbox"
+                    :checked="themeStore.activeWidgets.welcome"
+                    @change="themeStore.toggleWidget('welcome')" />
                   <span class="slider"></span>
                 </label>
               </div>
@@ -857,10 +885,11 @@ const handleFileUpload = (event: Event) => {
     position: absolute;
     cursor: pointer;
     inset: 0;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.08);
     transition: .4s;
     border-radius: 34px;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 
     &::before {
       position: absolute;
@@ -869,18 +898,23 @@ const handleFileUpload = (event: Event) => {
       width: 18px;
       left: 3px;
       bottom: 3px;
-      background-color: white;
+      background-color: #ffffff;
       transition: .4s;
       border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      z-index: 2;
     }
   }
 
   input:checked + .slider {
     background-color: var(--os-primary-color);
+    border-color: rgba(255, 255, 255, 0.2);
   }
 
   input:checked + .slider::before {
     transform: translateX(24px);
+    background-color: var(--os-primary-text, #ffffff);
+    box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.2);
   }
 }
 </style>

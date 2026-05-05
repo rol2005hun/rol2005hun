@@ -7,10 +7,10 @@
       "version": "1.3.0",
       "title": "Asztali Widgetek és Testreszabás",
       "changes": [
-        "Bemutatkoznak az <strong>Asztali Widgetek</strong>: Óra, Rendszerstatisztika (CPU/RAM) és dinamikus üdvözlés.",
-        "<strong>Egyedi Hangsúlyszín</strong> támogatás: válassz bármilyen színt az OS felületéhez a Beállításokban.",
-        "Új <strong>Rendszer Beállítások</strong> fül OS információkkal és widget vezérlőkkel.",
-        "Fix magasságú, stabil Start menü elrendezés a jobb felhasználói élményért."
+        "<strong>Mozgatható Asztali Widgetek</strong>: Óra, Rendszerstatisztika és dinamikus üdvözlés.",
+        "Egyedileg szabályozható widget láthatóság a Rendszer beállításoknál.",
+        "<strong>Egyedi Hangsúlyszín</strong> támogatás modern színválasztóval.",
+        "Megszépített UI elemek: finomhangolt kapcsoló gombok és stabil Start menü elrendezés."
       ]
     },
     "2026-05-04-4": {

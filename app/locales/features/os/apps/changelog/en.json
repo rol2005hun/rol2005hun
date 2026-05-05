@@ -7,10 +7,10 @@
       "version": "3.4.0",
       "title": "Desktop Widgets & Customization",
       "changes": [
-        "Introduced beautiful <strong>Desktop Widgets</strong>: Clock, System Stats (CPU/RAM), and dynamic Greetings.",
-        "Added <strong>Custom Accent Color</strong> support: pick any color for the OS UI in Settings.",
-        "New <strong>System Settings</strong> tab with OS information and widget controls.",
-        "Refined Start Menu layout with fixed-height stability and improved spacing."
+        "Introduced draggable <strong>Desktop Widgets</strong>: Clock, System Stats, and dynamic Greetings.",
+        "Individual widget visibility controls added to System Settings.",
+        "Added <strong>Custom Accent Color</strong> support with a modern color picker.",
+        "Refined UI components: improved slider button aesthetics and Start Menu stability."
       ]
     },
     "2026-05-04-4": {
