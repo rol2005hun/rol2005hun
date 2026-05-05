@@ -23,21 +23,27 @@
       </div>
     </div>
 
-    <div
-      class="taskbar-right"
-      @click="desktopStore.toggleControlCenter()">
-      <div class="sys-tray">
-        <Icon :name="wifiIcon" size="16px" :title="wifiTitle" />
-        <Icon name="ph:speaker-high-fill" size="16px" />
-        <Icon
-          v-if="batteryLevel !== null"
-          :name="batteryIcon"
-          size="16px"
-          :title="`${Math.round(batteryLevel * 100)}%`" />
+    <div class="taskbar-right">
+      <div
+        class="tray-button"
+        :class="{ active: desktopStore.isControlCenterOpen }"
+        @click="desktopStore.toggleControlCenter()">
+        <div class="sys-tray">
+          <Icon :name="wifiIcon" size="16px" :title="wifiTitle" />
+          <Icon name="ph:speaker-high-fill" size="16px" />
+          <Icon
+            v-if="batteryLevel !== null"
+            :name="batteryIcon"
+            size="16px"
+            :title="`${Math.round(batteryLevel * 100)}%`" />
+        </div>
       </div>
-      <div class="time-widget">
-        <div class="time-text">{{ currentTime }}</div>
-        <div class="date-text">{{ currentDate }}</div>
+
+      <div class="time-button" @click="openCalendar">
+        <div class="time-widget">
+          <div class="time-text">{{ currentTime }}</div>
+          <div class="date-text">{{ currentDate }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -111,6 +117,16 @@ const toggleWindow = (id: string) => {
       windowStore.focusWindow(id);
     }
   }
+};
+
+const openCalendar = () => {
+  windowStore.openWindow({
+    id: 'calendar',
+    appId: 'calendar',
+    titleKey: 'os.apps.calendar.name',
+    width: 400,
+    height: 450
+  });
 };
 </script>
 
@@ -188,16 +204,28 @@ const toggleWindow = (id: string) => {
 }
 
 .taskbar-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 100%;
+
   .left &,
   .right & {
     flex-direction: column;
-    padding-left: 0;
-    padding-bottom: 10px;
+    height: auto;
+    width: 100%;
+    gap: 8px;
   }
+}
 
-  height: 100%;
-  padding-left: 10px;
-  border-radius: 6px;
+.tray-button,
+.time-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  padding: 0 8px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s;
 
@@ -207,6 +235,12 @@ const toggleWindow = (id: string) => {
 
   &.active {
     background: var(--os-active, rgba(255, 255, 255, 0.15));
+  }
+
+  .left &,
+  .right & {
+    width: 38px;
+    padding: 8px 0;
   }
 }
 
