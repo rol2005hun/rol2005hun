@@ -15,14 +15,14 @@
       </button>
 
       <div class="open-apps">
-        <AppIcon
+        <button
           v-for="win in windowStore.windows"
           :key="win.id"
-          :app-id="win.appId"
-          :is-active="win.zIndex === topZIndex && !win.isMinimized"
-          :is-minimized="win.isMinimized"
           class="app-btn-taskbar"
-          @click.stop="toggleWindow(win.id)" />
+          :class="{ active: win.zIndex === topZIndex && !win.isMinimized }"
+          @click.stop="toggleWindow(win.id)">
+          <AppIcon :app-id="win.appId" size="24px" />
+        </button>
       </div>
     </div>
 
