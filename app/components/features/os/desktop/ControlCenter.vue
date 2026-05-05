@@ -8,8 +8,8 @@
         <h3>User</h3>
         <p>{{ $t('os.controlCenter.online') }}</p>
       </div>
-      <button class="power-btn" @click="handleLogout">
-        <Icon name="ph:sign-out-bold" />
+      <button class="power-btn" @click="handleShutdown">
+        <Icon name="ph:power-bold" />
       </button>
     </div>
 
@@ -88,11 +88,13 @@ import { ref, computed } from 'vue';
 import { useThemeStore } from '@/stores/features/os/useThemeStore';
 import { useDesktopStore } from '@/stores/features/os/useDesktopStore';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
+import { useSystemStore } from '@/stores/features/os/useSystemStore';
 import { useSystemInfo } from '@/composables/features/os/useSystemInfo';
 
 const themeStore = useThemeStore();
 const desktopStore = useDesktopStore();
 const windowStore = useWindowStore();
+const systemStore = useSystemStore();
 const { batteryLevel: sysBattery, batteryCharging } = useSystemInfo();
 
 const wifiActive = ref(true);
@@ -123,10 +125,8 @@ const openSettings = () => {
   desktopStore.closeControlCenter();
 };
 
-const handleLogout = () => {
-  if (confirm('Are you sure you want to log out?')) {
-    window.location.reload();
-  }
+const handleShutdown = () => {
+  systemStore.initiateShutdown();
 };
 </script>
 
@@ -211,6 +211,8 @@ const handleLogout = () => {
 
   &.active {
     background: var(--os-primary-color, #3b82f6);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     .icon-circle {
       background: rgba(255, 255, 255, 0.2);
     }
@@ -225,11 +227,13 @@ const handleLogout = () => {
     align-items: center;
     justify-content: center;
     font-size: 16px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 
   span {
     font-size: 13px;
     font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 }
 
