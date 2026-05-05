@@ -171,18 +171,24 @@ const handleShutdown = () => {
   }
 
   .power-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: none;
-    color: white;
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
+    background: rgba(255, 59, 48, 0.1);
+    border: 1px solid rgba(255, 59, 48, 0.3);
+    color: #ff3b30;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s ease;
+    
+    font-size: 20px;
+
     &:hover {
-      background: rgba(255, 0, 0, 0.2);
+      background: rgba(255, 59, 48, 0.2);
+      border-color: #ff3b30;
+      transform: scale(1.05);
     }
   }
 }
@@ -210,7 +216,7 @@ const handleShutdown = () => {
   }
 
   &.active {
-    background: var(--os-primary-color, #3b82f6);
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), var(--os-primary-color, #3b82f6);
     color: white;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     .icon-circle {
