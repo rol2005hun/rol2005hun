@@ -5,11 +5,11 @@
   "history": {
     "2026-05-05": {
       "version": "1.2.4",
-      "title": "Start Menü Optimalizáció",
+      "title": "Start Menü Elrendezés és Rács Javítások",
       "changes": [
-        "A Start menü alján lévő felesleges üres rész megszüntetése.",
-        "Dinamikus tartalomhoz igazodó elrendezés bevezetése minimum és maximum magassággal.",
-        "Vertikális elrendezés javítása a felesleges flex nyújtások eltávolításával."
+        "Fix magasságú elrendezés (540px) bevezetése a vizuális konzisztenciáért lapozás közben.",
+        "Finomhangolt alkalmazás-rács flexibilis nyújtással a stabil lapozó és footer pozíciókhoz.",
+        "Felesleges üres terek megszüntetése a prémium, kiegyensúlyozott megjelenés megőrzése mellett."
       ]
     },
     "2026-05-04-4": {

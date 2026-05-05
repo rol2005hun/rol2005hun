@@ -5,11 +5,11 @@
   "history": {
     "2026-05-05": {
       "version": "3.3.4",
-      "title": "Start Menu Optimization",
+      "title": "Start Menu Layout & Grid Fixes",
       "changes": [
-        "Fixed excessive empty space at the bottom of the Start Menu.",
-        "Optimized layout to wrap content dynamically with minimum and maximum height constraints.",
-        "Improved vertical alignment by removing unnecessary flex stretching."
+        "Implemented a fixed-height layout (540px) to ensure visual consistency when navigating between pages.",
+        "Refined the app grid with flex stretching to maintain stable pagination and footer positioning.",
+        "Eliminated excessive empty space while preserving a premium, balanced look."
       ]
     },
     "2026-05-04-4": {
