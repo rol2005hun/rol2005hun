@@ -9,9 +9,10 @@
       "changes": [
         "Turbózott <strong>Terminál</strong>: parancselőzmények (Fel/Le nyilak) és új parancsok: <code>cowsay</code>, <code>calc</code>, és <code>coffee</code>.",
         "<strong>Globális Kereső</strong>: azonnali elérés <code>Alt+Space</code> vagy <code>Ctrl+K</code> kombinációval.",
-        "Új <strong>Vezérlőközpont</strong> a gyors beállításokhoz.",
-        "Dinamikus <strong>Tálca Pozíciók</strong> támogatása.",
+        "Új <strong>Vezérlőközpont</strong> a gyors beállításokhoz és leállításhoz.",
+        "Dinamikus és <strong>Lebegő Tálca</strong> pozíciók elegáns térközökkel (gap).",
         "<strong>Mozgatható Asztali Widgetek</strong> perzisztens mentéssel.",
+        "Javított láthatóság és kontraszt világos hangsúlyszínek esetén.",
         "Teljes <strong>TypeScript</strong> refaktor az abszolút stabilitásért."
       ]
     },

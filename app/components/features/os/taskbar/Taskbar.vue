@@ -146,23 +146,23 @@ const toggleWindow = (id: string) => {
   &.left,
   &.right {
     flex-direction: column;
-    width: 60px;
-    height: 100%;
-    padding: 10px 0;
+    width: 64px;
+    height: auto;
+    max-height: calc(100% - 40px);
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 15px 0;
+    border-radius: 24px;
+    border: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   }
 
   &.left {
-    left: 0;
-    top: 0;
-    border-right: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    left: 12px;
   }
 
   &.right {
-    right: 0;
-    top: 0;
-    border-left: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
-    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    right: 12px;
   }
 }
 

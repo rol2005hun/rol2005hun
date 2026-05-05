@@ -9,9 +9,10 @@
       "changes": [
         "Enhanced <strong>Terminal</strong>: added command history (Up/Down arrows) and new commands: <code>cowsay</code>, <code>calc</code>, and <code>coffee</code>.",
         "Introduced <strong>Global Search</strong>: open with <code>Alt+Space</code> or <code>Ctrl+K</code>.",
-        "Added <strong>Control Center</strong> for quick system management.",
-        "Implemented dynamic <strong>Taskbar Positions</strong>.",
+        "Added <strong>Control Center</strong> for quick system management and shutdown.",
+        "Implemented dynamic and <strong>Floating Taskbar</strong> positions with elegant gaps.",
         "Introduced draggable <strong>Desktop Widgets</strong>.",
+        "Improved visibility and contrast for light accent colors.",
         "Full <strong>TypeScript</strong> refactor for 100% type-safety."
       ]
     },
