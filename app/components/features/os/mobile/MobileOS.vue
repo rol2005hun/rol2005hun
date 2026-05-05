@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, defineAsyncComponent, computed } from 'vue';
+import { ref, onMounted, onUnmounted, defineAsyncComponent, computed, type Component } from 'vue';
 import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
 
 const appRegistry = useAppRegistry();
@@ -51,7 +51,7 @@ const mobileVisibleApps = computed(() => {
   });
 });
 
-const appComponents: Record<string, any> = {
+const appComponents: Record<string, Component> = {
   settings: defineAsyncComponent(
     () => import('@/components/features/os/apps/settings/SettingsApp.vue')
   ),
@@ -121,12 +121,12 @@ onUnmounted(() => {
   top: 0;
   left: 0;
   right: 0;
-  height: 34px; /* Increased from 30px to accommodate bottom padding */
+  height: 34px;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px 4px 20px; /* Added 4px bottom padding */
+  padding: 0 20px 4px 20px;
   font-size: 14px;
   font-weight: 600;
   z-index: 50;

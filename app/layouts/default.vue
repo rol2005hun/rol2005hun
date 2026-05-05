@@ -51,18 +51,20 @@ const preventRefresh = (e: KeyboardEvent) => {
   }
 };
 
-const preventZoom = (e: KeyboardEvent | WheelEvent) => {
-  if (e.ctrlKey) {
-    if (e.type === 'wheel') {
+const preventZoom = (e: Event) => {
+  const isKeyboard = e instanceof KeyboardEvent;
+  const isWheel = e instanceof WheelEvent;
+  
+  if (!isKeyboard && !isWheel) return;
+  const ev = e as KeyboardEvent | WheelEvent;
+
+  if (ev.ctrlKey) {
+    if (isWheel) {
       e.preventDefault();
-    } else if (e.type === 'keydown') {
+    } else if (isKeyboard) {
       const ke = e as KeyboardEvent;
       if (
-        ke.key === '+' ||
-        ke.key === '-' ||
-        ke.key === '=' ||
-        ke.key === 'NumpadAdd' ||
-        ke.key === 'NumpadSubtract'
+        ['+', '-', '=', 'NumpadAdd', 'NumpadSubtract'].includes(ke.key)
       ) {
         e.preventDefault();
       }
@@ -80,15 +82,15 @@ const handleBeforeUnload = (e: BeforeUnloadEvent) => {
 
 onMounted(() => {
   window.addEventListener('keydown', preventRefresh);
-  window.addEventListener('keydown', preventZoom as any, { passive: false });
-  window.addEventListener('wheel', preventZoom as any, { passive: false });
+  window.addEventListener('keydown', preventZoom, { passive: false });
+  window.addEventListener('wheel', preventZoom, { passive: false });
   window.addEventListener('beforeunload', handleBeforeUnload);
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener('keydown', preventRefresh);
-  window.removeEventListener('keydown', preventZoom as any);
-  window.removeEventListener('wheel', preventZoom as any);
+  window.removeEventListener('keydown', preventZoom);
+  window.removeEventListener('wheel', preventZoom);
   window.removeEventListener('beforeunload', handleBeforeUnload);
 });
 </script>

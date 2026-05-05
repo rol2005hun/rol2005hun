@@ -60,10 +60,6 @@ useHead({
 });
 </script>
 
-<style>
-/* HMR placeholder */
-</style>
-
 <style scoped lang="scss">
 .privacy-page {
   padding: 3rem 2rem;

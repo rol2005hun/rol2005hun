@@ -444,7 +444,6 @@ const copyKey = async () => {
   }
 }
 
-/* --- MOBILE SPECIFIC STYLES --- */
 @media (max-width: 768px), (max-height: 700px) {
   .os-setup-window {
     width: 100vw;
@@ -579,7 +578,6 @@ const copyKey = async () => {
   font-size: 0.95rem;
 }
 
-/* Privacy Modal Styles */
 .privacy-modal {
   position: fixed;
   inset: 0;

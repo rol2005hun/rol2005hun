@@ -42,8 +42,14 @@ import { useI18n } from 'vue-i18n';
 
 const { tm } = useI18n({ useScope: 'global' });
 
+interface ChangelogEntry {
+  version: string;
+  title: string;
+  changes: string[];
+}
+
 const versions = computed(() => {
-  const data = tm('os.apps.changelog.history') as Record<string, any>;
+  const data = tm('os.apps.changelog.history') as Record<string, ChangelogEntry>;
   if (!data || typeof data !== 'object') {
     return [];
   }

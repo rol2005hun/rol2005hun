@@ -120,7 +120,6 @@ body {
   user-select: none;
 }
 
-/* Global Modern Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -141,7 +140,6 @@ body {
   }
 }
 
-/* Firefox fallback styles */
 * {
   scrollbar-width: thin;
   scrollbar-color: rgba(150, 150, 150, 0.3) transparent;

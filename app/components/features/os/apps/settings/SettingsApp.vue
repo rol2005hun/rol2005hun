@@ -63,7 +63,11 @@
                 </button>
               </div>
             </div>
-            <div class="preview-line" :style="{ backgroundColor: themeStore.accentColor || 'var(--os-primary-color)' }"></div>
+            <div
+              class="preview-line"
+              :style="{
+                backgroundColor: themeStore.accentColor || 'var(--os-primary-color)'
+              }"></div>
           </div>
         </div>
 
@@ -230,7 +234,7 @@
                     :key="pos"
                     class="pos-btn"
                     :class="{ active: desktopStore.taskbarPosition === pos }"
-                    @click="desktopStore.setTaskbarPosition(pos as any)">
+                    @click="desktopStore.setTaskbarPosition(pos as 'top' | 'bottom' | 'left' | 'right')">
                     {{ $t(`os.apps.settings.pos.${pos}`) }}
                   </button>
                 </div>
@@ -247,9 +251,11 @@
 import { ref, watch } from 'vue';
 import { useThemeStore } from '@/stores/features/os/useThemeStore';
 import { useLanguageStore } from '@/stores/features/os/useLanguageStore';
+import { useDesktopStore } from '@/stores/features/os/useDesktopStore';
 
 const themeStore = useThemeStore();
 const languageStore = useLanguageStore();
+const desktopStore = useDesktopStore();
 
 const activeTab = ref<'appearance' | 'wallpaper' | 'language' | 'system'>('appearance');
 
@@ -821,7 +827,9 @@ const handleFileUpload = (event: Event) => {
         cursor: pointer;
         padding: 0;
         text-decoration: underline;
-        &:hover { opacity: 0.8; }
+        &:hover {
+          opacity: 0.8;
+        }
       }
     }
   }
@@ -871,8 +879,14 @@ const handleFileUpload = (event: Event) => {
     align-items: center;
     gap: 12px;
     margin-bottom: 20px;
-    h3 { margin: 0; font-size: 18px; }
-    svg { font-size: 24px; color: var(--os-primary-color); }
+    h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+    svg {
+      font-size: 24px;
+      color: var(--os-primary-color);
+    }
   }
 
   .setting-row {
@@ -882,40 +896,50 @@ const handleFileUpload = (event: Event) => {
     padding: 12px 0;
 
     .label-group {
-      span { font-weight: 600; font-size: 15px; }
-      p { font-size: 13px; opacity: 0.6; margin: 4px 0 0; }
+      span {
+        font-weight: 600;
+        font-size: 15px;
+      }
+      p {
+        font-size: 13px;
+        opacity: 0.6;
+        margin: 4px 0 0;
+      }
     }
   }
 }
 
-/* Switch styling */
 .switch {
   position: relative;
   display: inline-block;
   width: 50px;
   height: 26px;
 
-  input { opacity: 0; width: 0; height: 0; }
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
 
   .slider {
     position: absolute;
     cursor: pointer;
     inset: 0;
     background-color: rgba(255, 255, 255, 0.08);
-    transition: .4s;
+    transition: 0.4s;
     border-radius: 34px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 
     &::before {
       position: absolute;
-      content: "";
+      content: '';
       height: 18px;
       width: 18px;
       left: 3px;
       bottom: 3px;
       background-color: #ffffff;
-      transition: .4s;
+      transition: 0.4s;
       border-radius: 50%;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
       z-index: 2;
@@ -966,3 +990,4 @@ const handleFileUpload = (event: Event) => {
   align-items: flex-start;
   gap: 12px;
 }
+</style>

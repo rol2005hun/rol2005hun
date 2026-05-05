@@ -364,7 +364,7 @@ const selectProject = (project: Project) => {
 
   @media (max-width: 768px) {
     padding: 20px;
-    padding-bottom: 80px; /* add some safe space at the bottom for mobile */
+    padding-bottom: 80px;
   }
 }
 
@@ -406,7 +406,6 @@ const selectProject = (project: Project) => {
   line-height: 1.6;
 }
 
-/* Animations */
 .fade-slide-enter-active,
 .fade-slide-leave-active {
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
