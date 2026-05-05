@@ -1,7 +1,10 @@
 <template>
   <div
     class="taskbar-container"
-    :class="[desktopStore.taskbarPosition, { active: desktopStore.isControlCenterOpen }]"
+    :class="[
+      desktopStore.taskbarPosition,
+      { active: desktopStore.isControlCenterOpen, floating: desktopStore.isTaskbarFloating }
+    ]"
     @click.self="desktopStore.closeStartMenu()">
     <div class="taskbar-left">
       <button
@@ -146,46 +149,69 @@ const openCalendar = () => {
   &.bottom,
   &.top {
     height: 48px;
-    width: auto;
-    min-width: 400px;
-    max-width: 90vw;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 20px;
-    padding: 0 15px;
-    border: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    left: 0;
+    border-radius: 0;
+    border: none;
+    padding: 0 10px;
+
+    &.floating {
+      width: auto;
+      min-width: 400px;
+      max-width: 90vw;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 20px;
+      padding: 0 12px;
+      border: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
   }
 
   &.bottom {
-    bottom: 12px;
+    bottom: 0;
+    border-top: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+    &.floating { bottom: 12px; border-top: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1)); }
   }
 
   &.top {
-    top: 12px;
+    top: 0;
+    border-bottom: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+    &.floating { top: 12px; border-bottom: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1)); }
   }
 
   &.left,
   &.right {
     flex-direction: column;
     width: 72px;
-    height: auto;
-    min-height: 200px;
-    max-height: calc(100% - 40px);
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 15px 0;
-    border-radius: 24px;
-    border: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    height: 100%;
+    top: 0;
+    border-radius: 0;
+    padding: 10px 0;
+
+    &.floating {
+      height: auto;
+      min-height: 200px;
+      max-height: calc(100% - 40px);
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 12px 0;
+      border-radius: 24px;
+      border: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
   }
 
   &.left {
-    left: 12px;
+    left: 0;
+    border-right: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+    &.floating { left: 12px; border-right: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1)); }
   }
 
   &.right {
-    right: 12px;
+    right: 0;
+    border-left: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+    &.floating { right: 12px; border-left: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1)); }
   }
 }
 
@@ -193,7 +219,16 @@ const openCalendar = () => {
 .taskbar-right {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
+  height: 100%;
+
+  .left &,
+  .right & {
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    gap: 6px;
+  }
 }
 
 .taskbar-left {
@@ -241,7 +276,7 @@ const openCalendar = () => {
   .right & {
     width: 56px;
     height: auto;
-    padding: 10px 0;
+    padding: 8px 0;
   }
 }
 
@@ -283,13 +318,13 @@ const openCalendar = () => {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 0 10px;
+  padding: 0 6px;
   color: var(--os-text, #fff);
 
   .left &,
   .right & {
     flex-direction: column;
-    padding: 10px 0;
+    padding: 6px 0;
   }
 }
 
@@ -299,7 +334,7 @@ const openCalendar = () => {
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  padding: 0 10px;
+  padding: 0 4px;
   border-radius: 6px;
   cursor: default;
   user-select: none;
@@ -308,12 +343,8 @@ const openCalendar = () => {
   .left &,
   .right & {
     align-items: center;
-    padding: 10px 0;
+    padding: 4px 0;
     text-align: center;
-  }
-
-  &:hover {
-    background: var(--os-hover, rgba(255, 255, 255, 0.1));
   }
 
   .time-text {

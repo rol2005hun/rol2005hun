@@ -20,6 +20,12 @@ export const useDesktopStore = defineStore('os-desktop', () => {
     maxAge: 31536000
   });
   const taskbarPosition = ref(taskbarPositionCookie.value || 'bottom');
+  const isTaskbarFloatingCookie = useCookie<boolean>('os-taskbar-floating', {
+    default: () => true,
+    watch: true,
+    maxAge: 31536000
+  });
+  const isTaskbarFloating = ref(isTaskbarFloatingCookie.value ?? true);
   const selectedIcons = ref<string[]>([]);
   const appRegistry = useAppRegistry();
 
@@ -103,6 +109,11 @@ export const useDesktopStore = defineStore('os-desktop', () => {
   const setTaskbarPosition = (pos: 'bottom' | 'top' | 'left' | 'right') => {
     taskbarPosition.value = pos;
     taskbarPositionCookie.value = pos;
+  };
+
+  const toggleTaskbarFloating = () => {
+    isTaskbarFloating.value = !isTaskbarFloating.value;
+    isTaskbarFloatingCookie.value = isTaskbarFloating.value;
   };
 
   const updateIconPosition = (id: string, x: number, y: number) => {
@@ -241,6 +252,8 @@ export const useDesktopStore = defineStore('os-desktop', () => {
     clearSelection,
     setSelection,
     resetIcons,
-    ensureIconsInBounds
+    ensureIconsInBounds,
+    isTaskbarFloating,
+    toggleTaskbarFloating
   };
 });

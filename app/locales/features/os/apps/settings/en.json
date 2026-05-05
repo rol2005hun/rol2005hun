@@ -31,9 +31,8 @@
   "taskbarPosition": "Taskbar Position",
   "taskbarPosDesc": "Choose where to place the system taskbar.",
   "pos": {
-    "top": "Top",
-    "bottom": "Bottom",
-    "left": "Left",
     "right": "Right"
-  }
+  },
+  "floatingTaskbar": "Floating Taskbar",
+  "floatingTaskbarDesc": "Switch between modern floating and traditional full-width taskbar layout."
 }

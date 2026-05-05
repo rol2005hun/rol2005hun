@@ -223,6 +223,20 @@
                   <span class="slider"></span>
                 </label>
               </div>
+
+              <div class="setting-row">
+                <div class="label-group">
+                  <span>{{ $t('os.apps.settings.floatingTaskbar') }}</span>
+                  <p>{{ $t('os.apps.settings.floatingTaskbarDesc') }}</p>
+                </div>
+                <label class="switch">
+                  <input
+                    type="checkbox"
+                    :checked="desktopStore.isTaskbarFloating"
+                    @change="desktopStore.toggleTaskbarFloating()" />
+                  <span class="slider"></span>
+                </label>
+              </div>
               <div class="setting-row vertical">
                 <div class="label-group">
                   <span>{{ $t('os.apps.settings.taskbarPosition') }}</span>
