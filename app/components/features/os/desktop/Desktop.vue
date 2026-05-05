@@ -40,6 +40,10 @@
     </Transition>
 
     <Taskbar class="fixed-bottom" />
+
+    <Transition name="slide-up">
+      <ControlCenter v-if="desktopStore.isControlCenterOpen" class="control-center-panel" />
+    </Transition>
   </div>
 </template>
 
@@ -47,6 +51,7 @@
 import { ref, reactive, computed, onMounted, onUnmounted, nextTick } from 'vue';
 import Taskbar from '@/components/features/os/taskbar/Taskbar.vue';
 import StartMenu from '@/components/features/os/desktop/StartMenu.vue';
+import ControlCenter from '@/components/features/os/desktop/ControlCenter.vue';
 import DesktopWidgets from '@/components/features/os/desktop/DesktopWidgets.vue';
 import WindowFrame from '@/components/features/os/window/WindowFrame.vue';
 import DesktopIcon from '@/components/features/desktop/DesktopIcon.vue';
@@ -255,6 +260,13 @@ onUnmounted(() => {
   position: absolute;
   bottom: 60px;
   left: 10px;
+  z-index: 9999;
+}
+
+.control-center-panel {
+  position: absolute;
+  bottom: 60px;
+  right: 10px;
   z-index: 9999;
 }
 

@@ -4,14 +4,14 @@
   "empty": "No versions available.",
   "history": {
     "2026-05-05": {
-      "version": "3.4.0",
-      "title": "Desktop Widgets & Customization",
+      "version": "3.5.0",
+      "title": "Control Center & Productivity",
       "changes": [
+        "Added a new <strong>Control Center</strong>: manage Wi-Fi, Bluetooth, volume, and brightness from a single panel.",
         "Introduced draggable <strong>Desktop Widgets</strong>: Clock, System Stats, and dynamic Greetings.",
-        "Individual widget visibility controls added to System Settings.",
         "Added <strong>Custom Accent Color</strong> support with a modern color picker.",
-        "<strong>Notepad</strong>: Added automatic focus on launch for better productivity.",
-        "<strong>Paint</strong>: Fixed touch interaction bugs and improved TypeScript stability.",
+        "<strong>Notepad</strong>: Added automatic focus on launch.",
+        "<strong>Paint</strong>: Fixed touch interaction bugs.",
         "Refined UI components: improved slider button aesthetics and Start Menu stability."
       ]
     },

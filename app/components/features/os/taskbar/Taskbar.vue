@@ -20,7 +20,10 @@
       </div>
     </div>
 
-    <div class="taskbar-right">
+    <div
+      class="taskbar-right"
+      :class="{ active: desktopStore.isControlCenterOpen }"
+      @click="desktopStore.toggleControlCenter()">
       <div class="sys-tray">
         <Icon :name="wifiIcon" size="16px" :title="wifiTitle" />
         <Icon name="ph:speaker-high-fill" size="16px" />
@@ -131,6 +134,18 @@ const toggleWindow = (id: string) => {
   align-items: center;
   gap: 8px;
   height: 100%;
+  padding-left: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: var(--os-hover, rgba(255, 255, 255, 0.1));
+  }
+
+  &.active {
+    background: var(--os-active, rgba(255, 255, 255, 0.15));
+  }
 }
 
 .start-btn,

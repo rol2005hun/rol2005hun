@@ -12,6 +12,7 @@ export interface DesktopIconItem {
 
 export const useDesktopStore = defineStore('os-desktop', () => {
   const isStartMenuOpen = ref(false);
+  const isControlCenterOpen = ref(false);
   const selectedIcons = ref<string[]>([]);
   const appRegistry = useAppRegistry();
 
@@ -58,10 +59,20 @@ export const useDesktopStore = defineStore('os-desktop', () => {
 
   const toggleStartMenu = () => {
     isStartMenuOpen.value = !isStartMenuOpen.value;
+    if (isStartMenuOpen.value) isControlCenterOpen.value = false;
   };
 
   const closeStartMenu = () => {
     isStartMenuOpen.value = false;
+  };
+
+  const toggleControlCenter = () => {
+    isControlCenterOpen.value = !isControlCenterOpen.value;
+    if (isControlCenterOpen.value) isStartMenuOpen.value = false;
+  };
+
+  const closeControlCenter = () => {
+    isControlCenterOpen.value = false;
   };
 
   const updateIconPosition = (id: string, x: number, y: number) => {
@@ -166,10 +177,13 @@ export const useDesktopStore = defineStore('os-desktop', () => {
 
   return {
     isStartMenuOpen,
+    isControlCenterOpen,
     icons,
     selectedIcons,
     toggleStartMenu,
     closeStartMenu,
+    toggleControlCenter,
+    closeControlCenter,
     updateIconPosition,
     selectIcon,
     clearSelection,
