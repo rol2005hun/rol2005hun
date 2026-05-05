@@ -4,15 +4,15 @@
   "empty": "Nincs elérhető változat.",
   "history": {
     "2026-05-05": {
-      "version": "1.5.0",
-      "title": "Globális Kereső és Finomhangolás",
+      "version": "1.6.0",
+      "title": "Terminál Tuning és Globális Kereső",
       "changes": [
-        "Bevezetett <strong>Globális Kereső (Gyorskereső)</strong>: nyisd meg az <code>Alt+Space</code> vagy <code>Ctrl+K</code> kombinációval az appok azonnali eléréséhez.",
-        "Új <strong>Vezérlőközpont</strong>: Wi-Fi, Bluetooth, hangerő és fényerő kezelése.",
-        "Dinamikus <strong>Tálca Pozíciók</strong>: bárhová áthelyezhető tálca a képernyő szélén.",
+        "Turbózott <strong>Terminál</strong>: parancselőzmények (Fel/Le nyilak) és új parancsok: <code>cowsay</code>, <code>calc</code>, és <code>coffee</code>.",
+        "<strong>Globális Kereső</strong>: azonnali elérés <code>Alt+Space</code> vagy <code>Ctrl+K</code> kombinációval.",
+        "Új <strong>Vezérlőközpont</strong> a gyors beállításokhoz.",
+        "Dinamikus <strong>Tálca Pozíciók</strong> támogatása.",
         "<strong>Mozgatható Asztali Widgetek</strong> perzisztens mentéssel.",
-        "<strong>Egyedi Hangsúlyszín</strong> támogatás.",
-        "Az összes <code>any</code> típus kiirtása a 100% típusbiztos kódért."
+        "Teljes <strong>TypeScript</strong> refaktor az abszolút stabilitásért."
       ]
     },
     "2026-05-04-4": {

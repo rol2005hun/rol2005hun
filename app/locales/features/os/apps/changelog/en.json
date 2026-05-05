@@ -4,15 +4,15 @@
   "empty": "No versions available.",
   "history": {
     "2026-05-05": {
-      "version": "3.6.0",
-      "title": "Global Search & Refinement",
+      "version": "3.7.0",
+      "title": "Terminal Power-up & Global Search",
       "changes": [
-        "Introduced <strong>Global Search (Quick Search)</strong>: open with <code>Alt+Space</code> or <code>Ctrl+K</code> to find apps instantly.",
-        "Added a new <strong>Control Center</strong>: manage Wi-Fi, Bluetooth, volume, and brightness.",
-        "Implemented dynamic <strong>Taskbar Positions</strong>: move it to any edge of the screen.",
-        "Introduced draggable <strong>Desktop Widgets</strong> with persistence.",
-        "Added <strong>Custom Accent Color</strong> support.",
-        "Eliminated all <code>any</code> types for a 100% type-safe codebase."
+        "Enhanced <strong>Terminal</strong>: added command history (Up/Down arrows) and new commands: <code>cowsay</code>, <code>calc</code>, and <code>coffee</code>.",
+        "Introduced <strong>Global Search</strong>: open with <code>Alt+Space</code> or <code>Ctrl+K</code>.",
+        "Added <strong>Control Center</strong> for quick system management.",
+        "Implemented dynamic <strong>Taskbar Positions</strong>.",
+        "Introduced draggable <strong>Desktop Widgets</strong>.",
+        "Full <strong>TypeScript</strong> refactor for 100% type-safety."
       ]
     },
     "2026-05-04-4": {

@@ -141,3 +141,63 @@ export const themeCommand: TerminalCommand = {
     context.print(context.t('os.apps.terminal.commands.fun.themeAvailable', { available }));
   }
 };
+
+export const cowsayCommand: TerminalCommand = {
+  name: 'cowsay',
+  execute: (args, context) => {
+    const text = args.length > 0 ? args.join(' ') : 'Moooo!';
+    const border = '-'.repeat(text.length + 2);
+    context.print(
+      `<pre style="line-height: 1.2; margin: 0;">
+  ${border}
+< ${text} >
+  ${border}
+         \\  ^__^
+          \\ (oo)\\_______
+            (__)\\       )\\/\\
+                ||----w |
+                ||     ||
+      </pre>`,
+      false,
+      true
+    );
+  }
+};
+
+export const calcCommand: TerminalCommand = {
+  name: 'calc',
+  aliases: ['calculate', 'math'],
+  execute: (args, context) => {
+    if (args.length === 0) {
+      context.print('Usage: calc <expression> (e.g. calc 2 + 2)');
+      return;
+    }
+    const expr = args.join(' ');
+    try {
+      // Basic safety: only numbers and math operators
+      if (!/^[0-9+\-*/().\s]+$/.test(expr)) {
+        throw new Error('Invalid characters');
+      }
+      const result = eval(expr);
+      context.print(`${expr} = ${result}`);
+    } catch (e) {
+      context.print('Error: Invalid math expression');
+    }
+  }
+};
+
+export const coffeeCommand: TerminalCommand = {
+  name: 'coffee',
+  aliases: ['brew'],
+  execute: async (args, context) => {
+    context.print('Brewing coffee...', true);
+    await new Promise((r) => setTimeout(r, 1000));
+    context.print('  ( (');
+    await new Promise((r) => setTimeout(r, 500));
+    context.print('   ) )');
+    await new Promise((r) => setTimeout(r, 500));
+    context.print('........');
+    context.print('|      |]  - Enjoy your coffee!');
+    context.print('\\______/');
+  }
+};

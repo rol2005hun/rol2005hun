@@ -24,7 +24,9 @@
         :type="isMaskedMode ? 'password' : 'text'"
         spellcheck="false"
         autocomplete="off"
-        @keyup.enter="handleEnter" />
+        @keyup.enter="handleEnter"
+        @keydown.up.prevent="navigateHistory(1)"
+        @keydown.down.prevent="navigateHistory(-1)" />
     </div>
   </div>
 </template>
@@ -43,6 +45,10 @@ const history = ref<TerminalLine[]>([]);
 const command = ref('');
 const cmdInput = ref<HTMLInputElement | null>(null);
 const terminalContainer = ref<HTMLElement | null>(null);
+
+const cmdHistory = ref<string[]>([]);
+const historyIndex = ref(-1);
+const tempCommand = ref('');
 
 const isMaskedMode = ref(false);
 const passwordCallback = ref<Parameters<TerminalContext['setPromptMode']>[1] | null>(null);
@@ -69,6 +75,27 @@ const scrollToBottom = async () => {
   await nextTick();
   if (terminalContainer.value) {
     terminalContainer.value.scrollTop = terminalContainer.value.scrollHeight;
+  }
+  }
+};
+
+const navigateHistory = (direction: number) => {
+  if (cmdHistory.value.length === 0) return;
+
+  if (historyIndex.value === -1) {
+    tempCommand.value = command.value;
+  }
+
+  const newIndex = historyIndex.value + direction;
+
+  if (newIndex >= -1 && newIndex < cmdHistory.value.length) {
+    historyIndex.value = newIndex;
+    if (newIndex === -1) {
+      command.value = tempCommand.value;
+    } else {
+      // History is stored in chronological order, but we want last first
+      command.value = cmdHistory.value[cmdHistory.value.length - 1 - newIndex] || '';
+    }
   }
 };
 
@@ -134,6 +161,8 @@ const handleEnter = async () => {
   }
 
   history.value.push({ prompt: promptStr, content: cmd });
+  cmdHistory.value.push(cmd);
+  historyIndex.value = -1;
   command.value = '';
 
   const args = cmd.trim().split(/\s+/);
