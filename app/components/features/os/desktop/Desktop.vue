@@ -244,8 +244,8 @@ onUnmounted(() => {
 
   &.bottom { flex-direction: column; padding-bottom: 72px; }
   &.top { flex-direction: column-reverse; padding-top: 72px; }
-  &.left { flex-direction: row-reverse; padding-left: 88px; }
-  &.right { flex-direction: row; padding-right: 88px; }
+  &.left { flex-direction: row-reverse; padding-left: 96px; }
+  &.right { flex-direction: row; padding-right: 96px; }
 }
 
 .desktop-surface {

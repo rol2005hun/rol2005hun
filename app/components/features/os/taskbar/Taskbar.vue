@@ -168,7 +168,7 @@ const openCalendar = () => {
   &.left,
   &.right {
     flex-direction: column;
-    width: 64px;
+    width: 72px;
     height: auto;
     min-height: 200px;
     max-height: calc(100% - 40px);
@@ -239,8 +239,9 @@ const openCalendar = () => {
 
   .left &,
   .right & {
-    width: 38px;
-    padding: 8px 0;
+    width: 56px;
+    height: auto;
+    padding: 10px 0;
   }
 }
 
