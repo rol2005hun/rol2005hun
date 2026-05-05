@@ -3,6 +3,15 @@
   "subtitle": "Latest OS updates and features",
   "empty": "No versions available.",
   "history": {
+    "2026-05-05": {
+      "version": "3.3.4",
+      "title": "Start Menu Optimization",
+      "changes": [
+        "Fixed excessive empty space at the bottom of the Start Menu.",
+        "Optimized layout to wrap content dynamically with minimum and maximum height constraints.",
+        "Improved vertical alignment by removing unnecessary flex stretching."
+      ]
+    },
     "2026-05-04-4": {
       "version": "3.3.3",
       "title": "Start Menu Layout Fixes",

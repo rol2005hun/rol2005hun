@@ -3,6 +3,15 @@
   "subtitle": "Legújabb OS frissítések és funkciók",
   "empty": "Nincs elérhető változat.",
   "history": {
+    "2026-05-05": {
+      "version": "1.2.4",
+      "title": "Start Menü Optimalizáció",
+      "changes": [
+        "A Start menü alján lévő felesleges üres rész megszüntetése.",
+        "Dinamikus tartalomhoz igazodó elrendezés bevezetése minimum és maximum magassággal.",
+        "Vertikális elrendezés javítása a felesleges flex nyújtások eltávolításával."
+      ]
+    },
     "2026-05-04-4": {
       "version": "1.2.3",
       "title": "Start Menü Elrendezés Javítása",

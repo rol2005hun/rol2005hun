@@ -156,7 +156,9 @@ const openApp = (appId: string) => {
 <style scoped lang="scss">
 .start-menu-container {
   width: 420px;
-  height: 600px;
+  height: auto;
+  min-height: 450px;
+  max-height: 600px;
   background: var(--os-menu-bg, rgba(20, 20, 20, 0.85));
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
@@ -169,7 +171,6 @@ const openApp = (appId: string) => {
 }
 
 .start-menu-content {
-  flex: 1;
   padding: 24px 24px 12px 24px;
   display: flex;
   flex-direction: column;
@@ -210,8 +211,6 @@ const openApp = (appId: string) => {
 .pinned-section {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  min-height: 0;
 
   h3 {
     font-size: 12px;
@@ -229,8 +228,6 @@ const openApp = (appId: string) => {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
-  flex: 1;
-  min-height: 0;
   align-content: start;
 }
 
