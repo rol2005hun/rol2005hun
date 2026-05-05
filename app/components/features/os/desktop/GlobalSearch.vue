@@ -89,8 +89,9 @@ const moveSelection = (dir: number) => {
 };
 
 const handleEnter = () => {
-  if (results.value.length > 0) {
-    openApp(results.value[selectedIndex.value]);
+  const selected = results.value[selectedIndex.value];
+  if (selected) {
+    openApp(selected);
   } else if (query.value.trim()) {
     searchWeb();
   }
