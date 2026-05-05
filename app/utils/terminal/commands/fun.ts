@@ -76,8 +76,8 @@ export const dfCommand: TerminalCommand = {
   name: 'df',
   aliases: ['free'],
   execute: (args, context) => {
-    const memoryNav = (navigator as any).deviceMemory;
-    const gb = memoryNav ? memoryNav : 8;
+    const memoryNav = (navigator as Navigator & { deviceMemory?: number }).deviceMemory;
+    const gb = memoryNav || 8;
 
     context.print(context.t('os.apps.terminal.commands.fun.dfHeader'));
     context.print(

@@ -76,7 +76,6 @@ const scrollToBottom = async () => {
   if (terminalContainer.value) {
     terminalContainer.value.scrollTop = terminalContainer.value.scrollHeight;
   }
-  }
 };
 
 const navigateHistory = (direction: number) => {
