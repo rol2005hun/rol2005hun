@@ -1,20 +1,20 @@
 <template>
   <div class="os-root">
-    <Transition name="fade">
-      <ClientOnly>
+    <ClientOnly>
+      <Transition name="fade">
         <SystemSetup
           v-if="!isInstalled"
           class="setup-overlay"
           @setup-complete="handleSetupComplete" />
-      </ClientOnly>
-    </Transition>
+      </Transition>
+    </ClientOnly>
 
     <div v-show="isInstalled" class="os-content-wrapper">
-      <Transition name="fade">
-        <ClientOnly>
+      <ClientOnly>
+        <Transition name="fade">
           <LockScreen v-if="!authStore.isUnlocked" class="lock-screen-overlay" />
-        </ClientOnly>
-      </Transition>
+        </Transition>
+      </ClientOnly>
 
       <Transition name="fade">
         <ShutdownModal v-if="systemStore.showShutdownModal" />
