@@ -27,5 +27,13 @@
   "showStats": "System Stats",
   "statsDesc": "Show real-time CPU and RAM monitoring.",
   "showWelcome": "Welcome Card",
-  "welcomeDesc": "Show the personalized greeting message."
+  "welcomeDesc": "Show the personalized greeting message.",
+  "taskbarPosition": "Taskbar Position",
+  "taskbarPosDesc": "Choose where to place the system taskbar.",
+  "pos": {
+    "top": "Top",
+    "bottom": "Bottom",
+    "left": "Left",
+    "right": "Right"
+  }
 }

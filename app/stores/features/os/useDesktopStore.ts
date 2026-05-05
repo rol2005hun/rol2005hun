@@ -13,6 +13,12 @@ export interface DesktopIconItem {
 export const useDesktopStore = defineStore('os-desktop', () => {
   const isStartMenuOpen = ref(false);
   const isControlCenterOpen = ref(false);
+  const taskbarPositionCookie = useCookie<'bottom' | 'top' | 'left' | 'right'>('os-taskbar-pos', {
+    default: () => 'bottom',
+    watch: true,
+    maxAge: 31536000
+  });
+  const taskbarPosition = ref(taskbarPositionCookie.value || 'bottom');
   const selectedIcons = ref<string[]>([]);
   const appRegistry = useAppRegistry();
 
@@ -75,6 +81,11 @@ export const useDesktopStore = defineStore('os-desktop', () => {
     isControlCenterOpen.value = false;
   };
 
+  const setTaskbarPosition = (pos: 'bottom' | 'top' | 'left' | 'right') => {
+    taskbarPosition.value = pos;
+    taskbarPositionCookie.value = pos;
+  };
+
   const updateIconPosition = (id: string, x: number, y: number) => {
     const currentIcons = [...icons.value];
     const index = currentIcons.findIndex((i) => i.id === id);
@@ -118,21 +129,38 @@ export const useDesktopStore = defineStore('os-desktop', () => {
     const iconHeight = 100;
     const paddingX = 20;
     const paddingY = 20;
-    const taskbarHeight = 60;
-    const availableHeight = height - taskbarHeight;
+    const taskbarSize = 60;
+    
+    let availableWidth = width;
+    let availableHeight = height;
+    let startX = 0;
+    let startY = 0;
+
+    if (taskbarPosition.value === 'bottom') {
+      availableHeight -= taskbarSize;
+    } else if (taskbarPosition.value === 'top') {
+      availableHeight -= taskbarSize;
+      startY = taskbarSize;
+    } else if (taskbarPosition.value === 'left') {
+      availableWidth -= taskbarSize;
+      startX = taskbarSize;
+    } else if (taskbarPosition.value === 'right') {
+      availableWidth -= taskbarSize;
+    }
+
     const maxRows = Math.floor((availableHeight - paddingY) / iconHeight) || 1;
 
     const occupied = new Set<string>();
 
     const getCell = (x: number, y: number) => {
-      const col = Math.max(0, Math.round((x - paddingX) / (iconWidth + paddingX)));
-      const row = Math.max(0, Math.round((y - paddingY) / iconHeight));
+      const col = Math.max(0, Math.round((x - paddingX - startX) / (iconWidth + paddingX)));
+      const row = Math.max(0, Math.round((y - paddingY - startY) / iconHeight));
       return { col, row };
     };
 
     currentIcons.forEach((icon) => {
       const { x, y } = icon;
-      const isOutOfBounds = x < 0 || y < 0 || x + iconWidth > width || y + iconHeight > availableHeight;
+      const isOutOfBounds = x < startX || y < startY || x + iconWidth > width - (taskbarPosition.value === 'right' ? taskbarSize : 0) || y + iconHeight > height - (taskbarPosition.value === 'bottom' ? taskbarSize : 0);
       if (!isOutOfBounds) {
         const { col, row } = getCell(x, y);
         occupied.add(`${col},${row}`);
@@ -160,8 +188,8 @@ export const useDesktopStore = defineStore('os-desktop', () => {
         const { col, row } = findNextAvailableCell();
         occupied.add(`${col},${row}`);
 
-        const newX = paddingX + col * (iconWidth + paddingX);
-        const newY = paddingY + row * iconHeight;
+        const newX = paddingX + startX + col * (iconWidth + paddingX);
+        const newY = paddingY + startY + row * iconHeight;
 
         if (newX !== x || newY !== y) {
           currentIcons[index] = { ...icon, x: newX, y: newY };
@@ -178,12 +206,14 @@ export const useDesktopStore = defineStore('os-desktop', () => {
   return {
     isStartMenuOpen,
     isControlCenterOpen,
+    taskbarPosition,
     icons,
     selectedIcons,
     toggleStartMenu,
     closeStartMenu,
     toggleControlCenter,
     closeControlCenter,
+    setTaskbarPosition,
     updateIconPosition,
     selectIcon,
     clearSelection,

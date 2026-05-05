@@ -39,7 +39,7 @@
       <StartMenu v-if="desktopStore.isStartMenuOpen" class="start-menu-panel" />
     </Transition>
 
-    <Taskbar class="fixed-bottom" />
+    <Taskbar class="taskbar-panel" />
 
     <Transition name="slide-up">
       <ControlCenter v-if="desktopStore.isControlCenterOpen" class="control-center-panel" />
@@ -208,21 +208,28 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
-.desktop-environment {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  inset: 0;
+.desktop-container {
+  height: 100vh;
+  width: 100vw;
   display: flex;
-  flex-direction: column;
-  z-index: 10;
+  overflow: hidden;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.5s ease;
+
+  &.bottom { flex-direction: column; }
+  &.top { flex-direction: column-reverse; }
+  &.left { flex-direction: row-reverse; }
+  &.right { flex-direction: row; }
 }
 
 .desktop-surface {
-  position: relative;
   flex: 1;
-  width: 100%;
+  position: relative;
   overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 .selection-box {
@@ -258,20 +265,26 @@ onUnmounted(() => {
 
 .start-menu-panel {
   position: absolute;
-  bottom: 60px;
-  left: 10px;
   z-index: 9999;
+
+  .bottom & { bottom: 60px; left: 10px; }
+  .top & { top: 60px; left: 10px; }
+  .left & { bottom: 10px; left: 70px; }
+  .right & { bottom: 10px; right: 70px; }
 }
 
 .control-center-panel {
   position: absolute;
-  bottom: 60px;
-  right: 10px;
   z-index: 9999;
+
+  .bottom & { bottom: 60px; right: 10px; }
+  .top & { top: 60px; right: 10px; }
+  .left & { top: 10px; left: 70px; }
+  .right & { top: 10px; right: 70px; }
 }
 
-.fixed-bottom {
-  margin-top: auto;
+.taskbar-panel {
+  z-index: 10000;
 }
 
 .slide-up-enter-active,

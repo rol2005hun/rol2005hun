@@ -1,5 +1,8 @@
 <template>
-  <div class="taskbar-container" @click.self="desktopStore.closeStartMenu()">
+  <div
+    class="taskbar-container"
+    :class="[desktopStore.taskbarPosition, { active: desktopStore.isControlCenterOpen }]"
+    @click.self="desktopStore.closeStartMenu()">
     <div class="taskbar-left">
       <button
         class="start-btn"
@@ -22,7 +25,6 @@
 
     <div
       class="taskbar-right"
-      :class="{ active: desktopStore.isControlCenterOpen }"
       @click="desktopStore.toggleControlCenter()">
       <div class="sys-tray">
         <Icon :name="wifiIcon" size="16px" :title="wifiTitle" />
@@ -114,8 +116,6 @@ const toggleWindow = (id: string) => {
 
 <style scoped lang="scss">
 .taskbar-container {
-  height: 48px;
-  width: 100%;
   background: var(--os-taskbar-bg, rgba(20, 20, 20, 0.85));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -123,9 +123,47 @@ const toggleWindow = (id: string) => {
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
-  border-top: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
   z-index: 10000;
+
+  &.bottom {
+    height: 48px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  &.top {
+    height: 48px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  &.left,
+  &.right {
+    flex-direction: column;
+    width: 60px;
+    height: 100%;
+    padding: 10px 0;
+  }
+
+  &.left {
+    left: 0;
+    top: 0;
+    border-right: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  }
+
+  &.right {
+    right: 0;
+    top: 0;
+    border-left: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .taskbar-left,
@@ -133,6 +171,23 @@ const toggleWindow = (id: string) => {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.taskbar-left {
+  .left &,
+  .right & {
+    flex-direction: column;
+  }
+}
+
+.taskbar-right {
+  .left &,
+  .right & {
+    flex-direction: column;
+    padding-left: 0;
+    padding-bottom: 10px;
+  }
+
   height: 100%;
   padding-left: 10px;
   border-radius: 6px;
@@ -175,6 +230,11 @@ const toggleWindow = (id: string) => {
 .open-apps {
   display: flex;
   gap: 4px;
+
+  .left &,
+  .right & {
+    flex-direction: column;
+  }
 }
 
 .sys-tray {
@@ -183,6 +243,12 @@ const toggleWindow = (id: string) => {
   gap: 12px;
   padding: 0 10px;
   color: var(--os-text, #fff);
+
+  .left &,
+  .right & {
+    flex-direction: column;
+    padding: 10px 0;
+  }
 }
 
 .time-widget {
@@ -192,11 +258,17 @@ const toggleWindow = (id: string) => {
   justify-content: center;
   align-items: flex-end;
   padding: 0 10px;
-  height: 38px;
   border-radius: 6px;
   cursor: default;
   user-select: none;
   line-height: 1.2;
+
+  .left &,
+  .right & {
+    align-items: center;
+    padding: 10px 0;
+    text-align: center;
+  }
 
   &:hover {
     background: var(--os-hover, rgba(255, 255, 255, 0.1));

@@ -14,20 +14,14 @@
     </div>
 
     <div class="quick-grid">
-      <div
-        class="quick-tile"
-        :class="{ active: wifiActive }"
-        @click="wifiActive = !wifiActive">
+      <div class="quick-tile" :class="{ active: wifiActive }" @click="wifiActive = !wifiActive">
         <div class="icon-circle">
           <Icon :name="wifiActive ? 'ph:wifi-high-bold' : 'ph:wifi-slash-bold'" />
         </div>
         <span>Wi-Fi</span>
       </div>
 
-      <div
-        class="quick-tile"
-        :class="{ active: btActive }"
-        @click="btActive = !btActive">
+      <div class="quick-tile" :class="{ active: btActive }" @click="btActive = !btActive">
         <div class="icon-circle">
           <Icon name="ph:bluetooth-bold" />
         </div>
@@ -51,7 +45,9 @@
         <div class="icon-circle">
           <Icon :name="themeStore.currentTheme === 'dark' ? 'ph:moon-fill' : 'ph:sun-bold'" />
         </div>
-        <span>{{ themeStore.currentTheme === 'dark' ? $t('os.themes.dark') : $t('os.themes.light') }}</span>
+        <span>
+          {{ themeStore.currentTheme === 'dark' ? $t('os.themes.dark') : $t('os.themes.light') }}
+        </span>
       </div>
     </div>
 
@@ -59,7 +55,7 @@
       <div class="slider-group">
         <Icon name="ph:speaker-high-fill" class="slider-icon" />
         <div class="slider-container">
-          <input type="range" v-model="volume" min="0" max="100" class="cc-slider" />
+          <input v-model="volume" type="range" min="0" max="100" class="cc-slider" />
           <div class="slider-progress" :style="{ width: volume + '%' }"></div>
         </div>
         <span class="val">{{ volume }}%</span>
@@ -68,7 +64,7 @@
       <div class="slider-group">
         <Icon name="ph:sun-fill" class="slider-icon" />
         <div class="slider-container">
-          <input type="range" v-model="brightness" min="0" max="100" class="cc-slider" />
+          <input v-model="brightness" type="range" min="0" max="100" class="cc-slider" />
           <div class="slider-progress" :style="{ width: brightness + '%' }"></div>
         </div>
         <span class="val">{{ brightness }}%</span>
@@ -162,8 +158,16 @@ const handleLogout = () => {
 
   .user-info {
     flex: 1;
-    h3 { margin: 0; font-size: 16px; font-weight: 700; }
-    p { margin: 2px 0 0; font-size: 12px; opacity: 0.6; }
+    h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    p {
+      margin: 2px 0 0;
+      font-size: 12px;
+      opacity: 0.6;
+    }
   }
 
   .power-btn {
@@ -177,7 +181,9 @@ const handleLogout = () => {
     display: flex;
     align-items: center;
     justify-content: center;
-    &:hover { background: rgba(255, 0, 0, 0.2); }
+    &:hover {
+      background: rgba(255, 0, 0, 0.2);
+    }
   }
 }
 
@@ -205,7 +211,9 @@ const handleLogout = () => {
 
   &.active {
     background: var(--os-primary-color, #3b82f6);
-    .icon-circle { background: rgba(255, 255, 255, 0.2); }
+    .icon-circle {
+      background: rgba(255, 255, 255, 0.2);
+    }
   }
 
   .icon-circle {
@@ -269,7 +277,7 @@ const handleLogout = () => {
         height: 14px;
         background: white;
         border-radius: 50%;
-        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       }
     }
 
@@ -315,7 +323,10 @@ const handleLogout = () => {
     cursor: pointer;
     opacity: 0.7;
     transition: transform 0.2s;
-    &:hover { transform: rotate(45deg); opacity: 1; }
+    &:hover {
+      transform: rotate(45deg);
+      opacity: 1;
+    }
   }
 }
 </style>

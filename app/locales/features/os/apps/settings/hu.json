@@ -27,5 +27,13 @@
   "showStats": "Rendszer statisztikák",
   "statsDesc": "CPU és RAM használat valós idejű kijelzése.",
   "showWelcome": "Üdvözlő kártya",
-  "welcomeDesc": "Személyre szabott üdvözlő üzenet megjelenítése."
+  "welcomeDesc": "Személyre szabott üdvözlő üzenet megjelenítése.",
+  "taskbarPosition": "Tálca helye",
+  "taskbarPosDesc": "Válaszd ki, hol helyezkedjen el a rendszer tálcája.",
+  "pos": {
+    "top": "Fent",
+    "bottom": "Lent",
+    "left": "Balra",
+    "right": "Jobbra"
+  }
 }

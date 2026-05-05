@@ -219,6 +219,22 @@
                   <span class="slider"></span>
                 </label>
               </div>
+              <div class="setting-row vertical">
+                <div class="label-group">
+                  <span>{{ $t('os.apps.settings.taskbarPosition') }}</span>
+                  <p>{{ $t('os.apps.settings.taskbarPosDesc') }}</p>
+                </div>
+                <div class="pos-picker">
+                  <button
+                    v-for="pos in ['top', 'bottom', 'left', 'right']"
+                    :key="pos"
+                    class="pos-btn"
+                    :class="{ active: desktopStore.taskbarPosition === pos }"
+                    @click="desktopStore.setTaskbarPosition(pos as any)">
+                    {{ $t(`os.apps.settings.pos.${pos}`) }}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -917,4 +933,36 @@ const handleFileUpload = (event: Event) => {
     box-shadow: -2px 2px 5px rgba(0, 0, 0, 0.2);
   }
 }
-</style>
+.pos-picker {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.pos-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &.active {
+    background: var(--os-primary-color, #0078d4);
+    border-color: var(--os-primary-color, #0078d4);
+  }
+}
+
+.setting-row.vertical {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
