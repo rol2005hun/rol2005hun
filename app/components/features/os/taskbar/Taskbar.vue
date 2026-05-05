@@ -10,21 +10,23 @@
       <button
         class="start-btn"
         :class="{ active: desktopStore.isStartMenuOpen }"
-        @click="desktopStore.toggleStartMenu()">
-        <Icon name="ph:circles-four-fill" size="24px" />
+        @click.stop="desktopStore.toggleStartMenu()">
+        <Icon name="ph:dots-nine-bold" size="24px" />
       </button>
 
       <div class="open-apps">
-        <button
+        <AppIcon
           v-for="win in windowStore.windows"
           :key="win.id"
+          :app-id="win.appId"
+          :is-active="win.zIndex === topZIndex && !win.isMinimized"
+          :is-minimized="win.isMinimized"
           class="app-btn-taskbar"
-          :class="{ active: win.zIndex === topZIndex && !win.isMinimized }"
-          @click="toggleWindow(win.id)">
-          <AppIcon :app-id="win.appId" size="20px" />
-        </button>
+          @click.stop="toggleWindow(win.id)" />
       </div>
     </div>
+
+    <div class="taskbar-spacer"></div>
 
     <div class="taskbar-right">
       <div
@@ -278,6 +280,10 @@ const openCalendar = () => {
     height: auto;
     padding: 8px 0;
   }
+}
+
+.taskbar-spacer {
+  flex: 1;
 }
 
 .start-btn,

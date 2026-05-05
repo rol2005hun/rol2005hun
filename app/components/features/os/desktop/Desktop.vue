@@ -96,6 +96,22 @@ const handleDesktopClick = () => {
   }
 };
 
+onMounted(() => {
+  window.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    // Don't close if clicking inside taskbar, windows, or the panels themselves
+    if (
+      target.closest('.taskbar-container') || 
+      target.closest('.window-container') || 
+      target.closest('.start-menu-panel') || 
+      target.closest('.control-center-panel')
+    ) {
+      return;
+    }
+    handleDesktopClick();
+  });
+});
+
 const refreshDesktop = async () => {
   desktopStore.resetIcons();
   await nextTick();
