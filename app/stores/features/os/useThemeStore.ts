@@ -185,9 +185,25 @@ export const useThemeStore = defineStore('os-theme', () => {
     if (color) {
       document.documentElement.style.setProperty('--os-primary-color', color);
       document.documentElement.style.setProperty('--os-border-color', `${color}33`);
+
+      // Kiszámoljuk a kontrasztot a megfelelő szövegszínhez (fekete vagy fehér)
+      const hex = color.replace('#', '');
+      if (hex.length === 6) {
+        const r = parseInt(hex.substring(0, 2), 16);
+        const g = parseInt(hex.substring(2, 4), 16);
+        const b = parseInt(hex.substring(4, 6), 16);
+        const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+        document.documentElement.style.setProperty(
+          '--os-primary-text',
+          yiq >= 128 ? '#000000' : '#ffffff'
+        );
+      } else {
+        document.documentElement.style.setProperty('--os-primary-text', '#ffffff');
+      }
     } else {
       document.documentElement.style.removeProperty('--os-primary-color');
       document.documentElement.style.removeProperty('--os-border-color');
+      document.documentElement.style.removeProperty('--os-primary-text');
     }
   };
 

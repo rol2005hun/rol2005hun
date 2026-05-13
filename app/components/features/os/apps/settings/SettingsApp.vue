@@ -751,7 +751,7 @@ const handleFileUpload = (event: Event) => {
 
       .apply-btn {
         background: var(--os-primary-color, #3b82f6);
-        color: var(--os-text);
+        color: var(--os-primary-text, #ffffff);
         border: none;
         border-radius: 12px;
         width: 46px;
