@@ -1,72 +1,79 @@
 <template>
   <div class="lock-screen-container">
-    <div class="clock-widget">
-      <h1 class="time">{{ currentTime }}</h1>
-      <p class="date">{{ currentDate }}</p>
-    </div>
+    <div
+      class="wallpaper-bg"
+      :style="{ backgroundImage: 'url(' + themeStore.currentWallpaperUrl + ')' }" />
+    <div class="wallpaper-overlay" />
 
-    <div class="auth-wrapper">
-      <div class="user-profile">
-        <div class="avatar-container">
-          <Icon name="ph:user-circle-light" class="avatar-placeholder" />
-        </div>
-        <h2 class="username">{{ t('auth.guestUser') }}</h2>
+    <div class="lock-screen-content">
+      <div class="clock-widget">
+        <h1 class="time">{{ currentTime }}</h1>
+        <p class="date">{{ currentDate }}</p>
       </div>
 
-      <div class="unlock-section">
-        <div
-          class="fingerprint-sensor"
-          :class="{ 'is-scanning': isUnlocking, 'is-success': isSuccess }"
-          @mousedown="startUnlock"
-          @mouseup="cancelUnlock"
-          @mouseleave="cancelUnlock"
-          @touchstart.prevent="startUnlock"
-          @touchend.prevent="cancelUnlock">
-          <div class="sensor-icon-wrapper">
-            <Icon
-              :name="
-                isSuccess
-                  ? 'fluent:fingerprint-24-filled'
-                  : isUnlocking
-                    ? 'fluent:fingerprint-24-filled'
-                    : 'fluent:fingerprint-24-regular'
-              "
-              class="sensor-icon" />
+      <div class="auth-wrapper">
+        <div class="user-profile">
+          <div class="avatar-container">
+            <Icon name="ph:user-circle-light" class="avatar-placeholder" />
           </div>
-
-          <svg class="progress-ring" width="110" height="110">
-            <circle
-              class="progress-ring-bg"
-              stroke="rgba(255, 255, 255, 0.05)"
-              stroke-width="4"
-              fill="transparent"
-              r="50"
-              cx="55"
-              cy="55" />
-            <circle
-              class="progress-ring-circle"
-              :style="{ strokeDashoffset: unlockProgress }"
-              stroke="url(#grad1)"
-              stroke-width="4"
-              stroke-linecap="round"
-              fill="transparent"
-              r="50"
-              cx="55"
-              cy="55" />
-            <defs>
-              <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color: #38bdf8; stop-opacity: 1" />
-                <stop offset="100%" style="stop-color: #818cf8; stop-opacity: 1" />
-              </linearGradient>
-            </defs>
-          </svg>
-
-          <div class="glow-effect" />
+          <h2 class="username">{{ t('auth.guestUser') }}</h2>
         </div>
 
-        <p class="instruction-text" :class="{ 'is-hidden': isUnlocking || isSuccess }">
-          {{ t('auth.fingerprintPrompt') }}
-        </p>
+        <div class="unlock-section">
+          <div
+            class="fingerprint-sensor"
+            :class="{ 'is-scanning': isUnlocking, 'is-success': isSuccess }"
+            @mousedown="startUnlock"
+            @mouseup="cancelUnlock"
+            @mouseleave="cancelUnlock"
+            @touchstart.prevent="startUnlock"
+            @touchend.prevent="cancelUnlock">
+            <div class="sensor-icon-wrapper">
+              <Icon
+                :name="
+                  isSuccess
+                    ? 'fluent:fingerprint-24-filled'
+                    : isUnlocking
+                      ? 'fluent:fingerprint-24-filled'
+                      : 'fluent:fingerprint-24-regular'
+                "
+                class="sensor-icon" />
+            </div>
+
+            <svg class="progress-ring" width="110" height="110">
+              <circle
+                class="progress-ring-bg"
+                stroke="rgba(255, 255, 255, 0.05)"
+                stroke-width="4"
+                fill="transparent"
+                r="50"
+                cx="55"
+                cy="55" />
+              <circle
+                class="progress-ring-circle"
+                :style="{ strokeDashoffset: unlockProgress }"
+                stroke="url(#grad1)"
+                stroke-width="4"
+                stroke-linecap="round"
+                fill="transparent"
+                r="50"
+                cx="55"
+                cy="55" />
+              <defs>
+                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style="stop-color: #38bdf8; stop-opacity: 1" />
+                  <stop offset="100%" style="stop-color: #818cf8; stop-opacity: 1" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <div class="glow-effect" />
+          </div>
+
+          <p class="instruction-text" :class="{ 'is-hidden': isUnlocking || isSuccess }">
+            {{ t('auth.fingerprintPrompt') }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -76,9 +83,11 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useAuthStore } from '@/composables/features/auth/useAuthStore';
+import { useThemeStore } from '@/stores/features/os/useThemeStore';
 
 const { t } = useI18n({ useScope: 'global' });
 const authStore = useAuthStore();
+const themeStore = useThemeStore();
 const isUnlocking = ref(false);
 const isSuccess = ref(false);
 const progressValue = ref(0);
@@ -172,21 +181,44 @@ const finishUnlock = () => {
 <style scoped lang="scss">
 .lock-screen-container {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100dvh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.wallpaper-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(10px) brightness(0.8);
+  transform: scale(1.05);
+  z-index: 0;
+}
+
+.wallpaper-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  z-index: 1;
+}
+
+.lock-screen-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 100dvh;
-  width: 100vw;
-  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+  height: 100%;
+  width: 100%;
   color: #f8fafc;
   padding: 8vh 2rem;
   box-sizing: border-box;
-  overflow-y: auto;
-  position: relative;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 .clock-widget {

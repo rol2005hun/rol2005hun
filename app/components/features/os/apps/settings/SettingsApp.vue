@@ -177,7 +177,7 @@
               </div>
             </div>
 
-            <div class="settings-card glass-panel">
+            <div class="settings-card glass-panel desktop-only-setting">
               <div class="card-header">
                 <Icon name="ph:layout-fill" />
                 <h3>{{ $t('os.apps.settings.desktopLayout') }}</h3>
@@ -268,10 +268,12 @@ import { ref, watch } from 'vue';
 import { useThemeStore } from '@/stores/features/os/useThemeStore';
 import { useLanguageStore } from '@/stores/features/os/useLanguageStore';
 import { useDesktopStore } from '@/stores/features/os/useDesktopStore';
+import { useDevice } from '@/composables/features/os/useDevice';
 
 const themeStore = useThemeStore();
 const languageStore = useLanguageStore();
 const desktopStore = useDesktopStore();
+const { isMobile } = useDevice();
 
 const activeTab = ref<'appearance' | 'wallpaper' | 'language' | 'system'>('appearance');
 
@@ -368,6 +370,7 @@ const handleFileUpload = (event: Event) => {
     border-bottom: 1px solid var(--os-border-color, var(--os-border-color));
     display: block;
     overflow-x: auto;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     &::-webkit-scrollbar {
@@ -386,8 +389,9 @@ const handleFileUpload = (event: Event) => {
     @media (max-width: 768px) {
       flex-direction: row;
       gap: 12px;
-      width: max-content;
       padding: 0 16px;
+      width: max-content;
+      min-width: 100%;
     }
 
     li {
@@ -402,6 +406,8 @@ const handleFileUpload = (event: Event) => {
       color: var(--os-text);
       opacity: 0.7;
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      white-space: nowrap;
+      flex-shrink: 0;
 
       .icon {
         font-size: 20px;
@@ -1007,5 +1013,11 @@ const handleFileUpload = (event: Event) => {
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .desktop-only-setting {
+    display: none !important;
+  }
 }
 </style>

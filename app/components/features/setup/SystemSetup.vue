@@ -80,12 +80,7 @@
             </button>
           </div>
           <div class="p-body">
-            <iframe
-              v-if="currentLocale !== 'en'"
-              :src="`/${currentLocale}/privacy`"
-              class="privacy-iframe"
-              frameborder="0"></iframe>
-            <iframe v-else src="/privacy" class="privacy-iframe" frameborder="0"></iframe>
+            <iframe src="/privacy" class="privacy-iframe" frameborder="0"></iframe>
           </div>
           <div class="p-footer">
             <button class="os-btn-primary small-btn" @click="acceptAndClosePrivacy">
@@ -116,6 +111,8 @@ const VALID_KEY = ref('RNZK-2026-BETA');
 const acceptedPrivacy = ref(false);
 const showPrivacyModal = ref(false);
 
+const config = useRuntimeConfig();
+
 const licenseCookie = useCookie('ranzakos_license');
 if (licenseCookie.value === 'valid') {
   inputKey.value = VALID_KEY.value;
@@ -142,7 +139,7 @@ const verifyLicense = () => {
       maxAge: 60 * 60 * 24 * 365
     });
     licenseCookie.value = 'valid';
-    privacyVersionCookie.value = '1.1';
+    privacyVersionCookie.value = config.public.privacyVersion;
     emit('setup-complete');
   } else {
     if (inputKey.value.toUpperCase() !== VALID_KEY.value) {

@@ -10,7 +10,9 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     adminPassword: process.env.VITE_ADMIN_PASSWORD,
-    public: {}
+    public: {
+      privacyVersion: process.env.NUXT_PUBLIC_PRIVACY_VERSION
+    }
   },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },

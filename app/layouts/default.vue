@@ -44,10 +44,10 @@ const systemStore = useSystemStore();
 const licenseCookie = useCookie('ranzakos_license');
 const privacyVersionCookie = useCookie('ranzakos_privacy_version');
 
-const CURRENT_PRIVACY_VERSION = '1.0';
+const config = useRuntimeConfig();
 
 const isInstalled = ref(
-  licenseCookie.value === 'valid' && privacyVersionCookie.value === CURRENT_PRIVACY_VERSION
+  licenseCookie.value === 'valid' && privacyVersionCookie.value === config.public.privacyVersion
 );
 
 const handleSetupComplete = () => {
