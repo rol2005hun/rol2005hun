@@ -169,7 +169,7 @@
               </div>
               <div class="info-item">
                 <span class="label">Kernel</span>
-                <span class="val">Nuxt 3.11 / Vue 3.4</span>
+                <span class="val">Nuxt 4 / Vue 3.4</span>
               </div>
               <div class="info-item">
                 <span class="label">Architecture</span>
@@ -248,7 +248,9 @@
                     :key="pos"
                     class="pos-btn"
                     :class="{ active: desktopStore.taskbarPosition === pos }"
-                    @click="desktopStore.setTaskbarPosition(pos as 'top' | 'bottom' | 'left' | 'right')">
+                    @click="
+                      desktopStore.setTaskbarPosition(pos as 'top' | 'bottom' | 'left' | 'right')
+                    ">
                     {{ $t(`os.apps.settings.pos.${pos}`) }}
                   </button>
                 </div>

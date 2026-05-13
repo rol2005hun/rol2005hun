@@ -42,7 +42,13 @@ import { useSystemStore } from '@/stores/features/os/useSystemStore';
 const authStore = useAuthStore();
 const systemStore = useSystemStore();
 const licenseCookie = useCookie('ranzakos_license');
-const isInstalled = ref(licenseCookie.value === 'valid');
+const privacyVersionCookie = useCookie('ranzakos_privacy_version');
+
+const CURRENT_PRIVACY_VERSION = '1.0';
+
+const isInstalled = ref(
+  licenseCookie.value === 'valid' && privacyVersionCookie.value === CURRENT_PRIVACY_VERSION
+);
 
 const handleSetupComplete = () => {
   isInstalled.value = true;
@@ -58,7 +64,7 @@ const preventRefresh = (e: KeyboardEvent) => {
 const preventZoom = (e: Event) => {
   const isKeyboard = e instanceof KeyboardEvent;
   const isWheel = e instanceof WheelEvent;
-  
+
   if (!isKeyboard && !isWheel) return;
   const ev = e as KeyboardEvent | WheelEvent;
 
@@ -67,9 +73,7 @@ const preventZoom = (e: Event) => {
       e.preventDefault();
     } else if (isKeyboard) {
       const ke = e as KeyboardEvent;
-      if (
-        ['+', '-', '=', 'NumpadAdd', 'NumpadSubtract'].includes(ke.key)
-      ) {
+      if (['+', '-', '=', 'NumpadAdd', 'NumpadSubtract'].includes(ke.key)) {
         e.preventDefault();
       }
     }

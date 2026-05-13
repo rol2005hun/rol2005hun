@@ -3,6 +3,15 @@
   "subtitle": "Latest OS updates and features",
   "empty": "No versions available.",
   "history": {
+    "2026-05-13": {
+      "version": "3.7.1",
+      "title": "Privacy & Setup Screen Enhancements",
+      "changes": [
+        "Updated <strong>Privacy Policy</strong> to accurately list stored elements (cookies and local storage).",
+        "Added a privacy policy versioning system. Users are prompted to re-accept the policy when it changes.",
+        "Fixed a visual glitch where the privacy acceptance checkbox displayed a question mark instead of a correct checkmark."
+      ]
+    },
     "2026-05-05": {
       "version": "3.7.0",
       "title": "Terminal Power-up & Global Search",

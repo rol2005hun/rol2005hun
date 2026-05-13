@@ -4,9 +4,9 @@
   "section1Title": "1. What is ranzakOS?",
   "section1Text": "ranzakOS is a web-based portfolio operating system simulator meant for personal presentation and interactive experiences. It runs entirely inside your browser.",
   "section2Title": "2. Cookies and Local Storage",
-  "section2Text": "To maintain state, settings, and authentications (like keeping you logged in when you refresh the page, or saving your windows and themes), this site heavily relies on LocalStorage and Cookies. We DO NOT use them for tracking, advertising, or sharing with third parties.",
-  "section3Title": "3. Data Handling",
-  "section3Text": "We do not collect personal identifiable data (PII) beyond what you voluntarily provide in apps that require interaction. Everything stays on your local machine.",
-  "section4Title": "4. Analytics",
-  "section4Text": "We may use basic analytics to monitor site traffic. This data is fully anonymized."
+  "section2Text": "To maintain state and settings, this site heavily relies on LocalStorage and Cookies. We DO NOT use them for tracking, advertising, or sharing with third parties. We store the following data locally in your browser:",
+  "section3Title": "3. Stored Data Explained",
+  "section3Text": "Cookies: os_locale (Language), os-theme, os-wallpaper, os-accent-color (Theme), os-taskbar-pos, os-desktop-icons (UI layout), browser_history (Browser history), ranzakos_license, ranzakos_privacy_version (License and terms version). Local Storage: os-music-volume (Volume), custom wallpaper data.",
+  "section4Title": "4. Data Handling & Analytics",
+  "section4Text": "We do not collect personal identifiable data (PII). All sessions, customizations, and history stay exclusively on your local machine. We may use basic analytics for site traffic, but it is fully anonymized."
 }

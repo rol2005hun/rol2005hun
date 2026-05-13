@@ -116,6 +116,11 @@ const VALID_KEY = ref('RNZK-2026-BETA');
 const acceptedPrivacy = ref(false);
 const showPrivacyModal = ref(false);
 
+const licenseCookie = useCookie('ranzakos_license');
+if (licenseCookie.value === 'valid') {
+  inputKey.value = VALID_KEY.value;
+}
+
 const localeCookie = useCookie('os_locale', {
   maxAge: 60 * 60 * 24 * 365
 });
@@ -133,7 +138,11 @@ const verifyLicense = () => {
     const licenseCookie = useCookie('ranzakos_license', {
       maxAge: 60 * 60 * 24 * 365
     });
+    const privacyVersionCookie = useCookie('ranzakos_privacy_version', {
+      maxAge: 60 * 60 * 24 * 365
+    });
     licenseCookie.value = 'valid';
+    privacyVersionCookie.value = '1.1';
     emit('setup-complete');
   } else {
     if (inputKey.value.toUpperCase() !== VALID_KEY.value) {
@@ -568,7 +577,7 @@ const copyKey = async () => {
 }
 
 .privacy-agreement-label input:checked + .custom-chk::after {
-  content: '?';
+  content: '✓';
   color: white;
   font-size: 14px;
 }

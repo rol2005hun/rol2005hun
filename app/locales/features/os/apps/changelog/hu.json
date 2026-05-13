@@ -3,6 +3,15 @@
   "subtitle": "Legújabb OS frissítések és funkciók",
   "empty": "Nincs elérhető változat.",
   "history": {
+    "2026-05-13": {
+      "version": "1.6.1",
+      "title": "Adatvédelmi és Telepítő Javítások",
+      "changes": [
+        "Frissített szakaszinformációk az <strong>Adatvédelmi Nyilatkozatban</strong> a tárolt sütik és adatok pontos listájával.",
+        "A Telepítő ismét megjelenik, ha frissül az Adatvédelmi Nyilatkozat verziója, az ismételt elfogadás érdekében.",
+        "Javítva egy UI hiba, amely egy kérdőjelet jelenített meg pipajel helyett az adatvédelmi jelölőnégyzeten telepítéskor."
+      ]
+    },
     "2026-05-05": {
       "version": "1.6.0",
       "title": "Terminál Tuning és Globális Kereső",
