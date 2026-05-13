@@ -23,5 +23,10 @@
     "4": "Thu",
     "5": "Fri",
     "6": "Sat"
-  }
+  },
+  "eventsOn": "Events on:",
+  "noEvents": "No events on this day.",
+  "newEvent": "New event...",
+  "add": "Add",
+  "close": "Close"
 }

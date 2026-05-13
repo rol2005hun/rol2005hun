@@ -23,5 +23,10 @@
     "4": "Csü",
     "5": "Pén",
     "6": "Szo"
-  }
+  },
+  "eventsOn": "Események:",
+  "noEvents": "Nincs esemény ezen a napon.",
+  "newEvent": "Új esemény...",
+  "add": "Hozzáadás",
+  "close": "Bezárás"
 }
