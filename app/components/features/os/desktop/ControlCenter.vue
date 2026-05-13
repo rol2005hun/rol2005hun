@@ -182,7 +182,7 @@ const handleShutdown = () => {
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
-    
+
     font-size: 20px;
 
     &:hover {
@@ -216,7 +216,8 @@ const handleShutdown = () => {
   }
 
   &.active {
-    background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), var(--os-primary-color, #3b82f6);
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), var(--os-primary-color, #3b82f6);
     color: white;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     .icon-circle {

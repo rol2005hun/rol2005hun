@@ -3,6 +3,15 @@
   "subtitle": "Latest OS updates and features",
   "empty": "No versions available.",
   "history": {
+    "2026-05-13-2": {
+      "version": "3.7.2",
+      "title": "Calendar UI Modernization",
+      "changes": [
+        "The <strong>Calendar</strong> interface received a modern glassmorphism styling update.",
+        "Introduced dot-based event indicators, a cleaner day-grid layout, and a glowing 'Today' highlight.",
+        "Added subtle micro-animations and smooth window transitions."
+      ]
+    },
     "2026-05-13": {
       "version": "3.7.1",
       "title": "Privacy & Setup Screen Enhancements",

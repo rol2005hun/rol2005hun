@@ -54,7 +54,7 @@ export const openCommand: TerminalCommand = {
       return;
     }
 
-    const appId = args[0]!;
+    const appId = args[0] as string;
     const app = registry.getAppById(appId);
     if (!app) {
       context.print(context.t('os.apps.terminal.commands.openNotFound', { app: appId }));
@@ -103,7 +103,7 @@ export const closeCommand: TerminalCommand = {
       return;
     }
 
-    const appId = args[0]!;
+    const appId = args[0] as string;
     const app = registry.getAppById(appId);
     if (!app) {
       context.print(context.t('os.apps.terminal.commands.closeNotFound', { app: appId }));

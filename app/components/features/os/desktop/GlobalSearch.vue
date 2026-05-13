@@ -39,13 +39,16 @@
 
       <div class="search-footer">
         <div class="hint">
-          <kbd>↑↓</kbd> {{ $t('os.search.navigate') }}
+          <kbd>↑↓</kbd>
+          {{ $t('os.search.navigate') }}
         </div>
         <div class="hint">
-          <kbd>Enter</kbd> {{ $t('os.search.open') }}
+          <kbd>Enter</kbd>
+          {{ $t('os.search.open') }}
         </div>
         <div class="hint">
-          <kbd>Esc</kbd> {{ $t('os.search.close') }}
+          <kbd>Esc</kbd>
+          {{ $t('os.search.close') }}
         </div>
       </div>
     </div>
@@ -199,7 +202,9 @@ onMounted(() => {
 
   &.active {
     background: rgba(255, 255, 255, 0.1);
-    .enter-icon { opacity: 0.5; }
+    .enter-icon {
+      opacity: 0.5;
+    }
   }
 
   .result-info {
@@ -250,7 +255,9 @@ onMounted(() => {
     color: var(--os-primary-color, #3b82f6);
   }
 
-  span { font-weight: 500; }
+  span {
+    font-weight: 500;
+  }
 }
 
 .search-footer {

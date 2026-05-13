@@ -108,7 +108,9 @@ const openApp = () => {
     selectedIds.forEach((id, index) => {
       const iconItem = desktopStore.icons.find((i) => i.id === id);
       if (iconItem) {
-        const meta = appRegistry.installedApps.find((app: AppDefinition) => app.id === iconItem.appId);
+        const meta = appRegistry.installedApps.find(
+          (app: AppDefinition) => app.id === iconItem.appId
+        );
         if (meta) {
           setTimeout(() => {
             windowStore.openWindow({

@@ -11,7 +11,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"**/*.{vue,scss,css,js,ts,json}\"",
-    "format:check": "prettier --check \"**/*.{vue,scss,css,js,ts,json}\""
+    "format:check": "prettier --check \"**/*.{vue,scss,css,js,ts,json}\"",
+    "typecheck": "vue-tsc --noEmit",
+    "check": "npm run typecheck && npm run lint && npm run format:check"
   },
   "dependencies": {
     "@nuxt/icon": "^2.2.1",

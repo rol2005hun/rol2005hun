@@ -59,7 +59,7 @@ const projects: Project[] = [
   }
 ];
 
-const activeProject = shallowRef<Project>(projects[0]!);
+const activeProject = shallowRef<Project>(projects[0] as Project);
 const scrollContainer = ref<HTMLElement | null>(null);
 
 let isDown = false;

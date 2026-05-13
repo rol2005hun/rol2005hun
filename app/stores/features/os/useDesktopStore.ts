@@ -160,8 +160,7 @@ export const useDesktopStore = defineStore('os-desktop', () => {
     const paddingX = 20;
     const paddingY = 20;
     const taskbarSize = 60;
-    
-    let availableWidth = width;
+
     let availableHeight = height;
     let startX = 0;
     let startY = 0;
@@ -172,10 +171,9 @@ export const useDesktopStore = defineStore('os-desktop', () => {
       availableHeight -= taskbarSize;
       startY = taskbarSize;
     } else if (taskbarPosition.value === 'left') {
-      availableWidth -= taskbarSize;
       startX = taskbarSize;
     } else if (taskbarPosition.value === 'right') {
-      availableWidth -= taskbarSize;
+      // reserved for future use if needed
     }
 
     const maxRows = Math.floor((availableHeight - paddingY) / iconHeight) || 1;
@@ -190,7 +188,11 @@ export const useDesktopStore = defineStore('os-desktop', () => {
 
     currentIcons.forEach((icon) => {
       const { x, y } = icon;
-      const isOutOfBounds = x < startX || y < startY || x + iconWidth > width - (taskbarPosition.value === 'right' ? taskbarSize : 0) || y + iconHeight > height - (taskbarPosition.value === 'bottom' ? taskbarSize : 0);
+      const isOutOfBounds =
+        x < startX ||
+        y < startY ||
+        x + iconWidth > width - (taskbarPosition.value === 'right' ? taskbarSize : 0) ||
+        y + iconHeight > height - (taskbarPosition.value === 'bottom' ? taskbarSize : 0);
       if (!isOutOfBounds) {
         const { col, row } = getCell(x, y);
         occupied.add(`${col},${row}`);
@@ -212,7 +214,8 @@ export const useDesktopStore = defineStore('os-desktop', () => {
 
     currentIcons.forEach((icon, index) => {
       const { x, y } = icon;
-      const isOutOfBounds = x < 0 || y < 0 || x + iconWidth > width || y + iconHeight > availableHeight;
+      const isOutOfBounds =
+        x < 0 || y < 0 || x + iconWidth > width || y + iconHeight > availableHeight;
 
       if (isOutOfBounds) {
         const { col, row } = findNextAvailableCell();

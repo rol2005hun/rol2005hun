@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { useCookie } from '#imports';
-import { computed } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { computed, ref, watch } from 'vue';
+import { useLanguageStore } from '@/stores/features/os/useLanguageStore';
 
 export interface CalendarEvent {
   id: string;
@@ -11,7 +11,7 @@ export interface CalendarEvent {
 }
 
 export const useCalendarStore = defineStore('calendar', () => {
-  const { t } = useI18n();
+  const languageStore = useLanguageStore();
 
   const formatDate = (date: Date) => {
     const year = date.getFullYear();
@@ -25,45 +25,62 @@ export const useCalendarStore = defineStore('calendar', () => {
     maxAge: 365 * 24 * 60 * 60
   });
 
-  const getPredefinedEvents = (year: number): CalendarEvent[] => {
-    const events: CalendarEvent[] = [
-      { id: `ny-${year}`, dateStr: `${year}-01-01`, title: 'Újév', isPredefined: true },
-      { id: `mar15-${year}`, dateStr: `${year}-03-15`, title: 'Nemzeti ünnep', isPredefined: true },
-      { id: `may1-${year}`, dateStr: `${year}-05-01`, title: 'Munka ünnepe', isPredefined: true },
-      { id: `aug20-${year}`, dateStr: `${year}-08-20`, title: 'Államalapítás', isPredefined: true },
-      { id: `oct23-${year}`, dateStr: `${year}-10-23`, title: 'Forradalom', isPredefined: true },
-      { id: `nov1-${year}`, dateStr: `${year}-11-01`, title: 'Mindenszentek', isPredefined: true },
-      { id: `dec25-${year}`, dateStr: `${year}-12-25`, title: 'Karácsony', isPredefined: true },
-      {
-        id: `dec26-${year}`,
-        dateStr: `${year}-12-26`,
-        title: 'Karácsony 2. napja',
-        isPredefined: true
+  const predefinedEvents = ref<CalendarEvent[]>([]);
+
+  interface NagerHoliday {
+    date: string;
+    localName: string;
+    name: string;
+    countryCode: string;
+    fixed: boolean;
+    global: boolean;
+    counties: string[] | null;
+    launchYear: number | null;
+    types: string[];
+  }
+
+  const fetchHolidays = async (year: number, lang: string): Promise<CalendarEvent[]> => {
+    const countryCode = lang === 'hu' ? 'HU' : lang === 'ro' ? 'RO' : 'US';
+    try {
+      const res = await fetch(`https://date.nager.at/api/v3/PublicHolidays/${year}/${countryCode}`);
+      if (res.ok) {
+        const data: NagerHoliday[] = await res.json();
+        return data.map((d) => ({
+          id: `hol-${d.date}-${countryCode}-${d.localName}`,
+          dateStr: d.date,
+          title: d.localName || d.name,
+          isPredefined: true
+        }));
       }
-    ];
-
-    const firstOfMay = new Date(year, 4, 1);
-    const dayOfWeek = firstOfMay.getDay();
-    const firstSundayOffset = dayOfWeek === 0 ? 0 : 7 - dayOfWeek;
-    const mothersDay = new Date(year, 4, 1 + firstSundayOffset);
-    events.push({
-      id: `mothersday-${year}`,
-      dateStr: formatDate(mothersDay),
-      title: 'Anyák napja',
-      isPredefined: true
-    });
-
-    return events;
+    } catch (e) {
+      console.error('Failed to fetch holidays', e);
+    }
+    return [];
   };
 
-  const allEvents = computed(() => {
+  const loadHolidays = async () => {
     const currentYear = new Date().getFullYear();
-    const predefinedKeys = [
-      ...getPredefinedEvents(currentYear - 1),
-      ...getPredefinedEvents(currentYear),
-      ...getPredefinedEvents(currentYear + 1)
-    ];
-    return [...predefinedKeys, ...(customEvents.value || [])];
+    const lang = languageStore.currentLanguage;
+
+    const [prev, curr, next] = await Promise.all([
+      fetchHolidays(currentYear - 1, lang),
+      fetchHolidays(currentYear, lang),
+      fetchHolidays(currentYear + 1, lang)
+    ]);
+
+    predefinedEvents.value = [...prev, ...curr, ...next];
+  };
+
+  watch(
+    () => languageStore.currentLanguage,
+    () => {
+      loadHolidays();
+    },
+    { immediate: true }
+  );
+
+  const allEvents = computed(() => {
+    return [...predefinedEvents.value, ...(customEvents.value || [])];
   });
 
   const getEventsForDate = (date: Date) => {

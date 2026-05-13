@@ -36,9 +36,9 @@
           </div>
           <div class="condition-block">
             <span class="weather-emoji">{{ getWeatherEmoji(weather.current.weathercode) }}</span>
-            <span class="condition-label">{{
-              $t(getWeatherKey(weather.current.weathercode))
-            }}</span>
+            <span class="condition-label">
+              {{ $t(getWeatherKey(weather.current.weathercode)) }}
+            </span>
           </div>
         </div>
 
@@ -55,10 +55,10 @@
           </div>
           <div class="stat-item">
             <Icon name="ph:thermometer-hot-fill" size="14px" />
-            <span
-              >{{ Math.round(weather.daily.temperature_2m_max[0] ?? 0) }}° /
-              {{ Math.round(weather.daily.temperature_2m_min[0] ?? 0) }}°</span
-            >
+            <span>
+              {{ Math.round(weather.daily.temperature_2m_max[0] ?? 0) }}° /
+              {{ Math.round(weather.daily.temperature_2m_min[0] ?? 0) }}°
+            </span>
             <small>{{ $t('os.apps.weather.highLow') }}</small>
           </div>
           <div class="stat-item">
@@ -77,7 +77,9 @@
             :key="i"
             class="hour-card"
             :class="{ 'is-now': i === currentHourIndex }">
-            <span class="hour-label">{{ i === currentHourIndex ? $t('os.apps.weather.now') : formatHour(hour.time) }}</span>
+            <span class="hour-label">
+              {{ i === currentHourIndex ? $t('os.apps.weather.now') : formatHour(hour.time) }}
+            </span>
             <span class="hour-emoji">{{ getWeatherEmoji(hour.code) }}</span>
             <span class="hour-temp">{{ Math.round(hour.temp) }}°</span>
           </div>
@@ -86,14 +88,14 @@
         <div class="section-title">{{ $t('os.apps.weather.weeklyForecast') }}</div>
         <div class="daily-list">
           <div v-for="(day, i) in dailySlice" :key="i" class="day-row">
-            <span class="day-name">{{ i === 0 ? $t('os.apps.weather.today') : formatDay(day.date) }}</span>
+            <span class="day-name">
+              {{ i === 0 ? $t('os.apps.weather.today') : formatDay(day.date) }}
+            </span>
             <span class="day-emoji">{{ getWeatherEmoji(day.code) }}</span>
             <div class="day-range">
               <span class="day-min">{{ Math.round(day.min) }}°</span>
               <div class="temp-bar-wrap">
-                <div
-                  class="temp-bar"
-                  :style="getTempBarStyle(day.min, day.max)" />
+                <div class="temp-bar" :style="getTempBarStyle(day.min, day.max)" />
               </div>
               <span class="day-max">{{ Math.round(day.max) }}°</span>
             </div>
@@ -150,22 +152,24 @@ const currentHourIndex = computed(() => {
 });
 
 const hourlySlice = computed(() => {
-  if (!weather.value) return [];
+  const w = weather.value;
+  if (!w) return [];
   const idx = Math.max(0, currentHourIndex.value);
-  return weather.value.hourly.time.slice(idx, idx + 24).map((time, i) => ({
+  return w.hourly.time.slice(idx, idx + 24).map((time, i) => ({
     time,
-    temp: weather.value!.hourly.temperature_2m[idx + i] ?? 0,
-    code: weather.value!.hourly.weathercode[idx + i] ?? 0
+    temp: w.hourly.temperature_2m[idx + i] ?? 0,
+    code: w.hourly.weathercode[idx + i] ?? 0
   }));
 });
 
 const dailySlice = computed(() => {
-  if (!weather.value) return [];
-  return weather.value.daily.time.slice(0, 7).map((date, i) => ({
+  const w = weather.value;
+  if (!w) return [];
+  return w.daily.time.slice(0, 7).map((date, i) => ({
     date,
-    code: weather.value!.daily.weathercode[i] ?? 0,
-    max: weather.value!.daily.temperature_2m_max[i] ?? 0,
-    min: weather.value!.daily.temperature_2m_min[i] ?? 0
+    code: w.daily.weathercode[i] ?? 0,
+    max: w.daily.temperature_2m_max[i] ?? 0,
+    min: w.daily.temperature_2m_min[i] ?? 0
   }));
 });
 

@@ -112,8 +112,8 @@ export const randomCommand: TerminalCommand = {
       context.print(context.t('os.apps.terminal.commands.randomUsage'));
       return;
     }
-    const min = parseInt(args[0]!);
-    const max = parseInt(args[1]!);
+    const min = parseInt(args[0] as string);
+    const max = parseInt(args[1] as string);
 
     if (isNaN(min) || isNaN(max)) {
       context.print(context.t('os.apps.terminal.commands.randomErrorNumber'));

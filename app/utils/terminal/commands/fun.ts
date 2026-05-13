@@ -180,7 +180,7 @@ export const calcCommand: TerminalCommand = {
       }
       const result = eval(expr);
       context.print(`${expr} = ${result}`);
-    } catch (e) {
+    } catch {
       context.print('Error: Invalid math expression');
     }
   }

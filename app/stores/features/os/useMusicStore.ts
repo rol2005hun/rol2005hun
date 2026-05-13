@@ -29,11 +29,11 @@ export const useMusicStore = defineStore('os-music', () => {
     audioPlayer.volume = volume.value;
 
     audioPlayer.addEventListener('timeupdate', () => {
-      currentTime.value = audioPlayer!.currentTime;
+      currentTime.value = audioPlayer?.currentTime || 0;
     });
 
     audioPlayer.addEventListener('loadedmetadata', () => {
-      duration.value = audioPlayer!.duration;
+      duration.value = audioPlayer?.duration || 0;
     });
 
     audioPlayer.addEventListener('ended', () => {

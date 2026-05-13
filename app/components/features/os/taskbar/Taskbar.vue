@@ -173,13 +173,19 @@ const openCalendar = () => {
   &.bottom {
     bottom: 0;
     border-top: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
-    &.floating { bottom: 12px; border-top: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1)); }
+    &.floating {
+      bottom: 12px;
+      border-top: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+    }
   }
 
   &.top {
     top: 0;
     border-bottom: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
-    &.floating { top: 12px; border-bottom: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1)); }
+    &.floating {
+      top: 12px;
+      border-bottom: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+    }
   }
 
   &.left,
@@ -207,13 +213,19 @@ const openCalendar = () => {
   &.left {
     left: 0;
     border-right: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
-    &.floating { left: 12px; border-right: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1)); }
+    &.floating {
+      left: 12px;
+      border-right: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+    }
   }
 
   &.right {
     right: 0;
     border-left: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
-    &.floating { right: 12px; border-left: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1)); }
+    &.floating {
+      right: 12px;
+      border-left: 1px solid var(--os-border-color, rgba(255, 255, 255, 0.1));
+    }
   }
 }
 

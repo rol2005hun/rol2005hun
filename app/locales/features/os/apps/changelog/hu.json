@@ -3,6 +3,15 @@
   "subtitle": "Legújabb OS frissítések és funkciók",
   "empty": "Nincs elérhető változat.",
   "history": {
+    "2026-05-13-2": {
+      "version": "1.6.2",
+      "title": "Naptár UI Modernizálás",
+      "changes": [
+        "A <strong>Naptár</strong> felülete modern glassmorphism (üveghatás) stílust kapott.",
+        "Új pötty-alapú eseményjelölők, letisztultabb nap-nézet és ragyogó \"Mai nap\" fénypont.",
+        "Finom micro-animációk és sima ablak-átmenetek lettek hozzáadva."
+      ]
+    },
     "2026-05-13": {
       "version": "1.6.1",
       "title": "Adatvédelmi és Telepítő Javítások",

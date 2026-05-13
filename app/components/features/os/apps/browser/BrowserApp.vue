@@ -115,7 +115,7 @@ const formatUrl = (url: string) => {
 };
 
 const navigate = () => {
-  let destination = formatUrl(inputUrl.value);
+  const destination = formatUrl(inputUrl.value);
   if (!destination) return;
 
   if (destination !== currentUrl.value) {

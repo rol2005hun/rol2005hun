@@ -1,8 +1,8 @@
 <template>
   <div class="settings-app">
     <div
-      class="sidebar"
       ref="scrollContainer"
+      class="sidebar"
       @mousedown="onMouseDown"
       @mouseleave="onMouseLeave"
       @mouseup="onMouseUp"
@@ -274,12 +274,10 @@ import { ref, watch } from 'vue';
 import { useThemeStore } from '@/stores/features/os/useThemeStore';
 import { useLanguageStore } from '@/stores/features/os/useLanguageStore';
 import { useDesktopStore } from '@/stores/features/os/useDesktopStore';
-import { useDevice } from '@/composables/features/os/useDevice';
 
 const themeStore = useThemeStore();
 const languageStore = useLanguageStore();
 const desktopStore = useDesktopStore();
-const { isMobile } = useDevice();
 
 const activeTab = ref<'appearance' | 'wallpaper' | 'language' | 'system'>('appearance');
 

@@ -1,4 +1,4 @@
-import { type TerminalContext } from '../types';
+import type { TerminalContext } from '../types';
 import { useMusicStore } from '@/stores/features/os/useMusicStore';
 import { useWindowStore } from '@/stores/features/os/useWindowStore';
 import { useAppRegistry } from '@/stores/features/os/useAppRegistry';
