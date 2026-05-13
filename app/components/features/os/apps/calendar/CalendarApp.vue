@@ -53,7 +53,7 @@
                     {{ evt.startTime }}
                     <span v-if="evt.endTime">-{{ evt.endTime }}</span>
                   </span>
-                  {{ evt.title }}
+                  <span class="event-text">{{ evt.title }}</span>
                 </span>
               </div>
               <div class="event-more" v-if="calendarStore.getEventsForDate(day.date).length > 3">
@@ -424,6 +424,7 @@ const addNewEvent = () => {
   min-height: 90px;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 
   @media (max-width: 768px) {
     min-height: 70px;
@@ -441,6 +442,7 @@ const addNewEvent = () => {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    min-width: 0;
 
     @media (max-width: 768px) {
       padding: 6px;
@@ -493,13 +495,22 @@ const addNewEvent = () => {
       }
 
       .event-title-text {
+        display: flex;
+        align-items: center;
         overflow: hidden;
-        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 100%;
+
+        .event-text {
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
 
         .event-time {
           margin-right: 4px;
           opacity: 0.8;
           font-weight: 500;
+          flex-shrink: 0;
         }
       }
     }
@@ -757,6 +768,8 @@ const addNewEvent = () => {
 
       .primary-btn {
         margin-left: auto;
+        height: 42px;
+        padding: 0 16px;
       }
     }
 
