@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     adminPassword: process.env.VITE_ADMIN_PASSWORD,
     public: {
-      privacyVersion: process.env.NUXT_PUBLIC_PRIVACY_VERSION
+      privacyVersion: process.env.NUXT_PUBLIC_PRIVACY_VERSION || '1.0'
     }
   },
   compatibilityDate: '2025-07-15',

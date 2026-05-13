@@ -1,6 +1,12 @@
 <template>
   <div class="settings-app">
-    <div class="sidebar">
+    <div
+      class="sidebar"
+      ref="scrollContainer"
+      @mousedown="onMouseDown"
+      @mouseleave="onMouseLeave"
+      @mouseup="onMouseUp"
+      @mousemove="onMouseMove">
       <ul>
         <li :class="{ active: activeTab === 'appearance' }" @click="activeTab = 'appearance'">
           <Icon name="ph:paint-brush-broad-fill" class="icon" />
@@ -277,6 +283,44 @@ const { isMobile } = useDevice();
 
 const activeTab = ref<'appearance' | 'wallpaper' | 'language' | 'system'>('appearance');
 
+const scrollContainer = ref<HTMLElement | null>(null);
+
+let isDown = false;
+let startX = 0;
+let scrollLeft = 0;
+
+const onMouseDown = (e: MouseEvent) => {
+  if (!scrollContainer.value) return;
+  // Csak akkor kellhet ha mobil nezetben (vizszintes) vagyunk, desktopon nincsen ertelme
+  if (scrollContainer.value.scrollWidth <= scrollContainer.value.clientWidth) return;
+  isDown = true;
+  scrollContainer.value.style.cursor = 'grabbing';
+  startX = e.pageX - scrollContainer.value.offsetLeft;
+  scrollLeft = scrollContainer.value.scrollLeft;
+};
+
+const onMouseLeave = () => {
+  isDown = false;
+  if (scrollContainer.value) {
+    scrollContainer.value.style.cursor = 'default';
+  }
+};
+
+const onMouseUp = () => {
+  isDown = false;
+  if (scrollContainer.value) {
+    scrollContainer.value.style.cursor = 'default';
+  }
+};
+
+const onMouseMove = (e: MouseEvent) => {
+  if (!isDown || !scrollContainer.value) return;
+  e.preventDefault();
+  const x = e.pageX - scrollContainer.value.offsetLeft;
+  const walk = (x - startX) * 1.5; // Scroll-fast
+  scrollContainer.value.scrollLeft = scrollLeft - walk;
+};
+
 const customUrlInput = ref('');
 
 watch(
@@ -364,14 +408,16 @@ const handleFileUpload = (event: Event) => {
   -webkit-backdrop-filter: blur(10px);
 
   @media (max-width: 768px) {
-    width: 100%;
+    width: 100vw;
+    max-width: 100%;
     padding: 12px 0;
     border-right: none;
     border-bottom: 1px solid var(--os-border-color, var(--os-border-color));
-    display: block;
+    display: flex;
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
     scrollbar-width: none;
     &::-webkit-scrollbar {
       display: none;
@@ -392,6 +438,7 @@ const handleFileUpload = (event: Event) => {
       padding: 0 16px;
       width: max-content;
       min-width: 100%;
+      flex-shrink: 0;
     }
 
     li {
@@ -918,6 +965,8 @@ const handleFileUpload = (event: Event) => {
     padding: 12px 0;
 
     .label-group {
+      flex: 1;
+      padding-right: 16px;
       span {
         font-weight: 600;
         font-size: 15px;
@@ -936,6 +985,7 @@ const handleFileUpload = (event: Event) => {
   display: inline-block;
   width: 50px;
   height: 26px;
+  flex-shrink: 0;
 
   input {
     opacity: 0;
