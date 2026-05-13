@@ -28,5 +28,11 @@
   "noEvents": "No events on this day.",
   "newEvent": "New event...",
   "add": "Add",
-  "close": "Close"
+  "close": "Close",
+  "prevMonth": "Previous Month",
+  "nextMonth": "Next Month",
+  "deleteEvent": "Delete Event",
+  "more": "more",
+  "startTime": "Start Time",
+  "endTime": "End Time"
 }

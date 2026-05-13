@@ -7,6 +7,8 @@ export interface CalendarEvent {
   id: string;
   dateStr: string;
   title: string;
+  startTime?: string;
+  endTime?: string;
   isPredefined?: boolean;
 }
 
@@ -88,12 +90,14 @@ export const useCalendarStore = defineStore('calendar', () => {
     return allEvents.value.filter((e) => e.dateStr === dateStr);
   };
 
-  const addEvent = (date: Date, title: string) => {
+  const addEvent = (date: Date, title: string, startTime?: string, endTime?: string) => {
     if (!customEvents.value) customEvents.value = [];
     customEvents.value.push({
       id: `evt-${Date.now()}`,
       dateStr: formatDate(date),
       title,
+      startTime,
+      endTime,
       isPredefined: false
     });
   };

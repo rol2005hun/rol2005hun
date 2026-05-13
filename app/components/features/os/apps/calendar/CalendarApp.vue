@@ -41,15 +41,24 @@
           @click="openEventModal(day.date, day.isCurrentMonth)">
           <div class="day-content glass-panel">
             <span class="day-number">{{ day.day }}</span>
-            <div class="event-dots" v-if="calendarStore.getEventsForDate(day.date).length > 0">
+            <div class="event-list" v-if="calendarStore.getEventsForDate(day.date).length > 0">
               <div
                 v-for="evt in calendarStore.getEventsForDate(day.date).slice(0, 3)"
                 :key="evt.id"
-                class="dot"
+                class="event-capsule"
                 :class="{ predefined: evt.isPredefined }"
-                :title="evt.title"></div>
-              <div class="dot-more" v-if="calendarStore.getEventsForDate(day.date).length > 3">
+                :title="evt.title">
+                <span class="event-title-text">
+                  <span v-if="evt.startTime" class="event-time">
+                    {{ evt.startTime }}
+                    <span v-if="evt.endTime">-{{ evt.endTime }}</span>
+                  </span>
+                  {{ evt.title }}
+                </span>
+              </div>
+              <div class="event-more" v-if="calendarStore.getEventsForDate(day.date).length > 3">
                 +{{ calendarStore.getEventsForDate(day.date).length - 3 }}
+                {{ $t('os.apps.calendar.more') }}
               </div>
             </div>
           </div>
@@ -73,8 +82,13 @@
           <div class="existing-events">
             <div v-for="evt in selectedDateEvents" :key="evt.id" class="existing-event">
               <div class="event-info">
-                <div class="event-indicator" :class="{ predefined: evt.isPredefined }"></div>
-                <span>{{ evt.title }}</span>
+                <span>
+                  <span v-if="evt.startTime" class="event-time-modal">
+                    {{ evt.startTime }}
+                    <span v-if="evt.endTime">- {{ evt.endTime }}</span>
+                  </span>
+                  {{ evt.title }}
+                </span>
               </div>
               <button
                 v-if="!evt.isPredefined"
@@ -91,14 +105,26 @@
           </div>
 
           <div class="add-event-form">
-            <input
-              v-model="newEventTitle"
-              :placeholder="$t('os.apps.calendar.newEvent')"
-              @keyup.enter="addNewEvent" />
-            <button class="primary-btn" @click="addNewEvent" :disabled="!newEventTitle.trim()">
-              <Icon name="ph:plus-bold" />
-              {{ $t('os.apps.calendar.add') }}
-            </button>
+            <div class="input-row">
+              <input
+                v-model="newEventTitle"
+                :placeholder="$t('os.apps.calendar.newEvent')"
+                @keyup.enter="addNewEvent" />
+            </div>
+            <div class="time-inputs-row">
+              <div class="time-input-group">
+                <label>{{ $t('os.apps.calendar.startTime') }}</label>
+                <input type="time" v-model="newEventStartTime" />
+              </div>
+              <div class="time-input-group">
+                <label>{{ $t('os.apps.calendar.endTime') }}</label>
+                <input type="time" v-model="newEventEndTime" />
+              </div>
+              <button class="primary-btn" @click="addNewEvent" :disabled="!newEventTitle.trim()">
+                <Icon name="ph:plus-bold" />
+                {{ $t('os.apps.calendar.add') }}
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -192,6 +218,8 @@ const goToday = () => {
 const showModal = ref(false);
 const selectedDate = ref(new Date());
 const newEventTitle = ref('');
+const newEventStartTime = ref('');
+const newEventEndTime = ref('');
 
 const selectedDateEvents = computed(() => {
   return calendarStore.getEventsForDate(selectedDate.value);
@@ -206,12 +234,21 @@ const openEventModal = (date: Date, isCurrentMonth: boolean) => {
 const closeModal = () => {
   showModal.value = false;
   newEventTitle.value = '';
+  newEventStartTime.value = '';
+  newEventEndTime.value = '';
 };
 
 const addNewEvent = () => {
   if (newEventTitle.value.trim()) {
-    calendarStore.addEvent(selectedDate.value, newEventTitle.value.trim());
+    calendarStore.addEvent(
+      selectedDate.value,
+      newEventTitle.value.trim(),
+      newEventStartTime.value || undefined,
+      newEventEndTime.value || undefined
+    );
     newEventTitle.value = '';
+    newEventStartTime.value = '';
+    newEventEndTime.value = '';
   }
 };
 </script>
@@ -422,32 +459,61 @@ const addNewEvent = () => {
     }
   }
 
-  .event-dots {
+  .event-list {
     display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
+    flex-direction: column;
+    gap: 3px;
     margin-top: auto;
-    padding-top: 8px;
+    padding-top: 4px;
 
-    .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--os-primary-color, #3b82f6);
-      box-shadow: 0 0 6px color-mix(in srgb, var(--os-primary-color) 60%, transparent);
+    .event-capsule {
+      display: flex;
+      align-items: center;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: color-mix(in srgb, var(--os-primary-color) 20%, transparent);
+      color: var(--os-primary-color);
+      font-size: 0.65rem;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      border-left: 2px solid var(--os-primary-color);
+
+      @media (max-width: 768px) {
+        font-size: 0.55rem;
+        padding: 1px 4px;
+      }
 
       &.predefined {
-        background: #f59e0b;
-        box-shadow: 0 0 6px rgba(245, 158, 11, 0.6);
+        background: rgba(245, 158, 11, 0.2);
+        color: #f59e0b;
+        border-left-color: #f59e0b;
+      }
+
+      .event-title-text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        .event-time {
+          margin-right: 4px;
+          opacity: 0.8;
+          font-weight: 500;
+        }
       }
     }
 
-    .dot-more {
+    .event-more {
       font-size: 0.6rem;
-      font-weight: 700;
+      font-weight: 600;
       color: color-mix(in srgb, var(--os-text) 60%, transparent);
-      line-height: 6px;
-      margin-left: 2px;
+      text-align: center;
+      margin-top: 1px;
+
+      @media (max-width: 768px) {
+        font-size: 0.5rem;
+      }
     }
   }
 
@@ -614,6 +680,13 @@ const addNewEvent = () => {
         font-weight: 500;
         font-size: 0.95rem;
 
+        .event-time-modal {
+          color: var(--os-primary-color);
+          margin-right: 6px;
+          font-weight: 600;
+          opacity: 0.9;
+        }
+
         .event-indicator {
           width: 8px;
           height: 8px;
@@ -650,8 +723,42 @@ const addNewEvent = () => {
 
   .add-event-form {
     display: flex;
-    gap: 8px;
+    flex-direction: column;
+    gap: 12px;
     margin-top: 4px;
+
+    .input-row {
+      display: flex;
+      width: 100%;
+    }
+
+    .time-inputs-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+
+      .time-input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        label {
+          font-size: 0.8rem;
+          color: color-mix(in srgb, var(--os-text) 60%, transparent);
+          font-weight: 500;
+        }
+
+        input[type='time'] {
+          padding: 8px 12px;
+          border-radius: 8px;
+          width: 100px;
+        }
+      }
+
+      .primary-btn {
+        margin-left: auto;
+      }
+    }
 
     input {
       flex: 1;
